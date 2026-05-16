@@ -1,0 +1,26 @@
+name: Build dashboard
+
+on:
+  push:
+    paths:
+      - "dashboard/**"
+      - "scripts/bundle_dash.mjs"
+      - ".github/workflows/build-dash.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install and build
+        working-directory: dashboard
+        run: npm install && npm run build
+      - name: Upload dash artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dash
+          path: dash/

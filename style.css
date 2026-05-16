@@ -495,7 +495,7 @@ html.is-embed #content p:has(a[href*="github.com/datenpunk-ch/swiss_film_vod"]) 
   display: none;
 }
 
-/* —— Explorer page (explore.html) —— */
+/* —— React dashboard (dash/) —— */
 
 .page-explore {
   line-height: 1.6;

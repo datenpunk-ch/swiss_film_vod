@@ -124,7 +124,7 @@ Stand: automatisch aus den Dateien in `data/raw/` abgeleitet (Mai 2026).
 |--------|--------|
 | `data/cinema.json` | Jährliche Summen, Wochenreihen 2019+ |
 | `data/cinema_stats.json` | Deskriptive Statistik | `data_explorer.html?dataset=cinema` |
-| **Seite** `explore.html` | Wochenverlauf, Jahr wählen |
+| **Seite** `dashboard.html` → `dash/` | Wochenverlauf, Jahr wählen (React) |
 
 ---
 

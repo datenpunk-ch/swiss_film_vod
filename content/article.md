@@ -72,8 +72,8 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder â
     <p class="measure reveal stats-intro">Wochenverlauf der Kinobesuche und VoD-Herkunft im Zeitvergleich â€” Filter und Jahreswahl in der eingebetteten Ansicht.</p>
   </div>
   <div class="wide-bleed">
-    <div class="embed-frame reveal" style="height: min(72vh, 820px); max-width: 1240px; margin: 0 auto;">
-      <iframe title="Swiss Film Explorer" src="./explore.html?embed=1" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    <div class="embed-frame visible" style="height: min(72vh, 820px); max-width: 1240px; margin: 0 auto;">
+      <iframe title="Swiss Film Dashboard" src="./dash/?embed=1" loading="lazy" referrerpolicy="no-referrer"></iframe>
     </div>
   </div>
 </section>

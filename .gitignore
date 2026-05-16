@@ -1,3 +1,5 @@
 .DS_Store
 Thumbs.db
 *.log
+dashboard/node_modules/
+scripts/.esbuild/

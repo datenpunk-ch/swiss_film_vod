@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <script>
+      (function () {
+        try {
+          var p = new URLSearchParams(window.location.search);
+          var v = (p.get("embed") || "").toLowerCase();
+          if (v === "1" || v === "true" || v === "yes") {
+            document.documentElement.classList.add("is-embed");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swiss Film — Dashboard</title>
+    <link rel="stylesheet" href="../assets/fonts.css" />
+    <link rel="stylesheet" href="./assets/dash.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./assets/dash.js"></script>
+  </body>
+</html>
