@@ -15,13 +15,14 @@ Stand: automatisch aus den Dateien in `data/raw/` abgeleitet (Mai 2026).
 
 \*2025/2026 in der Kinodatei sind oft noch unvollständig — für Jahresvergleiche nur vollständige Jahre verwenden.
 
-**Im Repo, aber in `sources.txt` erwähnt (ggf. noch nachzuladen):**
+**Metadaten (Appendix, gleicher Stammname wie die CSV):**
 
-| Datei | Quelle | Hinweis |
-|--------|--------|---------|
-| `je-d-16.02.01.01.xlsx` | BFS | Indikatoren Schweizer Film- und Kinolandschaft |
-| `2025-Publikation-Jahresdaten-Mediapulse-TV.xlsx` | Mediapulse | TV-Jahresdaten |
-| `*-APPENDIX.ods` | BFS | **Code-Listen** zu Spaltenwerten (wichtig für exakte Labels) |
+| Datei | Zuordnung |
+|--------|-----------|
+| `ts-x-16.02.01.10-APPENDIX.ods` | Code-Listen zu `ts-x-16.02.01.10.csv` (StatVoD) |
+| `ts-x-16.02.01-P4-APPENDIX.ods` | Code-Listen zu `ts-x-16.02.01-P4.csv` (Kinowochen) |
+
+Auswertung: `data/bfs_metadata.json` via `node scripts/build_bfs_metadata.mjs`.
 
 ---
 
@@ -68,8 +69,8 @@ Stand: automatisch aus den Dateien in `data/raw/` abgeleitet (Mai 2026).
 | Datei | Inhalt |
 |--------|--------|
 | `data/vod.json` | EST-Herkunftsserie, letztes Jahr |
-| `data/vod_stats.json` | Deskriptive Statistik, Tabellen pro Jahr |
-| **Seite** `data_explorer.html` | Visualisierung (Dropdown: VoD / Kino / PX) |
+| `data/unified.json` | PX-Hauptstory + VoD/P4 als Zusatz |
+| **Seite** `unified.html` | Kinomarkt (PX), ergänzt VoD & P4 |
 
 ---
 
@@ -123,8 +124,7 @@ Stand: automatisch aus den Dateien in `data/raw/` abgeleitet (Mai 2026).
 | Datei | Inhalt |
 |--------|--------|
 | `data/cinema.json` | Jährliche Summen, Wochenreihen 2019+ |
-| `data/cinema_stats.json` | Deskriptive Statistik | `data_explorer.html?dataset=cinema` |
-| **Seite** `dashboard.html` → `dash/` | Wochenverlauf, Jahr wählen (React) |
+| **Seite** `unified.html` | Saison (P4), Herkunft/Genre vergleichen |
 
 ---
 
@@ -153,12 +153,7 @@ Stand: automatisch aus den Dateien in `data/raw/` abgeleitet (Mai 2026).
 
 ### Aufbereitung
 
-| Datei | Inhalt |
-|--------|--------|
-| `data/px_stats.json` | Metadaten, Jahresreihen (Total / CH-Schnitt) |
-| **Seite** `data_explorer.html?dataset=px` | Datenbeschreibung + Tabellen |
-
-Extraktion über minimalen PX-Parser in `scripts/export_site.mjs` (kein vollständiger Kreuztabellen-Export).
+PX ist **Primärquelle** in `data/unified.json` (Markt, Herkunft CH/EU/WW, Genre, Top-Länder, CH-Produktion) via `scripts/build_unified.mjs`. VoD und P4 liegen unter `supplementary`.
 
 ---
 
@@ -166,13 +161,11 @@ Extraktion über minimalen PX-Parser in `scripts/export_site.mjs` (kein vollstä
 
 | Datei | Quelle | Verwendung |
 |--------|--------|------------|
-| `vod.json` | VoD-CSV | Explorer, Artikel-Karten |
-| `vod_stats.json` | VoD-CSV | `data_explorer.html?dataset=vod` |
-| `cinema.json` | Kino-CSV | Explorer, Artikel |
-| `cinema_stats.json` | Kino-CSV | `data_explorer.html?dataset=cinema` |
-| `px_stats.json` | PX-Datei | `data_explorer.html?dataset=px` |
-| `summary.json` | beide | Kennzahlen Artikel |
-| `labels.json` | Code → Label (DE) | optional für UI |
+| `unified.json` | PX (primary) + VoD/P4 (supplementary) | **Hauptauswertung** [`unified.html`](../unified.html) |
+| `bfs_metadata.json` | Appendix-ODS | Code-Listen, Filter-Labels |
+| `vod.json` | VoD-CSV | Artikel-KPIs |
+| `cinema.json` | Kino-CSV | Artikel-KPIs |
+| `summary.json` | VoD + Kino | Kennzahlen Artikel (`index.html`) |
 
 Neu erzeugen:
 
@@ -222,15 +215,38 @@ Siehe auch `sources.txt` im Projektroot.
 - [StatVoD (VoD)](https://www.bfs.admin.ch/bfs/de/home/statistiken/kultur-medien-informationsgesellschaft-sport/kultur/film-kino/vod.assetdetail.36217919.html)
 - [Kinostatistik wöchentlich](https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36596835.html)
 - [Filmangebot/Nachfrage PX](https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36476429.html)
-- [Indikatoren Kinolandschaft (XLSX)](https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36461148.html)
-- [Mediapulse Jahresdaten](https://www.mediapulse.ch/daten/jahresdaten)
 
 ---
 
-## 7. Ideen für neue Stories (noch nicht umgesetzt)
+## 7. Unified-Auswertung (`model: px_primary`)
 
-1. **PX → Schweizer Anteil Kinoeintritte nach Land** (feiner als `och` allein).
-2. **Wochenprofil Kino:** welche KW sind stärkste/schwächste?
-3. **VoD TVOD/SVOD vs. EST:** Shift weg vom Kauf?
-4. **Mediapulse TV** vs. BFS VoD (andere Datenquelle, andere Definition).
-5. **Erstaufführungen (`rnew`)** vs. Gesamtprogramm wöchentlich.
+**Fragestellung:** Wann schaut die Schweiz was am Kinomarkt — und woher kommen die Filme? VoD und Kinowochen ergänzen andere Märkte/Zeitskalen; Anteile sind **pro Kanal** vergleichbar, nicht über Kanäle summierbar.
+
+**Konfiguration:** `config/analysis.json` (Pfade, Filter, harmonisierte Herkunft/Genre, Texte `unified_page`).
+
+| Schritt | Skript | Ausgabe |
+|---------|--------|---------|
+| Metadaten | `build_bfs_metadata.mjs` | `data/bfs_metadata.json` |
+| Unified | `build_unified.mjs` | `data/unified.json` |
+| Artikel-KPIs | `export_site.mjs` | `summary.json`, `vod.json`, `cinema.json` |
+
+**JSON-Struktur (`unified.json`):**
+
+| Block | Inhalt |
+|-------|--------|
+| `primary.px` | Pro Jahr: `market`, `origins`, `genres`, `top_countries` je mit `demand` (Eintritte), `supply` (Filme), `share_*`, `intensity` |
+| `supplementary.vod` | EST: Views + Filme nach Herkunft und Genre |
+| `supplementary.cinema_p4` | Eintritte (`adm`) + Filme (`flm`) nach Herkunft; Saison (Wochen). **Kein Genre** in P4-CSV |
+| `by_year` | Verknüpfung PX-Jahr mit optionalem VoD/P4 |
+
+**PX-Schnitt (Standard):** Sprachgebiet Schweiz, alle vorgeführten Filme, Genre-Total; Markt aus aggregierten Herkunftsländern (nicht „Herkunftsland - Total“-Zeile).
+
+**Seite:** [unified.html](../unified.html) — eingebettet im [Artikel](../index.html#interactive). Frontend: React + Recharts (`unified-app/`, Build → `assets/unified/unified.js` via `node scripts/bundle_unified_ui.mjs`).
+
+---
+
+## 8. Ideen für Erweiterungen
+
+1. **PX:** feinere Länder-Rankings in `unified.json`.
+2. **VoD:** TVOD/SVOD vs. EST im Unified-Export.
+3. **Erstaufführungen (`rnew`)** in der Kinosaison.

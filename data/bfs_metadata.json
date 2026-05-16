@@ -1,0 +1,511 @@
+{
+  "generated_at": "2026-05-16T12:04:14.426Z",
+  "sources": {
+    "vod": {
+      "data": "data/raw/ts-x-16.02.01.10.csv",
+      "appendix": "data/raw/ts-x-16.02.01.10-APPENDIX.ods",
+      "title_de": "Quelle: Bundesamt für Statistik - Schweizer Film- und Kinostatistik / Video on Demand (StatVoD)"
+    },
+    "cinema_p4": {
+      "data": "data/raw/ts-x-16.02.01-P4.csv",
+      "appendix": "data/raw/ts-x-16.02.01-P4-APPENDIX.ods",
+      "title_de": ""
+    }
+  },
+  "vod": {
+    "dimensions": {
+      "PERIOD": {
+        "name": "PERIOD",
+        "codes": [
+          {
+            "code": "2019",
+            "label_de": "Jahr 2019",
+            "label_fr": "Année 2019",
+            "label_en": "Year 2019"
+          },
+          {
+            "code": "2020",
+            "label_de": "Jahr 2020",
+            "label_fr": "Année 2020",
+            "label_en": "Year 2020"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Referenzahr, z.B. 2019",
+        "description_fr": "L'année de référence, par ex. 2013.",
+        "description_en": "Reference year, e.g. 2019"
+      },
+      "TYPE_VOD": {
+        "name": "TYPE_VOD",
+        "codes": [
+          {
+            "code": "EST",
+            "label_de": "Digitaler Kauf von Filmen für Download oder Streaming (zeitlich unbeschränkte Nutzung)",
+            "label_fr": "Achat numérique de films pour le téléchargement ou le streaming (utilisation illimitée)",
+            "label_en": "Digital sale of films for download or streaming (time limitation for utilisation)"
+          },
+          {
+            "code": "TVOD",
+            "label_de": "Digitale Miete von Filmen für Download oder Streaming (zeitlich beschränkte Nutzung)",
+            "label_fr": "Location numérique de films pour le téléchargement ou le streaming (utilisation limitée dans le temps)",
+            "label_en": "Digital rent of films for download or streaming (time limitation for utilisation)"
+          },
+          {
+            "code": "SVOD",
+            "label_de": "Abruf (Download oder Streaming) von Filmen auf zahlungspflichtigen Abonnementsdiensten",
+            "label_fr": "Visionnement (téléchargement ou streaming) de films sur des services d'abonnement payants",
+            "label_en": "Viewing (download or streaming) of films on paying subscription services"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Gibt den VoD-Typ an",
+        "description_fr": "Indique le type de VoD",
+        "description_en": "Indicates the VoD type"
+      },
+      "TYPE_FILM": {
+        "name": "TYPE_FILM",
+        "codes": [
+          {
+            "code": "all",
+            "label_de": "Alle VoD-Filme",
+            "label_fr": "Tous les films VoD",
+            "label_en": "All VOD films"
+          },
+          {
+            "code": "cin",
+            "label_de": "Teilmenge: Nur Filme über VoD, die in der Schweiz auch im Kino vorgeführt wurden",
+            "label_fr": "Sous-ensemble: seulement films VoD qui ont aussi été projetés au cinéma en Suisse",
+            "label_en": "Subset: Only films via VoD that have been screened in cinemas in Switzerland"
+          },
+          {
+            "code": "Si ce ne sont pas les films de cinéma qui intéressent en particulier, le filtre doit être mis sur \"all\".",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          },
+          {
+            "code": "If there is no particular interest in cinema films, filter must be set at “all”.",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          }
+        ],
+        "usage_note_de": "Besteht kein spezifisches Interesse an den Ergebnissen für Kinofilme, muss der Filter auf \"all\" gesetzt werden.",
+        "description_de": "Definiert die Grundgesamtheit der betrachteten Filme: alle VoD-Filme oder nur Kinofilme über VoD",
+        "description_fr": "Définit l'univers des films considérés: tous les films VoD ou seulement des films de cinéma sur VoD",
+        "description_en": "Defines the universe of all films considered: all VoD films or only cinema films via VoD"
+      },
+      "ORIGIN": {
+        "name": "ORIGIN",
+        "codes": [
+          {
+            "code": "oall",
+            "label_de": "Filme aus allen Herkunftsländern",
+            "label_fr": "films de tous les pays d’origine",
+            "label_en": "Films from all countries of origin"
+          },
+          {
+            "code": "och",
+            "label_de": "Schweiz",
+            "label_fr": "Suisse",
+            "label_en": "Switzerland"
+          },
+          {
+            "code": "oep",
+            "label_de": "Europa (Mitgliedstaaten des Europarates ohne die Schweiz)",
+            "label_fr": "Europe (états membres du Conseil de l’Europe sauf la Suisse)",
+            "label_en": "Europe (member states of the European Council excl. Switzerland)"
+          },
+          {
+            "code": "oot",
+            "label_de": "andere",
+            "label_fr": "autres pays",
+            "label_en": "others"
+          },
+          {
+            "code": "ous",
+            "label_de": "USA",
+            "label_fr": "Etats-Unis",
+            "label_en": "USA"
+          },
+          {
+            "code": "Si ce ne sont pas les films de cinéma qui intéressent en particulier, le filtre doit être mis sur \"oall\". Les résultats des quatre autres codes donnent ensemble le résultat au code \"oall\".",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          },
+          {
+            "code": "If there is no particular interest in the origin of VoD films, filter must be set at “oall”. The results of the other four codes together provide the result under the “oall” code.",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          }
+        ],
+        "usage_note_de": "Besteht kein spezifisches Interesse an der Herkunft der VoD-Filme, muss der Filter auf \"oall\" gesetzt werden. Die Ergebnisse der anderen vier Codes ergeben das Ergebnis unter dem Code \"oall\".",
+        "description_de": "Gibt die Herkunft der Filme an",
+        "description_fr": "Indique l'origine des films",
+        "description_en": "Indicates the film’s origin"
+      },
+      "GENRE": {
+        "name": "GENRE",
+        "codes": [
+          {
+            "code": "all",
+            "label_de": "alle Filme",
+            "label_fr": "tous les films",
+            "label_en": "All films"
+          },
+          {
+            "code": "ani",
+            "label_de": "Animationsfilme",
+            "label_fr": "Films d'animation",
+            "label_en": "Animated films"
+          },
+          {
+            "code": "doc",
+            "label_de": "Dokumentarfilme",
+            "label_fr": "Documentaires",
+            "label_en": "Documentary films"
+          },
+          {
+            "code": "fic",
+            "label_de": "Spielfilme/Fiktion (übrige Filme)",
+            "label_fr": "Fictions (autres films)",
+            "label_en": "Feature films (other films)"
+          },
+          {
+            "code": "Si ce ne sont pas les films de cinéma qui intéressent en particulier, le filtre doit être mis sur \"all\". Les résultats des trois autres codes donnent ensemble le résultat au code \"all\".",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          },
+          {
+            "code": "If there is no particular interest in the genre category of VoD films, filter must be set at “all”. The results of the other three codes together provide the result under the “all” code.",
+            "label_de": "",
+            "label_fr": "",
+            "label_en": ""
+          }
+        ],
+        "usage_note_de": "Besteht kein spezifisches Interesse an der Genrekategorie der VoD-Filme, muss der Filter auf \"all\" gesetzt werden. Die Ergebnisse der anderen drei Codes ergeben das Ergebnis unter dem Code \"all\".",
+        "description_de": "Gibt das Genre der Filme an",
+        "description_fr": "Indique le genre du film",
+        "description_en": "Indicates the film’s genre"
+      },
+      "UNIT": {
+        "name": "UNIT",
+        "codes": [
+          {
+            "code": "film",
+            "label_de": "\"VALUE\" entspricht der Anzahl angebotener Filme",
+            "label_fr": "\"VALUE\" correspond au nombre de films offerts",
+            "label_en": "“VALUE” corresponds to the number of films available"
+          },
+          {
+            "code": "view",
+            "label_de": "EST/TVOD: \"VALUE\" entspricht der Anzahl finanzieller Transaktionen, also Überweisungen für einen Kauf oder für eine Miete SVOD: \"VALUE\" entspricht der Anzahl Abrufe auf Abonnementsdiensten.ACHTUNG:Diese Werte werden aufgrund unterschiedlicher Definitionen von Abrufen nicht veröffentlicht.",
+            "label_fr": "EST/TVOD: \"VALUE\" correspond au nombre de transactions financières, donc aux versements pour un achat ou une location SVOD: \"VALUE\" correspond au nombre de visionnements sur des services d'abonnement/de streaming.ATTENTION:au vu des définitions différentes, ces valeurs ne sont pas publiées",
+            "label_en": "EST/TVOD: “VALUE” corresponds to the number of financial transactions, i.e. payments for a film sale or rental SVOD: “VALUE” corresponds to the number of views on subscription services.PLEASE NOTE:Due to different definitions of views, these values are not published."
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Enthält die Einheitencode: Anzahl Filme oder Nachfrage",
+        "description_fr": "Comprend les codes des unités: nombre de films ou demande",
+        "description_en": "Contains the unit code: number of films or requests"
+      },
+      "STATUS": {
+        "name": "STATUS",
+        "codes": [
+          {
+            "code": "A",
+            "label_de": "Normaler Wert",
+            "label_fr": "Valeur normale",
+            "label_en": "Normal value"
+          },
+          {
+            "code": "D",
+            "label_de": "Definition unterscheidet sich: Aufgrund uneinheitlicher Definition von Abrufen auf Abonnementsdiensten (SVoD) werden die Ergebnisse nicht publiziert",
+            "label_fr": "Définition différente: au vu de définitions de visionnements SVOD non-uniformisés, les résultats ne sont pas publiés",
+            "label_en": "Different definition: Due to non-standardised definitions of SVOD viewings, the results are not published."
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Enthält die Codesliste für den Beobachtungsstatus (Flags), falls erforderlich",
+        "description_fr": "Comprend la liste des codes pour les statuts d'observation (flags) si nécessaire",
+        "description_en": "Contains the code list for observation status (flags), if necessary"
+      }
+    },
+    "active_slice": {
+      "TYPE_VOD": {
+        "code": "EST",
+        "label_de": "Digitaler Kauf von Filmen für Download oder Streaming (zeitlich unbeschränkte Nutzung)"
+      },
+      "TYPE_FILM": {
+        "code": "all",
+        "label_de": "Alle VoD-Filme"
+      },
+      "UNIT": {
+        "code": "view",
+        "label_de": "EST/TVOD: \"VALUE\" entspricht der Anzahl finanzieller Transaktionen, also Überweisungen für einen Kauf oder für eine Miete SVOD: \"VALUE\" entspricht der Anzahl Abrufe auf Abonnementsdiensten.ACHTUNG:Diese Werte werden aufgrund unterschiedlicher Definitionen von Abrufen nicht veröffentlicht."
+      },
+      "STATUS": {
+        "code": "A",
+        "label_de": "Normaler Wert"
+      },
+      "ORIGIN": [
+        {
+          "code": "och",
+          "label_de": "Schweiz"
+        },
+        {
+          "code": "oep",
+          "label_de": "Europa (Mitgliedstaaten des Europarates ohne die Schweiz)"
+        },
+        {
+          "code": "oot",
+          "label_de": "andere"
+        }
+      ],
+      "GENRE": [
+        {
+          "code": "fic",
+          "label_de": "Spielfilme/Fiktion (übrige Filme)"
+        },
+        {
+          "code": "doc",
+          "label_de": "Dokumentarfilme"
+        },
+        {
+          "code": "ani",
+          "label_de": "Animationsfilme"
+        }
+      ]
+    }
+  },
+  "cinema_p4": {
+    "dimensions": {
+      "year": {
+        "name": "year",
+        "codes": [
+          {
+            "code": "2019",
+            "label_de": "Kinojahr 2019",
+            "label_fr": "Année cinématographique 2019",
+            "label_it": "Anno cinematografico 2019",
+            "label_en": "Cinema year 2019"
+          },
+          {
+            "code": "2020",
+            "label_de": "Kinojahr 2020",
+            "label_fr": "Année cinématographique 2020",
+            "label_it": "Anno cinematografico 2020",
+            "label_en": "Cinema year 2020"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "\"year\" bezeichnet das Kinojahr im Format YYYY. Das erste Referenzahr ist 2019.",
+        "description_fr": "\"year\" indique l'année cinématographique au format YYYY. La première année de référence est 2019.",
+        "description_en": "\"year\" indica l’anno cinematografico nel formato YYYY. Il primo anno di riferimento è il 2019."
+      },
+      "week": {
+        "name": "week",
+        "codes": [
+          {
+            "code": "1",
+            "label_de": "Kinowoche 1",
+            "label_fr": "Semaine cinématographique 1",
+            "label_it": "Settimana cinematografica 1",
+            "label_en": "Cinema week 1"
+          },
+          {
+            "code": "2",
+            "label_de": "Kinowoche 2",
+            "label_fr": "Semaine cinématographique 2",
+            "label_it": "Settimana cinematografica 2",
+            "label_en": "Cinema week 2"
+          },
+          {
+            "code": "3",
+            "label_de": "Kinowoche 3",
+            "label_fr": "Semaine cinématographique 3",
+            "label_it": "Settimana cinematografica 3",
+            "label_en": "Cinema week 3"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "\"week\" bezeichnet die Kinowoche gemäss dem Jahreskalender, den die Kinobranche erstellt. Die Kinowoche beginnt in der französischsprachigen Schweiz am Mittwoch und in der übrigen Schweiz am Donnerstag. In seltenen Fällen kann ein Jahr 53 Kinowochen enthalten.",
+        "description_fr": "\"week\" indique la semaine cinématographique selon le calendrier annuel d'exploitation qui est établi par la branche cinématographique. La semaine cinématographique commence le mercredi en Suisse francophone et le jeudi dans le reste de la Suisse. Dans de rares cas, une année cinématographique peut avoir 53 semaines.",
+        "description_en": "\"week\" indica la settimana cinematografica secondo il programma annuale dei film in cartellone redatto dall’industria cinematografica. La settimana cinematografica inizia il mercoledì nella Svizzera francese e il giovedì nel resto della Svizzera. In rari casi, un anno cinematografico può avere 53 settimane."
+      },
+      "date": {
+        "name": "date",
+        "codes": [
+          {
+            "code": "2019-01-02",
+            "label_de": "Jahr: 2019, Monat: Januar, Tag: 2",
+            "label_fr": "Année: 2019, Mois: janvier, Jour: 2",
+            "label_it": "Anno: 2019, Mese: gennaio, Giorno: 2",
+            "label_en": "Year: 2019, Month: January, Day: 2"
+          },
+          {
+            "code": "2019-01-09",
+            "label_de": "Jahr: 2019, Monat: Januar, Tag: 9",
+            "label_fr": "Année: 2019, Mois: janvier, Jour: 9",
+            "label_it": "Anno: 2019, Mese: gennaio, Giorno: 9",
+            "label_en": "Year: 2019, Month: January, Day: 9"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "\"date\" bezeichnet den ersten Tag der Kinowoche \"week\" und orientiert sich dabei an der französischsprachigen Schweiz (Mittwoch). \"date\" hat das Format YYYY-MM-DD: YYYY ist das Jahr, z.B. 2019, MM ist das Monat, z.B. 01 (Januar), DD ist der Tag, z.B. 27 gemäss ISO8601. Beispiel: 2019-01-27",
+        "description_fr": "\"date\" indique le premier jour de la semaine cinématographique \"week\" et se base pour ce faire sur la Suisse francophone (mercredis). \"date\" est au format YYYY-MM-DD, où: YYYY est l'année, par ex. 2019, MM est le mois, par exemple 01 (janvier), DD est le jour, par exemple 27 selon la norme ISO8601. Exemple: 2019-01-27",
+        "description_en": "\"date\" indica il primo giorno della settimana cinematografica \"week\" e si basa sulla Svizzera francese (mercoledì). \"date\" compare nel formato YYYY-MM-DD, dove: YYYY sta per l’anno, ad esempio 2019, MM per il mese, ad esempio 01 (gennaio), DD per il giorno, ad esempio 27 secondo la norma ISO8601. Esempio: 2019-01-27"
+      },
+      "unit": {
+        "name": "unit",
+        "codes": [
+          {
+            "code": "adm",
+            "label_de": "Eintritte",
+            "label_fr": "entrées",
+            "label_it": "Ingressi",
+            "label_en": "admissions"
+          },
+          {
+            "code": "cin",
+            "label_de": "aktive Kinos",
+            "label_fr": "cinémas actifs",
+            "label_it": "Cinema attivi",
+            "label_en": "cinemas in operation"
+          },
+          {
+            "code": "flm",
+            "label_de": "Filme",
+            "label_fr": "films",
+            "label_it": "Film",
+            "label_en": "films"
+          },
+          {
+            "code": "prj",
+            "label_de": "Vorführungen",
+            "label_fr": "projections",
+            "label_it": "Proiezioni",
+            "label_en": "screenings"
+          },
+          {
+            "code": "scr",
+            "label_de": "aktive Kinosäle",
+            "label_fr": "salles actives",
+            "label_it": "Sale attive",
+            "label_en": "screens in operation"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Masseinheiten",
+        "description_fr": "Unités de mesure",
+        "description_en": "Unità di misura"
+      },
+      "recent": {
+        "name": "recent",
+        "codes": [
+          {
+            "code": "rall",
+            "label_de": "alle Filme",
+            "label_fr": "tous les films",
+            "label_it": "tutti i film",
+            "label_en": "all films"
+          },
+          {
+            "code": "rnew",
+            "label_de": "neue Filme",
+            "label_fr": "nouveaux films",
+            "label_it": "nuovi film",
+            "label_en": "new films"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Bezeichnet, ob alle Filme einbezogen wurden oder nur neue Filme, die im jeweiligen Kinojahr erschienen sind",
+        "description_fr": "Indique si tous les films ont été pris en compte ou seulement les nouveaux films, qui sont sortis en salle dans l'année cinématographique concernée.",
+        "description_en": "Indica se sono stati presi in considerazione tutti i film o solo i nuovi film, ovvero quelli usciti nelle sale nell’anno cinematografico in esame."
+      },
+      "origin": {
+        "name": "origin",
+        "codes": [
+          {
+            "code": "oall",
+            "label_de": "Filme aus allen Herkunftsländern",
+            "label_fr": "films de tous les pays d’origine",
+            "label_it": "Film di tutti i Paesi di origine",
+            "label_en": "films from all countries of origin"
+          },
+          {
+            "code": "och",
+            "label_de": "Schweiz",
+            "label_fr": "Suisse",
+            "label_it": "Svizzera",
+            "label_en": "Switzerland"
+          },
+          {
+            "code": "oeu",
+            "label_de": "Europa (Mitgliedstaaten des Europarates ohne die Schweiz)",
+            "label_fr": "Europe (Etats membres du Conseil de l’Europe sauf la Suisse)",
+            "label_it": "Europa (Stati membri del Consiglio d’Europa tranne la Svizzera)",
+            "label_en": "Europe (Council of Europe member states except Switzerland)"
+          },
+          {
+            "code": "oot",
+            "label_de": "andere",
+            "label_fr": "autres pays",
+            "label_it": "Altri Paesi",
+            "label_en": "other countries"
+          },
+          {
+            "code": "ous",
+            "label_de": "USA",
+            "label_fr": "Etats-Unis",
+            "label_it": "Stati Uniti",
+            "label_en": "United States"
+          }
+        ],
+        "usage_note_de": null,
+        "description_de": "Gibt die Herkunft der Filme an (Produktionsland, bzw. majoritäres Produktionsland bei Koproduktionen)",
+        "description_fr": "Indique l'origine des films (pays de production, respectivement pays de production majoritaire dans le cas de coproductions)",
+        "description_en": "Indica l’origine dei film (Paese di produzione o Paese di produzione principale in caso di coproduzioni)"
+      },
+      "value": {
+        "name": "value",
+        "codes": [],
+        "usage_note_de": null,
+        "description_de": "Werte der Indikatoren",
+        "description_fr": "Valeurs des indicateurs",
+        "description_en": "Valori degli indicatori"
+      }
+    },
+    "active_filters": {
+      "unit": {
+        "code": "adm",
+        "label_de": "Eintritte"
+      },
+      "recent": {
+        "code": "rall",
+        "label_de": "alle Filme"
+      },
+      "origin_all": {
+        "code": "oall",
+        "label_de": "Filme aus allen Herkunftsländern"
+      },
+      "origins": [
+        {
+          "code": "och",
+          "label_de": "Schweiz"
+        },
+        {
+          "code": "oeu",
+          "label_de": "Europa (Mitgliedstaaten des Europarates ohne die Schweiz)"
+        },
+        {
+          "code": "oot",
+          "label_de": "andere"
+        }
+      ]
+    }
+  }
+}

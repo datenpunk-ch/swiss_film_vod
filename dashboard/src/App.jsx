@@ -9,7 +9,6 @@ const isEmbed = document.documentElement.classList.contains("is-embed");
 
 export default function App() {
   const { loading, error, cinema, vod, summary } = useExplorerData();
-
   const kpis = useMemo(() => {
     if (!cinema || !vod) return [];
     const cinemaComplete = completeYears(cinema.yearly);

@@ -1,0 +1,86 @@
+{
+  "$schema": "Swiss Film — unified BFS analysis (VoD + Kino P4 + PX)",
+  "paths": {
+    "root": ".",
+    "vod_csv": "data/raw/ts-x-16.02.01.10.csv",
+    "vod_appendix": "data/raw/ts-x-16.02.01.10-APPENDIX.ods",
+    "cinema_csv": "data/raw/ts-x-16.02.01-P4.csv",
+    "cinema_appendix": "data/raw/ts-x-16.02.01-P4-APPENDIX.ods",
+    "px_file": "data/raw/px-x-1602010000_200.px",
+    "bfs_metadata": "data/bfs_metadata.json",
+    "unified_output": "data/unified.json",
+    "summary_output": "data/summary.json",
+    "vod_article_output": "data/vod.json",
+    "cinema_article_output": "data/cinema.json"
+  },
+  "vod": {
+    "slice": {
+      "type_vod": "EST",
+      "unit": "view",
+      "type_film": "all",
+      "status": "A"
+    },
+    "slice_label": "VoD Kauf (EST), Views, alle Filme",
+    "origins": [
+      { "id": "och", "label": "Schweiz", "fill": "accent" },
+      { "id": "oep", "label": "Europa (ohne CH)", "fill": "eu" },
+      { "id": "oot", "label": "Übrige Welt", "fill": "ww" }
+    ],
+    "genres": [
+      { "id": "fic", "label": "Fiktion", "color": "#0b0d10", "reference": true },
+      { "id": "doc", "label": "Dokumentar", "color": "#b5542a" },
+      { "id": "ani", "label": "Animation", "color": "#c4896e" }
+    ]
+  },
+  "cinema": {
+    "season_years": [2019, 2022, 2023, 2024],
+    "weekly": {
+      "unit": "adm",
+      "recent": "rall",
+      "origin_all": "oall"
+    },
+    "yearly_origin": {
+      "demand_unit": "adm",
+      "supply_unit": "flm",
+      "recent": "rall"
+    },
+    "origins": [
+      { "id": "och", "label": "Schweiz", "color": "#b5542a", "fill": "accent", "reference": true },
+      { "id": "oeu", "label": "Europa", "color": "#c4896e", "fill": "eu" },
+      { "id": "oot", "label": "Übrige Welt", "color": "#e5d4c8", "fill": "ww" }
+    ],
+    "genres": [
+      { "id": "fic", "label": "Spielfilm", "color": "#0b0d10", "reference": true, "px_match": "Spielfilme" },
+      { "id": "doc", "label": "Dokumentar", "color": "#b5542a", "px_match": "Dokumentarfilme" },
+      { "id": "ani", "label": "Animation", "color": "#c4896e", "px_match": "Animationsfilme" }
+    ],
+    "px": {
+      "encoding": "latin1",
+      "dimensions": {
+        "year": "Jahr",
+        "country": "Herkunftsland",
+        "language_region": "Sprachgebiet",
+        "film_type": "Alle Filme - Erstaufführungen",
+        "genre": "Sprachfassung - Projektionsart - Genre",
+        "unit": "Beobachtungseinheit"
+      },
+      "filters": {
+        "language_region": "Schweiz",
+        "film_type_prefix": "Alle vorgeführten",
+        "unit_prefix": "Kinoeintritte"
+      },
+      "countries": [
+        {
+          "id": "total",
+          "label": "Alle Herkünfte",
+          "match_substring": "Herkunftsland - Total"
+        }
+      ]
+    }
+  },
+  "unified_page": {
+    "html": "unified.html",
+    "title": "Schweiz: was läuft, wann, woher?",
+    "lead": "Hauptstory: BFS Filmangebot und Nachfrage (PX). VoD und Kinowochen (P4) als Zusatz — andere Märkte und Zeitskalen."
+  }
+}

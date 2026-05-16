@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const RAW_DIR = path.join(ROOT, "data", "raw");
@@ -797,22 +798,22 @@ function processCinema(rows) {
 }
 
 function main() {
+  try {
+    execFileSync(process.execPath, [path.join(ROOT, "scripts", "build_bfs_metadata.mjs")], {
+      stdio: "inherit",
+    });
+  } catch (e) {
+    console.warn("BFS-Appendix-Metadaten übersprungen:", e.message);
+  }
   ensureDir(DOCS_DATA);
 
   const vodPath = path.join(RAW_DIR, "ts-x-16.02.01.10.csv");
   const cinemaPath = path.join(RAW_DIR, "ts-x-16.02.01-P4.csv");
-  const pxPath = path.join(RAW_DIR, "px-x-1602010000_200.px");
-
   const vodRows = parseCsv(fs.readFileSync(vodPath, "utf8"));
   const cinemaRows = parseCsv(fs.readFileSync(cinemaPath, "utf8"));
-  const pxRaw = fs.readFileSync(pxPath, "latin1");
-  const pxParsed = parsePxFile(pxRaw);
 
   const vod = processVod(vodRows);
-  const vodStats = processVodStats(vodRows);
   const cinema = processCinema(cinemaRows);
-  const cinemaStats = processCinemaStats(cinemaRows);
-  const pxStats = processPxStats(pxParsed);
 
   const summary = {
     generated_at: new Date().toISOString(),
@@ -824,18 +825,16 @@ function main() {
   };
 
   writeJson("vod.json", vod);
-  writeJson("vod_stats.json", vodStats);
   writeJson("cinema.json", cinema);
-  writeJson("cinema_stats.json", cinemaStats);
-  writeJson("px_stats.json", pxStats);
   writeJson("summary.json", summary);
-  writeJson("labels.json", {
-    origins: ORIGIN_LABELS,
-    cinema_origins: CINEMA_ORIGIN_LABELS,
-    cinema_units: CINEMA_UNIT_LABELS,
-    vod_types: VOD_TYPE_LABELS,
-    genres: GENRE_LABELS,
-  });
+
+  try {
+    execFileSync(process.execPath, [path.join(ROOT, "scripts", "build_unified.mjs")], {
+      stdio: "inherit",
+    });
+  } catch (e) {
+    console.warn("Unified-JSON übersprungen:", e.message);
+  }
 }
 
 main();

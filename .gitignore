@@ -2,4 +2,5 @@
 Thumbs.db
 *.log
 dashboard/node_modules/
+unified-app/node_modules/
 scripts/.esbuild/

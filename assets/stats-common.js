@@ -1,5 +1,5 @@
 /**
- * Shared helpers for data_explorer.html.
+ * Shared helpers for index.html and unified.html.
  */
 export function createFormatters() {
   return {

@@ -53,7 +53,7 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
         <div class="stats-label">Kinobesuche nach Jahr</div>
         <div id="cinemaYearStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
       </div>
-      <p class="reveal stats-intro">VoD-Kauf-Views (EST) nach Herkunftsregion — Anteil Schweiz am Gesamtvolumen. Ausführliche Tabellen: <a href="./data_explorer.html?dataset=vod">Daten-Explorer</a>.</p>
+      <p class="reveal stats-intro">VoD-Kauf-Views (EST) nach Herkunftsregion — Anteil Schweiz am Gesamtvolumen. Drei BFS-Quellen im Vergleich: <a href="./unified.html">Datenauswertung</a>.</p>
       <div class="stats reveal" id="vodShareStats" aria-live="polite">
         <div class="stats-label">Schweizer Anteil (EST, Views)</div>
         <div id="vodShareStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
@@ -67,13 +67,13 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
     <div class="section-label reveal">Interaktiv</div>
     <div class="sec-head reveal">
       <div class="sec-num">03</div>
-      <h2>Explorer</h2>
+      <h2>Datenauswertung</h2>
     </div>
-    <p class="measure reveal stats-intro">Wochenverlauf der Kinobesuche und VoD-Herkunft im Zeitvergleich — Filter und Jahreswahl in der eingebetteten Ansicht.</p>
+    <p class="measure reveal stats-intro">VoD, Kinowochen (P4) und Filmangebot/Nachfrage (PX) — Herkunft und Genre nach Jahr, plus Kinosaison (Wochen). <a href="./unified.html">Vollbild-Ansicht</a>.</p>
   </div>
   <div class="wide-bleed">
     <div class="embed-frame visible" style="height: min(72vh, 820px); max-width: 1240px; margin: 0 auto;">
-      <iframe title="Swiss Film Dashboard" src="./dash/?embed=1" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      <iframe title="Swiss Film — Unified Auswertung" src="./unified.html?embed=1" loading="lazy" referrerpolicy="no-referrer"></iframe>
     </div>
   </div>
 </section>
