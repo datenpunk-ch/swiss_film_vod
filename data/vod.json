@@ -1,0 +1,88 @@
+{
+  "latest_year": 2024,
+  "series": [
+    {
+      "year": 2019,
+      "och": 10624,
+      "oep": 193386,
+      "oot": 42454,
+      "total": 246464,
+      "share_ch": 0.043105686834588416
+    },
+    {
+      "year": 2020,
+      "och": 14470,
+      "oep": 185838,
+      "oot": 47664,
+      "total": 247972,
+      "share_ch": 0.05835336247640863
+    },
+    {
+      "year": 2021,
+      "och": 6181,
+      "oep": 155868,
+      "oot": 46365,
+      "total": 208414,
+      "share_ch": 0.029657316686978803
+    },
+    {
+      "year": 2022,
+      "och": 6474,
+      "oep": 136886,
+      "oot": 32141,
+      "total": 175501,
+      "share_ch": 0.03688867869698748
+    },
+    {
+      "year": 2023,
+      "och": 7343,
+      "oep": 147383,
+      "oot": 35081,
+      "total": 189807,
+      "share_ch": 0.038686665929075326
+    },
+    {
+      "year": 2024,
+      "och": 11495,
+      "oep": 149142,
+      "oot": 41865,
+      "total": 202502,
+      "share_ch": 0.056764871458059675
+    }
+  ],
+  "latest_by_origin": [
+    {
+      "id": "och",
+      "label": "Schweiz",
+      "views": 11495
+    },
+    {
+      "id": "oep",
+      "label": "Europa (ohne CH)",
+      "views": 149142
+    },
+    {
+      "id": "oot",
+      "label": "Übrige Welt",
+      "views": 41865
+    }
+  ],
+  "latest_total_views": 202502,
+  "latest_type_breakdown": [
+    {
+      "id": "EST",
+      "label": "Kauf (EST)",
+      "views": 919719
+    },
+    {
+      "id": "SVOD",
+      "label": "Abo (SVoD)",
+      "views": 0
+    },
+    {
+      "id": "TVOD",
+      "label": "TVOD",
+      "views": 4007624
+    }
+  ]
+}

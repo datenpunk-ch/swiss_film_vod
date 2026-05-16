@@ -1,0 +1,2237 @@
+{
+  "yearly": [
+    {
+      "year": 2019,
+      "admissions": 12506143
+    },
+    {
+      "year": 2020,
+      "admissions": 4348555
+    },
+    {
+      "year": 2021,
+      "admissions": 5387595
+    },
+    {
+      "year": 2022,
+      "admissions": 8713836
+    },
+    {
+      "year": 2023,
+      "admissions": 10502231
+    },
+    {
+      "year": 2024,
+      "admissions": 10264111
+    },
+    {
+      "year": 2025,
+      "admissions": 9472075
+    }
+  ],
+  "weekly": [
+    {
+      "year": 2019,
+      "week": 1,
+      "date": "2019-01-02",
+      "admissions": 307923
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "date": "2019-01-09",
+      "admissions": 249573
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "date": "2019-01-16",
+      "admissions": 240276
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "date": "2019-01-23",
+      "admissions": 303711
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "date": "2019-01-30",
+      "admissions": 333087
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "date": "2019-02-06",
+      "admissions": 339580
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "date": "2019-02-13",
+      "admissions": 240156
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "date": "2019-02-20",
+      "admissions": 227210
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "date": "2019-02-27",
+      "admissions": 257911
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "date": "2019-03-06",
+      "admissions": 318577
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "date": "2019-03-13",
+      "admissions": 216455
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "date": "2019-03-20",
+      "admissions": 150675
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "date": "2019-03-27",
+      "admissions": 142909
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "date": "2019-04-03",
+      "admissions": 233250
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "date": "2019-04-10",
+      "admissions": 238149
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "date": "2019-04-17",
+      "admissions": 181769
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "date": "2019-04-24",
+      "admissions": 435994
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "date": "2019-05-01",
+      "admissions": 281089
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "date": "2019-05-08",
+      "admissions": 238686
+    },
+    {
+      "year": 2019,
+      "week": 20,
+      "date": "2019-05-15",
+      "admissions": 187145
+    },
+    {
+      "year": 2019,
+      "week": 21,
+      "date": "2019-05-22",
+      "admissions": 208470
+    },
+    {
+      "year": 2019,
+      "week": 22,
+      "date": "2019-05-29",
+      "admissions": 145057
+    },
+    {
+      "year": 2019,
+      "week": 23,
+      "date": "2019-06-05",
+      "admissions": 261961
+    },
+    {
+      "year": 2019,
+      "week": 24,
+      "date": "2019-06-12",
+      "admissions": 119599
+    },
+    {
+      "year": 2019,
+      "week": 25,
+      "date": "2019-06-19",
+      "admissions": 122933
+    },
+    {
+      "year": 2019,
+      "week": 26,
+      "date": "2019-06-26",
+      "admissions": 96345
+    },
+    {
+      "year": 2019,
+      "week": 27,
+      "date": "2019-07-03",
+      "admissions": 178519
+    },
+    {
+      "year": 2019,
+      "week": 28,
+      "date": "2019-07-10",
+      "admissions": 173813
+    },
+    {
+      "year": 2019,
+      "week": 29,
+      "date": "2019-07-17",
+      "admissions": 192198
+    },
+    {
+      "year": 2019,
+      "week": 30,
+      "date": "2019-07-24",
+      "admissions": 273107
+    },
+    {
+      "year": 2019,
+      "week": 31,
+      "date": "2019-07-31",
+      "admissions": 226999
+    },
+    {
+      "year": 2019,
+      "week": 32,
+      "date": "2019-08-07",
+      "admissions": 220234
+    },
+    {
+      "year": 2019,
+      "week": 33,
+      "date": "2019-08-14",
+      "admissions": 210713
+    },
+    {
+      "year": 2019,
+      "week": 34,
+      "date": "2019-08-21",
+      "admissions": 139408
+    },
+    {
+      "year": 2019,
+      "week": 35,
+      "date": "2019-08-28",
+      "admissions": 325467
+    },
+    {
+      "year": 2019,
+      "week": 36,
+      "date": "2019-09-04",
+      "admissions": 215922
+    },
+    {
+      "year": 2019,
+      "week": 37,
+      "date": "2019-09-11",
+      "admissions": 137463
+    },
+    {
+      "year": 2019,
+      "week": 38,
+      "date": "2019-09-18",
+      "admissions": 156286
+    },
+    {
+      "year": 2019,
+      "week": 39,
+      "date": "2019-09-25",
+      "admissions": 168375
+    },
+    {
+      "year": 2019,
+      "week": 40,
+      "date": "2019-10-02",
+      "admissions": 247868
+    },
+    {
+      "year": 2019,
+      "week": 41,
+      "date": "2019-10-09",
+      "admissions": 265276
+    },
+    {
+      "year": 2019,
+      "week": 42,
+      "date": "2019-10-16",
+      "admissions": 292566
+    },
+    {
+      "year": 2019,
+      "week": 43,
+      "date": "2019-10-23",
+      "admissions": 234341
+    },
+    {
+      "year": 2019,
+      "week": 44,
+      "date": "2019-10-30",
+      "admissions": 306602
+    },
+    {
+      "year": 2019,
+      "week": 45,
+      "date": "2019-11-06",
+      "admissions": 273762
+    },
+    {
+      "year": 2019,
+      "week": 46,
+      "date": "2019-11-13",
+      "admissions": 263573
+    },
+    {
+      "year": 2019,
+      "week": 47,
+      "date": "2019-11-20",
+      "admissions": 305027
+    },
+    {
+      "year": 2019,
+      "week": 48,
+      "date": "2019-11-27",
+      "admissions": 265914
+    },
+    {
+      "year": 2019,
+      "week": 49,
+      "date": "2019-12-04",
+      "admissions": 220012
+    },
+    {
+      "year": 2019,
+      "week": 50,
+      "date": "2019-12-11",
+      "admissions": 257216
+    },
+    {
+      "year": 2019,
+      "week": 51,
+      "date": "2019-12-18",
+      "admissions": 421095
+    },
+    {
+      "year": 2019,
+      "week": 52,
+      "date": "2019-12-25",
+      "admissions": 455897
+    },
+    {
+      "year": 2020,
+      "week": 1,
+      "date": "2020-01-01",
+      "admissions": 334405
+    },
+    {
+      "year": 2020,
+      "week": 2,
+      "date": "2020-01-08",
+      "admissions": 199455
+    },
+    {
+      "year": 2020,
+      "week": 3,
+      "date": "2020-01-15",
+      "admissions": 275591
+    },
+    {
+      "year": 2020,
+      "week": 4,
+      "date": "2020-01-22",
+      "admissions": 289291
+    },
+    {
+      "year": 2020,
+      "week": 5,
+      "date": "2020-01-29",
+      "admissions": 319828
+    },
+    {
+      "year": 2020,
+      "week": 6,
+      "date": "2020-02-05",
+      "admissions": 248108
+    },
+    {
+      "year": 2020,
+      "week": 7,
+      "date": "2020-02-12",
+      "admissions": 274737
+    },
+    {
+      "year": 2020,
+      "week": 8,
+      "date": "2020-02-19",
+      "admissions": 223265
+    },
+    {
+      "year": 2020,
+      "week": 9,
+      "date": "2020-02-26",
+      "admissions": 212710
+    },
+    {
+      "year": 2020,
+      "week": 10,
+      "date": "2020-03-04",
+      "admissions": 161450
+    },
+    {
+      "year": 2020,
+      "week": 11,
+      "date": "2020-03-11",
+      "admissions": 47010
+    },
+    {
+      "year": 2020,
+      "week": 12,
+      "date": "2020-03-18",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 13,
+      "date": "2020-03-25",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 14,
+      "date": "2020-04-01",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 15,
+      "date": "2020-04-08",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 16,
+      "date": "2020-04-15",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 17,
+      "date": "2020-04-22",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 18,
+      "date": "2020-04-29",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 19,
+      "date": "2020-05-06",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 20,
+      "date": "2020-05-13",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 21,
+      "date": "2020-05-20",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 22,
+      "date": "2020-05-27",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 23,
+      "date": "2020-06-03",
+      "admissions": 52143
+    },
+    {
+      "year": 2020,
+      "week": 24,
+      "date": "2020-06-10",
+      "admissions": 65537
+    },
+    {
+      "year": 2020,
+      "week": 25,
+      "date": "2020-06-17",
+      "admissions": 38506
+    },
+    {
+      "year": 2020,
+      "week": 26,
+      "date": "2020-06-24",
+      "admissions": 37400
+    },
+    {
+      "year": 2020,
+      "week": 27,
+      "date": "2020-07-01",
+      "admissions": 34277
+    },
+    {
+      "year": 2020,
+      "week": 28,
+      "date": "2020-07-08",
+      "admissions": 47550
+    },
+    {
+      "year": 2020,
+      "week": 29,
+      "date": "2020-07-15",
+      "admissions": 54173
+    },
+    {
+      "year": 2020,
+      "week": 30,
+      "date": "2020-07-22",
+      "admissions": 47949
+    },
+    {
+      "year": 2020,
+      "week": 31,
+      "date": "2020-07-29",
+      "admissions": 61550
+    },
+    {
+      "year": 2020,
+      "week": 32,
+      "date": "2020-08-05",
+      "admissions": 30884
+    },
+    {
+      "year": 2020,
+      "week": 33,
+      "date": "2020-08-12",
+      "admissions": 54168
+    },
+    {
+      "year": 2020,
+      "week": 34,
+      "date": "2020-08-19",
+      "admissions": 65624
+    },
+    {
+      "year": 2020,
+      "week": 35,
+      "date": "2020-08-26",
+      "admissions": 156439
+    },
+    {
+      "year": 2020,
+      "week": 36,
+      "date": "2020-09-02",
+      "admissions": 95910
+    },
+    {
+      "year": 2020,
+      "week": 37,
+      "date": "2020-09-09",
+      "admissions": 65850
+    },
+    {
+      "year": 2020,
+      "week": 38,
+      "date": "2020-09-16",
+      "admissions": 83208
+    },
+    {
+      "year": 2020,
+      "week": 39,
+      "date": "2020-09-23",
+      "admissions": 123831
+    },
+    {
+      "year": 2020,
+      "week": 40,
+      "date": "2020-09-30",
+      "admissions": 140157
+    },
+    {
+      "year": 2020,
+      "week": 41,
+      "date": "2020-10-07",
+      "admissions": 117202
+    },
+    {
+      "year": 2020,
+      "week": 42,
+      "date": "2020-10-14",
+      "admissions": 109806
+    },
+    {
+      "year": 2020,
+      "week": 43,
+      "date": "2020-10-21",
+      "admissions": 78080
+    },
+    {
+      "year": 2020,
+      "week": 44,
+      "date": "2020-10-28",
+      "admissions": 54067
+    },
+    {
+      "year": 2020,
+      "week": 45,
+      "date": "2020-11-04",
+      "admissions": 31172
+    },
+    {
+      "year": 2020,
+      "week": 46,
+      "date": "2020-11-11",
+      "admissions": 26180
+    },
+    {
+      "year": 2020,
+      "week": 47,
+      "date": "2020-11-18",
+      "admissions": 30230
+    },
+    {
+      "year": 2020,
+      "week": 48,
+      "date": "2020-11-25",
+      "admissions": 27566
+    },
+    {
+      "year": 2020,
+      "week": 49,
+      "date": "2020-12-02",
+      "admissions": 27048
+    },
+    {
+      "year": 2020,
+      "week": 50,
+      "date": "2020-12-09",
+      "admissions": 6198
+    },
+    {
+      "year": 2020,
+      "week": 51,
+      "date": "2019-12-18",
+      "admissions": 0
+    },
+    {
+      "year": 2020,
+      "week": 52,
+      "date": "2019-12-25",
+      "admissions": 0
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "date": "2020-12-30",
+      "admissions": 21
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "date": "2021-01-06",
+      "admissions": 0
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "date": "2021-01-13",
+      "admissions": 13
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "date": "2021-01-20",
+      "admissions": 6
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "date": "2021-01-27",
+      "admissions": 12
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "date": "2021-02-03",
+      "admissions": 15
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "date": "2021-02-10",
+      "admissions": 102
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "date": "2021-02-17",
+      "admissions": 98
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "date": "2021-02-24",
+      "admissions": 29
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "date": "2021-03-03",
+      "admissions": 9
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "date": "2021-03-10",
+      "admissions": 77
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "date": "2021-03-17",
+      "admissions": 153
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "date": "2021-03-24",
+      "admissions": 747
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "date": "2021-03-31",
+      "admissions": 1011
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "date": "2021-04-07",
+      "admissions": 213
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "date": "2021-04-14",
+      "admissions": 2066
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "date": "2021-04-21",
+      "admissions": 41993
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "date": "2021-04-28",
+      "admissions": 92178
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "date": "2021-05-05",
+      "admissions": 53757
+    },
+    {
+      "year": 2021,
+      "week": 20,
+      "date": "2021-05-12",
+      "admissions": 118840
+    },
+    {
+      "year": 2021,
+      "week": 21,
+      "date": "2021-05-19",
+      "admissions": 80230
+    },
+    {
+      "year": 2021,
+      "week": 22,
+      "date": "2021-05-26",
+      "admissions": 44923
+    },
+    {
+      "year": 2021,
+      "week": 23,
+      "date": "2021-06-02",
+      "admissions": 83339
+    },
+    {
+      "year": 2021,
+      "week": 24,
+      "date": "2021-06-09",
+      "admissions": 48070
+    },
+    {
+      "year": 2021,
+      "week": 25,
+      "date": "2021-06-16",
+      "admissions": 56926
+    },
+    {
+      "year": 2021,
+      "week": 26,
+      "date": "2021-06-23",
+      "admissions": 69239
+    },
+    {
+      "year": 2021,
+      "week": 27,
+      "date": "2021-06-30",
+      "admissions": 128193
+    },
+    {
+      "year": 2021,
+      "week": 28,
+      "date": "2021-07-07",
+      "admissions": 154335
+    },
+    {
+      "year": 2021,
+      "week": 29,
+      "date": "2021-07-14",
+      "admissions": 207503
+    },
+    {
+      "year": 2021,
+      "week": 30,
+      "date": "2021-07-21",
+      "admissions": 202720
+    },
+    {
+      "year": 2021,
+      "week": 31,
+      "date": "2021-07-28",
+      "admissions": 205042
+    },
+    {
+      "year": 2021,
+      "week": 32,
+      "date": "2021-08-04",
+      "admissions": 208804
+    },
+    {
+      "year": 2021,
+      "week": 33,
+      "date": "2021-08-11",
+      "admissions": 111525
+    },
+    {
+      "year": 2021,
+      "week": 34,
+      "date": "2021-08-18",
+      "admissions": 128283
+    },
+    {
+      "year": 2021,
+      "week": 35,
+      "date": "2021-08-25",
+      "admissions": 130868
+    },
+    {
+      "year": 2021,
+      "week": 36,
+      "date": "2021-09-01",
+      "admissions": 178204
+    },
+    {
+      "year": 2021,
+      "week": 37,
+      "date": "2021-09-08",
+      "admissions": 117498
+    },
+    {
+      "year": 2021,
+      "week": 38,
+      "date": "2021-09-15",
+      "admissions": 142340
+    },
+    {
+      "year": 2021,
+      "week": 39,
+      "date": "2021-09-22",
+      "admissions": 103814
+    },
+    {
+      "year": 2021,
+      "week": 40,
+      "date": "2021-09-29",
+      "admissions": 299813
+    },
+    {
+      "year": 2021,
+      "week": 41,
+      "date": "2021-10-06",
+      "admissions": 262076
+    },
+    {
+      "year": 2021,
+      "week": 42,
+      "date": "2021-10-13",
+      "admissions": 201405
+    },
+    {
+      "year": 2021,
+      "week": 43,
+      "date": "2021-10-20",
+      "admissions": 204030
+    },
+    {
+      "year": 2021,
+      "week": 44,
+      "date": "2021-10-27",
+      "admissions": 208965
+    },
+    {
+      "year": 2021,
+      "week": 45,
+      "date": "2021-11-03",
+      "admissions": 174088
+    },
+    {
+      "year": 2021,
+      "week": 46,
+      "date": "2021-11-10",
+      "admissions": 161686
+    },
+    {
+      "year": 2021,
+      "week": 47,
+      "date": "2021-11-17",
+      "admissions": 129597
+    },
+    {
+      "year": 2021,
+      "week": 48,
+      "date": "2021-11-24",
+      "admissions": 140159
+    },
+    {
+      "year": 2021,
+      "week": 49,
+      "date": "2021-12-01",
+      "admissions": 151506
+    },
+    {
+      "year": 2021,
+      "week": 50,
+      "date": "2021-12-08",
+      "admissions": 139672
+    },
+    {
+      "year": 2021,
+      "week": 51,
+      "date": "2021-12-15",
+      "admissions": 286603
+    },
+    {
+      "year": 2021,
+      "week": 52,
+      "date": "2021-12-22",
+      "admissions": 314799
+    },
+    {
+      "year": 2022,
+      "week": 1,
+      "date": "2021-12-29",
+      "admissions": 230719
+    },
+    {
+      "year": 2022,
+      "week": 2,
+      "date": "2022-01-05",
+      "admissions": 189075
+    },
+    {
+      "year": 2022,
+      "week": 3,
+      "date": "2022-01-12",
+      "admissions": 125990
+    },
+    {
+      "year": 2022,
+      "week": 4,
+      "date": "2022-01-19",
+      "admissions": 128651
+    },
+    {
+      "year": 2022,
+      "week": 5,
+      "date": "2022-01-26",
+      "admissions": 133230
+    },
+    {
+      "year": 2022,
+      "week": 6,
+      "date": "2022-02-02",
+      "admissions": 133641
+    },
+    {
+      "year": 2022,
+      "week": 7,
+      "date": "2022-02-09",
+      "admissions": 143251
+    },
+    {
+      "year": 2022,
+      "week": 8,
+      "date": "2022-02-16",
+      "admissions": 229621
+    },
+    {
+      "year": 2022,
+      "week": 9,
+      "date": "2022-02-23",
+      "admissions": 173760
+    },
+    {
+      "year": 2022,
+      "week": 10,
+      "date": "2022-03-02",
+      "admissions": 185327
+    },
+    {
+      "year": 2022,
+      "week": 11,
+      "date": "2022-03-09",
+      "admissions": 153929
+    },
+    {
+      "year": 2022,
+      "week": 12,
+      "date": "2022-03-16",
+      "admissions": 131811
+    },
+    {
+      "year": 2022,
+      "week": 13,
+      "date": "2022-03-23",
+      "admissions": 101631
+    },
+    {
+      "year": 2022,
+      "week": 14,
+      "date": "2022-03-30",
+      "admissions": 221729
+    },
+    {
+      "year": 2022,
+      "week": 15,
+      "date": "2022-04-06",
+      "admissions": 213312
+    },
+    {
+      "year": 2022,
+      "week": 16,
+      "date": "2022-04-13",
+      "admissions": 161789
+    },
+    {
+      "year": 2022,
+      "week": 17,
+      "date": "2022-04-20",
+      "admissions": 207513
+    },
+    {
+      "year": 2022,
+      "week": 18,
+      "date": "2022-04-27",
+      "admissions": 146589
+    },
+    {
+      "year": 2022,
+      "week": 19,
+      "date": "2022-05-04",
+      "admissions": 186755
+    },
+    {
+      "year": 2022,
+      "week": 20,
+      "date": "2022-05-11",
+      "admissions": 91482
+    },
+    {
+      "year": 2022,
+      "week": 21,
+      "date": "2022-05-18",
+      "admissions": 94371
+    },
+    {
+      "year": 2022,
+      "week": 22,
+      "date": "2022-05-25",
+      "admissions": 184711
+    },
+    {
+      "year": 2022,
+      "week": 23,
+      "date": "2022-06-01",
+      "admissions": 234275
+    },
+    {
+      "year": 2022,
+      "week": 24,
+      "date": "2022-06-08",
+      "admissions": 129104
+    },
+    {
+      "year": 2022,
+      "week": 25,
+      "date": "2022-06-15",
+      "admissions": 98759
+    },
+    {
+      "year": 2022,
+      "week": 26,
+      "date": "2022-06-22",
+      "admissions": 145110
+    },
+    {
+      "year": 2022,
+      "week": 27,
+      "date": "2022-06-29",
+      "admissions": 156044
+    },
+    {
+      "year": 2022,
+      "week": 28,
+      "date": "2022-07-06",
+      "admissions": 164248
+    },
+    {
+      "year": 2022,
+      "week": 29,
+      "date": "2022-07-13",
+      "admissions": 132927
+    },
+    {
+      "year": 2022,
+      "week": 30,
+      "date": "2022-07-20",
+      "admissions": 133553
+    },
+    {
+      "year": 2022,
+      "week": 31,
+      "date": "2022-07-27",
+      "admissions": 123416
+    },
+    {
+      "year": 2022,
+      "week": 32,
+      "date": "2022-08-03",
+      "admissions": 149123
+    },
+    {
+      "year": 2022,
+      "week": 33,
+      "date": "2022-08-10",
+      "admissions": 120088
+    },
+    {
+      "year": 2022,
+      "week": 34,
+      "date": "2022-08-17",
+      "admissions": 154040
+    },
+    {
+      "year": 2022,
+      "week": 35,
+      "date": "2022-08-24",
+      "admissions": 116333
+    },
+    {
+      "year": 2022,
+      "week": 36,
+      "date": "2022-08-31",
+      "admissions": 248487
+    },
+    {
+      "year": 2022,
+      "week": 37,
+      "date": "2022-09-07",
+      "admissions": 116157
+    },
+    {
+      "year": 2022,
+      "week": 38,
+      "date": "2022-09-14",
+      "admissions": 146465
+    },
+    {
+      "year": 2022,
+      "week": 39,
+      "date": "2022-09-21",
+      "admissions": 166084
+    },
+    {
+      "year": 2022,
+      "week": 40,
+      "date": "2022-09-28",
+      "admissions": 183022
+    },
+    {
+      "year": 2022,
+      "week": 41,
+      "date": "2022-10-05",
+      "admissions": 194763
+    },
+    {
+      "year": 2022,
+      "week": 42,
+      "date": "2022-10-12",
+      "admissions": 198927
+    },
+    {
+      "year": 2022,
+      "week": 43,
+      "date": "2022-10-19",
+      "admissions": 208230
+    },
+    {
+      "year": 2022,
+      "week": 44,
+      "date": "2022-10-26",
+      "admissions": 188717
+    },
+    {
+      "year": 2022,
+      "week": 45,
+      "date": "2022-11-02",
+      "admissions": 192205
+    },
+    {
+      "year": 2022,
+      "week": 46,
+      "date": "2022-11-09",
+      "admissions": 216444
+    },
+    {
+      "year": 2022,
+      "week": 47,
+      "date": "2022-11-16",
+      "admissions": 187105
+    },
+    {
+      "year": 2022,
+      "week": 48,
+      "date": "2022-11-23",
+      "admissions": 150357
+    },
+    {
+      "year": 2022,
+      "week": 49,
+      "date": "2022-11-30",
+      "admissions": 134633
+    },
+    {
+      "year": 2022,
+      "week": 50,
+      "date": "2022-12-07",
+      "admissions": 133776
+    },
+    {
+      "year": 2022,
+      "week": 51,
+      "date": "2022-12-14",
+      "admissions": 269985
+    },
+    {
+      "year": 2022,
+      "week": 52,
+      "date": "2022-12-21",
+      "admissions": 352572
+    },
+    {
+      "year": 2023,
+      "week": 1,
+      "date": "2022-12-28",
+      "admissions": 421171
+    },
+    {
+      "year": 2023,
+      "week": 2,
+      "date": "2023-01-04",
+      "admissions": 329515
+    },
+    {
+      "year": 2023,
+      "week": 3,
+      "date": "2023-01-11",
+      "admissions": 237438
+    },
+    {
+      "year": 2023,
+      "week": 4,
+      "date": "2023-01-18",
+      "admissions": 181338
+    },
+    {
+      "year": 2023,
+      "week": 5,
+      "date": "2023-01-25",
+      "admissions": 210800
+    },
+    {
+      "year": 2023,
+      "week": 6,
+      "date": "2023-02-01",
+      "admissions": 239359
+    },
+    {
+      "year": 2023,
+      "week": 7,
+      "date": "2023-02-08",
+      "admissions": 194344
+    },
+    {
+      "year": 2023,
+      "week": 8,
+      "date": "2023-02-15",
+      "admissions": 181598
+    },
+    {
+      "year": 2023,
+      "week": 9,
+      "date": "2023-02-22",
+      "admissions": 206737
+    },
+    {
+      "year": 2023,
+      "week": 10,
+      "date": "2023-03-01",
+      "admissions": 228140
+    },
+    {
+      "year": 2023,
+      "week": 11,
+      "date": "2023-03-08",
+      "admissions": 223407
+    },
+    {
+      "year": 2023,
+      "week": 12,
+      "date": "2023-03-15",
+      "admissions": 145366
+    },
+    {
+      "year": 2023,
+      "week": 13,
+      "date": "2023-03-22",
+      "admissions": 208922
+    },
+    {
+      "year": 2023,
+      "week": 14,
+      "date": "2023-03-29",
+      "admissions": 205808
+    },
+    {
+      "year": 2023,
+      "week": 15,
+      "date": "2023-04-05",
+      "admissions": 340517
+    },
+    {
+      "year": 2023,
+      "week": 16,
+      "date": "2023-04-12",
+      "admissions": 310276
+    },
+    {
+      "year": 2023,
+      "week": 17,
+      "date": "2023-04-19",
+      "admissions": 220651
+    },
+    {
+      "year": 2023,
+      "week": 18,
+      "date": "2023-04-26",
+      "admissions": 188176
+    },
+    {
+      "year": 2023,
+      "week": 19,
+      "date": "2023-05-03",
+      "admissions": 152970
+    },
+    {
+      "year": 2023,
+      "week": 20,
+      "date": "2023-05-10",
+      "admissions": 161581
+    },
+    {
+      "year": 2023,
+      "week": 21,
+      "date": "2023-05-17",
+      "admissions": 243920
+    },
+    {
+      "year": 2023,
+      "week": 22,
+      "date": "2023-05-24",
+      "admissions": 118778
+    },
+    {
+      "year": 2023,
+      "week": 23,
+      "date": "2023-05-31",
+      "admissions": 92540
+    },
+    {
+      "year": 2023,
+      "week": 24,
+      "date": "2023-06-07",
+      "admissions": 98364
+    },
+    {
+      "year": 2023,
+      "week": 25,
+      "date": "2023-06-14",
+      "admissions": 82752
+    },
+    {
+      "year": 2023,
+      "week": 26,
+      "date": "2023-06-21",
+      "admissions": 114917
+    },
+    {
+      "year": 2023,
+      "week": 27,
+      "date": "2023-06-28",
+      "admissions": 171656
+    },
+    {
+      "year": 2023,
+      "week": 28,
+      "date": "2023-07-05",
+      "admissions": 120159
+    },
+    {
+      "year": 2023,
+      "week": 29,
+      "date": "2023-07-12",
+      "admissions": 155488
+    },
+    {
+      "year": 2023,
+      "week": 30,
+      "date": "2023-07-19",
+      "admissions": 356825
+    },
+    {
+      "year": 2023,
+      "week": 31,
+      "date": "2023-07-26",
+      "admissions": 370190
+    },
+    {
+      "year": 2023,
+      "week": 32,
+      "date": "2023-08-02",
+      "admissions": 397382
+    },
+    {
+      "year": 2023,
+      "week": 33,
+      "date": "2023-08-09",
+      "admissions": 199321
+    },
+    {
+      "year": 2023,
+      "week": 34,
+      "date": "2023-08-16",
+      "admissions": 144603
+    },
+    {
+      "year": 2023,
+      "week": 35,
+      "date": "2023-08-23",
+      "admissions": 222900
+    },
+    {
+      "year": 2023,
+      "week": 36,
+      "date": "2023-08-30",
+      "admissions": 290794
+    },
+    {
+      "year": 2023,
+      "week": 37,
+      "date": "2023-09-06",
+      "admissions": 98412
+    },
+    {
+      "year": 2023,
+      "week": 38,
+      "date": "2023-09-13",
+      "admissions": 142048
+    },
+    {
+      "year": 2023,
+      "week": 39,
+      "date": "2023-09-20",
+      "admissions": 139798
+    },
+    {
+      "year": 2023,
+      "week": 40,
+      "date": "2023-09-27",
+      "admissions": 127314
+    },
+    {
+      "year": 2023,
+      "week": 41,
+      "date": "2023-10-04",
+      "admissions": 120036
+    },
+    {
+      "year": 2023,
+      "week": 42,
+      "date": "2023-10-11",
+      "admissions": 168547
+    },
+    {
+      "year": 2023,
+      "week": 43,
+      "date": "2023-10-18",
+      "admissions": 195365
+    },
+    {
+      "year": 2023,
+      "week": 44,
+      "date": "2023-10-25",
+      "admissions": 199017
+    },
+    {
+      "year": 2023,
+      "week": 45,
+      "date": "2023-11-01",
+      "admissions": 196057
+    },
+    {
+      "year": 2023,
+      "week": 46,
+      "date": "2023-11-08",
+      "admissions": 184534
+    },
+    {
+      "year": 2023,
+      "week": 47,
+      "date": "2023-11-15",
+      "admissions": 176778
+    },
+    {
+      "year": 2023,
+      "week": 48,
+      "date": "2023-11-22",
+      "admissions": 184671
+    },
+    {
+      "year": 2023,
+      "week": 49,
+      "date": "2023-11-29",
+      "admissions": 173591
+    },
+    {
+      "year": 2023,
+      "week": 50,
+      "date": "2023-12-06",
+      "admissions": 199256
+    },
+    {
+      "year": 2023,
+      "week": 51,
+      "date": "2023-12-13",
+      "admissions": 178580
+    },
+    {
+      "year": 2023,
+      "week": 52,
+      "date": "2023-12-20",
+      "admissions": 249524
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "date": "2023-12-27",
+      "admissions": 393293
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "date": "2024-01-03",
+      "admissions": 284490
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "date": "2024-01-10",
+      "admissions": 172008
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "date": "2024-01-17",
+      "admissions": 182528
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "date": "2024-01-24",
+      "admissions": 189680
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "date": "2024-01-31",
+      "admissions": 183106
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "date": "2024-02-07",
+      "admissions": 215526
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "date": "2024-02-14",
+      "admissions": 197094
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "date": "2024-02-21",
+      "admissions": 186542
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "date": "2024-02-28",
+      "admissions": 239579
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "date": "2024-03-06",
+      "admissions": 219245
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "date": "2024-03-13",
+      "admissions": 203210
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "date": "2024-03-20",
+      "admissions": 200833
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "date": "2024-03-27",
+      "admissions": 268584
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "date": "2024-04-03",
+      "admissions": 164378
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "date": "2024-04-10",
+      "admissions": 136844
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "date": "2024-04-17",
+      "admissions": 209241
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "date": "2024-04-24",
+      "admissions": 154651
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "date": "2024-05-01",
+      "admissions": 153262
+    },
+    {
+      "year": 2024,
+      "week": 20,
+      "date": "2024-05-08",
+      "admissions": 125386
+    },
+    {
+      "year": 2024,
+      "week": 21,
+      "date": "2024-05-15",
+      "admissions": 156472
+    },
+    {
+      "year": 2024,
+      "week": 22,
+      "date": "2024-05-22",
+      "admissions": 128732
+    },
+    {
+      "year": 2024,
+      "week": 23,
+      "date": "2024-05-29",
+      "admissions": 205123
+    },
+    {
+      "year": 2024,
+      "week": 24,
+      "date": "2024-06-05",
+      "admissions": 154585
+    },
+    {
+      "year": 2024,
+      "week": 25,
+      "date": "2024-06-12",
+      "admissions": 119434
+    },
+    {
+      "year": 2024,
+      "week": 26,
+      "date": "2024-06-19",
+      "admissions": 207606
+    },
+    {
+      "year": 2024,
+      "week": 27,
+      "date": "2024-06-26",
+      "admissions": 184866
+    },
+    {
+      "year": 2024,
+      "week": 28,
+      "date": "2024-07-03",
+      "admissions": 191895
+    },
+    {
+      "year": 2024,
+      "week": 29,
+      "date": "2024-07-10",
+      "admissions": 173282
+    },
+    {
+      "year": 2024,
+      "week": 30,
+      "date": "2024-07-17",
+      "admissions": 147877
+    },
+    {
+      "year": 2024,
+      "week": 31,
+      "date": "2024-07-24",
+      "admissions": 159565
+    },
+    {
+      "year": 2024,
+      "week": 32,
+      "date": "2024-07-31",
+      "admissions": 167475
+    },
+    {
+      "year": 2024,
+      "week": 33,
+      "date": "2024-08-07",
+      "admissions": 141826
+    },
+    {
+      "year": 2024,
+      "week": 34,
+      "date": "2024-08-14",
+      "admissions": 222450
+    },
+    {
+      "year": 2024,
+      "week": 35,
+      "date": "2024-08-21",
+      "admissions": 147606
+    },
+    {
+      "year": 2024,
+      "week": 36,
+      "date": "2024-08-28",
+      "admissions": 267536
+    },
+    {
+      "year": 2024,
+      "week": 37,
+      "date": "2024-09-04",
+      "admissions": 137155
+    },
+    {
+      "year": 2024,
+      "week": 38,
+      "date": "2024-09-11",
+      "admissions": 152933
+    },
+    {
+      "year": 2024,
+      "week": 39,
+      "date": "2024-09-18",
+      "admissions": 102995
+    },
+    {
+      "year": 2024,
+      "week": 40,
+      "date": "2024-09-25",
+      "admissions": 154166
+    },
+    {
+      "year": 2024,
+      "week": 41,
+      "date": "2024-10-02",
+      "admissions": 188721
+    },
+    {
+      "year": 2024,
+      "week": 42,
+      "date": "2024-10-09",
+      "admissions": 193967
+    },
+    {
+      "year": 2024,
+      "week": 43,
+      "date": "2024-10-16",
+      "admissions": 195447
+    },
+    {
+      "year": 2024,
+      "week": 44,
+      "date": "2024-10-23",
+      "admissions": 198851
+    },
+    {
+      "year": 2024,
+      "week": 45,
+      "date": "2024-10-30",
+      "admissions": 198326
+    },
+    {
+      "year": 2024,
+      "week": 46,
+      "date": "2024-11-06",
+      "admissions": 181468
+    },
+    {
+      "year": 2024,
+      "week": 47,
+      "date": "2024-11-13",
+      "admissions": 204422
+    },
+    {
+      "year": 2024,
+      "week": 48,
+      "date": "2024-11-20",
+      "admissions": 166035
+    },
+    {
+      "year": 2024,
+      "week": 49,
+      "date": "2024-11-27",
+      "admissions": 258287
+    },
+    {
+      "year": 2024,
+      "week": 50,
+      "date": "2024-12-04",
+      "admissions": 252957
+    },
+    {
+      "year": 2024,
+      "week": 51,
+      "date": "2024-12-11",
+      "admissions": 216782
+    },
+    {
+      "year": 2024,
+      "week": 52,
+      "date": "2024-12-18",
+      "admissions": 270286
+    },
+    {
+      "year": 2024,
+      "week": 53,
+      "date": "2024-12-25",
+      "admissions": 335503
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "date": "2025-01-01",
+      "admissions": 302589
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "date": "2025-01-08",
+      "admissions": 192560
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "date": "2025-01-15",
+      "admissions": 162237
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "date": "2025-01-22",
+      "admissions": 168214
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "date": "2025-01-29",
+      "admissions": 188471
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "date": "2025-02-05",
+      "admissions": 191851
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "date": "2025-02-12",
+      "admissions": 210944
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "date": "2025-02-19",
+      "admissions": 203316
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "date": "2025-02-26",
+      "admissions": 191353
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "date": "2025-03-05",
+      "admissions": 153304
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "date": "2025-03-12",
+      "admissions": 202567
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "date": "2025-03-19",
+      "admissions": 155830
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "date": "2025-03-26",
+      "admissions": 164021
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "date": "2025-04-02",
+      "admissions": 166556
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "date": "2025-04-09",
+      "admissions": 189494
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "date": "2025-04-16",
+      "admissions": 216830
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "date": "2025-04-23",
+      "admissions": 169173
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "date": "2025-04-30",
+      "admissions": 144575
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "date": "2025-05-07",
+      "admissions": 93718
+    },
+    {
+      "year": 2025,
+      "week": 20,
+      "date": "2025-05-14",
+      "admissions": 96662
+    },
+    {
+      "year": 2025,
+      "week": 21,
+      "date": "2025-05-21",
+      "admissions": 224398
+    },
+    {
+      "year": 2025,
+      "week": 22,
+      "date": "2025-05-28",
+      "admissions": 188755
+    },
+    {
+      "year": 2025,
+      "week": 23,
+      "date": "2025-06-04",
+      "admissions": 225607
+    },
+    {
+      "year": 2025,
+      "week": 24,
+      "date": "2025-06-11",
+      "admissions": 100850
+    },
+    {
+      "year": 2025,
+      "week": 25,
+      "date": "2025-06-18",
+      "admissions": 93221
+    },
+    {
+      "year": 2025,
+      "week": 26,
+      "date": "2025-06-25",
+      "admissions": 122425
+    },
+    {
+      "year": 2025,
+      "week": 27,
+      "date": "2025-07-02",
+      "admissions": 204259
+    },
+    {
+      "year": 2025,
+      "week": 28,
+      "date": "2025-07-09",
+      "admissions": 161998
+    },
+    {
+      "year": 2025,
+      "week": 29,
+      "date": "2025-07-16",
+      "admissions": 161553
+    },
+    {
+      "year": 2025,
+      "week": 30,
+      "date": "2025-07-23",
+      "admissions": 251500
+    },
+    {
+      "year": 2025,
+      "week": 31,
+      "date": "2025-07-30",
+      "admissions": 169739
+    },
+    {
+      "year": 2025,
+      "week": 32,
+      "date": "2025-08-06",
+      "admissions": 87690
+    },
+    {
+      "year": 2025,
+      "week": 33,
+      "date": "2025-08-13",
+      "admissions": 120571
+    },
+    {
+      "year": 2025,
+      "week": 34,
+      "date": "2025-08-20",
+      "admissions": 131600
+    },
+    {
+      "year": 2025,
+      "week": 35,
+      "date": "2025-08-27",
+      "admissions": 133978
+    },
+    {
+      "year": 2025,
+      "week": 36,
+      "date": "2025-09-03",
+      "admissions": 253729
+    },
+    {
+      "year": 2025,
+      "week": 37,
+      "date": "2025-09-10",
+      "admissions": 160368
+    },
+    {
+      "year": 2025,
+      "week": 38,
+      "date": "2025-09-17",
+      "admissions": 179089
+    },
+    {
+      "year": 2025,
+      "week": 39,
+      "date": "2025-09-24",
+      "admissions": 179384
+    },
+    {
+      "year": 2025,
+      "week": 40,
+      "date": "2025-10-01",
+      "admissions": 178315
+    },
+    {
+      "year": 2025,
+      "week": 41,
+      "date": "2025-10-08",
+      "admissions": 160305
+    },
+    {
+      "year": 2025,
+      "week": 42,
+      "date": "2025-10-15",
+      "admissions": 159320
+    },
+    {
+      "year": 2025,
+      "week": 43,
+      "date": "2025-10-22",
+      "admissions": 212252
+    },
+    {
+      "year": 2025,
+      "week": 44,
+      "date": "2025-10-29",
+      "admissions": 189615
+    },
+    {
+      "year": 2025,
+      "week": 45,
+      "date": "2025-11-05",
+      "admissions": 154411
+    },
+    {
+      "year": 2025,
+      "week": 46,
+      "date": "2025-11-12",
+      "admissions": 172662
+    },
+    {
+      "year": 2025,
+      "week": 47,
+      "date": "2025-11-19",
+      "admissions": 172658
+    },
+    {
+      "year": 2025,
+      "week": 48,
+      "date": "2025-11-26",
+      "admissions": 207801
+    },
+    {
+      "year": 2025,
+      "week": 49,
+      "date": "2025-12-03",
+      "admissions": 215357
+    },
+    {
+      "year": 2025,
+      "week": 50,
+      "date": "2025-12-10",
+      "admissions": 169925
+    },
+    {
+      "year": 2025,
+      "week": 51,
+      "date": "2025-12-17",
+      "admissions": 333315
+    },
+    {
+      "year": 2025,
+      "week": 52,
+      "date": "2025-12-24",
+      "admissions": 431160
+    }
+  ],
+  "focus_years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "latest_year": 2025,
+  "yoy_change": -0.0771655723520527,
+  "latest_admissions": 9472075,
+  "prev_admissions": 10264111
+}

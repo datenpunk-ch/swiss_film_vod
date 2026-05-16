@@ -1,0 +1,14 @@
+{
+  "origins": {
+    "och": "Schweiz",
+    "oep": "Europa (ohne CH)",
+    "oot": "Übrige Welt",
+    "oall": "Alle Herkünfte",
+    "rall": "Alle (aktuell)"
+  },
+  "vod_types": {
+    "EST": "Kauf (EST)",
+    "VOD": "Leihe (TVoD)",
+    "SVOD": "Abo (SVoD)"
+  }
+}

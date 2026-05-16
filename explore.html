@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <script>
+      (function () {
+        try {
+          var p = new URLSearchParams(window.location.search);
+          var v = (p.get("embed") || "").toLowerCase();
+          if (v === "1" || v === "true" || v === "yes") {
+            document.documentElement.classList.add("is-embed");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swiss Film — Explorer</title>
+    <link rel="stylesheet" href="./assets/fonts.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="page-explore">
+    <div class="wrap">
+      <header class="page-head">
+        <h1>Explorer — Kino &amp; VoD</h1>
+        <p>BFS-Daten: wöchentliche Kinobesuche und jährliche VoD-Kauf-Views nach Herkunftsregion (EST).</p>
+      </header>
+
+      <section class="panel" aria-labelledby="cinema-heading">
+        <div class="panel-label" id="cinema-heading">Kinobesuche</div>
+        <div class="controls">
+          <label for="cinemaYear">Jahr</label>
+          <select id="cinemaYear" aria-label="Kalenderjahr Kinobesuche"></select>
+        </div>
+        <svg class="chart" id="cinemaChart" role="img" aria-label="Wochenverlauf Kinobesuche"></svg>
+        <p class="chart-caption" id="cinemaCaption"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="vod-heading">
+        <div class="panel-label" id="vod-heading">VoD — Kauf (EST)</div>
+        <p class="panel-intro">
+          Gestapelte Views nach Herkunft: Schweiz, Europa (ohne CH), übrige Welt. Datenquelle: BFS StatVoD.
+        </p>
+        <svg class="chart" id="vodChart" role="img" aria-label="VoD Views nach Herkunft pro Jahr"></svg>
+        <div class="legend" aria-hidden="true">
+          <span class="lg-ch">Schweiz</span>
+          <span class="lg-eu">Europa (ohne CH)</span>
+          <span class="lg-ww">Übrige Welt</span>
+        </div>
+        <p class="chart-caption" id="vodCaption"></p>
+      </section>
+    </div>
+
+    <footer class="site-footer">
+      Swiss Film · <a href="./index.html">Artikel</a>
+    </footer>
+
+    <script>
+      (async function () {
+        const fmt = new Intl.NumberFormat("de-CH");
+        const pctFmt = new Intl.NumberFormat("de-CH", { style: "percent", maximumFractionDigits: 1 });
+        const root = getComputedStyle(document.documentElement);
+        const CHART = {
+          accent: root.getPropertyValue("--color-accent").trim(),
+          eu: root.getPropertyValue("--color-eu").trim(),
+          ww: root.getPropertyValue("--color-ww").trim(),
+          bgSoft: root.getPropertyValue("--color-bg-soft").trim(),
+          muted: root.getPropertyValue("--color-muted").trim(),
+        };
+
+        const [cinema, vod] = await Promise.all([
+          fetch("./data/cinema.json", { cache: "no-cache" }).then((r) => r.json()),
+          fetch("./data/vod.json", { cache: "no-cache" }).then((r) => r.json()),
+        ]);
+
+        const cinemaYearSel = document.getElementById("cinemaYear");
+        const years = [...new Set(cinema.weekly.map((w) => w.year))].sort((a, b) => b - a);
+        for (const y of years) {
+          const o = document.createElement("option");
+          o.value = String(y);
+          o.textContent = String(y);
+          cinemaYearSel.appendChild(o);
+        }
+
+        function drawCinema(year) {
+          const pts = cinema.weekly.filter((w) => w.year === year);
+          const W = 900;
+          const H = 280;
+          const pad = { l: 52, r: 16, t: 16, b: 36 };
+          const innerW = W - pad.l - pad.r;
+          const innerH = H - pad.t - pad.b;
+          const maxV = Math.max(1, ...pts.map((p) => p.admissions));
+          const path = [];
+          const circles = [];
+          pts.forEach((p, i) => {
+            const x = pad.l + (pts.length <= 1 ? 0 : (i / (pts.length - 1)) * innerW);
+            const y = pad.t + innerH - (p.admissions / maxV) * innerH;
+            path.push((i === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1));
+            circles.push(
+              `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="${CHART.accent}"><title>KW ${p.week}: ${fmt.format(p.admissions)}</title></circle>`
+            );
+          });
+          const total = pts.reduce((s, p) => s + p.admissions, 0);
+          document.getElementById("cinemaCaption").textContent =
+            `${year}: ${pts.length} Wochen, Summe ${fmt.format(total)} Besuche.`;
+          document.getElementById("cinemaChart").innerHTML =
+            `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">` +
+            `<rect width="${W}" height="${H}" fill="${CHART.bgSoft}"/>` +
+            `<path d="${path.join(" ")}" fill="none" stroke="${CHART.accent}" stroke-width="2"/>` +
+            circles.join("") +
+            `</svg>`;
+        }
+
+        function drawVod() {
+          const series = vod.series;
+          const W = 900;
+          const H = 300;
+          const pad = { l: 48, r: 16, t: 16, b: 44 };
+          const barW = Math.min(56, (W - pad.l - pad.r) / series.length - 12);
+          const maxV = Math.max(1, ...series.map((s) => s.total));
+          const innerH = H - pad.t - pad.b;
+          let bars = "";
+          series.forEach((s, i) => {
+            const x = pad.l + i * ((W - pad.l - pad.r) / series.length) + 8;
+            const hCh = (s.och / maxV) * innerH;
+            const hEu = (s.oep / maxV) * innerH;
+            const hWw = (s.oot / maxV) * innerH;
+            let y = pad.t + innerH;
+            y -= hWw;
+            bars += `<rect x="${x}" y="${y}" width="${barW}" height="${hWw}" fill="${CHART.ww}"><title>${s.year} Welt: ${fmt.format(s.oot)}</title></rect>`;
+            y -= hEu;
+            bars += `<rect x="${x}" y="${y}" width="${barW}" height="${hEu}" fill="${CHART.eu}"><title>${s.year} Europa: ${fmt.format(s.oep)}</title></rect>`;
+            y -= hCh;
+            bars += `<rect x="${x}" y="${y}" width="${barW}" height="${hCh}" fill="${CHART.accent}"><title>${s.year} CH: ${fmt.format(s.och)} (${pctFmt.format(s.share_ch)})</title></rect>`;
+            bars += `<text x="${x + barW / 2}" y="${H - 12}" text-anchor="middle" font-family="Karla,sans-serif" font-size="11" fill="${CHART.muted}">${s.year}</text>`;
+          });
+          const last = series[series.length - 1];
+          document.getElementById("vodCaption").textContent =
+            `Letztes Jahr ${last.year}: ${fmt.format(last.total)} EST-Views gesamt, davon ${pctFmt.format(last.share_ch)} Schweiz.`;
+          document.getElementById("vodChart").innerHTML =
+            `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">` +
+            `<rect width="${W}" height="${H}" fill="${CHART.bgSoft}"/>` + bars + `</svg>`;
+        }
+
+        cinemaYearSel.addEventListener("change", () => drawCinema(Number(cinemaYearSel.value)));
+        drawCinema(Number(cinemaYearSel.value));
+        drawVod();
+      })();
+    </script>
+  </body>
+</html>

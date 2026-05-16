@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <script>
+      (function () {
+        try {
+          var p = new URLSearchParams(window.location.search);
+          var v = (p.get("embed") || "").toLowerCase();
+          if (v === "1" || v === "true" || v === "yes") {
+            document.documentElement.classList.add("is-embed");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swiss Film — Artikel</title>
+    <meta
+      name="description"
+      content="Datenjournalismus zu Kinobesuchen und Video-on-Demand in der Schweiz — BFS-Daten, Artikel und interaktiver Explorer."
+    />
+    <link rel="stylesheet" href="./assets/fonts.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="page-article">
+    <a class="skip-link" href="#content">Zum Inhalt</a>
+    <div class="progress-bar" id="progress"></div>
+
+    <header
+      class="hero"
+      aria-label="Swiss Film Artikel — Kopf"
+      data-src="./content/article.md"
+      data-part="hero"
+    ></header>
+
+    <main id="content" data-src="./content/article.md" data-part="body"></main>
+
+    <footer class="site-footer site-footer-chrome reveal">
+      Swiss Film<span class="site-footer-selfref"> · <a href="#content">Artikel</a></span
+      ><span class="site-footer-subnav" aria-label="Weitere Seiten dieser Site">
+        · <a href="./explore.html">Explorer</a> · <a href="./sources.txt">Quellen</a></span
+      >
+    </footer>
+
+    <script>
+      window.__contentReady = (async function () {
+        const nodes = Array.from(document.querySelectorAll("[data-src]"));
+        if (!nodes.length) return;
+
+        function escapeHtml(s) {
+          return String(s || "")
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+        }
+
+        function renderInlineMarkdown(s) {
+          let out = escapeHtml(s);
+          out = out.replace(
+            /\[([^\]]+)\]\(([^)]+)\)/g,
+            (_m, t, url) => `<a href="${escapeHtml(url)}">${escapeHtml(t)}</a>`
+          );
+          out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+          out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+          return out;
+        }
+
+        function mdToHtml(md) {
+          const lines = String(md || "").replace(/\r\n?/g, "\n").split("\n");
+          const out = [];
+          let inUl = false;
+
+          function closeUl() {
+            if (inUl) {
+              out.push("</ul>");
+              inUl = false;
+            }
+          }
+
+          for (let i = 0; i < lines.length; i++) {
+            const raw = lines[i];
+            const line = raw.trimEnd();
+            const t = line.trim();
+
+            if (!t) {
+              closeUl();
+              continue;
+            }
+
+            if (t.startsWith("<")) {
+              closeUl();
+              out.push(raw);
+              continue;
+            }
+
+            const h3 = t.match(/^###\s+(.*)$/);
+            if (h3) {
+              closeUl();
+              out.push(`<h3 class="reveal">${renderInlineMarkdown(h3[1])}</h3>`);
+              continue;
+            }
+            const h2 = t.match(/^##\s+(.*)$/);
+            if (h2) {
+              closeUl();
+              out.push(`<h2 class="reveal">${renderInlineMarkdown(h2[1])}</h2>`);
+              continue;
+            }
+
+            const li = t.match(/^- (.*)$/);
+            if (li) {
+              if (!inUl) {
+                out.push('<ul class="reveal">');
+                inUl = true;
+              }
+              out.push(`<li>${renderInlineMarkdown(li[1])}</li>`);
+              continue;
+            }
+
+            closeUl();
+            out.push(`<p class="reveal">${renderInlineMarkdown(t)}</p>`);
+          }
+          closeUl();
+          return out.join("\n");
+        }
+
+        function splitParts(md) {
+          const text = String(md || "").replace(/\r\n?/g, "\n");
+          const re = /^<!--PART:([a-zA-Z0-9_-]+)-->\s*$/gm;
+          const matches = Array.from(text.matchAll(re));
+          if (!matches.length) return null;
+          const parts = {};
+          for (let i = 0; i < matches.length; i++) {
+            const key = matches[i][1];
+            const start = matches[i].index + matches[i][0].length;
+            const end = i + 1 < matches.length ? matches[i + 1].index : text.length;
+            parts[key] = text.slice(start, end).trim();
+          }
+          return parts;
+        }
+
+        async function fetchTextCached(cache, src) {
+          if (cache.has(src)) return cache.get(src);
+          const p = (async () => {
+            const r = await fetch(src, { cache: "no-cache" });
+            if (!r.ok) throw new Error("Failed to load: " + src);
+            return await r.text();
+          })();
+          cache.set(src, p);
+          return p;
+        }
+
+        async function loadInto(node, cache) {
+          const src = node.getAttribute("data-src");
+          if (!src) return;
+          const part = (node.getAttribute("data-part") || "").trim();
+          const txt = await fetchTextCached(cache, src);
+          if (src.toLowerCase().endsWith(".md")) {
+            const parts = splitParts(txt);
+            const chunk =
+              parts && part && Object.prototype.hasOwnProperty.call(parts, part)
+                ? parts[part]
+                : txt;
+            node.innerHTML = mdToHtml(chunk);
+          } else {
+            node.innerHTML = txt;
+          }
+        }
+
+        try {
+          const cache = new Map();
+          for (const node of nodes) {
+            await loadInto(node, cache);
+          }
+        } catch (e) {
+          console.error(e);
+          const main = document.getElementById("content");
+          if (main) {
+            main.innerHTML =
+              "<section><div class='container'><div class='note-box'>" +
+              "<div class='note-box-label'>Hinweis</div>" +
+              "<p>Der Artikel konnte nicht geladen werden. Direkt öffnen: <a href='./content/article.md'>article.md</a>.</p>" +
+              "</div></div></section>";
+          }
+        }
+      })();
+    </script>
+    <script>
+      (async function () {
+        await (window.__contentReady || Promise.resolve());
+        const progress = document.getElementById("progress");
+        if (!progress) return;
+        function tick() {
+          const h = document.documentElement;
+          const sh = h.scrollHeight - h.clientHeight;
+          const pct = sh > 0 ? (h.scrollTop / sh) * 100 : 0;
+          progress.style.width = pct + "%";
+        }
+        window.addEventListener("scroll", tick, { passive: true });
+        window.addEventListener("resize", tick);
+        tick();
+      })();
+    </script>
+    <script>
+      (async function () {
+        await (window.__contentReady || Promise.resolve());
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                observer.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      })();
+    </script>
+    <script>
+      (async function () {
+        await (window.__contentReady || Promise.resolve());
+
+        const headlineCards = document.getElementById("headlineStatsCards");
+        const cinemaWrap = document.getElementById("cinemaYearStatsInner");
+        const vodShareWrap = document.getElementById("vodShareStatsInner");
+        if (!headlineCards && !cinemaWrap && !vodShareWrap) return;
+
+        const fmt = new Intl.NumberFormat("de-CH");
+        const pctFmt = new Intl.NumberFormat("de-CH", {
+          style: "percent",
+          maximumFractionDigits: 1,
+        });
+        const compactFmt = new Intl.NumberFormat("de-CH", {
+          notation: "compact",
+          maximumFractionDigits: 1,
+        });
+
+        function pushCard(container, { value, label, delayMs = 0 }) {
+          if (!container) return;
+          const card = document.createElement("div");
+          card.className = "stat-card flip";
+          if (delayMs) card.style.animationDelay = delayMs + "ms";
+          const v = document.createElement("div");
+          v.className = "v";
+          v.textContent = value;
+          const k = document.createElement("div");
+          k.className = "k";
+          k.textContent = label;
+          card.appendChild(v);
+          card.appendChild(k);
+          container.appendChild(card);
+        }
+
+        function showLoading(container, msg) {
+          if (!container) return;
+          container.innerHTML = "";
+          const card = document.createElement("div");
+          card.className = "stat-card is-loading";
+          card.style.cssText = "width:100%;max-width:100%;height:auto;min-height:72px;";
+          card.textContent = msg || "Lädt…";
+          container.appendChild(card);
+        }
+
+        function buildYearStrip(container, rows, { valueKey, formatValue, ariaLabel }) {
+          if (!container) return;
+          container.innerHTML = "";
+          const peak = Math.max(0, ...rows.map((r) => r[valueKey] || 0));
+          const maxScale = Math.max(1, peak);
+          const strip = document.createElement("div");
+          strip.className = "year-strip";
+          strip.setAttribute("role", "group");
+          strip.setAttribute("aria-label", ariaLabel || "Jahresvergleich");
+
+          for (const row of rows) {
+            const val = row[valueKey] || 0;
+            const col = document.createElement("div");
+            col.className = "year-col" + (peak > 0 && val === peak ? " is-peak" : "");
+            const pct = peak > 0 ? (val / maxScale) * 100 : 0;
+
+            const track = document.createElement("div");
+            track.className = "year-bar-track";
+            const fill = document.createElement("div");
+            fill.className = "year-bar-fill";
+            fill.style.height = pct + "%";
+            fill.title = row.year + ": " + (formatValue ? formatValue(val) : String(val));
+            track.appendChild(fill);
+
+            const label = document.createElement("div");
+            label.className = "year-label";
+            label.textContent = String(row.year);
+
+            const num = document.createElement("div");
+            num.className = "year-count";
+            num.textContent = formatValue ? formatValue(val) : String(val);
+
+            col.appendChild(track);
+            col.appendChild(label);
+            col.appendChild(num);
+            strip.appendChild(col);
+          }
+          container.appendChild(strip);
+        }
+
+        try {
+          const [summary, cinema, vod] = await Promise.all([
+            fetch("./data/summary.json", { cache: "no-cache" }).then((r) => r.json()),
+            fetch("./data/cinema.json", { cache: "no-cache" }).then((r) => r.json()),
+            fetch("./data/vod.json", { cache: "no-cache" }).then((r) => r.json()),
+          ]);
+
+          if (headlineCards) {
+            headlineCards.innerHTML = "";
+            const cy = summary.cinema_latest_year;
+            const ca = summary.cinema_latest_admissions;
+            const yoy = summary.cinema_yoy_change;
+            const vy = summary.vod_latest_year;
+            const lastVod = vod.series[vod.series.length - 1];
+
+            pushCard(headlineCards, {
+              value: compactFmt.format(ca),
+              label: "Kinobesuche\n" + cy,
+              delayMs: 0,
+            });
+            pushCard(headlineCards, {
+              value: yoy == null ? "—" : pctFmt.format(yoy),
+              label: "Kino Δ\nzum Vorjahr",
+              delayMs: 70,
+            });
+            pushCard(headlineCards, {
+              value: compactFmt.format(summary.vod_latest_total_views),
+              label: "VoD EST\nViews " + vy,
+              delayMs: 140,
+            });
+            pushCard(headlineCards, {
+              value: pctFmt.format(lastVod.share_ch),
+              label: "CH-Anteil\nVoD " + vy,
+              delayMs: 210,
+            });
+          }
+
+          if (cinemaWrap && Array.isArray(cinema.yearly)) {
+            const recent = cinema.yearly.filter((y) => y.year >= 2019);
+            buildYearStrip(cinemaWrap, recent, {
+              valueKey: "admissions",
+              formatValue: (n) => compactFmt.format(n),
+              ariaLabel: "Kinobesuche nach Jahr",
+            });
+          }
+
+          if (vodShareWrap && Array.isArray(vod.series)) {
+            const rows = vod.series.map((s) => ({
+              year: s.year,
+              share: s.share_ch,
+            }));
+            buildYearStrip(vodShareWrap, rows, {
+              valueKey: "share",
+              formatValue: (n) => pctFmt.format(n),
+              ariaLabel: "Schweizer Anteil an VoD EST-Views",
+            });
+          }
+        } catch (e) {
+          console.error(e);
+          const msg = "Statistiken konnten nicht geladen werden.";
+          if (headlineCards) {
+            headlineCards.innerHTML = "";
+            pushCard(headlineCards, { value: "!", label: msg });
+          }
+          if (cinemaWrap) showLoading(cinemaWrap, msg);
+          if (vodShareWrap) showLoading(vodShareWrap, msg);
+        }
+      })();
+    </script>
+  </body>
+</html>

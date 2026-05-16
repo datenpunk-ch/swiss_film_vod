@@ -1,0 +1,26 @@
+
+https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36461148.html
+- Indikatoren zur Schweizer Film- und Kinolandschaft
+- je-d-16.02.01.01.xlsx
+
+
+https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36476429.html
+- Filmangebot und Nachfrage nach Herkunftsland, Sprachgebiet, Sprachfassung, Projektionsart (2D/3D) und Genre
+- px-x-1602010000_200.px
+
+
+https://www.mediapulse.ch/daten/jahresdaten
+Jahresbericht Mediapulse TV, DS, SR, SI, 2025
+2025-Publikation-Jahresdaten-Mediapulse-TV.xlsx
+
+
+https://www.bfs.admin.ch/bfs/de/home/statistiken/kultur-medien-informationsgesellschaft-sport/kultur/film-kino/vod.assetdetail.36217919.html
+Film- und Kinostatistik – Video on Demand (StatVoD)
+ts-x-16.02.01.10.csv
+ts-x-16.02.01.10-APPENDIX  = Metadaten
+
+
+https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36596835.html
+Kinostatistik - Ergebnisse nach Kinowochen
+ts-x-16.02.01-P4.csv
+ts-x-16.02.01-P4-APPENDIX = Metadaten
