@@ -60,7 +60,7 @@ export default function WeeklyAdmissionsChart({ profile, years, height = 280 }) 
             />
             <Bar
               dataKey="admissions"
-              name="Ø Eintritte"
+              name="Ø Besucher"
               fill="#b5542a"
               isAnimationActive={false}
               maxBarSize={28}

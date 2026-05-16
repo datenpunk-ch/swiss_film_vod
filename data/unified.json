@@ -3507,7 +3507,7 @@
     "cinema_p4": {
       "role": "supplementary",
       "label": "Kinostatistik (P4)",
-      "note": "Wöchentliche Eintritte; Herkunft jährlich mit Eintritten (adm) und Filmen (flm). Keine Genre-Dimension in dieser P4-Datei — Genre nur via PX (Kino) und VoD.",
+      "note": "Wöchentliche Besucher; Herkunft jährlich mit Besuchern (adm) und Filmen (flm). Keine Genre-Dimension in dieser P4-Datei — Genre nur via PX (Kino) und VoD.",
       "genre_available": false,
       "season": {
         "years": [
@@ -7422,9 +7422,9 @@
   ],
   "limitations": [
     "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
-    "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
+    "Nachfrage (Besucher/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
     "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-    "P4-Saison = Wochenprofil Kinobesuch (nur Eintritte).",
+    "P4-Saison = Wochenprofil Kinobesuch (nur Besucher).",
     "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep."
   ],
   "bfs_metadata": "data/bfs_metadata.json"

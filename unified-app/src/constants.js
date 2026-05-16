@@ -39,7 +39,7 @@ export const Y_AXIS_LABEL_PROPS = {
 };
 
 export const METRICS = [
-  { id: "demand", label: "Nachfrage (Eintritte / Views)" },
+  { id: "demand", label: "Nachfrage (Besucher / Views)" },
   { id: "supply", label: "Angebot (Filme)" },
-  { id: "intensity", label: "Ø Eintritte je Film" },
+  { id: "intensity", label: "Ø Besucher je Film" },
 ];

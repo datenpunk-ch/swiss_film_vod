@@ -170,7 +170,7 @@ export default function App() {
             data={marketTrendData}
             height={260}
             series={[
-              { key: "demand", label: "Kinoeintritte", color: "#0b0d10" },
+              { key: "demand", label: "Kinobesucher", color: "#0b0d10" },
               { key: "supply", label: "Filme im Programm", color: "#c4896e" },
             ]}
           />
@@ -181,7 +181,7 @@ export default function App() {
         <section className="panel panel-primary">
           <div className="panel-label">Besuche pro Kinowoche (P4)</div>
           <p className="panel-intro">
-            Verteilung der Kinobesuche über das Jahr (Ø Eintritte pro Woche, alle Filme, alle Herkünfte).
+            Verteilung der Kinobesuche über das Jahr (Ø Besucher pro Woche, alle Filme, alle Herkünfte).
             {seasonYears.length ? ` Basisjahre: ${seasonYears.join(", ")}.` : ""}
           </p>
           <ChartFrame>

@@ -91,7 +91,7 @@ function sharesFromTotals(totals) {
   return Object.fromEntries(Object.entries(totals).map(([k, v]) => [k, v / sum]));
 }
 
-/** demand = Eintritte/Views; supply = Filme im Programm/Katalog */
+/** demand = Besucher/Views; supply = Filme im Programm/Katalog */
 function metricBundle(demand, supply, demandTotal, supplyTotal) {
   return {
     demand,
@@ -452,7 +452,7 @@ function main() {
       "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
       "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
       "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-      "P4-Saison = Wochenprofil Kinobesuch (nur Eintritte).",
+      "P4-Saison = Wochenprofil Kinobesuch (nur Besucher).",
       "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep.",
     ],
     bfs_metadata: bfsMeta ? CFG.paths.bfs_metadata : null,

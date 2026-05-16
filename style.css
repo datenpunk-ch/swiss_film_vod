@@ -1280,17 +1280,32 @@ html.is-embed .page-explore .site-footer {
   margin-bottom: 0.5rem;
 }
 
+.page-unified .kpi-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.page-unified .kpi-row-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.35rem;
+}
+
 .page-unified .stat-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin: 0 0 1rem;
   align-items: stretch;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 640px) {
   .page-unified .stat-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1323,7 +1338,9 @@ html.is-embed .page-explore .site-footer {
   color: var(--color-ink);
   line-height: 1.2;
   text-align: center;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .page-unified .stat-card .k {

@@ -4,10 +4,22 @@ export const pctFmt = new Intl.NumberFormat("de-CH", {
   maximumFractionDigits: 1,
 });
 
+const deltaPctFmt = new Intl.NumberFormat("de-CH", {
+  style: "percent",
+  signDisplay: "exceptZero",
+  maximumFractionDigits: 1,
+});
+
+/** Abweichung vom Durchschnitt: +25 % = 25 % über Benchmark (Index 125 → +25 %). */
+export function formatVsMarketDelta(ratio) {
+  if (ratio == null || !Number.isFinite(ratio)) return "—";
+  return deltaPctFmt.format(ratio - 1);
+}
+
 export function metricLabel(metric) {
   if (metric === "supply") return "Angebot (Filme)";
-  if (metric === "intensity") return "Ø Eintritte je Film";
-  return "Nachfrage (Eintritte / Views)";
+  if (metric === "intensity") return "Ø Besucher je Film";
+  return "Nachfrage (Besucher / Views)";
 }
 
 export function metricValue(row, metric) {

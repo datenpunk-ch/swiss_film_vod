@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { resolveChartColors } from "../utils/countryColors.js";
-import { metricShare, metricValue, pctFmt } from "../utils/format.js";
+import { formatVsMarketDelta, metricShare, metricValue, pctFmt } from "../utils/format.js";
 import { sortRowsByMetric } from "../utils/sortRows.js";
 import CountryFlag from "./CountryFlag.jsx";
 
@@ -13,7 +13,7 @@ function partShareValue(row, metric, marketIntensity) {
 
 function formatLegendShare(part, metric, marketIntensity) {
   if (metric === "intensity" && marketIntensity > 0) {
-    return pctFmt.format(part.abs / marketIntensity);
+    return formatVsMarketDelta(part.abs / marketIntensity);
   }
   return pctFmt.format(part.value);
 }

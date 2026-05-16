@@ -141,11 +141,11 @@ Auswertung: `data/bfs_metadata.json` via `node scripts/build_bfs_metadata.mjs`.
 3. **Sprachgebiet** — Schweiz, Deutschschweiz, französische/italienische Schweiz, …
 4. **Alle Filme / Erstaufführungen** — `Alle vorgeführten Filme` vs. `Erstaufführungen`
 5. **Sprachfassung · Projektionsart · Genre** — z. B. Originalfassung, 2D/3D, Genre-Total
-6. **Beobachtungseinheit** — `Anzahl Filme`, `Anzahl Vorführungen`, `Kinoeintritte`
+6. **Beobachtungseinheit** — `Anzahl Filme`, `Anzahl Vorführungen`, `Kinobesucher`
 
 ### Was du damit machen kannst
 
-- **Länder-Rankings:** Welche Herkunftsländer dominieren Angebot vs. Eintritte?
+- **Länder-Rankings:** Welche Herkunftsländer dominieren Angebot vs. Besucher?
 - **Sprache:** Deutschschweiz vs. andere Sprachgebiete.
 - **Erstaufführungen:** Anteil neuer Filme am Angebot.
 - **2D/3D, Genre, Sprachfassung:** tiefere Schnitt als VoD-CSV.
@@ -234,9 +234,9 @@ Siehe auch `sources.txt` im Projektroot.
 
 | Block | Inhalt |
 |-------|--------|
-| `primary.px` | Pro Jahr: `market`, `origins`, `genres`, `top_countries` je mit `demand` (Eintritte), `supply` (Filme), `share_*`, `intensity` |
+| `primary.px` | Pro Jahr: `market`, `origins`, `genres`, `top_countries` je mit `demand` (Besucher), `supply` (Filme), `share_*`, `intensity` |
 | `supplementary.vod` | EST: Views + Filme nach Herkunft und Genre |
-| `supplementary.cinema_p4` | Eintritte (`adm`) + Filme (`flm`) nach Herkunft; Saison (Wochen). **Kein Genre** in P4-CSV |
+| `supplementary.cinema_p4` | Besucher (`adm`) + Filme (`flm`) nach Herkunft; Saison (Wochen). **Kein Genre** in P4-CSV |
 | `by_year` | Verknüpfung PX-Jahr mit optionalem VoD/P4 |
 
 **PX-Schnitt (Standard):** Sprachgebiet Schweiz, alle vorgeführten Filme, Genre-Total; Markt aus aggregierten Herkunftsländern (nicht „Herkunftsland - Total“-Zeile).
