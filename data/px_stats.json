@@ -1,0 +1,307 @@
+{
+  "generated_at": "2026-05-16T08:28:59.051Z",
+  "source_file": "px-x-1602010000_200.px",
+  "dataset": {
+    "id": "px",
+    "source_file": "data/raw/px-x-1602010000_200.px",
+    "official_title": "Filmangebot und Nachfrage nach Jahr, Herkunftsland, Sprachgebiet, Alle Filme - Erstaufführungen, Sprachfassung - Projektionsart - Genre und Beobachtungseinheit",
+    "summary": "Filmangebot und Nachfrage nach Herkunftsland, Sprachgebiet, Sprachfassung, Projektionsart (2D/3D) und Genre",
+    "period": "2014–2025",
+    "size_label": "244’224 Datenzellen (PX)",
+    "format": "PC-Axis (.px), ISO-8859-15",
+    "link": "https://www.bfs.admin.ch/asset/de/px-x-1602010000_200",
+    "notes": [
+      "PX enthält detaillierte Kreuztabellen (Land × Sprachgebiet × Genre × …).",
+      "Jahreswerte auf der Statistik-Seite: Schweiz, alle vorgeführten Filme, Total der Filme (aus PX-Matrix extrahiert).",
+      "Vergleich 2019↔2020 bei «vorgeführten Filmen» laut BFS-Methodik eingeschränkt."
+    ],
+    "dimensions": [
+      {
+        "name": "Jahr",
+        "count": 12,
+        "sample": "2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025"
+      },
+      {
+        "name": "Herkunftsland",
+        "count": 106,
+        "sample": "Herkunftsland - Total, ......Schweiz, ......Vereinigte Staaten, - Total Europa, …"
+      },
+      {
+        "name": "Sprachgebiet",
+        "count": 4,
+        "sample": "Schweiz, Deutschschweiz, Französische Schweiz, Italienische Schweiz"
+      },
+      {
+        "name": "Alle Filme – Erstaufführungen",
+        "count": 2,
+        "sample": "Alle vorgeführten Filme, Erstaufführungen"
+      },
+      {
+        "name": "Sprachfassung – Projektionsart – Genre",
+        "count": 8,
+        "sample": "Total der Filme, Orginalfassung, Synchronfassung, 2D-Projektionen, 3D-Projektionen, Animationsfilme, Dokumentarfilme, Spielfilme"
+      },
+      {
+        "name": "Beobachtungseinheit",
+        "count": 3,
+        "sample": "Anzahl Filme, Anzahl Vorführungen, Kinoeintritte"
+      }
+    ],
+    "variables": [
+      {
+        "name": "Anzahl Filme",
+        "description": "Beobachtungseinheit",
+        "values_label": "Teil der Kopfachse «Beobachtungseinheit»"
+      },
+      {
+        "name": "Anzahl Vorführungen",
+        "description": "Beobachtungseinheit",
+        "values_label": "Teil der Kopfachse «Beobachtungseinheit»"
+      },
+      {
+        "name": "Kinoeintritte",
+        "description": "Beobachtungseinheit",
+        "values_label": "Teil der Kopfachse «Beobachtungseinheit»"
+      }
+    ]
+  },
+  "meta": {
+    "description": "Filmangebot und Nachfrage nach Herkunftsland, Sprachgebiet, Sprachfassung, Projektionsart (2D/3D) und Genre",
+    "title": "Filmangebot und Nachfrage nach Jahr, Herkunftsland, Sprachgebiet, Alle Filme - Erstaufführungen, Sprachfassung - Projektionsart - Genre und Beobachtungseinheit",
+    "link": "https://www.bfs.admin.ch/asset/de/px-x-1602010000_200",
+    "survey": "Schweizer Film- und Kinostatistik (StatCin)",
+    "last_updated": "20260316 08:30",
+    "matrix": "px-x-1602010000_200"
+  },
+  "years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "latest_year": 2025,
+  "row_count": 244224,
+  "stat_options": [
+    {
+      "id": "slice",
+      "label": "Herkunftsschnitt",
+      "options": [
+        {
+          "id": "total",
+          "label": "Alle Herkünfte (Total)"
+        },
+        {
+          "id": "ch",
+          "label": "Nur Schweiz (Herkunftsland)"
+        }
+      ]
+    },
+    {
+      "id": "metric",
+      "label": "Kennzahl",
+      "options": [
+        {
+          "id": "admissions",
+          "label": "Kinoeintritte"
+        },
+        {
+          "id": "films",
+          "label": "Anzahl Filme"
+        },
+        {
+          "id": "screenings",
+          "label": "Vorführungen"
+        }
+      ]
+    }
+  ],
+  "defaults": {
+    "slice": "total",
+    "metric": "admissions"
+  },
+  "overview": {
+    "year_span": "2014–2025",
+    "latest_admissions_ch": 861116,
+    "matrix": "px-x-1602010000_200"
+  },
+  "yearly_ch": [
+    {
+      "year": 2014,
+      "admissions": 624755,
+      "films": 263,
+      "screenings": 32906,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2015,
+      "admissions": 779510,
+      "films": 261,
+      "screenings": 32458,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2016,
+      "admissions": 596653,
+      "films": 299,
+      "screenings": 27984,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2017,
+      "admissions": 892981,
+      "films": 287,
+      "screenings": 40400,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2018,
+      "admissions": 745548,
+      "films": 330,
+      "screenings": 34152,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2019,
+      "admissions": 839167,
+      "films": 316,
+      "screenings": 39022,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2020,
+      "admissions": 600875,
+      "films": 243,
+      "screenings": 33916,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2021,
+      "admissions": 233548,
+      "films": 292,
+      "screenings": 22757,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2022,
+      "admissions": 441922,
+      "films": 391,
+      "screenings": 34381,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2023,
+      "admissions": 665858,
+      "films": 385,
+      "screenings": 37691,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2024,
+      "admissions": 909623,
+      "films": 412,
+      "screenings": 46875,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    },
+    {
+      "year": 2025,
+      "admissions": 861116,
+      "films": 407,
+      "screenings": 51125,
+      "slice": "Schweiz · Alle vorgeführten Filme · Total der Filme"
+    }
+  ],
+  "yearly_total": [
+    {
+      "year": 2014,
+      "admissions": 12940965,
+      "films": 1683,
+      "screenings": 544597,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2015,
+      "admissions": 14407373,
+      "films": 1674,
+      "screenings": 557649,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2016,
+      "admissions": 13443890,
+      "films": 1857,
+      "screenings": 571889,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2017,
+      "admissions": 13532638,
+      "films": 1917,
+      "screenings": 599587,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2018,
+      "admissions": 11740410,
+      "films": 2073,
+      "screenings": 600550,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2019,
+      "admissions": 12506143,
+      "films": 2067,
+      "screenings": 615131,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2020,
+      "admissions": 4348555,
+      "films": 2208,
+      "screenings": 314653,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2021,
+      "admissions": 5387595,
+      "films": 2255,
+      "screenings": 349053,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2022,
+      "admissions": 8713836,
+      "films": 3305,
+      "screenings": 556511,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2023,
+      "admissions": 10502231,
+      "films": 3405,
+      "screenings": 529131,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2024,
+      "admissions": 10264111,
+      "films": 3698,
+      "screenings": 558411,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    },
+    {
+      "year": 2025,
+      "admissions": 9472075,
+      "films": 3852,
+      "screenings": 575112,
+      "slice": "Herkunftsland Total · Schweiz (Sprachgebiet) · Alle vorgeführten Filme"
+    }
+  ]
+}

@@ -6,9 +6,30 @@
     "oall": "Alle Herkünfte",
     "rall": "Alle (aktuell)"
   },
+  "cinema_origins": {
+    "oall": "Alle Herkünfte",
+    "och": "Schweiz",
+    "oeu": "Europa (ohne CH)",
+    "oot": "Übrige Welt",
+    "ous": "Unbestimmt"
+  },
+  "cinema_units": {
+    "adm": "Kinobesuche",
+    "cin": "Kinos",
+    "flm": "Filme",
+    "prj": "Vorführungen",
+    "scr": "Leinwände"
+  },
   "vod_types": {
     "EST": "Kauf (EST)",
     "VOD": "Leihe (TVoD)",
+    "TVOD": "Leihe (TVoD)",
     "SVOD": "Abo (SVoD)"
+  },
+  "genres": {
+    "all": "Alle Genres",
+    "fic": "Fiktion",
+    "doc": "Dokumentar",
+    "ani": "Animation"
   }
 }

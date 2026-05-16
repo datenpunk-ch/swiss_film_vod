@@ -53,7 +53,7 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
         <div class="stats-label">Kinobesuche nach Jahr</div>
         <div id="cinemaYearStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
       </div>
-      <p class="reveal stats-intro">VoD-Kauf-Views (EST) nach Herkunftsregion — Anteil Schweiz am Gesamtvolumen:</p>
+      <p class="reveal stats-intro">VoD-Kauf-Views (EST) nach Herkunftsregion — Anteil Schweiz am Gesamtvolumen. Ausführliche Tabellen: <a href="./data_explorer.html?dataset=vod">Daten-Explorer</a>.</p>
       <div class="stats reveal" id="vodShareStats" aria-live="polite">
         <div class="stats-label">Schweizer Anteil (EST, Views)</div>
         <div id="vodShareStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
@@ -92,7 +92,7 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
 - **Aufbereitung**: CSV → JSON via `node scripts/export_site.mjs`; keine Live-API.
 - **Hinweis**: Unvollständige Kalenderjahre (z. B. laufendes Jahr) werden in Jahresvergleichen ausgeschlossen.
 
-Projekt auf [GitHub](https://github.com/datenpunk-ch/swiss_film).
+Projekt auf [GitHub](https://github.com/datenpunk-ch/swiss_film_vod).
 
     </div>
   </div>

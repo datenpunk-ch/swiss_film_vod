@@ -1,3 +1,4 @@
+Datenbeschreibung (Spalten, Codes, Ideen): data/DATENBESCHREIBUNG.md
 
 https://www.bfs.admin.ch/bfs/de/home/statistiken/katalog.assetdetail.36461148.html
 - Indikatoren zur Schweizer Film- und Kinolandschaft
