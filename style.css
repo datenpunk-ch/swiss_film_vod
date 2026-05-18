@@ -2028,3 +2028,60 @@ html.is-embed .page-explore .site-footer {
   color: var(--color-muted);
   margin: 0.5rem 0 1rem;
 }
+
+.page-analysis .analysis-prose {
+  margin: 0 0 1rem;
+  line-height: 1.65;
+  max-width: 42rem;
+}
+
+.page-analysis .analysis-lead {
+  font-size: 1.0625rem;
+  color: var(--color-ink);
+}
+
+.page-analysis .analysis-synthesis {
+  background: var(--color-bg-soft);
+  border-top: 3px solid var(--color-accent, #b5542a);
+}
+
+.page-analysis .synthesis-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .page-analysis .synthesis-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.page-analysis .synthesis-card {
+  border: var(--rule-w) solid var(--color-rule);
+  padding: 1rem 1.1rem;
+  background: var(--color-bg);
+}
+
+.page-analysis .synthesis-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.page-analysis .synthesis-card h3 {
+  font-size: 1rem;
+  margin: 0.35rem 0;
+}
+
+.page-analysis .synthesis-q {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem;
+}
+
+.page-analysis .synthesis-takeaway {
+  font-size: 0.9375rem;
+  margin: 0;
+  font-weight: 600;
+}

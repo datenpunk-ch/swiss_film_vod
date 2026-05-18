@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Erzeugt analysis.html, data/analysis_report.json und SVG-Grafiken.
- * Volles Python-Modell: pip install -r python/requirements.txt && python python/run_analyses.py
+ * Legacy-Fallback (SVG-Teaser). Hauptpipeline:
+ *   pixi run analyze  → data/analysis_report.json + Grafiken
+ *   content/analysis.md + analysis.html (Markdown + JSON)
  */
 import fs from "node:fs";
 import path from "node:path";

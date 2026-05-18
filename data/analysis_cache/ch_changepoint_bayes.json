@@ -1,0 +1,104 @@
+{
+  "fingerprint": "1a04da8072b3d8aa988dea1f",
+  "result": {
+    "id": "ch_changepoint_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/02_changepoint.png",
+        "caption": "CH-Anteil mit Change-Point bei 2022 (95 %-credible interval (HDI))."
+      },
+      {
+        "src": "./assets/analysis/figures/02_changepoint_forest.png",
+        "caption": "Forest-Plot β₁ und β₂."
+      },
+      {
+        "src": "./assets/analysis/figures/02_changepoint_trace.png",
+        "caption": "MCMC-Trace."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Posterior-Zusammenfassung",
+        "headers": [
+          "Parameter",
+          "Bedeutung",
+          "Mittelwert",
+          "SD",
+          "95 %-HDI",
+          "Pd"
+        ],
+        "rows": [
+          [
+            "β₁",
+            "Trend vor/nach τ (Basis)",
+            "0,049",
+            "0,0003",
+            "0,048 – 0,049",
+            "100,0 %"
+          ],
+          [
+            "β₂",
+            "Zusatz-Trend ab 2022",
+            "0,002",
+            "0,0005",
+            "0,001 – 0,003",
+            "99,9 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "609",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "789",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 1000",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 1000,
+      "draws": 1000,
+      "target_accept": 0.92,
+      "fit_years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "year_center": 2019.3,
+      "break_year": 2022
+    }
+  }
+}

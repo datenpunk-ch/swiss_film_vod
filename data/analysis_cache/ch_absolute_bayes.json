@@ -1,0 +1,111 @@
+{
+  "fingerprint": "3570764af4e9bf94f883279b",
+  "result": {
+    "id": "ch_absolute_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/07_absolute_ch.png",
+        "caption": "Posterior CH-Besuche absolut (95 %-credible interval (HDI))."
+      },
+      {
+        "src": "./assets/analysis/figures/07_absolute_market_ch.png",
+        "caption": "Gesamtmarkt vs. CH-Besuche (Mio.)."
+      },
+      {
+        "src": "./assets/analysis/figures/07_absolute_rate.png",
+        "caption": "Impliziter CH-Anteil aus dem Offset-Modell (95 %-credible interval (HDI))."
+      },
+      {
+        "src": "./assets/analysis/figures/07_absolute_forest.png",
+        "caption": "Forest-Plot Trend β (log-Rate)."
+      },
+      {
+        "src": "./assets/analysis/figures/07_absolute_trace.png",
+        "caption": "MCMC-Trace α, β."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Posterior-Zusammenfassung",
+        "headers": [
+          "Parameter",
+          "Bedeutung",
+          "Mittelwert",
+          "SD",
+          "95 %-HDI",
+          "Pd"
+        ],
+        "rows": [
+          [
+            "β",
+            "Trend log-Rate / Jahr",
+            "0,046",
+            "0,0001",
+            "0,046 – 0,047",
+            "100,0 %"
+          ],
+          [
+            "α",
+            "Intercept log-Rate",
+            "-2,762",
+            "0,0004",
+            "-2,763 – -2,761",
+            "0,0 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "2279",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "1964",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 800",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 800,
+      "draws": 800,
+      "target_accept": 0.92,
+      "fit_years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "year_center": 2019.3
+    }
+  }
+}

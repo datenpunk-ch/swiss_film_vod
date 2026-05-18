@@ -1,0 +1,95 @@
+{
+  "fingerprint": "f57cda43e5aa6f6726971372",
+  "result": {
+    "id": "ch_forecast_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/05_forecast.png",
+        "caption": "Schätzung + Prognose (95 %-credible interval (HDI), grau)."
+      },
+      {
+        "src": "./assets/analysis/figures/05_forecast_forest.png",
+        "caption": "Forest-Plot Trend β."
+      },
+      {
+        "src": "./assets/analysis/figures/05_forecast_trace.png",
+        "caption": "MCMC-Trace."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Posterior-Zusammenfassung",
+        "headers": [
+          "Parameter",
+          "Bedeutung",
+          "Mittelwert",
+          "SD",
+          "95 %-HDI",
+          "Pd"
+        ],
+        "rows": [
+          [
+            "β",
+            "Trend pro Jahr",
+            "0,050",
+            "0,0001",
+            "0,050 – 0,050",
+            "100,0 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "2522",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "1991",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 800",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 800,
+      "draws": 800,
+      "target_accept": 0.92,
+      "fit_years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "year_center": 2019.3
+    }
+  }
+}

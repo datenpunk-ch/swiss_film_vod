@@ -1,0 +1,111 @@
+{
+  "fingerprint": "8f51b17eb332ae4c25532ec2",
+  "result": {
+    "id": "ch_genre_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/01_genre_trend.png",
+        "caption": "Posterior CH-Anteil je Genre (95 %-credible interval (HDI))."
+      },
+      {
+        "src": "./assets/analysis/figures/01_genre_forest.png",
+        "caption": "Forest-Plot β (Auszug Fiktion/Dokumentar)."
+      },
+      {
+        "src": "./assets/analysis/figures/01_genre_trace.png",
+        "caption": "MCMC-Trace Hyperpriors."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Posterior-Zusammenfassung",
+        "headers": [
+          "Parameter",
+          "Bedeutung",
+          "Mittelwert",
+          "SD",
+          "95 %-HDI",
+          "Pd"
+        ],
+        "rows": [
+          [
+            "β_fic",
+            "Trend Fiktion",
+            "0,049",
+            "0,0001",
+            "0,049 – 0,049",
+            "100,0 %"
+          ],
+          [
+            "β_doc",
+            "Trend Dokumentar",
+            "0,060",
+            "0,0002",
+            "0,059 – 0,060",
+            "100,0 %"
+          ],
+          [
+            "β_ani",
+            "Trend Animation",
+            "-0,057",
+            "0,0006",
+            "-0,058 – -0,056",
+            "0,0 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "2757",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "1998",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 800",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 800,
+      "draws": 800,
+      "target_accept": 0.92,
+      "fit_years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "year_center": 2019.3
+    }
+  }
+}

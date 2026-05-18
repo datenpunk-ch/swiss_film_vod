@@ -1,7 +1,9 @@
 {
-  "generated_at": "2026-05-18T11:29:03.781Z",
+  "generated_at": "2026-05-18T14:38:06.279Z",
   "model": "px_primary",
-  "lead": "Kinomarkt Schweiz (BFS PX, 2014 ff.): Angebot und Nachfrage im Jahresverlauf, Kinosaison nach Wochen, Herkunft und Genre pro Jahr. VoD und wöchentliche P4-Daten ergänzen andere Zeitskalen.",
+  "page_title": "Übersicht Swiss Film",
+  "page_note": "Arbeitsansicht auf dem Weg zum Artikel — explorativ, noch keine finale Story.",
+  "lead": "Zwischenstand zur BFS-Auswertung (PX, 2014 ff.): Jahresverläufe, Kinosaison und Herkunft/Genre zum Prüfen von Hypothesen. Der Artikel bleibt die Hauptseite; VoD und P4 ergänzen andere Zeitskalen.",
   "harmonized": {
     "origins": [
       {
@@ -129,6 +131,35 @@
               "share_demand": 0.12388442438411663,
               "share_supply": 0.055852644087938205,
               "intensity": 17055.14893617021
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 379065,
+              "supply": 94,
+              "share_demand": 0.03481153520739112,
+              "share_supply": 0.07137433561123765,
+              "intensity": 4032.6063829787236
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 245690,
+              "supply": 169,
+              "share_demand": 0.5475376517099827,
+              "share_supply": 0.6213235294117647,
+              "intensity": 1453.7869822485206
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 0,
+              "supply": 0,
+              "share_demand": 0,
+              "share_supply": 0,
+              "intensity": null
             }
           ],
           "top_countries": [
@@ -309,6 +340,35 @@
               "intensity": 21384.272727272728
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 534977,
+              "supply": 105,
+              "share_demand": 0.04416584915054688,
+              "share_supply": 0.07948523845571537,
+              "intensity": 5095.019047619047
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 244533,
+              "supply": 156,
+              "share_demand": 0.5925975291169671,
+              "share_supply": 0.5886792452830188,
+              "intensity": 1567.5192307692307
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 0,
+              "supply": 0,
+              "share_demand": 0,
+              "share_supply": 0,
+              "intensity": null
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -485,6 +545,35 @@
               "share_demand": 0.17299992784826415,
               "share_supply": 0.05277329025309639,
               "intensity": 23732.571428571428
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 254227,
+              "supply": 119,
+              "share_demand": 0.02406390057117771,
+              "share_supply": 0.08240997229916898,
+              "intensity": 2136.361344537815
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 233859,
+              "supply": 178,
+              "share_demand": 0.42255910811567754,
+              "share_supply": 0.5650793650793651,
+              "intensity": 1313.814606741573
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 108567,
+              "supply": 2,
+              "share_demand": 0.04667958269699096,
+              "share_supply": 0.02040816326530612,
+              "intensity": 54283.5
             }
           ],
           "top_countries": [
@@ -665,6 +754,35 @@
               "intensity": 21895.291666666668
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 598764,
+              "supply": 109,
+              "share_demand": 0.05463499702400206,
+              "share_supply": 0.07384823848238482,
+              "intensity": 5493.247706422018
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 220525,
+              "supply": 176,
+              "share_demand": 0.4678672129095496,
+              "share_supply": 0.5101449275362319,
+              "intensity": 1252.9829545454545
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 73692,
+              "supply": 2,
+              "share_demand": 0.035058907261264316,
+              "share_supply": 0.020833333333333332,
+              "intensity": 36846
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -841,6 +959,35 @@
               "share_demand": 0.12607455787319183,
               "share_supply": 0.05209840810419682,
               "intensity": 13705.25
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 441239,
+              "supply": 119,
+              "share_demand": 0.04528425933271557,
+              "share_supply": 0.07395898073337477,
+              "intensity": 3707.890756302521
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 303087,
+              "supply": 209,
+              "share_demand": 0.5868297443086109,
+              "share_supply": 0.5870786516853933,
+              "intensity": 1450.177033492823
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 1222,
+              "supply": 2,
+              "share_demand": 0.0008255825187293055,
+              "share_supply": 0.018518518518518517,
+              "intensity": 611
             }
           ],
           "top_countries": [
@@ -1021,6 +1168,35 @@
               "intensity": 23556.25
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 581964,
+              "supply": 110,
+              "share_demand": 0.06127267426600113,
+              "share_supply": 0.0697084917617237,
+              "intensity": 5290.581818181819
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 256452,
+              "supply": 204,
+              "share_demand": 0.5525422779344624,
+              "share_supply": 0.5354330708661418,
+              "intensity": 1257.1176470588234
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 751,
+              "supply": 2,
+              "share_demand": 0.000295195699812309,
+              "share_supply": 0.018518518518518517,
+              "intensity": 375.5
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -1197,6 +1373,35 @@
               "share_demand": 0.1070440640626599,
               "share_supply": 0.04664855072463768,
               "intensity": 4519.291262135922
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 474676,
+              "supply": 77,
+              "share_demand": 0.13057434435133564,
+              "share_supply": 0.04495037945125511,
+              "intensity": 6164.623376623376
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 125912,
+              "supply": 165,
+              "share_demand": 0.5081707194026839,
+              "share_supply": 0.42091836734693877,
+              "intensity": 763.1030303030303
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 287,
+              "supply": 1,
+              "share_demand": 0.0006165585719901952,
+              "share_supply": 0.009708737864077669,
+              "intensity": 287
             }
           ],
           "top_countries": [
@@ -1377,6 +1582,35 @@
               "intensity": 7603.677083333333
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 130466,
+              "supply": 97,
+              "share_demand": 0.029150433315138426,
+              "share_supply": 0.05629715612304121,
+              "intensity": 1345.0103092783504
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 103022,
+              "supply": 194,
+              "share_demand": 0.5659585455224659,
+              "share_supply": 0.44495412844036697,
+              "intensity": 531.0412371134021
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 60,
+              "supply": 1,
+              "share_demand": 0.00008219707296223181,
+              "share_supply": 0.010416666666666666,
+              "intensity": 60
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -1553,6 +1787,35 @@
               "share_demand": 0.15110566689572766,
               "share_supply": 0.044780635400907716,
               "intensity": 8896.68918918919
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 255559,
+              "supply": 137,
+              "share_demand": 0.036170400675515586,
+              "share_supply": 0.05362035225048924,
+              "intensity": 1865.3941605839416
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 185316,
+              "supply": 250,
+              "share_demand": 0.5586720850868836,
+              "share_supply": 0.4152823920265781,
+              "intensity": 741.264
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 1047,
+              "supply": 4,
+              "share_demand": 0.0007951637034730502,
+              "share_supply": 0.02702702702702703,
+              "intensity": 261.75
             }
           ],
           "top_countries": [
@@ -1733,6 +1996,35 @@
               "intensity": 9659.879581151832
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 401910,
+              "supply": 160,
+              "share_demand": 0.04859906023195165,
+              "share_supply": 0.061871616395978345,
+              "intensity": 2511.9375
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 263802,
+              "supply": 221,
+              "share_demand": 0.6811643225461615,
+              "share_supply": 0.3519108280254777,
+              "intensity": 1193.6742081447965
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 146,
+              "supply": 4,
+              "share_demand": 0.00007913120441487081,
+              "share_supply": 0.020942408376963352,
+              "intensity": 36.5
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -1911,6 +2203,35 @@
               "intensity": 12900.190476190477
             }
           ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 519205,
+              "supply": 172,
+              "share_demand": 0.07090086796738646,
+              "share_supply": 0.06162665711214618,
+              "intensity": 3018.6337209302324
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 355972,
+              "supply": 238,
+              "share_demand": 0.7076921853504147,
+              "share_supply": 0.33147632311977715,
+              "intensity": 1495.6806722689075
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 34446,
+              "supply": 2,
+              "share_demand": 0.01412800598489994,
+              "share_supply": 0.010582010582010581,
+              "intensity": 17223
+            }
+          ],
           "top_countries": [
             {
               "name": "......Vereinigte Staaten",
@@ -2087,6 +2408,35 @@
               "share_demand": 0.12061443770240417,
               "share_supply": 0.05659397715472482,
               "intensity": 5240.683486238532
+            }
+          ],
+          "ch_genres": [
+            {
+              "id": "fic",
+              "label": "Fiktion / Spielfilm",
+              "demand": 496618,
+              "supply": 151,
+              "share_demand": 0.06393116590591852,
+              "share_supply": 0.05171232876712329,
+              "intensity": 3288.860927152318
+            },
+            {
+              "id": "doc",
+              "label": "Dokumentar",
+              "demand": 339009,
+              "supply": 250,
+              "share_demand": 0.6036538786848173,
+              "share_supply": 0.35014005602240894,
+              "intensity": 1356.036
+            },
+            {
+              "id": "ani",
+              "label": "Animation",
+              "demand": 25489,
+              "supply": 6,
+              "share_demand": 0.02231045218732412,
+              "share_supply": 0.027522935779816515,
+              "intensity": 4248.166666666667
             }
           ],
           "top_countries": [
@@ -5145,6 +5495,35 @@
             "intensity": 17055.14893617021
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 379065,
+            "supply": 94,
+            "share_demand": 0.03481153520739112,
+            "share_supply": 0.07137433561123765,
+            "intensity": 4032.6063829787236
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 245690,
+            "supply": 169,
+            "share_demand": 0.5475376517099827,
+            "share_supply": 0.6213235294117647,
+            "intensity": 1453.7869822485206
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 0,
+            "supply": 0,
+            "share_demand": 0,
+            "share_supply": 0,
+            "intensity": null
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -5326,6 +5705,35 @@
             "share_demand": 0.13061479008005136,
             "share_supply": 0.052568697729988054,
             "intensity": 21384.272727272728
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 534977,
+            "supply": 105,
+            "share_demand": 0.04416584915054688,
+            "share_supply": 0.07948523845571537,
+            "intensity": 5095.019047619047
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 244533,
+            "supply": 156,
+            "share_demand": 0.5925975291169671,
+            "share_supply": 0.5886792452830188,
+            "intensity": 1567.5192307692307
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 0,
+            "supply": 0,
+            "share_demand": 0,
+            "share_supply": 0,
+            "intensity": null
           }
         ],
         "top_countries": [
@@ -5511,6 +5919,35 @@
             "intensity": 23732.571428571428
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 254227,
+            "supply": 119,
+            "share_demand": 0.02406390057117771,
+            "share_supply": 0.08240997229916898,
+            "intensity": 2136.361344537815
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 233859,
+            "supply": 178,
+            "share_demand": 0.42255910811567754,
+            "share_supply": 0.5650793650793651,
+            "intensity": 1313.814606741573
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 108567,
+            "supply": 2,
+            "share_demand": 0.04667958269699096,
+            "share_supply": 0.02040816326530612,
+            "intensity": 54283.5
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -5692,6 +6129,35 @@
             "share_demand": 0.15532433513702207,
             "share_supply": 0.050078247261345854,
             "intensity": 21895.291666666668
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 598764,
+            "supply": 109,
+            "share_demand": 0.05463499702400206,
+            "share_supply": 0.07384823848238482,
+            "intensity": 5493.247706422018
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 220525,
+            "supply": 176,
+            "share_demand": 0.4678672129095496,
+            "share_supply": 0.5101449275362319,
+            "intensity": 1252.9829545454545
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 73692,
+            "supply": 2,
+            "share_demand": 0.035058907261264316,
+            "share_supply": 0.020833333333333332,
+            "intensity": 36846
           }
         ],
         "top_countries": [
@@ -5877,6 +6343,35 @@
             "intensity": 13705.25
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 441239,
+            "supply": 119,
+            "share_demand": 0.04528425933271557,
+            "share_supply": 0.07395898073337477,
+            "intensity": 3707.890756302521
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 303087,
+            "supply": 209,
+            "share_demand": 0.5868297443086109,
+            "share_supply": 0.5870786516853933,
+            "intensity": 1450.177033492823
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 1222,
+            "supply": 2,
+            "share_demand": 0.0008255825187293055,
+            "share_supply": 0.018518518518518517,
+            "intensity": 611
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -6058,6 +6553,35 @@
             "share_demand": 0.20342602831264603,
             "share_supply": 0.05224963715529753,
             "intensity": 23556.25
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 581964,
+            "supply": 110,
+            "share_demand": 0.06127267426600113,
+            "share_supply": 0.0697084917617237,
+            "intensity": 5290.581818181819
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 256452,
+            "supply": 204,
+            "share_demand": 0.5525422779344624,
+            "share_supply": 0.5354330708661418,
+            "intensity": 1257.1176470588234
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 751,
+            "supply": 2,
+            "share_demand": 0.000295195699812309,
+            "share_supply": 0.018518518518518517,
+            "intensity": 375.5
           }
         ],
         "top_countries": [
@@ -6417,6 +6941,35 @@
             "intensity": 4519.291262135922
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 474676,
+            "supply": 77,
+            "share_demand": 0.13057434435133564,
+            "share_supply": 0.04495037945125511,
+            "intensity": 6164.623376623376
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 125912,
+            "supply": 165,
+            "share_demand": 0.5081707194026839,
+            "share_supply": 0.42091836734693877,
+            "intensity": 763.1030303030303
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 287,
+            "supply": 1,
+            "share_demand": 0.0006165585719901952,
+            "share_supply": 0.009708737864077669,
+            "intensity": 287
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -6772,6 +7325,35 @@
             "share_demand": 0.1354877268985512,
             "share_supply": 0.042572062084257206,
             "intensity": 7603.677083333333
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 130466,
+            "supply": 97,
+            "share_demand": 0.029150433315138426,
+            "share_supply": 0.05629715612304121,
+            "intensity": 1345.0103092783504
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 103022,
+            "supply": 194,
+            "share_demand": 0.5659585455224659,
+            "share_supply": 0.44495412844036697,
+            "intensity": 531.0412371134021
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 60,
+            "supply": 1,
+            "share_demand": 0.00008219707296223181,
+            "share_supply": 0.010416666666666666,
+            "intensity": 60
           }
         ],
         "top_countries": [
@@ -7131,6 +7713,35 @@
             "intensity": 8896.68918918919
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 255559,
+            "supply": 137,
+            "share_demand": 0.036170400675515586,
+            "share_supply": 0.05362035225048924,
+            "intensity": 1865.3941605839416
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 185316,
+            "supply": 250,
+            "share_demand": 0.5586720850868836,
+            "share_supply": 0.4152823920265781,
+            "intensity": 741.264
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 1047,
+            "supply": 4,
+            "share_demand": 0.0007951637034730502,
+            "share_supply": 0.02702702702702703,
+            "intensity": 261.75
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -7486,6 +8097,35 @@
             "share_demand": 0.17568048160433722,
             "share_supply": 0.056093979441997066,
             "intensity": 9659.879581151832
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 401910,
+            "supply": 160,
+            "share_demand": 0.04859906023195165,
+            "share_supply": 0.061871616395978345,
+            "intensity": 2511.9375
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 263802,
+            "supply": 221,
+            "share_demand": 0.6811643225461615,
+            "share_supply": 0.3519108280254777,
+            "intensity": 1193.6742081447965
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 146,
+            "supply": 4,
+            "share_demand": 0.00007913120441487081,
+            "share_supply": 0.020942408376963352,
+            "intensity": 36.5
           }
         ],
         "top_countries": [
@@ -7845,6 +8485,35 @@
             "intensity": 12900.190476190477
           }
         ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 519205,
+            "supply": 172,
+            "share_demand": 0.07090086796738646,
+            "share_supply": 0.06162665711214618,
+            "intensity": 3018.6337209302324
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 355972,
+            "supply": 238,
+            "share_demand": 0.7076921853504147,
+            "share_supply": 0.33147632311977715,
+            "intensity": 1495.6806722689075
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 34446,
+            "supply": 2,
+            "share_demand": 0.01412800598489994,
+            "share_supply": 0.010582010582010581,
+            "intensity": 17223
+          }
+        ],
         "top_countries": [
           {
             "name": "......Vereinigte Staaten",
@@ -8200,6 +8869,35 @@
             "share_demand": 0.12061443770240417,
             "share_supply": 0.05659397715472482,
             "intensity": 5240.683486238532
+          }
+        ],
+        "ch_genres": [
+          {
+            "id": "fic",
+            "label": "Fiktion / Spielfilm",
+            "demand": 496618,
+            "supply": 151,
+            "share_demand": 0.06393116590591852,
+            "share_supply": 0.05171232876712329,
+            "intensity": 3288.860927152318
+          },
+          {
+            "id": "doc",
+            "label": "Dokumentar",
+            "demand": 339009,
+            "supply": 250,
+            "share_demand": 0.6036538786848173,
+            "share_supply": 0.35014005602240894,
+            "intensity": 1356.036
+          },
+          {
+            "id": "ani",
+            "label": "Animation",
+            "demand": 25489,
+            "supply": 6,
+            "share_demand": 0.02231045218732412,
+            "share_supply": 0.027522935779816515,
+            "intensity": 4248.166666666667
           }
         ],
         "top_countries": [

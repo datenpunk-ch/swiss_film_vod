@@ -1,13 +1,19 @@
-from .ch_intensity import run as run_ch_intensity
-from .ch_success_bayes import run as run_ch_success_bayes
-from .ch_supply_demand import run as run_ch_supply_demand
-from .cinema_season import run as run_cinema_season
-from .market_overview import run as run_market_overview
+from .ch_absolute_bayes import run as run_ch_absolute_bayes
+from .ch_changepoint_bayes import run as run_ch_changepoint_bayes
+from .ch_forecast_bayes import run as run_ch_forecast_bayes
+from .ch_gap_bayes import run as run_ch_gap_bayes
+from .ch_genre_bayes import run as run_ch_genre_bayes
+from .ch_genremix_bayes import run as run_ch_genremix_bayes
+from .ch_weekly_bayes import run as run_ch_weekly_bayes
 
-ALL = [
-    run_market_overview,
-    run_ch_supply_demand,
-    run_ch_success_bayes,
-    run_ch_intensity,
-    run_cinema_season,
+RUNNERS: list[tuple[str, object]] = [
+    ("ch_genre_bayes", run_ch_genre_bayes),
+    ("ch_genremix_bayes", run_ch_genremix_bayes),
+    ("ch_changepoint_bayes", run_ch_changepoint_bayes),
+    ("ch_absolute_bayes", run_ch_absolute_bayes),
+    ("ch_gap_bayes", run_ch_gap_bayes),
+    ("ch_weekly_bayes", run_ch_weekly_bayes),
+    ("ch_forecast_bayes", run_ch_forecast_bayes),
 ]
+
+ALL = [fn for _, fn in RUNNERS]

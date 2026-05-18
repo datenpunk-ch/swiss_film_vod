@@ -1,0 +1,95 @@
+{
+  "fingerprint": "2e344a6c5fad2919557efc3c",
+  "result": {
+    "id": "ch_gap_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/03_gap_trend.png",
+        "caption": "Posterior der Lücke (95 %-credible interval (HDI))."
+      },
+      {
+        "src": "./assets/analysis/figures/03_gap_forest.png",
+        "caption": "Forest-Plot Trend β."
+      },
+      {
+        "src": "./assets/analysis/figures/03_gap_trace.png",
+        "caption": "MCMC-Trace β."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Posterior-Zusammenfassung",
+        "headers": [
+          "Parameter",
+          "Bedeutung",
+          "Mittelwert",
+          "SD",
+          "95 %-HDI",
+          "Pd"
+        ],
+        "rows": [
+          [
+            "β",
+            "Trend Lücke (pp/Jahr)",
+            "-0,832",
+            "0,1297",
+            "-1,105 – -0,590",
+            "100,0 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "1643",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "1333",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 800",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 800,
+      "draws": 800,
+      "target_accept": 0.92,
+      "fit_years": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "year_center": 2019.3
+    }
+  }
+}

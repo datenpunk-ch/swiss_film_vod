@@ -1,0 +1,64 @@
+{
+  "fingerprint": "b31ea321bf34e78e8b794a23",
+  "result": {
+    "id": "ch_weekly_bayes",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/04_weekly_season.png",
+        "caption": "Gemitteltes Saisonprofil CH-Anteil (95 %-HDI)."
+      },
+      {
+        "src": "./assets/analysis/figures/04_weekly_trace.png",
+        "caption": "MCMC-Trace Saison/Trend."
+      }
+    ],
+    "tables": [],
+    "diagnostics": [
+      {
+        "label": "R̂ max",
+        "value": "1.000",
+        "note": "Ziel < 1,01",
+        "ok": true
+      },
+      {
+        "label": "ESS bulk (min)",
+        "value": "1853",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "ESS tail (min)",
+        "value": "2184",
+        "note": "Ziel ≥ 400",
+        "ok": true
+      },
+      {
+        "label": "Divergenzen",
+        "value": "0",
+        "note": "Ziel = 0",
+        "ok": true
+      },
+      {
+        "label": "Ketten × Draws",
+        "value": "4 × 800",
+        "note": "MCMC-Stichprobe",
+        "ok": true
+      }
+    ],
+    "mcmc": {
+      "sampler": "NUTS",
+      "chains": 4,
+      "tune": 800,
+      "draws": 800,
+      "target_accept": 0.92,
+      "fit_years": [
+        2019,
+        2022,
+        2023,
+        2024
+      ],
+      "year_center": 2022.0095693779904,
+      "n_weeks": 209
+    }
+  }
+}

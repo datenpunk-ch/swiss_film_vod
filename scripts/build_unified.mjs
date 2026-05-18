@@ -414,6 +414,16 @@ function buildPxPrimary(pxText) {
         label: g.label,
         ...metricBundle(genreDemand[g.id] ?? 0, genreSupply[g.id] ?? 0, genreDemandTotal, genreSupplyTotal),
       })),
+      ch_genres: HARM_GENRES.map((g) => ({
+        id: g.id,
+        label: g.label,
+        ...metricBundle(
+          chGenreDemand[g.id] ?? 0,
+          chGenreSupply[g.id] ?? 0,
+          genreDemand[g.id] ?? 0,
+          genreSupply[g.id] ?? 0
+        ),
+      })),
       top_countries: topCountries,
       switzerland,
     });
