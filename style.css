@@ -1869,3 +1869,162 @@ html.is-embed .page-explore .site-footer {
   margin: 0 0 1rem;
   padding-left: 1.2rem;
 }
+
+/* —— Python Kino-Analysen (analysis.html) —— */
+
+.page-analysis .analysis-hero {
+  padding-bottom: 1.5rem;
+}
+
+.page-analysis .analysis-nav-wrap {
+  padding-bottom: 1rem;
+  border-bottom: var(--rule-w) solid var(--color-rule);
+}
+
+.page-analysis .analysis-nav ol {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .page-analysis .analysis-nav ol {
+    columns: 1;
+  }
+}
+
+.page-analysis .analysis-nav a {
+  font-size: 0.9375rem;
+}
+
+.page-analysis .analysis-block {
+  padding: 2.5rem 0;
+  border-bottom: var(--rule-w) solid var(--color-rule);
+}
+
+.page-analysis .analysis-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  margin: 1.75rem 0 0.5rem;
+  color: var(--color-ink);
+}
+
+.page-analysis .analysis-body h3:first-child {
+  margin-top: 0;
+}
+
+.page-analysis .analysis-figure {
+  margin: 1.5rem 0;
+  border: var(--rule-w) solid var(--color-rule);
+  background: var(--color-bg);
+}
+
+.page-analysis .analysis-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-analysis .analysis-figure figcaption {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  border-top: var(--rule-w) solid var(--color-rule);
+}
+
+.page-analysis .analysis-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.page-analysis .analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-analysis .analysis-table caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.page-analysis .analysis-table th,
+.page-analysis .analysis-table td {
+  border: 1px solid var(--color-rule);
+  padding: 0.4rem 0.55rem;
+}
+
+.page-analysis .analysis-table th {
+  background: var(--color-bg-soft);
+  text-align: left;
+}
+
+.page-analysis .analysis-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.page-analysis .analysis-metric {
+  border: var(--rule-w) solid var(--color-rule);
+  padding: 0.65rem 1rem;
+  min-width: 10rem;
+}
+
+.page-analysis .analysis-metric .k {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.page-analysis .analysis-metric .v {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.page-analysis .analysis-metric .note {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}
+
+.page-analysis .analysis-metric.is-ok {
+  border-color: #2d6a4f;
+  background: #f0f7f4;
+}
+
+.page-analysis .analysis-metric.is-warn {
+  border-color: #b5542a;
+  background: #fdf6f2;
+}
+
+.page-analysis .analysis-dl {
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9375rem;
+}
+
+.page-analysis .analysis-dl dt {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.page-analysis .analysis-dl dd {
+  margin: 0.15rem 0 0.5rem;
+}
+
+.page-analysis .analysis-dl code,
+.page-analysis .analysis-note {
+  font-size: 0.875rem;
+}
+
+.page-analysis .analysis-note {
+  color: var(--color-muted);
+  margin: 0.5rem 0 1rem;
+}

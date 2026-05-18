@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swiss Film — Kino-Analysen (Python)</title>
+    <meta name="description" content="Kino-Analysen mit Bayes-Modell: Posterior, HDI, Pd (Probability of Direction), MCMC-Diagnostik." />
+    <link rel="stylesheet" href="./assets/fonts.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="page-article page-analysis">
+    <header class="hero analysis-hero">
+      <div class="container">
+        <div class="hero-tag">Python · Bayesian · BFS Kino</div>
+        <h1>Kino-Analysen im Detail</h1>
+        <p class="hero-sub">Auswertungen mit Modelldefinition, Posterior-Ausgabe, 95 %-credible intervals (HDI) und Probability of Direction (Pd). Aktualisieren: <code>pixi run analyze</code>. Stand: 2026-05-18.</p>
+        <p class="hero-byline"><a href="./index.html">← Artikel</a> · <a href="./unified.html">Übersicht</a></p>
+      </div>
+    </header>
+    <div class="container analysis-nav-wrap">
+      <nav class="analysis-nav" aria-label="Analysen"><ol><li><a href="#market_overview">Kinomarkt: Besuche und Programmumfang</a></li><li><a href="#ch_supply_demand">Schweizer Filme: Programmplatz vs. Publikum</a></li><li><a href="#ch_success_bayes">Bayesianische Modellierung: Erfolg Schweizer Filme</a></li><li><a href="#ch_intensity">Besuche pro Film (Intensität)</a></li><li><a href="#cinema_season">Kinosaison nach Wochen (P4)</a></li></ol></nav>
+    </div>
+    <main>
+      
+<section class="analysis-block" id="market_overview">
+  <div class="container">
+    <div class="section-label">Analyse 01</div>
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2>Kinomarkt: Besuche und Programmumfang</h2>
+    </div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p>Wie entwickeln sich Kinobesuche und Angebot am Schweizer Kinomarkt über die Jahre?</p>
+      <h3>Daten</h3>
+      <p>BFS «Filmangebot und Nachfrage» (PX), Sprachgebiet Schweiz, 2014–2025.</p>
+      
+      
+      <h3>Methode</h3>
+      <p>Jährliche Aggregation; Markt aus allen vorgeführten Filmen. Schattierung: Pandemiejahre 2020–2021.</p>
+      
+      <h3>Ergebnisse (Grafiken)</h3>
+      <figure class="analysis-figure"><img src="./assets/analysis/figures/01_markt_ueberblick.png" alt="Kinobesuche (schwarz) und Anzahl Filme (rostrot, rechte Achse)." loading="lazy" /><figcaption>Kinobesuche (schwarz) und Anzahl Filme (rostrot, rechte Achse).</figcaption></figure>
+      
+      <h3>Ergebnisse &amp; Interpretation</h3>
+      <div class="analysis-table-wrap"><table class="analysis-table"><caption>Markt-Kennzahlen (Auszug)</caption><thead><tr><th>Jahr</th><th>Besuche</th><th>Filme</th><th>Besuche/Film</th></tr></thead><tbody><tr><td>2014</td><td>12’940’965</td><td>1’683</td><td>7’689</td></tr><tr><td>2015</td><td>14’407’373</td><td>1’674</td><td>8’607</td></tr><tr><td>2016</td><td>13’443’890</td><td>1’857</td><td>7’240</td></tr><tr><td>2017</td><td>13’532’638</td><td>1’917</td><td>7’059</td></tr><tr><td>2018</td><td>11’740’410</td><td>2’073</td><td>5’663</td></tr><tr><td>2019</td><td>12’506’143</td><td>2’067</td><td>6’050</td></tr><tr><td>2020</td><td>4’348’555</td><td>2’208</td><td>1’969</td></tr><tr><td>2021</td><td>5’387’595</td><td>2’255</td><td>2’389</td></tr><tr><td>2022</td><td>8’713’836</td><td>3’305</td><td>2’637</td></tr><tr><td>2023</td><td>10’502’231</td><td>3’405</td><td>3’084</td></tr><tr><td>2024</td><td>10’264’111</td><td>3’698</td><td>2’776</td></tr><tr><td>2025</td><td>9’472’075</td><td>3’852</td><td>2’459</td></tr></tbody></table></div>
+      <ul>
+<li>Höchste Besuche vor der Pandemie: 14’407’373 (2015).</li>
+<li>Letztes Jahr (2025): 9’472’075 Besuche, 3’852 Filme.</li>
+<li>Filme im Programm wachsen im Mittel ~7.8 % pro Jahr (geometrisch über 2014–2025).</li>
+</ul>
+      
+      <h3>Grenzen</h3>
+      <ul>
+<li>Nur Kino (PX), kein VoD.</li>
+<li>2025 kann als laufendes Jahr in der BFS-Quelle noch revidiert werden.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="analysis-block" id="ch_supply_demand">
+  <div class="container">
+    <div class="section-label">Analyse 02</div>
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <h2>Schweizer Filme: Programmplatz vs. Publikum</h2>
+    </div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p>Kommen Schweizer Filme beim Publikum proportional zu ihrem Platz im Programm an?</p>
+      <h3>Daten</h3>
+      <p>BFS PX, Herkunft Schweiz vs. Gesamtmarkt.</p>
+      
+      
+      <h3>Methode</h3>
+      <p>Jährliche Anteile an gelisteten Filmen (Angebot) und Kinobesuchen (Nachfrage).</p>
+      
+      <h3>Ergebnisse (Grafiken)</h3>
+      <figure class="analysis-figure"><img src="./assets/analysis/figures/02_ch_angebot_nachfrage.png" alt="Rostrot = Angebotsanteil, Schwarz = Nachfrageanteil." loading="lazy" /><figcaption>Rostrot = Angebotsanteil, Schwarz = Nachfrageanteil.</figcaption></figure>
+      
+      <h3>Ergebnisse &amp; Interpretation</h3>
+      <div class="analysis-table-wrap"><table class="analysis-table"><caption>CH-Anteile je Jahr</caption><thead><tr><th>Jahr</th><th>Angebot</th><th>Nachfrage</th><th>Differenz (Pp.)</th></tr></thead><tbody><tr><td>2014</td><td>15,6 %</td><td>4,8 %</td><td>+10,8</td></tr><tr><td>2015</td><td>15,6 %</td><td>5,4 %</td><td>+10,2</td></tr><tr><td>2016</td><td>16,1 %</td><td>4,4 %</td><td>+11,7</td></tr><tr><td>2017</td><td>15,0 %</td><td>6,6 %</td><td>+8,4</td></tr><tr><td>2018</td><td>15,9 %</td><td>6,4 %</td><td>+9,6</td></tr><tr><td>2019</td><td>15,3 %</td><td>6,7 %</td><td>+8,6</td></tr><tr><td>2020</td><td>11,0 %</td><td>13,8 %</td><td>-2,8</td></tr><tr><td>2021</td><td>12,9 %</td><td>4,3 %</td><td>+8,6</td></tr><tr><td>2022</td><td>11,8 %</td><td>5,1 %</td><td>+6,8</td></tr><tr><td>2023</td><td>11,3 %</td><td>6,3 %</td><td>+5,0</td></tr><tr><td>2024</td><td>11,1 %</td><td>8,9 %</td><td>+2,3</td></tr><tr><td>2025</td><td>10,6 %</td><td>9,1 %</td><td>+1,5</td></tr></tbody></table></div>
+      <ul>
+<li>2025: 10,6 % der Filme, aber nur 9,1 % der Besuche.</li>
+<li>Lücke Angebot–Nachfrage zuletzt: 1.5 Prozentpunkte (mehr Filme im Programm als Besuchsanteil).</li>
+<li>Seit 2022 liegt der Besuchsanteil höher als 2014–2019, der Angebotsanteil sinkt relativ.</li>
+</ul>
+      
+      <h3>Grenzen</h3>
+      <ul>
+<li>Anteile beziehen sich auf den PX-Kinomarkt, nicht auf einzelne Filme.</li>
+<li>Co-Produktionen und Herkunftsregeln folgen der BFS-Klassifikation.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="analysis-block" id="ch_success_bayes">
+  <div class="container">
+    <div class="section-label">Analyse 03</div>
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <h2>Bayesianische Modellierung: Erfolg Schweizer Filme</h2>
+    </div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p>Steigt der Besuchsanteil Schweizer Filme am Kinomarkt über die Jahre — und wie sicher ist der Trend?</p>
+      <h3>Daten</h3>
+      <p>BFS PX, Schätzjahre: 2014, 2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025 (ohne 2020–2021). Jahr̄ = 2019.</p>
+      
+<h3>Modelldefinition</h3>
+<p><strong>Hierarchisches Trendmodell für den CH-Besuchsanteil</strong></p>
+<dl class="analysis-dl">
+<dt>Likelihood</dt><dd><code>Besuche bei Schweizer Filmen yₜ ~ Binomial(Nₜ, pₜ)</code></dd>
+<dt>Link</dt><dd><code>logit(pₜ) = α + β · (Jahrₜ − Jahr̄)</code></dd>
+<dt>Priors</dt><dd><ul><li><code>α ~ Normal(0, 1,5) — Basis auf logit-Skala (schwach informativ)</code></li><li><code>β ~ Normal(0, 0,2) — jährlicher Trend (schwach informativ; Erwartung nahe 0)</code></li></ul></dd>
+</dl>
+<p class="analysis-note">Schätzung auf Jahren ohne starke Pandemie-Störung (2014–2019, 2022–2025). 2020–2021 werden in der Grafik markiert, fliessen aber nicht in die Schätzung ein. Unsicherheit: 95 %-credible interval (HDI) (ArviZ HDI, nicht gleichverteiltes Quantil).</p>
+
+      <h3>Variablen</h3><div class="analysis-table-wrap"><table class="analysis-table"><caption>Variablen und Parameter</caption><thead><tr><th>Symbol</th><th>Name</th><th>Bedeutung</th></tr></thead><tbody><tr><td>yₜ</td><td>CH-Kinobesuche</td><td>Beobachtete Besuche bei Schweizer Filmen im Jahr t (PX).</td></tr><tr><td>Nₜ</td><td>Gesamtbesuche</td><td>Alle Kinobesuche am Markt im Jahr t (Nenner).</td></tr><tr><td>pₜ</td><td>CH-Besuchsanteil</td><td>Latenter Anteil yₜ/Nₜ — «Erfolg» Schweizer Film am Kino.</td></tr><tr><td>α</td><td>Intercept</td><td>Logit-Anteil im Bezugsjahr (zentriert um Jahr̄).</td></tr><tr><td>β</td><td>Trend</td><td>Änderung des Logit-Anteils pro Jahr (positiv → steigender CH-Anteil).</td></tr><tr><td>Jahr̄</td><td>Jahreszentrum</td><td>Mittelwert der Schätzjahre; macht β interpretierbar.</td></tr></tbody></table></div>
+      <h3>Methode</h3>
+      <p>Bayes (PyMC): Binomial-Likelihood, logit-Link, MCMC (NUTS), 4 Ketten × 1000 Draws. Unsicherheit: 95 %-credible interval (HDI); Richtung: Probability of Direction (Pd), nicht p-Wert.</p>
+      <h3>MCMC-Konfiguration</h3><ul><li>Sampler: NUTS</li><li>Ketten: 4, Tune-in: 1000, Draws: 1000</li><li>target_accept: 0.92</li><li>Schätzjahre: 2014, 2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025</li><li>Jahr̄ (Zentrum): 2019</li></ul>
+      <h3>Ergebnisse (Grafiken)</h3>
+      <figure class="analysis-figure"><img src="./assets/analysis/figures/03_ch_erfolg_bayes.png" alt="Posterior pₜ mit 95 %-credible interval (HDI); Schattierung = Pandemiejahre." loading="lazy" /><figcaption>Posterior pₜ mit 95 %-credible interval (HDI); Schattierung = Pandemiejahre.</figcaption></figure>
+<figure class="analysis-figure"><img src="./assets/analysis/figures/03_modell_passung.png" alt="Schätzjahre: PX vs. posterior p mit 95 %-Fehlerbalken (HDI)." loading="lazy" /><figcaption>Schätzjahre: PX vs. posterior p mit 95 %-Fehlerbalken (HDI).</figcaption></figure>
+<figure class="analysis-figure"><img src="./assets/analysis/figures/03_posterior_kde.png" alt="Posterior-Dichte (KDE) mit 95 %-credible interval (HDI); Referenzlinie bei 0." loading="lazy" /><figcaption>Posterior-Dichte (KDE) mit 95 %-credible interval (HDI); Referenzlinie bei 0.</figcaption></figure>
+<figure class="analysis-figure"><img src="./assets/analysis/figures/03_posterior_forest.png" alt="Forest-Plot (kombiniert, 95 %-credible interval (HDI))." loading="lazy" /><figcaption>Forest-Plot (kombiniert, 95 %-credible interval (HDI)).</figcaption></figure>
+<figure class="analysis-figure"><img src="./assets/analysis/figures/03_trace.png" alt="MCMC-Traces und Posterior-Dichten pro Kette (Mixing)." loading="lazy" /><figcaption>MCMC-Traces und Posterior-Dichten pro Kette (Mixing).</figcaption></figure>
+      <h3>Modellgüte (MCMC-Diagnostik)</h3><div class="analysis-metrics"><div class="analysis-metric is-ok"><span class="k">R̂ max</span><span class="v">1.000</span><span class="note">Ziel &lt; 1,01</span></div><div class="analysis-metric is-ok"><span class="k">ESS bulk (min)</span><span class="v">3531</span><span class="note">Ziel ≥ 400</span></div><div class="analysis-metric is-ok"><span class="k">ESS tail (min)</span><span class="v">2651</span><span class="note">Ziel ≥ 400</span></div><div class="analysis-metric is-ok"><span class="k">Divergenzen</span><span class="v">0</span><span class="note">Ziel = 0</span></div><div class="analysis-metric is-ok"><span class="k">Ketten × Draws</span><span class="v">4 × 1000</span><span class="note">MCMC-Stichprobe</span></div></div>
+      <h3>Posterior &amp; Interpretation</h3>
+      <div class="analysis-table-wrap"><table class="analysis-table"><caption>Posterior-Zusammenfassung</caption><thead><tr><th>Parameter</th><th>Bedeutung</th><th>Mittelwert</th><th>SD</th><th>95 %-HDI</th><th>Pd</th></tr></thead><tbody><tr><td>α</td><td>Intercept (logit)</td><td>-2,695</td><td>0,0004</td><td>-2,696 – -2,695</td><td>0,0 %</td></tr><tr><td>β</td><td>Trend pro Jahr (logit)</td><td>0,050</td><td>0,0001</td><td>0,050 – 0,050</td><td>100,0 %</td></tr></tbody></table></div>
+      <ul>
+<li>β (Trend): Mittel 0.050, 95 %-HDI [0,050 – 0,050] (logit).</li>
+<li>Pd(β &gt; 0) = 100,0 % — Probability of Direction.</li>
+<li>Posterior p (2025): 8,2 % [8,2 % – 8,2 %] (95 %-HDI).</li>
+<li>Modellpassung: Posterior p liegt nahe an den PX-Beobachtungen in den Schätzjahren.</li>
+</ul>
+      
+      <h3>Grenzen</h3>
+      <ul>
+<li>Erfolg = aggregierter Marktanteil, nicht Einzelfilm-Hit oder Qualität.</li>
+<li>Keine Genre- oder Saison-Kovariaten; Pandemiejahre ausgeschlossen.</li>
+<li>Pd ersetzt klassische Signifikanztests; bei kleinen Effekten trotz hoher Pd Vorsicht.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="analysis-block" id="ch_intensity">
+  <div class="container">
+    <div class="section-label">Analyse 04</div>
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <h2>Besuche pro Film (Intensität)</h2>
+    </div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p>Erzielen Schweizer Filme pro Titel mehr oder weniger Besuche als der Markt?</p>
+      <h3>Daten</h3>
+      <p>BFS PX: Besuche / Anzahl Filme je Herkunft.</p>
+      
+      
+      <h3>Methode</h3>
+      <p>Intensität = Kinobesuche ÷ Filme im Programm (jährlich).</p>
+      
+      <h3>Ergebnisse (Grafiken)</h3>
+      <figure class="analysis-figure"><img src="./assets/analysis/figures/04_ch_intensitaet.png" alt="Höhere Linie = mehr Besuche pro gelistetem Film." loading="lazy" /><figcaption>Höhere Linie = mehr Besuche pro gelistetem Film.</figcaption></figure>
+      
+      <h3>Ergebnisse &amp; Interpretation</h3>
+      
+      <ul>
+<li>2025: CH 2’116 vs. Markt 2’459 Besuche/Film (Faktor 0.86).</li>
+<li>In Pandemiejahren fallen beide Niveaus stark; CH 2021 besonders tief.</li>
+<li>Seit 2022 steigt die CH-Intensität wieder, bleibt meist unter dem Gesamtmarkt.</li>
+</ul>
+      
+      <h3>Grenzen</h3>
+      <ul>
+<li>Ein Film zählt einmal pro Jahr im Programm; Blockbuster und Langläufer werden nicht separat gewichtet.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="analysis-block" id="cinema_season">
+  <div class="container">
+    <div class="section-label">Analyse 05</div>
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <h2>Kinosaison nach Wochen (P4)</h2>
+    </div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p>Wann ist das Kino am vollsten — und folgen Schweizer Filme dem gleichen Muster?</p>
+      <h3>Daten</h3>
+      <p>BFS Kinostatistik P4, gemittelt über 2019, 2022, 2023, 2024. Pandemiejahre 2020, 2021 sind ausgeschlossen (Schliessungen, gestörtes Programm — kein typisches Saisonprofil).</p>
+      
+      
+      <h3>Methode</h3>
+      <p>Mittlere Besuche pro Kinowoche über die Basisjahre; CH-Filme separat (Herkunft och). Ziel: übliches Kalendermuster, nicht Krisenjahre.</p>
+      
+      <h3>Ergebnisse (Grafiken)</h3>
+      <figure class="analysis-figure"><img src="./assets/analysis/figures/05_kinosaison_p4.png" alt="Oben Gesamtmarkt, unten CH-Filme. Basisjahre 2019, 2022, 2023, 2024; ohne 2020, 2021." loading="lazy" /><figcaption>Oben Gesamtmarkt, unten CH-Filme. Basisjahre 2019, 2022, 2023, 2024; ohne 2020, 2021.</figcaption></figure>
+      
+      <h3>Ergebnisse &amp; Interpretation</h3>
+      
+      <ul>
+<li>Stärkste Woche gesamt: KW 1 (Dez), Ø 338’276 Besuche.</li>
+<li>Stärkste Woche CH: KW 6, Ø 29’850 Besuche.</li>
+<li>Hochphase Dezember/Jahreswechsel; Frühling (z. B. KW 17) zweiter Schwerpunkt.</li>
+</ul>
+      
+      <h3>Grenzen</h3>
+      <ul>
+<li>Kein Genre in P4; nur aggregierte Wochenprofile.</li>
+<li>2020–2021 bewusst ausgeschlossen; 2022 ist erstes Nach-Pandemie-Jahr (leichte Restverzerrung möglich).</li>
+<li>Mittel über wenige Basisjahre — nicht jedes Kalenderjahr einzeln.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+    </main>
+    <footer class="site-footer site-footer-chrome">
+      Swiss Film · <a href="./index.html">Artikel</a> · <a href="./unified.html">Übersicht</a>
+    </footer>
+  </body>
+</html>

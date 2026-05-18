@@ -279,7 +279,11 @@ export default function App() {
             <p className="panel-intro">
               Zwei Balkendiagramme: Gesamtbesuche aller Herkünfte (Schwarztöne) und Besuche bei
               Schweizer Filmen (Rottöne), jeweils Ø pro Kinowoche.
-              {seasonYears.length ? ` Basisjahre: ${seasonYears.join(", ")}.` : ""}
+              {seasonYears.length
+                ? ` Basisjahre: ${seasonYears.join(", ")} (Mittel über diese Jahre).`
+                : ""}{" "}
+              2020 und 2021 sind ausgeschlossen — Lockdowns und gestörtes Programm liefern kein
+              typisches Saisonprofil.
             </p>
             <div className="panel-chart-stack">
               <ChartFrame title="Alle Herkünfte">
@@ -480,7 +484,7 @@ export default function App() {
 
       {!isEmbed && (
         <footer className="site-footer">
-          Swiss Film · <a href="./index.html">Artikel</a>
+          Swiss Film · <a href="./index.html">Artikel</a> · <a href="./analysis.html">Analysen</a>
         </footer>
       )}
     </div>

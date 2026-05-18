@@ -26,6 +26,8 @@ node scripts/build_unified.mjs
 
 ```text
 node scripts/bundle_unified_ui.mjs
+
+**Kino-Analysen (Pixi):** `pixi run analyze` → `analysis.html` (vorher ggf. `pixi run build-unified`). Fallback ohne Pixi: `node scripts/build_analysis_page.mjs`
 ```
 
 Baut nach `assets/unified/unified.js` (esbuild; optional `cd unified-app && npm run build`).

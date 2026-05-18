@@ -75,7 +75,7 @@ Für Schweizer Filme heisst das: Ihr **Anteil an den Besuchen** lag 2014 bei kna
     </div>
     <div class="measure">
 
-Die wöchentliche Kinostatistik (P4) zeigt eine klare **Jahreskurve**: Am stärksten sind die Besuche in den **Dezember-Wochen** und um den Jahreswechsel (Kinowochen 51–53 sowie Woche 1). Ein zweiter Schwerpunkt liegt im **Frühling** (etwa Kinowoche 17 im April). In den Sommermonaten liegen die durchschnittlichen Wochenbesuche tiefer.
+Die wöchentliche Kinostatistik (P4) zeigt eine klare **Jahreskurve**: Am stärksten sind die Besuche in den **Dezember-Wochen** und um den Jahreswechsel (Kinowochen 51–53 sowie Woche 1). Ein zweiter Schwerpunkt liegt im **Frühling** (etwa Kinowoche 17 im April). In den Sommermonaten liegen die durchschnittlichen Wochenbesuche tiefer. Für dieses Wochenprofil mitteln wir **2019 und 2022–2024**; **2020 und 2021** bleiben ausserhalb (Pandemie — kein vergleichbares «normales» Kinojahr).
 
 Für Schweizer Filme gilt das Muster grundsätzlich ebenfalls — die absoluten Wochenwerte sind kleiner, die Saisonform aber vergleichbar. Wer Schweizer Produktionen im Kino verorten will, findet sie damit eher in denselben Hochphasen wie der Gesamtmarkt, nicht in einer parallelen «Nebensaison».
 
@@ -83,7 +83,7 @@ Für Schweizer Filme gilt das Muster grundsätzlich ebenfalls — die absoluten 
   <div class="embed-frame embed-frame--season">
     <iframe title="Kinosaison nach Wochen" src="./unified.html?embed=1&amp;panel=season" loading="lazy" referrerpolicy="no-referrer"></iframe>
   </div>
-  <p class="chart-caption">Ø Besuche pro Kinowoche (P4), Mittel über 2019 und 2022–2024 — gesamt und Schweizer Filme. <a href="./unified.html?panel=season">Einzelansicht</a></p>
+  <p class="chart-caption">Ø Besuche pro Kinowoche (P4), Mittel 2019 und 2022–2024 (ohne 2020–2021) — gesamt und Schweizer Filme. <a href="./unified.html?panel=season">Einzelansicht</a></p>
 </div>
 
     </div>
