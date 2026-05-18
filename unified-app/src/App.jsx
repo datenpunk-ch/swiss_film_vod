@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ChartFrame from "./components/ChartFrame.jsx";
 import KpiGrid from "./components/KpiGrid.jsx";
 import LineTrendChart from "./components/LineTrendChart.jsx";
@@ -15,7 +15,7 @@ import {
   mergePxGenres,
   mergePxOrigins,
 } from "./utils/merge.js";
-import { indexRowsById, YOY_ARROW_HINT, YOY_YEAR_HINT } from "./utils/format.js";
+import { indexRowsById, SERIES_ZONE_INTRO, YOY_ARROW_HINT, YOY_YEAR_HINT } from "./utils/format.js";
 
 const isEmbed = document.documentElement.classList.contains("is-embed");
 
@@ -199,7 +199,7 @@ export default function App() {
     <div className="wrap">
       {!isEmbed && (
         <header className="page-head">
-          <h1>Schweiz: was läuft, wann, woher?</h1>
+          <h1>Übersicht Swiss Film</h1>
           <p className="page-intro-lead">{data.lead}</p>
         </header>
       )}
@@ -207,12 +207,16 @@ export default function App() {
 
       <div className="dashboard-zone dashboard-zone--series">
         <h2 className="dashboard-zone-title">Über die Jahre</h2>
+        <p className="panel-intro panel-intro-meta">{SERIES_ZONE_INTRO}</p>
         <p className="panel-intro panel-intro-meta">{YOY_ARROW_HINT}</p>
 
         {supplyTrendData.length > 0 && (
           <section className="panel panel-primary">
             <div className="panel-label">Angebot (PX)</div>
             <p className="panel-intro panel-intro-meta">{px?.slice_label}</p>
+            <p className="panel-intro">
+              Filme im Programm: Gesamtmarkt und Schweizer Filme (CH-Anteil im Tooltip).
+            </p>
             <ChartFrame title="Filme im Programm">
               <LineTrendChart
                 data={supplyTrendData}
@@ -231,6 +235,9 @@ export default function App() {
           <section className="panel panel-primary">
             <div className="panel-label">Nachfrage (PX)</div>
             <p className="panel-intro panel-intro-meta">{px?.slice_label}</p>
+            <p className="panel-intro">
+              Kinobesuche: gleiche Darstellung wie beim Angebot (Gesamtmarkt und Schweizer Filme).
+            </p>
             <ChartFrame title="Kinobesuche">
               <LineTrendChart
                 data={demandTrendData}
@@ -249,7 +256,8 @@ export default function App() {
           <section className="panel panel-primary">
             <div className="panel-label">Nachfrage · Besuche pro Kinowoche (P4)</div>
             <p className="panel-intro">
-              Verteilung der Kinobesuche über das Jahr (Ø Besuche pro Woche).
+              Zwei Balkendiagramme: Gesamtbesuche aller Herkünfte (Schwarztöne) und Besuche bei
+              Schweizer Filmen (Rottöne), jeweils Ø pro Kinowoche.
               {seasonYears.length ? ` Basisjahre: ${seasonYears.join(", ")}.` : ""}
             </p>
             <div className="panel-chart-stack">
@@ -279,6 +287,10 @@ export default function App() {
 
         <section className="panel panel-primary">
           <div className="panel-label">Genre über die Jahre (PX)</div>
+          <p className="panel-intro">
+            Genre-Anteile je Jahr als gestapelte Balken (Fiktion, Dokumentar, Animation) — gesamt und
+            für Schweizer Filme.
+          </p>
           <div className="panel-chart-stack">
             <div className="metric-series-block">
               <div className="panel-label panel-label-sub">Angebot</div>
@@ -430,7 +442,8 @@ export default function App() {
           )}
 
           <p className="panel-intro meta-note">
-            Kinowochen (P4): keine Genre-Dimension in der BFS-Datei — Genre über PX (Kino) und VoD.
+            Kinowochen (P4) ohne Genre-Spalte; Genre und detaillierte Herkunft über PX und VoD. Top-Länder
+            mit je eigener Farbe (Schweiz rostrot).
           </p>
         </section>
       </div>

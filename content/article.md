@@ -42,7 +42,7 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
       <div class="sec-num">02</div>
       <h2>Datenauswertung</h2>
     </div>
-    <p class="measure reveal stats-intro">VoD, Kinowochen (P4) und Filmangebot/Nachfrage (PX) — Herkunft und Genre nach Jahr, plus Kinosaison (Wochen). <a href="./unified.html">Vollbild-Ansicht</a>.</p>
+    <p class="measure reveal stats-intro">Kinomarkt (PX) im Jahresverlauf: Angebot und Nachfrage als Linien, Kinosaison in zwei Wochenplots, Genre als gestapelte Jahresbalken; pro Jahr Herkunft, Top-Länder und Genre mit Vorjahresvergleich. VoD und P4 ergänzen. <a href="./unified.html">Vollbild-Ansicht</a>.</p>
   </div>
   <div class="wide-bleed">
     <div class="embed-frame visible" style="height: min(72vh, 820px); max-width: 1240px; margin: 0 auto;">

@@ -38,12 +38,16 @@ export function formatYoYCount(current, previous) {
   return formatVsMarketDelta(current / previous);
 }
 
-/** Hinweis über Grafikbereichen — Pfeilwerte in Tooltips/Legenden ohne «ggü. Vorjahr». */
-export const YOY_ARROW_HINT = "Pfeilwerte (↑ / ↓): prozentuale Veränderung ggü. Vorjahr.";
+/** Hinweis Zone «Über die Jahre». */
+export const SERIES_ZONE_INTRO =
+  "Jahresverlauf: Angebot und Nachfrage als Linien (Gesamtmarkt schwarz, Schweizer Filme rostrot). Kinowochen als zwei Balkenplots. Genre als gestapelte Jahresanteile.";
 
-/** Hinweis «Nach Jahr» inkl. Kennzahlen. */
+/** Hinweis über Grafikbereichen — Pfeilwerte in Tooltips ohne «ggü. Vorjahr». */
+export const YOY_ARROW_HINT = "Pfeilwerte (↑ / ↓) in Tooltips: prozentuale Veränderung ggü. Vorjahr.";
+
+/** Hinweis Zone «Nach Jahr» inkl. Kennzahlen. */
 export const YOY_YEAR_HINT =
-  "Pfeilwerte (↑ / ↓) in Grafiken und Werte unter den Kennzahlen: Veränderung ggü. Vorjahr (Anteile in Prozentpunkten).";
+  "Pfeilwerte (↑ / ↓) in Grafiken und unter den Kennzahlen: Veränderung ggü. Vorjahr (Anteile in Prozentpunkten). Herkunft: CH rostrot, Europa beige, übrige Welt schwarz.";
 
 /** Prozentuale Änderung (Pfeil) für Tooltips und Anteilslisten — ohne «ggü. Vorjahr». */
 export function formatYoYPercent(current, previous) {

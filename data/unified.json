@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-18T10:18:53.573Z",
+  "generated_at": "2026-05-18T11:29:03.781Z",
   "model": "px_primary",
-  "lead": "Hauptstory aus BFS «Filmangebot und Nachfrage» (PX): Angebot, Nachfrage, Herkunft und Genre am Schweizer Kinomarkt (2014 ff.). VoD (StatVoD) und Kinowochen (P4) ergänzen andere Märkte und Zeitskalen.",
+  "lead": "Kinomarkt Schweiz (BFS PX, 2014 ff.): Angebot und Nachfrage im Jahresverlauf, Kinosaison nach Wochen, Herkunft und Genre pro Jahr. VoD und wöchentliche P4-Daten ergänzen andere Zeitskalen.",
   "harmonized": {
     "origins": [
       {
@@ -14,14 +14,14 @@
       {
         "id": "eu",
         "label": "Europa (ohne CH)",
-        "color": "#c4896e",
+        "color": "#e5d4c8",
         "vod": "oep",
         "cinema": "oeu"
       },
       {
         "id": "ww",
         "label": "Übrige Welt",
-        "color": "#e5d4c8",
+        "color": "#0b0d10",
         "vod": "oot",
         "cinema": "oot"
       }
@@ -8354,10 +8354,12 @@
   ],
   "limitations": [
     "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
-    "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
-    "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-    "P4-Saison = Wochenprofil Kinobesuch (nur Besuche).",
-    "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep."
+    "Nachfrage (Besuche/Views) und Angebot (Filme) getrennt; Intensität = Besuche je Film.",
+    "Jahresgrafiken: Gesamtmarkt und Schweizer Filme als Linien; CH-Anteil im Tooltip, nicht als eigene Achse.",
+    "Kinowochen (P4): zwei Balkenplots (alle Herkünfte / CH-Filme), Ø pro Woche — kein Genre in der P4-CSV.",
+    "VoD nur 2019–2024; Genre in VoD und PX.",
+    "Herkunft in Grafiken: CH rostrot, Europa beige, übrige Welt schwarz (PX aus Ländern; P4/VoD BFS-Codes).",
+    "Pfeilwerte (↑/↓) = Veränderung ggü. Vorjahr (siehe Hinweis über den Grafikbereichen)."
   ],
   "bfs_metadata": "data/bfs_metadata.json"
 }

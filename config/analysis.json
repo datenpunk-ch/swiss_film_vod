@@ -80,7 +80,8 @@
   },
   "unified_page": {
     "html": "unified.html",
-    "title": "Schweiz: was läuft, wann, woher?",
-    "lead": "Hauptstory: BFS Filmangebot und Nachfrage (PX). VoD und Kinowochen (P4) als Zusatz — andere Märkte und Zeitskalen."
+    "title": "Übersicht Swiss Film",
+    "stage_note": "Arbeitsansicht auf dem Weg zum Artikel — explorativ, noch keine finale Story.",
+    "lead": "Zwischenstand zur BFS-Auswertung (PX, 2014 ff.): Jahresverläufe, Kinosaison und Herkunft/Genre zum Prüfen von Hypothesen. Der Artikel bleibt die Hauptseite; VoD und P4 ergänzen andere Zeitskalen."
   }
 }

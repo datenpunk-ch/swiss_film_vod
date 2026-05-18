@@ -241,6 +241,13 @@ Siehe auch `sources.txt` im Projektroot.
 
 **PX-Schnitt (Standard):** Sprachgebiet Schweiz, alle vorgeführten Filme, Genre-Total; Markt aus aggregierten Herkunftsländern (nicht „Herkunftsland - Total“-Zeile).
 
+**Dashboard (zwei Zonen):**
+
+| Zone | Inhalt |
+|------|--------|
+| **Über die Jahre** | PX-Angebot/Nachfrage als Linien (Gesamtmarkt schwarz, CH rostrot; CH-Anteil im Tooltip). P4: zwei Balkenplots (alle Herkünfte / CH-Filme, Ø pro Kinowoche). Genre: gestapelte Jahresanteile (gesamt + CH). |
+| **Nach Jahr** | KPIs mit Vorjahresvergleich; Herkunft CH/EU/WW und Top-Länder (eigene Farben); Genre; VoD/P4 als Zusatzpanels. Pfeilwerte in Tooltips = Änderung ggü. Vorjahr. |
+
 **Seite:** [unified.html](../unified.html) — eingebettet im [Artikel](../index.html#interactive). Frontend: React + Recharts (`unified-app/`, Build → `assets/unified/unified.js` via `node scripts/bundle_unified_ui.mjs`).
 
 ---

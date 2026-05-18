@@ -21,8 +21,8 @@ const TOP_COUNTRIES = 10;
 
 const HARM_ORIGINS = [
   { id: "ch", label: "Schweiz", color: "#b5542a", vod: "och", cinema: "och" },
-  { id: "eu", label: "Europa (ohne CH)", color: "#c4896e", vod: "oep", cinema: "oeu" },
-  { id: "ww", label: "Übrige Welt", color: "#e5d4c8", vod: "oot", cinema: "oot" },
+  { id: "eu", label: "Europa (ohne CH)", color: "#e5d4c8", vod: "oep", cinema: "oeu" },
+  { id: "ww", label: "Übrige Welt", color: "#0b0d10", vod: "oot", cinema: "oot" },
 ];
 
 const HARM_GENRES = [
@@ -508,8 +508,11 @@ function main() {
   const out = {
     generated_at: new Date().toISOString(),
     model: "px_primary",
+    page_title: CFG.unified_page?.title ?? "Kinomarkt — Zwischenstand",
+    page_note: CFG.unified_page?.stage_note ?? null,
     lead:
-      "Hauptstory aus BFS «Filmangebot und Nachfrage» (PX): Angebot, Nachfrage, Herkunft und Genre am Schweizer Kinomarkt (2014 ff.). VoD (StatVoD) und Kinowochen (P4) ergänzen andere Märkte und Zeitskalen.",
+      CFG.unified_page?.lead ??
+      "Zwischenstand zur BFS-Auswertung (PX): exploratives Dashboard, nicht die fertige Story.",
     harmonized: { origins: HARM_ORIGINS, genres: HARM_GENRES },
     primary: { px: primary },
     supplementary,
@@ -517,10 +520,12 @@ function main() {
     by_year: byYear,
     limitations: [
       "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
-      "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
-      "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-      "P4-Saison = Wochenprofil Kinobesuch (nur Besuche).",
-      "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep.",
+      "Nachfrage (Besuche/Views) und Angebot (Filme) getrennt; Intensität = Besuche je Film.",
+      "Jahresgrafiken: Gesamtmarkt und Schweizer Filme als Linien; CH-Anteil im Tooltip, nicht als eigene Achse.",
+      "Kinowochen (P4): zwei Balkenplots (alle Herkünfte / CH-Filme), Ø pro Woche — kein Genre in der P4-CSV.",
+      "VoD nur 2019–2024; Genre in VoD und PX.",
+      "Herkunft in Grafiken: CH rostrot, Europa beige, übrige Welt schwarz (PX aus Ländern; P4/VoD BFS-Codes).",
+      "Pfeilwerte (↑/↓) = Veränderung ggü. Vorjahr (siehe Hinweis über den Grafikbereichen).",
     ],
     bfs_metadata: bfsMeta ? CFG.paths.bfs_metadata : null,
   };
