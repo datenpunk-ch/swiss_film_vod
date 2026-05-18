@@ -15,9 +15,12 @@ import {
   mergePxGenres,
   mergePxOrigins,
 } from "./utils/merge.js";
+import EmbedPanelContent from "./components/EmbedPanelContent.jsx";
 import { indexRowsById, SERIES_ZONE_INTRO, YOY_ARROW_HINT, YOY_YEAR_HINT } from "./utils/format.js";
+import { getEmbedPanel } from "./utils/embedPanel.js";
 
 const isEmbed = document.documentElement.classList.contains("is-embed");
+const embedPanel = getEmbedPanel();
 
 function joinSeries(keys) {
   const yearSet = new Set();
@@ -194,6 +197,24 @@ export default function App() {
   const prevVodById = indexRowsById(prevVodOrigins);
   const prevP4ById = indexRowsById(prevP4Origins);
   const prevVodGenreById = indexRowsById(mergeGenreRows(harmonized, prevYearSnap?.vod?.genres));
+
+  if (embedPanel) {
+    return (
+      <div className="wrap wrap-embed-panel">
+        <EmbedPanelContent
+          panel={embedPanel}
+          px={px}
+          supplyTrendData={supplyTrendData}
+          demandTrendData={demandTrendData}
+          seasonProfile={seasonProfile}
+          seasonProfileCh={seasonProfileCh}
+          seasonYears={seasonYears}
+          genreTrendDemand={genreTrendDemand}
+          chGenreTrendDemand={chGenreTrendDemand}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="wrap">

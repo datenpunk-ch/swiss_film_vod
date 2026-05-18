@@ -468,9 +468,11 @@ a:hover {
 .page-article .embed-frame iframe {
   width: 100%;
   height: 100%;
+  min-height: inherit;
   border: 0;
   display: block;
   background: transparent;
+  overflow: hidden;
 }
 
 .page-article .wide-bleed {
@@ -485,6 +487,88 @@ a:hover {
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.page-article .article-plot {
+  margin: 2rem 0 2.5rem;
+}
+
+.page-article .article-plot .embed-frame {
+  overflow: hidden;
+}
+
+.page-article .article-plot .embed-frame--supply,
+.page-article .article-plot .embed-frame--demand {
+  height: 332px;
+}
+
+.page-article .article-plot .embed-frame--season {
+  height: 588px;
+}
+
+.page-article .article-plot .embed-frame--genre {
+  height: 572px;
+}
+
+html.is-embed.is-embed-panel .page-explore .wrap,
+html.is-embed.is-embed-panel .wrap-embed-panel {
+  padding: 0.25rem 0.45rem 0.35rem;
+}
+
+html.is-embed.is-embed-panel .panel-chart-stack {
+  gap: 0.65rem;
+}
+
+html.is-embed.is-embed-panel .chart-frame {
+  padding: 0.5rem 0.45rem 0.15rem;
+}
+
+html.is-embed.is-embed-panel .chart-frame-title {
+  font-size: 0.8125rem;
+  margin-bottom: 0.25rem;
+}
+
+html.is-embed.is-embed-panel .chart-subtitle {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+}
+
+html.is-embed.is-embed-panel .unified-grid.is-genre-years {
+  gap: 0.65rem;
+}
+
+html.is-embed.is-embed-panel,
+html.is-embed.is-embed-panel body {
+  overflow: hidden;
+}
+
+.page-article .article-plot .chart-caption {
+  margin: 0.65rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-muted, #5c5c5c);
+}
+
+.page-article .article-plot .chart-caption a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+html.is-embed.is-embed-panel .panel-embed {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+html.is-embed.is-embed-panel .panel-embed .panel-label,
+html.is-embed.is-embed-panel .panel-embed .panel-intro {
+  display: none;
+}
+
+html.is-embed.is-embed-panel .dashboard-zone,
+html.is-embed.is-embed-panel .dashboard-zone-title {
+  display: none;
 }
 
 html.is-embed .site-footer-chrome {

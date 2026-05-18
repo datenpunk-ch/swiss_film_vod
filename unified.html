@@ -9,6 +9,11 @@
           if (v === "1" || v === "true" || v === "yes") {
             document.documentElement.classList.add("is-embed");
           }
+          var panel = (p.get("panel") || "").trim().toLowerCase();
+          if (panel && panel !== "full") {
+            document.documentElement.classList.add("is-embed-panel");
+            document.documentElement.dataset.embedPanel = panel;
+          }
         } catch (e) {}
       })();
     </script>
