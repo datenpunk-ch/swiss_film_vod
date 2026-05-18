@@ -8,11 +8,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
 import { pctFmt } from "../utils/format.js";
 import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
 import ChartResponsive from "./ChartResponsive.jsx";
+import YearShareTooltip from "./YearShareTooltip.jsx";
 
 const MARGIN = { top: 12, left: 4, right: 4, bottom: 48 };
 
@@ -45,18 +46,18 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
           <ChartBox height={height}>
             <ChartResponsive height={height}>
               <BarChart data={rows} margin={MARGIN} stackOffset="expand" barCategoryGap="10%">
-                <CartesianGrid strokeDasharray="3 3" stroke="#e8e8e8" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.gridLight} vertical={false} />
                 <XAxis
                   dataKey="year"
                   tick={{ ...AXIS.tick, fontSize: 10 }}
-                  tickLine={{ stroke: "#b0b0b0" }}
-                  axisLine={{ stroke: "#b0b0b0" }}
+                  tickLine={{ stroke: PALETTE.axis }}
+                  axisLine={{ stroke: PALETTE.axis }}
                   interval={0}
                   angle={-40}
                   textAnchor="end"
                   height={48}
                 >
-                  <Label value="Jahr" position="bottom" offset={4} style={{ fontSize: 11, fill: "#55606a" }} />
+                  <Label value="Jahr" position="bottom" offset={4} style={{ fontSize: 11, fill: PALETTE.muted }} />
                 </XAxis>
                 <YAxis
                   type="number"
@@ -66,12 +67,12 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
                   tick={{ ...AXIS.tick, fontSize: 10 }}
                   tickMargin={4}
                   tickFormatter={(v) => pctFmt.format(v)}
-                  axisLine={{ stroke: "#b0b0b0" }}
-                  tickLine={{ stroke: "#b0b0b0" }}
+                  axisLine={{ stroke: PALETTE.axis }}
+                  tickLine={{ stroke: PALETTE.axis }}
                 />
                 <Tooltip
                   wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-                  formatter={(v, name) => [pctFmt.format(v), name]}
+                  content={<YearShareTooltip rows={rows} />}
                 />
                 {series.map((s) => (
                   <Bar

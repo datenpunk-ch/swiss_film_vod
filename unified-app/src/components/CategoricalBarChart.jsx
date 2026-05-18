@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
 import { resolveChartColors } from "../utils/countryColors.js";
 import { metricLabel, metricValue } from "../utils/format.js";
 import { sortRowsByMetric } from "../utils/sortRows.js";
@@ -17,8 +17,8 @@ import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
 import ChartTooltip from "./ChartTooltip.jsx";
 
-const AXIS_LINE = { stroke: "#b0b0b0" };
-const TICK_LINE = { stroke: "#b0b0b0" };
+const AXIS_LINE = { stroke: PALETTE.axis };
+const TICK_LINE = { stroke: PALETTE.axis };
 const HIDDEN_TICK = false;
 
 function plotHeight(count, compact) {
@@ -36,6 +36,8 @@ export default function CategoricalBarChart({
   useFlags = false,
   compact = false,
   hideAxisLabels = false,
+  tooltipShowShare = false,
+  prevRowById,
 }) {
   const sorted = useMemo(
     () => (sortByValue ? sortRowsByMetric(rows, metric) : rows),
@@ -78,7 +80,7 @@ export default function CategoricalBarChart({
       <ChartBox height={plotH}>
         <ResponsiveContainer width="100%" height={plotH} initialDimension={{ width: 200, height: plotH }}>
           <BarChart data={data} margin={margin} barCategoryGap={compact ? "20%" : "22%"}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.grid} vertical={false} />
             <XAxis
               dataKey="tickLabel"
               tick={hideAxisLabels ? HIDDEN_TICK : { ...AXIS.tick, fontSize: compact ? 8 : 9 }}
@@ -101,11 +103,11 @@ export default function CategoricalBarChart({
             <Tooltip
               wrapperStyle={TOOLTIP_WRAPPER_STYLE}
               allowEscapeViewBox={{ x: true, y: true }}
-              content={<ChartTooltip metric={metric} />}
+              content={<ChartTooltip metric={metric} showShare={tooltipShowShare} prevRowById={prevRowById} />}
             />
             <Bar dataKey="value" name={axisName} isAnimationActive={false} maxBarSize={compact ? 36 : 48} minPointSize={4}>
               {data.map((entry) => (
-                <Cell key={entry.barKey} fill={colors[entry.id] ?? "#b5542a"} />
+                <Cell key={entry.barKey} fill={colors[entry.id] ?? PALETTE.ink} />
               ))}
             </Bar>
           </BarChart>

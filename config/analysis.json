@@ -67,7 +67,7 @@
       "filters": {
         "language_region": "Schweiz",
         "film_type_prefix": "Alle vorgeführten",
-        "unit_prefix": "Kinobesucher"
+        "unit_prefix": "Kinobesuche"
       },
       "countries": [
         {

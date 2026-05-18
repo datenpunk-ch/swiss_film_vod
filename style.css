@@ -1262,6 +1262,60 @@ html.is-embed .page-explore .site-footer {
   flex-wrap: wrap;
 }
 
+.page-unified .dashboard-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.page-unified .dashboard-zone--year {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: var(--rule-w) solid var(--color-rule);
+}
+
+.page-unified .dashboard-zone-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 1.25rem;
+}
+
+.page-unified .panel-chart-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.page-unified .metric-series-block + .metric-series-block {
+  margin-top: 0.25rem;
+}
+
+.page-unified .metric-chart-group--grouped {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .page-unified .metric-chart-group--grouped {
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-unified .metric-chart-block .panel-label-sub {
+  margin-bottom: 0.5rem;
+}
+
+.page-unified .metric-chart-block .chart-frame {
+  min-width: 0;
+}
+
 .page-unified .controls-year-only {
   margin-bottom: 0.5rem;
 }

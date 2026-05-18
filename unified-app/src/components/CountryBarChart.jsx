@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
 import { resolveChartColors } from "../utils/countryColors.js";
 import { metricLabel, metricValue } from "../utils/format.js";
 import { sortRowsByMetric } from "../utils/sortRows.js";
@@ -25,6 +25,8 @@ export default function CountryBarChart({
   minHeight = 200,
   compact = true,
   hideAxisLabels = true,
+  tooltipShowShare = false,
+  prevRowById,
 }) {
   const sorted = useMemo(() => sortRowsByMetric(rows, metric), [rows, metric]);
   const colors = useMemo(() => resolveChartColors(sorted, colorsProp), [sorted, colorsProp]);
@@ -54,7 +56,7 @@ export default function CountryBarChart({
       <ChartBox height={plotH}>
         <ResponsiveContainer width="100%" height={plotH} initialDimension={{ width: 220, height: plotH }}>
           <BarChart data={data} layout="vertical" margin={margin} barCategoryGap="12%">
-            <CartesianGrid strokeDasharray="3 3" stroke="#e8e8e8" horizontal={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.gridLight} horizontal={false} />
             <XAxis
               type="number"
               tick={hideAxisLabels ? HIDDEN_TICK : { ...AXIS.tick, fontSize: 8 }}
@@ -74,11 +76,11 @@ export default function CountryBarChart({
             <Tooltip
               wrapperStyle={TOOLTIP_WRAPPER_STYLE}
               allowEscapeViewBox={{ x: true, y: true }}
-              content={<ChartTooltip metric={metric} />}
+              content={<ChartTooltip metric={metric} showShare={tooltipShowShare} prevRowById={prevRowById} />}
             />
             <Bar dataKey="value" name={axisName} isAnimationActive={false} maxBarSize={compact ? 14 : 22} minPointSize={3}>
               {data.map((entry) => (
-                <Cell key={entry.barKey} fill={colors[entry.label] ?? "#b5542a"} />
+                <Cell key={entry.barKey} fill={colors[entry.label] ?? PALETTE.ink} />
               ))}
             </Bar>
           </BarChart>

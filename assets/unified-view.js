@@ -25,7 +25,7 @@ function segmentsFromMetricRows(rows, { metric, labelKey = "label", idKey = "id"
     const supply = r.supply ?? 0;
     const tip =
       metric === "intensity"
-        ? `${r[labelKey] ?? id}: ${r.intensity != null ? intFmt.format(Math.round(r.intensity)) : "—"} Besucher/Film`
+        ? `${r[labelKey] ?? id}: ${r.intensity != null ? intFmt.format(Math.round(r.intensity)) : "—"} Besuche/Film`
         : `${r[labelKey] ?? id}: ${pct(share)} · ${intFmt.format(metric === "supply" ? supply : demand)}`;
     return {
       label: r[labelKey] ?? id,
@@ -204,8 +204,8 @@ function drawSeason(svg, profile) {
 
 function metricLabel(metric) {
   if (metric === "supply") return "Angebot (Filme)";
-  if (metric === "intensity") return "Intensität (Besucher/Film)";
-  return "Nachfrage (Besucher)";
+  if (metric === "intensity") return "Intensität (Besuche/Film)";
+  return "Nachfrage (Besuche)";
 }
 
 function renderKpis(pxRow) {
@@ -213,12 +213,12 @@ function renderKpis(pxRow) {
   root.innerHTML = "";
   if (!pxRow) return;
   const cards = [
-    { k: "Besucher (Markt)", v: intFmt.format(pxRow.market.demand) },
+    { k: "Besuche (Markt)", v: intFmt.format(pxRow.market.demand) },
     { k: "Filme im Programm", v: intFmt.format(pxRow.market.supply) },
-    { k: "CH-Anteil (Besucher)", v: pctFmt.format(pxRow.switzerland.share_demand) },
+    { k: "CH-Anteil (Besuche)", v: pctFmt.format(pxRow.switzerland.share_demand) },
     { k: "CH-Anteil (Filme)", v: pctFmt.format(pxRow.switzerland.share_supply) },
     {
-      k: "Besucher / CH-Film",
+      k: "Besuche / CH-Film",
       v: pxRow.switzerland.intensity ? intFmt.format(Math.round(pxRow.switzerland.intensity)) : "—",
     },
   ];
@@ -268,7 +268,7 @@ function renderYear(data, year, vodOriginId, metric) {
       share: shareForMetric(c, metric === "intensity" ? "demand" : metric),
       tip:
         metric === "intensity" && c.intensity
-          ? `${c.label}: ${intFmt.format(Math.round(c.intensity))} Besucher/Film`
+          ? `${c.label}: ${intFmt.format(Math.round(c.intensity))} Besuche/Film`
           : undefined,
     })),
     { title: `Top-Länder ${year} (${metricLabel(metric)})`, valueKey: "value" }
@@ -363,13 +363,13 @@ function renderPxTrends(px, metric) {
   drawMultiLine(
     document.getElementById("marketTrendChart"),
     [
-      { color: "#0b0d10", label: "Besucher", points: s.market_demand ?? s.market_admissions ?? [] },
+      { color: "#0b0d10", label: "Besuche", points: s.market_demand ?? s.market_admissions ?? [] },
       { color: "#c4896e", label: "Filme", points: s.market_supply ?? s.market_films ?? [] },
     ],
     { width: 720, height: 240, yLabel: "Anzahl" }
   );
   renderLegend(document.getElementById("marketTrendLegend"), [
-    { color: "#0b0d10", label: "Kinobesucher (Markt)" },
+    { color: "#0b0d10", label: "Kinobesuche (Markt)" },
     { color: "#c4896e", label: "Filme im Programm" },
   ]);
 

@@ -1,9 +1,11 @@
-/** Abwechslungsreiche Farben pro Land (Top-Länder). */
+import { PALETTE } from "../constants.js";
+
+/** Abwechslungsreiche Farben pro Land (Top-Länder), abgeleitet vom Dashboard-Palette. */
 const COUNTRY_PALETTE = [
-  "#b5542a",
-  "#0b0d10",
-  "#c4896e",
-  "#5c7a8a",
+  PALETTE.ink,
+  PALETTE.accent,
+  PALETTE.sand,
+  PALETTE.slate,
   "#8b5a2b",
   "#6b4c9a",
   "#c25b4a",

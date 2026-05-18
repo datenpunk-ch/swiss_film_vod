@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { resolveChartColors } from "../utils/countryColors.js";
-import { formatVsMarketDelta, metricShare, metricValue, pctFmt } from "../utils/format.js";
+import { formatVsMarketDelta, formatYoYPercent, metricShare, metricValue, pctFmt } from "../utils/format.js";
 import { sortRowsByMetric } from "../utils/sortRows.js";
 import CountryFlag from "./CountryFlag.jsx";
 
@@ -11,11 +11,24 @@ function partShareValue(row, metric, marketIntensity) {
   return Math.max(metricShare(row, metric), 0);
 }
 
-function formatLegendShare(part, metric, marketIntensity) {
+function formatLegendShare(part, metric, marketIntensity, prevRowById) {
+  let base;
   if (metric === "intensity" && marketIntensity > 0) {
-    return formatVsMarketDelta(part.abs / marketIntensity);
+    base = formatVsMarketDelta(part.abs / marketIntensity);
+  } else {
+    base = pctFmt.format(part.value);
   }
-  return pctFmt.format(part.value);
+
+  const prev = prevRowById?.[part.id];
+  if (prev) {
+    const cur = metric === "intensity" ? part.abs : part.value;
+    const prevVal =
+      metric === "intensity" ? metricValue(prev, metric) : partShareValue(prev, metric, marketIntensity);
+    const yoy = formatYoYPercent(cur, prevVal);
+    if (yoy) base += ` · ${yoy}`;
+  }
+
+  return base;
 }
 
 /** Nur Prozentliste — ohne horizontalen Anteils-Balken. */
@@ -26,6 +39,7 @@ export default function ShareStackChart({
   useFlags = false,
   marketIntensity,
   usePxBenchmark = true,
+  prevRowById,
 }) {
   const sorted = useMemo(() => sortRowsByMetric(rows ?? [], metric), [rows, metric]);
   const colors = useMemo(
@@ -58,7 +72,7 @@ export default function ShareStackChart({
             <span className="swatch" style={{ background: colors[p.id] }} aria-hidden="true" />
             {useFlags && p.label !== "Andere" ? <CountryFlag label={p.label} size={16} /> : null}
             <span className="share-pct-label">{p.label}</span>
-            <strong className="share-pct-value">{formatLegendShare(p, metric, marketIntensity)}</strong>
+            <strong className="share-pct-value">{formatLegendShare(p, metric, marketIntensity, prevRowById)}</strong>
           </li>
         ))}
       </ul>

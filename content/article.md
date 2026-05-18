@@ -22,7 +22,7 @@
     </div>
     <div class="measure">
 
-Die Schweizer Filmstatistik des Bundesamtes für Statistik (BFS) trennt Kinobesuche und VoD-Transaktionen — zwei Märkte, die sich gegenseitig beeinflussen, aber nicht identisch messen. Kinodaten liegen als wöchentliche Besucherzahlen vor; VoD als jährliche Aggregation nach Modell (Kauf, Leihe, Abo), Herkunftsregion und Genre.
+Die Schweizer Filmstatistik des Bundesamtes für Statistik (BFS) trennt Kinobesuche und VoD-Transaktionen — zwei Märkte, die sich gegenseitig beeinflussen, aber nicht identisch messen. Kinodaten liegen als wöchentliche Besuchszahlen vor; VoD als jährliche Aggregation nach Modell (Kauf, Leihe, Abo), Herkunftsregion und Genre.
 
 <div class="note-box reveal">
   <div class="note-box-label">Datenstand</div>
@@ -35,38 +35,11 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="section-label reveal">Zahlen</div>
-    <div class="sec-head reveal">
-      <div class="sec-num">02</div>
-      <h2>Ein paar Kennzahlen</h2>
-    </div>
-    <div class="measure">
-      <p class="reveal stats-intro">Die folgenden Werte werden beim Laden aus den aufbereiteten JSON-Dateien berechnet (letztes vollständiges Berichtsjahr).</p>
-      <div class="stats reveal" id="headlineStats" aria-live="polite">
-        <div class="stats-label">Überblick</div>
-        <div class="stats-cards" id="headlineStatsCards"><div class="stat-card is-loading">Lädt…</div></div>
-      </div>
-      <p class="reveal stats-intro">Kinobesuche pro Kalenderjahr (Summe wöchentlicher Zählungen, alle Herkünfte):</p>
-      <div class="stats reveal" id="cinemaYearStats" aria-live="polite">
-        <div class="stats-label">Kinobesuche nach Jahr</div>
-        <div id="cinemaYearStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
-      </div>
-      <p class="reveal stats-intro">VoD-Kauf-Views (EST) nach Herkunftsregion — Anteil Schweiz am Gesamtvolumen. Drei BFS-Quellen im Vergleich: <a href="./unified.html">Datenauswertung</a>.</p>
-      <div class="stats reveal" id="vodShareStats" aria-live="polite">
-        <div class="stats-label">Schweizer Anteil (EST, Views)</div>
-        <div id="vodShareStatsInner"><div class="stat-card is-loading" style="width:100%;max-width:100%;height:auto;min-height:72px;">Lädt…</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="interactive">
   <div class="container">
     <div class="section-label reveal">Interaktiv</div>
     <div class="sec-head reveal">
-      <div class="sec-num">03</div>
+      <div class="sec-num">02</div>
       <h2>Datenauswertung</h2>
     </div>
     <p class="measure reveal stats-intro">VoD, Kinowochen (P4) und Filmangebot/Nachfrage (PX) — Herkunft und Genre nach Jahr, plus Kinosaison (Wochen). <a href="./unified.html">Vollbild-Ansicht</a>.</p>
@@ -82,12 +55,12 @@ Nach der pandemiebedingten Einbruchsphase erholten sich die Kinobesuche wieder �
   <div class="container">
     <div class="section-label reveal">Methodik</div>
     <div class="sec-head reveal">
-      <div class="sec-num">04</div>
+      <div class="sec-num">03</div>
       <h2>Quellen &amp; Grenzen</h2>
     </div>
     <div class="measure">
 
-- **BFS Kinostatistik** (wöchentlich): Besucherzählungen nach Herkunft, Format u. a.
+- **BFS Kinostatistik** (wöchentlich): Besuchszählungen nach Herkunft, Format u. a.
 - **BFS VoD** (jährlich): Transaktionen/Views nach Modell, Herkunft, Genre.
 - **Aufbereitung**: CSV → JSON via `node scripts/export_site.mjs`; keine Live-API.
 - **Hinweis**: Unvollständige Kalenderjahre (z. B. laufendes Jahr) werden in Jahresvergleichen ausgeschlossen.

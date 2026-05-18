@@ -1,10 +1,37 @@
-export const ORIGIN_COLORS = { ch: "#b5542a", eu: "#c4896e", ww: "#e5d4c8" };
-export const GENRE_COLORS = { fic: "#0b0d10", doc: "#b5542a", ani: "#c4896e" };
+/** Gemeinsames Farbschema für alle Dashboard-Grafiken. */
+export const PALETTE = {
+  ink: "#0b0d10",
+  accent: "#b5542a",
+  sand: "#c4896e",
+  sandLight: "#e5d4c8",
+  sandPale: "#e8ddd6",
+  slate: "#5c7a8a",
+  muted: "#55606a",
+  grid: "#e0e0e0",
+  gridLight: "#e8e8e8",
+  axis: "#b0b0b0",
+};
+
+/** Erste Kategorie schwarz, zweite rostrot — für Vergleichsreihen. */
+export const SERIES_PAIR = {
+  first: PALETTE.ink,
+  second: PALETTE.accent,
+};
+
+/** Nachfrage / Angebot / Intensität. */
+export const METRIC_COLORS = {
+  demand: SERIES_PAIR.first,
+  supply: SERIES_PAIR.first,
+  intensity: PALETTE.slate,
+};
+
+export const ORIGIN_COLORS = { ch: SERIES_PAIR.first, eu: SERIES_PAIR.second, ww: PALETTE.sandLight };
+export const GENRE_COLORS = { fic: SERIES_PAIR.first, doc: SERIES_PAIR.second, ani: PALETTE.sand };
 
 export const CHART_MARGIN = { top: 16, right: 20, left: 12, bottom: 12 };
 
 export const AXIS = {
-  tick: { fontSize: 11, fill: "#55606a" },
+  tick: { fontSize: 11, fill: PALETTE.muted },
   tickMargin: 8,
 };
 
@@ -14,7 +41,6 @@ export const TOOLTIP_WRAPPER_STYLE = {
   outline: "none",
 };
 
-/** Legende rechts neben dem Plot (Zeitreihen / horizontale Charts). */
 export function legendRightProps(seriesCount = 2) {
   return {
     layout: "vertical",
@@ -31,15 +57,15 @@ export function chartMarginWithLegendRight(seriesCount = 2, base = CHART_MARGIN)
   return { ...base, left: 72, bottom: 36, right: legendW + 16, top: 16 };
 }
 
-/** Y-Achsen-Beschriftung links, ohne Überlappung mit Tick-Zahlen. */
 export const Y_AXIS_LABEL_PROPS = {
   angle: -90,
   position: "left",
-  style: { fontSize: 11, fill: "#55606a", textAnchor: "middle" },
+  style: { fontSize: 11, fill: PALETTE.muted, textAnchor: "middle" },
 };
 
+/** Angebot zuerst, dann Nachfrage. */
 export const METRICS = [
-  { id: "demand", label: "Nachfrage (Besucher / Views)" },
-  { id: "supply", label: "Angebot (Filme)" },
-  { id: "intensity", label: "Ø Besucher je Film" },
+  { id: "supply", label: "Angebot (Filme)", title: "Angebot" },
+  { id: "demand", label: "Nachfrage (Besuche / Views)", title: "Nachfrage" },
+  { id: "intensity", label: "Ø Besuche je Film", title: "Intensität" },
 ];

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T12:33:19.799Z",
+  "generated_at": "2026-05-18T10:18:53.573Z",
   "model": "px_primary",
   "lead": "Hauptstory aus BFS «Filmangebot und Nachfrage» (PX): Angebot, Nachfrage, Herkunft und Genre am Schweizer Kinomarkt (2014 ff.). VoD (StatVoD) und Kinowochen (P4) ergänzen andere Märkte und Zeitskalen.",
   "harmonized": {
@@ -2302,6 +2302,106 @@
             "value": 3852
           }
         ],
+        "ch_demand": [
+          {
+            "year": 2014,
+            "value": 624755
+          },
+          {
+            "year": 2015,
+            "value": 779510
+          },
+          {
+            "year": 2016,
+            "value": 596653
+          },
+          {
+            "year": 2017,
+            "value": 892981
+          },
+          {
+            "year": 2018,
+            "value": 745548
+          },
+          {
+            "year": 2019,
+            "value": 839167
+          },
+          {
+            "year": 2020,
+            "value": 600875
+          },
+          {
+            "year": 2021,
+            "value": 233548
+          },
+          {
+            "year": 2022,
+            "value": 441922
+          },
+          {
+            "year": 2023,
+            "value": 665858
+          },
+          {
+            "year": 2024,
+            "value": 909623
+          },
+          {
+            "year": 2025,
+            "value": 861116
+          }
+        ],
+        "ch_supply": [
+          {
+            "year": 2014,
+            "value": 263
+          },
+          {
+            "year": 2015,
+            "value": 261
+          },
+          {
+            "year": 2016,
+            "value": 299
+          },
+          {
+            "year": 2017,
+            "value": 287
+          },
+          {
+            "year": 2018,
+            "value": 330
+          },
+          {
+            "year": 2019,
+            "value": 316
+          },
+          {
+            "year": 2020,
+            "value": 243
+          },
+          {
+            "year": 2021,
+            "value": 292
+          },
+          {
+            "year": 2022,
+            "value": 391
+          },
+          {
+            "year": 2023,
+            "value": 385
+          },
+          {
+            "year": 2024,
+            "value": 412
+          },
+          {
+            "year": 2025,
+            "value": 407
+          }
+        ],
         "ch_demand_share": [
           {
             "year": 2014,
@@ -2650,6 +2750,306 @@
           {
             "year": 2025,
             "value": 0.05659397715472482
+          }
+        ],
+        "ch_genre_fic_demand_share": [
+          {
+            "year": 2014,
+            "value": 0.6067418428023785
+          },
+          {
+            "year": 2015,
+            "value": 0.686299085322831
+          },
+          {
+            "year": 2016,
+            "value": 0.42608853051941414
+          },
+          {
+            "year": 2017,
+            "value": 0.6705226650958979
+          },
+          {
+            "year": 2018,
+            "value": 0.59183178011342
+          },
+          {
+            "year": 2019,
+            "value": 0.6935020085394207
+          },
+          {
+            "year": 2020,
+            "value": 0.7899746203453297
+          },
+          {
+            "year": 2021,
+            "value": 0.5586260640211006
+          },
+          {
+            "year": 2022,
+            "value": 0.5782898339525979
+          },
+          {
+            "year": 2023,
+            "value": 0.6035971633591547
+          },
+          {
+            "year": 2024,
+            "value": 0.5707914157843414
+          },
+          {
+            "year": 2025,
+            "value": 0.57671440316984
+          }
+        ],
+        "ch_genre_doc_demand_share": [
+          {
+            "year": 2014,
+            "value": 0.39325815719762147
+          },
+          {
+            "year": 2015,
+            "value": 0.313700914677169
+          },
+          {
+            "year": 2016,
+            "value": 0.3919514357591431
+          },
+          {
+            "year": 2017,
+            "value": 0.24695374257682975
+          },
+          {
+            "year": 2018,
+            "value": 0.4065291570764055
+          },
+          {
+            "year": 2019,
+            "value": 0.30560305636422785
+          },
+          {
+            "year": 2020,
+            "value": 0.209547742874974
+          },
+          {
+            "year": 2021,
+            "value": 0.44111702947573944
+          },
+          {
+            "year": 2022,
+            "value": 0.4193409696733813
+          },
+          {
+            "year": 2023,
+            "value": 0.3961835706712242
+          },
+          {
+            "year": 2024,
+            "value": 0.39134014861101796
+          },
+          {
+            "year": 2025,
+            "value": 0.3936856358492932
+          }
+        ],
+        "ch_genre_ani_demand_share": [
+          {
+            "year": 2014,
+            "value": 0
+          },
+          {
+            "year": 2015,
+            "value": 0
+          },
+          {
+            "year": 2016,
+            "value": 0.1819600337214428
+          },
+          {
+            "year": 2017,
+            "value": 0.08252359232727235
+          },
+          {
+            "year": 2018,
+            "value": 0.0016390628101745294
+          },
+          {
+            "year": 2019,
+            "value": 0.0008949350963515009
+          },
+          {
+            "year": 2020,
+            "value": 0.00047763677969627627
+          },
+          {
+            "year": 2021,
+            "value": 0.00025690650315995
+          },
+          {
+            "year": 2022,
+            "value": 0.002369196374020755
+          },
+          {
+            "year": 2023,
+            "value": 0.00021926596962115044
+          },
+          {
+            "year": 2024,
+            "value": 0.03786843560464061
+          },
+          {
+            "year": 2025,
+            "value": 0.029599960980866688
+          }
+        ],
+        "ch_genre_fic_supply_share": [
+          {
+            "year": 2014,
+            "value": 0.3574144486692015
+          },
+          {
+            "year": 2015,
+            "value": 0.40229885057471265
+          },
+          {
+            "year": 2016,
+            "value": 0.3979933110367893
+          },
+          {
+            "year": 2017,
+            "value": 0.3797909407665505
+          },
+          {
+            "year": 2018,
+            "value": 0.3606060606060606
+          },
+          {
+            "year": 2019,
+            "value": 0.34810126582278483
+          },
+          {
+            "year": 2020,
+            "value": 0.3168724279835391
+          },
+          {
+            "year": 2021,
+            "value": 0.3321917808219178
+          },
+          {
+            "year": 2022,
+            "value": 0.35038363171355497
+          },
+          {
+            "year": 2023,
+            "value": 0.4155844155844156
+          },
+          {
+            "year": 2024,
+            "value": 0.4174757281553398
+          },
+          {
+            "year": 2025,
+            "value": 0.371007371007371
+          }
+        ],
+        "ch_genre_doc_supply_share": [
+          {
+            "year": 2014,
+            "value": 0.6425855513307985
+          },
+          {
+            "year": 2015,
+            "value": 0.5977011494252874
+          },
+          {
+            "year": 2016,
+            "value": 0.5953177257525084
+          },
+          {
+            "year": 2017,
+            "value": 0.6132404181184669
+          },
+          {
+            "year": 2018,
+            "value": 0.6333333333333333
+          },
+          {
+            "year": 2019,
+            "value": 0.6455696202531646
+          },
+          {
+            "year": 2020,
+            "value": 0.6790123456790124
+          },
+          {
+            "year": 2021,
+            "value": 0.6643835616438356
+          },
+          {
+            "year": 2022,
+            "value": 0.639386189258312
+          },
+          {
+            "year": 2023,
+            "value": 0.574025974025974
+          },
+          {
+            "year": 2024,
+            "value": 0.5776699029126213
+          },
+          {
+            "year": 2025,
+            "value": 0.6142506142506142
+          }
+        ],
+        "ch_genre_ani_supply_share": [
+          {
+            "year": 2014,
+            "value": 0
+          },
+          {
+            "year": 2015,
+            "value": 0
+          },
+          {
+            "year": 2016,
+            "value": 0.006688963210702341
+          },
+          {
+            "year": 2017,
+            "value": 0.006968641114982578
+          },
+          {
+            "year": 2018,
+            "value": 0.006060606060606061
+          },
+          {
+            "year": 2019,
+            "value": 0.006329113924050633
+          },
+          {
+            "year": 2020,
+            "value": 0.00411522633744856
+          },
+          {
+            "year": 2021,
+            "value": 0.003424657534246575
+          },
+          {
+            "year": 2022,
+            "value": 0.010230179028132993
+          },
+          {
+            "year": 2023,
+            "value": 0.01038961038961039
+          },
+          {
+            "year": 2024,
+            "value": 0.0048543689320388345
+          },
+          {
+            "year": 2025,
+            "value": 0.014742014742014743
           }
         ]
       }
@@ -3507,7 +3907,7 @@
     "cinema_p4": {
       "role": "supplementary",
       "label": "Kinostatistik (P4)",
-      "note": "Wöchentliche Besucher; Herkunft jährlich mit Besuchern (adm) und Filmen (flm). Keine Genre-Dimension in dieser P4-Datei — Genre nur via PX (Kino) und VoD.",
+      "note": "Wöchentliche Eintritte; Herkunft jährlich mit Eintritten (adm) und Filmen (flm). Keine Genre-Dimension in dieser P4-Datei — Genre nur via PX (Kino) und VoD.",
       "genre_available": false,
       "season": {
         "years": [
@@ -3521,319 +3921,851 @@
             "week": 1,
             "admissions": 338277,
             "mean_admissions": 338276.5,
-            "share": 0.031472829306654154
+            "share": 0.031472829306654154,
+            "month": 12,
+            "month_label": "Dez"
           },
           {
             "week": 2,
             "admissions": 263163,
             "mean_admissions": 263163.25,
-            "share": 0.02448438495442147
+            "share": 0.02448438495442147,
+            "month": 1,
+            "month_label": "Jan"
           },
           {
             "week": 3,
             "admissions": 193928,
             "mean_admissions": 193928,
-            "share": 0.018042822489238323
+            "share": 0.018042822489238323,
+            "month": 1,
+            "month_label": "Jan"
           },
           {
             "week": 4,
             "admissions": 199057,
             "mean_admissions": 199057,
-            "share": 0.018520018337941466
+            "share": 0.018520018337941466,
+            "month": 1,
+            "month_label": "Jan"
           },
           {
             "week": 5,
             "admissions": 216699,
             "mean_admissions": 216699.25,
-            "share": 0.020161431568938355
+            "share": 0.020161431568938355,
+            "month": 1,
+            "month_label": "Jan"
           },
           {
             "week": 6,
             "admissions": 223922,
             "mean_admissions": 223921.5,
-            "share": 0.020833380821871927
+            "share": 0.020833380821871927,
+            "month": 1,
+            "month_label": "Jan"
           },
           {
             "week": 7,
             "admissions": 198319,
             "mean_admissions": 198319.25,
-            "share": 0.01845137898575181
+            "share": 0.01845137898575181,
+            "month": 2,
+            "month_label": "Feb"
           },
           {
             "week": 8,
             "admissions": 208881,
             "mean_admissions": 208880.75,
-            "share": 0.01943400794969766
+            "share": 0.01943400794969766,
+            "month": 2,
+            "month_label": "Feb"
           },
           {
             "week": 9,
             "admissions": 206238,
             "mean_admissions": 206237.5,
-            "share": 0.01918808322224892
+            "share": 0.01918808322224892,
+            "month": 2,
+            "month_label": "Feb"
           },
           {
             "week": 10,
             "admissions": 242906,
             "mean_admissions": 242905.75,
-            "share": 0.0225996520815215
+            "share": 0.0225996520815215,
+            "month": 2,
+            "month_label": "Feb"
           },
           {
             "week": 11,
             "admissions": 203259,
             "mean_admissions": 203259,
-            "share": 0.01891096724732938
+            "share": 0.01891096724732938,
+            "month": 3,
+            "month_label": "Mär"
           },
           {
             "week": 12,
             "admissions": 157766,
             "mean_admissions": 157765.5,
-            "share": 0.014678307987634217
+            "share": 0.014678307987634217,
+            "month": 3,
+            "month_label": "Mär"
           },
           {
             "week": 13,
             "admissions": 163574,
             "mean_admissions": 163573.75,
-            "share": 0.015218700420511978
+            "share": 0.015218700420511978,
+            "month": 3,
+            "month_label": "Mär"
           },
           {
             "week": 14,
             "admissions": 232343,
             "mean_admissions": 232342.75,
-            "share": 0.02161688355942142
+            "share": 0.02161688355942142,
+            "month": 3,
+            "month_label": "Mär"
           },
           {
             "week": 15,
             "admissions": 239089,
             "mean_admissions": 239089,
-            "share": 0.02224454635807878
+            "share": 0.02224454635807878,
+            "month": 4,
+            "month_label": "Apr"
           },
           {
             "week": 16,
             "admissions": 197670,
             "mean_admissions": 197669.5,
-            "share": 0.018390927045277086
+            "share": 0.018390927045277086,
+            "month": 4,
+            "month_label": "Apr"
           },
           {
             "week": 17,
             "admissions": 268350,
             "mean_admissions": 268349.75,
-            "share": 0.024966930532370164
+            "share": 0.024966930532370164,
+            "month": 4,
+            "month_label": "Apr"
           },
           {
             "week": 18,
             "admissions": 192626,
             "mean_admissions": 192626.25,
-            "share": 0.01792170927105752
+            "share": 0.01792170927105752,
+            "month": 4,
+            "month_label": "Apr"
           },
           {
             "week": 19,
             "admissions": 182918,
             "mean_admissions": 182918.25,
-            "share": 0.01701848889686955
+            "share": 0.01701848889686955,
+            "month": 5,
+            "month_label": "Mai"
           },
           {
             "week": 20,
             "admissions": 141399,
             "mean_admissions": 141398.5,
-            "share": 0.013155542447426699
+            "share": 0.013155542447426699,
+            "month": 5,
+            "month_label": "Mai"
           },
           {
             "week": 21,
             "admissions": 175808,
             "mean_admissions": 175808.25,
-            "share": 0.016356983245810988
+            "share": 0.016356983245810988,
+            "month": 5,
+            "month_label": "Mai"
           },
           {
             "week": 22,
             "admissions": 144320,
             "mean_admissions": 144319.5,
-            "share": 0.013427308693100687
+            "share": 0.013427308693100687,
+            "month": 5,
+            "month_label": "Mai"
           },
           {
             "week": 23,
             "admissions": 198475,
             "mean_admissions": 198474.75,
-            "share": 0.01846584651440717
+            "share": 0.01846584651440717,
+            "month": 5,
+            "month_label": "Mai"
           },
           {
             "week": 24,
             "admissions": 125413,
             "mean_admissions": 125413,
-            "share": 0.011668271197778793
+            "share": 0.011668271197778793,
+            "month": 6,
+            "month_label": "Jun"
           },
           {
             "week": 25,
             "admissions": 105970,
             "mean_admissions": 105969.5,
-            "share": 0.009859271883241927
+            "share": 0.009859271883241927,
+            "month": 6,
+            "month_label": "Jun"
           },
           {
             "week": 26,
             "admissions": 140995,
             "mean_admissions": 140994.5,
-            "share": 0.01311795478455361
+            "share": 0.01311795478455361,
+            "month": 6,
+            "month_label": "Jun"
           },
           {
             "week": 27,
             "admissions": 172771,
             "mean_admissions": 172771.25,
-            "share": 0.01607442450287641
+            "share": 0.01607442450287641,
+            "month": 6,
+            "month_label": "Jun"
           },
           {
             "week": 28,
             "admissions": 162529,
             "mean_admissions": 162528.75,
-            "share": 0.015121474906397182
+            "share": 0.015121474906397182,
+            "month": 7,
+            "month_label": "Jul"
           },
           {
             "week": 29,
             "admissions": 163474,
             "mean_admissions": 163473.75,
-            "share": 0.015209396543563194
+            "share": 0.015209396543563194,
+            "month": 7,
+            "month_label": "Jul"
           },
           {
             "week": 30,
             "admissions": 227841,
             "mean_admissions": 227840.5,
-            "share": 0.02119799975949478
+            "share": 0.02119799975949478,
+            "month": 7,
+            "month_label": "Jul"
           },
           {
             "week": 31,
             "admissions": 220043,
             "mean_admissions": 220042.5,
-            "share": 0.020472483435028586
+            "share": 0.020472483435028586,
+            "month": 7,
+            "month_label": "Jul"
           },
           {
             "week": 32,
             "admissions": 233554,
             "mean_admissions": 233553.5,
-            "share": 0.021729530249578827
+            "share": 0.021729530249578827,
+            "month": 7,
+            "month_label": "Jul"
           },
           {
             "week": 33,
             "admissions": 167987,
             "mean_admissions": 167987,
-            "share": 0.015629303769954198
+            "share": 0.015629303769954198,
+            "month": 8,
+            "month_label": "Aug"
           },
           {
             "week": 34,
             "admissions": 165125,
             "mean_admissions": 165125.25,
-            "share": 0.015363050071372366
+            "share": 0.015363050071372366,
+            "month": 8,
+            "month_label": "Aug"
           },
           {
             "week": 35,
             "admissions": 203077,
             "mean_admissions": 203076.5,
-            "share": 0.018893987671897847
+            "share": 0.018893987671897847,
+            "month": 8,
+            "month_label": "Aug"
           },
           {
             "week": 36,
             "admissions": 255685,
             "mean_admissions": 255684.75,
-            "share": 0.02378859451680664
+            "share": 0.02378859451680664,
+            "month": 8,
+            "month_label": "Aug"
           },
           {
             "week": 37,
             "admissions": 122297,
             "mean_admissions": 122296.75,
-            "share": 0.011378339132362303
+            "share": 0.011378339132362303,
+            "month": 9,
+            "month_label": "Sep"
           },
           {
             "week": 38,
             "admissions": 149433,
             "mean_admissions": 149433,
-            "share": 0.01390306244087677
+            "share": 0.01390306244087677,
+            "month": 9,
+            "month_label": "Sep"
           },
           {
             "week": 39,
             "admissions": 144313,
             "mean_admissions": 144313,
-            "share": 0.013426703941099016
+            "share": 0.013426703941099016,
+            "month": 9,
+            "month_label": "Sep"
           },
           {
             "week": 40,
             "admissions": 178093,
             "mean_admissions": 178092.5,
-            "share": 0.01656950705501359
+            "share": 0.01656950705501359,
+            "month": 9,
+            "month_label": "Sep"
           },
           {
             "week": 41,
             "admissions": 192199,
             "mean_admissions": 192199,
-            "share": 0.017881958456793842
+            "share": 0.017881958456793842,
+            "month": 10,
+            "month_label": "Okt"
           },
           {
             "week": 42,
             "admissions": 213502,
             "mean_admissions": 213501.75,
-            "share": 0.01986394010350098
+            "share": 0.01986394010350098,
+            "month": 10,
+            "month_label": "Okt"
           },
           {
             "week": 43,
             "admissions": 208346,
             "mean_admissions": 208345.75,
-            "share": 0.019384232208021664
+            "share": 0.019384232208021664,
+            "month": 10,
+            "month_label": "Okt"
           },
           {
             "week": 44,
             "admissions": 223297,
             "mean_admissions": 223296.75,
-            "share": 0.020775254850634396
+            "share": 0.020775254850634396,
+            "month": 10,
+            "month_label": "Okt"
           },
           {
             "week": 45,
             "admissions": 215088,
             "mean_admissions": 215087.5,
-            "share": 0.020011476332216324
+            "share": 0.020011476332216324,
+            "month": 10,
+            "month_label": "Okt"
           },
           {
             "week": 46,
             "admissions": 211505,
             "mean_admissions": 211504.75,
-            "share": 0.019678141680833757
+            "share": 0.019678141680833757,
+            "month": 11,
+            "month_label": "Nov"
           },
           {
             "week": 47,
             "admissions": 218333,
             "mean_admissions": 218333,
-            "share": 0.02031343365858912
+            "share": 0.02031343365858912,
+            "month": 11,
+            "month_label": "Nov"
           },
           {
             "week": 48,
             "admissions": 191744,
             "mean_admissions": 191744.25,
-            "share": 0.017839649076369247
+            "share": 0.017839649076369247,
+            "month": 11,
+            "month_label": "Nov"
           },
           {
             "week": 49,
             "admissions": 196631,
             "mean_admissions": 196630.75,
-            "share": 0.018294283023471587
+            "share": 0.018294283023471587,
+            "month": 11,
+            "month_label": "Nov"
           },
           {
             "week": 50,
             "admissions": 210801,
             "mean_admissions": 210801.25,
-            "share": 0.01961268890649906
+            "share": 0.01961268890649906,
+            "month": 12,
+            "month_label": "Dez"
           },
           {
             "week": 51,
             "admissions": 271611,
             "mean_admissions": 271610.5,
-            "share": 0.025270306699977648
+            "share": 0.025270306699977648,
+            "month": 12,
+            "month_label": "Dez"
           },
           {
             "week": 52,
             "admissions": 332070,
             "mean_admissions": 332069.75,
-            "share": 0.03089536092413549
+            "share": 0.03089536092413549,
+            "month": 12,
+            "month_label": "Dez"
           },
           {
             "week": 53,
             "admissions": 335503,
             "mean_admissions": 335503,
-            "share": 0.031214786279479625
+            "share": 0.031214786279479625,
+            "month": 12,
+            "month_label": "Dez"
+          }
+        ],
+        "ch_profile": [
+          {
+            "week": 1,
+            "admissions": 21632,
+            "mean_admissions": 21632,
+            "share": 0.029472975725532913,
+            "month": 12,
+            "month_label": "Dez"
+          },
+          {
+            "week": 2,
+            "admissions": 18232,
+            "mean_admissions": 18231.5,
+            "share": 0.024839892610024655,
+            "month": 1,
+            "month_label": "Jan"
+          },
+          {
+            "week": 3,
+            "admissions": 23815,
+            "mean_admissions": 23815.25,
+            "share": 0.032447590844466426,
+            "month": 1,
+            "month_label": "Jan"
+          },
+          {
+            "week": 4,
+            "admissions": 28587,
+            "mean_admissions": 28586.5,
+            "share": 0.038948281276717206,
+            "month": 1,
+            "month_label": "Jan"
+          },
+          {
+            "week": 5,
+            "admissions": 29314,
+            "mean_admissions": 29314.25,
+            "share": 0.03993981964969504,
+            "month": 1,
+            "month_label": "Jan"
+          },
+          {
+            "week": 6,
+            "admissions": 29851,
+            "mean_admissions": 29850.5,
+            "share": 0.0406704447991411,
+            "month": 1,
+            "month_label": "Jan"
+          },
+          {
+            "week": 7,
+            "admissions": 23051,
+            "mean_admissions": 23051,
+            "share": 0.031406322274836314,
+            "month": 2,
+            "month_label": "Feb"
+          },
+          {
+            "week": 8,
+            "admissions": 18579,
+            "mean_admissions": 18578.5,
+            "share": 0.025312670096006528,
+            "month": 2,
+            "month_label": "Feb"
+          },
+          {
+            "week": 9,
+            "admissions": 17199,
+            "mean_admissions": 17199,
+            "share": 0.023433141156778872,
+            "month": 2,
+            "month_label": "Feb"
+          },
+          {
+            "week": 10,
+            "admissions": 17952,
+            "mean_admissions": 17952,
+            "share": 0.024459081926070953,
+            "month": 2,
+            "month_label": "Feb"
+          },
+          {
+            "week": 11,
+            "admissions": 18257,
+            "mean_admissions": 18257.25,
+            "share": 0.024874976241909475,
+            "month": 3,
+            "month_label": "Mär"
+          },
+          {
+            "week": 12,
+            "admissions": 16159,
+            "mean_admissions": 16159,
+            "share": 0.022016171169974407,
+            "month": 3,
+            "month_label": "Mär"
+          },
+          {
+            "week": 13,
+            "admissions": 15263,
+            "mean_admissions": 15262.5,
+            "share": 0.02079471579192613,
+            "month": 3,
+            "month_label": "Mär"
+          },
+          {
+            "week": 14,
+            "admissions": 18438,
+            "mean_admissions": 18437.75,
+            "share": 0.025120902282888522,
+            "month": 3,
+            "month_label": "Mär"
+          },
+          {
+            "week": 15,
+            "admissions": 18232,
+            "mean_admissions": 18231.5,
+            "share": 0.024839892610024655,
+            "month": 4,
+            "month_label": "Apr"
+          },
+          {
+            "week": 16,
+            "admissions": 13513,
+            "mean_admissions": 13513.25,
+            "share": 0.018411413148255253,
+            "month": 4,
+            "month_label": "Apr"
+          },
+          {
+            "week": 17,
+            "admissions": 13673,
+            "mean_admissions": 13673.25,
+            "share": 0.018629408530840556,
+            "month": 4,
+            "month_label": "Apr"
+          },
+          {
+            "week": 18,
+            "admissions": 10128,
+            "mean_admissions": 10127.5,
+            "share": 0.013798426482079077,
+            "month": 4,
+            "month_label": "Apr"
+          },
+          {
+            "week": 19,
+            "admissions": 8539,
+            "mean_admissions": 8539.25,
+            "share": 0.011634481692134659,
+            "month": 5,
+            "month_label": "Mai"
+          },
+          {
+            "week": 20,
+            "admissions": 7857,
+            "mean_admissions": 7856.75,
+            "share": 0.010704595138294228,
+            "month": 5,
+            "month_label": "Mai"
+          },
+          {
+            "week": 21,
+            "admissions": 5509,
+            "mean_admissions": 5509.25,
+            "share": 0.007506194134425491,
+            "month": 5,
+            "month_label": "Mai"
+          },
+          {
+            "week": 22,
+            "admissions": 4051,
+            "mean_admissions": 4050.5,
+            "share": 0.005518689357261052,
+            "month": 5,
+            "month_label": "Mai"
+          },
+          {
+            "week": 23,
+            "admissions": 4803,
+            "mean_admissions": 4802.75,
+            "share": 0.006543608273197264,
+            "month": 5,
+            "month_label": "Mai"
+          },
+          {
+            "week": 24,
+            "admissions": 3819,
+            "mean_admissions": 3819.25,
+            "share": 0.005203617905868231,
+            "month": 6,
+            "month_label": "Jun"
+          },
+          {
+            "week": 25,
+            "admissions": 3050,
+            "mean_admissions": 3050,
+            "share": 0.004155536980532331,
+            "month": 6,
+            "month_label": "Jun"
+          },
+          {
+            "week": 26,
+            "admissions": 3111,
+            "mean_admissions": 3111,
+            "share": 0.004238647720142978,
+            "month": 6,
+            "month_label": "Jun"
+          },
+          {
+            "week": 27,
+            "admissions": 2306,
+            "mean_admissions": 2305.75,
+            "share": 0.0031415178337253842,
+            "month": 6,
+            "month_label": "Jun"
+          },
+          {
+            "week": 28,
+            "admissions": 1491,
+            "mean_admissions": 1490.5,
+            "share": 0.00203076323589621,
+            "month": 7,
+            "month_label": "Jul"
+          },
+          {
+            "week": 29,
+            "admissions": 768,
+            "mean_admissions": 767.75,
+            "share": 0.001046037218624163,
+            "month": 7,
+            "month_label": "Jul"
+          },
+          {
+            "week": 30,
+            "admissions": 1103,
+            "mean_admissions": 1103.25,
+            "share": 0.0015031462864827194,
+            "month": 7,
+            "month_label": "Jul"
+          },
+          {
+            "week": 31,
+            "admissions": 651,
+            "mean_admissions": 651,
+            "share": 0.0008869687128939501,
+            "month": 7,
+            "month_label": "Jul"
+          },
+          {
+            "week": 32,
+            "admissions": 780,
+            "mean_admissions": 780,
+            "share": 0.0010627274901033503,
+            "month": 7,
+            "month_label": "Jul"
+          },
+          {
+            "week": 33,
+            "admissions": 1109,
+            "mean_admissions": 1109.25,
+            "share": 0.0015113211133296683,
+            "month": 8,
+            "month_label": "Aug"
+          },
+          {
+            "week": 34,
+            "admissions": 1626,
+            "mean_admissions": 1626.25,
+            "share": 0.0022157186933084274,
+            "month": 8,
+            "month_label": "Aug"
+          },
+          {
+            "week": 35,
+            "admissions": 4136,
+            "mean_admissions": 4136.25,
+            "share": 0.005635521257615362,
+            "month": 8,
+            "month_label": "Aug"
+          },
+          {
+            "week": 36,
+            "admissions": 7496,
+            "mean_admissions": 7496,
+            "share": 0.010213083674121428,
+            "month": 8,
+            "month_label": "Aug"
+          },
+          {
+            "week": 37,
+            "admissions": 6818,
+            "mean_admissions": 6817.75,
+            "share": 0.009288987622630918,
+            "month": 9,
+            "month_label": "Sep"
+          },
+          {
+            "week": 38,
+            "admissions": 9825,
+            "mean_admissions": 9824.75,
+            "share": 0.01338593834409345,
+            "month": 9,
+            "month_label": "Sep"
+          },
+          {
+            "week": 39,
+            "admissions": 8382,
+            "mean_admissions": 8381.75,
+            "share": 0.011419892487402251,
+            "month": 9,
+            "month_label": "Sep"
+          },
+          {
+            "week": 40,
+            "admissions": 8520,
+            "mean_admissions": 8520.25,
+            "share": 0.011608594740452654,
+            "month": 9,
+            "month_label": "Sep"
+          },
+          {
+            "week": 41,
+            "admissions": 6793,
+            "mean_admissions": 6792.5,
+            "share": 0.009254585226316675,
+            "month": 10,
+            "month_label": "Okt"
+          },
+          {
+            "week": 42,
+            "admissions": 15515,
+            "mean_admissions": 15515.25,
+            "share": 0.021139080372853853,
+            "month": 10,
+            "month_label": "Okt"
+          },
+          {
+            "week": 43,
+            "admissions": 17641,
+            "mean_admissions": 17640.5,
+            "share": 0.024034672165600193,
+            "month": 10,
+            "month_label": "Okt"
+          },
+          {
+            "week": 44,
+            "admissions": 21427,
+            "mean_admissions": 21426.75,
+            "share": 0.029193328523810205,
+            "month": 10,
+            "month_label": "Okt"
+          },
+          {
+            "week": 45,
+            "admissions": 29647,
+            "mean_admissions": 29647,
+            "share": 0.04039318192191542,
+            "month": 10,
+            "month_label": "Okt"
+          },
+          {
+            "week": 46,
+            "admissions": 27496,
+            "mean_admissions": 27495.75,
+            "share": 0.037462165879498965,
+            "month": 11,
+            "month_label": "Nov"
+          },
+          {
+            "week": 47,
+            "admissions": 23146,
+            "mean_admissions": 23146,
+            "share": 0.03153575703324634,
+            "month": 11,
+            "month_label": "Nov"
+          },
+          {
+            "week": 48,
+            "admissions": 19680,
+            "mean_admissions": 19680,
+            "share": 0.02681343205799222,
+            "month": 11,
+            "month_label": "Nov"
+          },
+          {
+            "week": 49,
+            "admissions": 24013,
+            "mean_admissions": 24013.25,
+            "share": 0.032717360130415735,
+            "month": 11,
+            "month_label": "Nov"
+          },
+          {
+            "week": 50,
+            "admissions": 28478,
+            "mean_admissions": 28477.75,
+            "share": 0.03880011254011626,
+            "month": 12,
+            "month_label": "Dez"
+          },
+          {
+            "week": 51,
+            "admissions": 24211,
+            "mean_admissions": 24211.25,
+            "share": 0.03298712941636505,
+            "month": 12,
+            "month_label": "Dez"
+          },
+          {
+            "week": 52,
+            "admissions": 21851,
+            "mean_admissions": 21850.75,
+            "share": 0.029771016287661257,
+            "month": 12,
+            "month_label": "Dez"
+          },
+          {
+            "week": 53,
+            "admissions": 26442,
+            "mean_admissions": 26442,
+            "share": 0.03602646191450357,
+            "month": 12,
+            "month_label": "Dez"
           }
         ]
       },
@@ -7422,9 +8354,9 @@
   ],
   "limitations": [
     "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
-    "Nachfrage (Besucher/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
+    "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
     "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-    "P4-Saison = Wochenprofil Kinobesuch (nur Besucher).",
+    "P4-Saison = Wochenprofil Kinobesuch (nur Besuche).",
     "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep."
   ],
   "bfs_metadata": "data/bfs_metadata.json"

@@ -1,7 +1,10 @@
-import { intFmt, metricShare, metricValue, pctFmt } from "../utils/format.js";
+import { intFmt, metricShare, metricValue, formatYoYPercent, pctFmt } from "../utils/format.js";
 
 function resolveTitle(label, row) {
-  if (row?.week != null && row.week !== "") return `Kinowoche ${row.week}`;
+  if (row?.week != null && row.week !== "") {
+    const month = row.monthLabel ? ` · ${row.monthLabel}` : "";
+    return `Kinowoche ${row.week}${month}`;
+  }
   if (row?.legendLabel) return row.legendLabel;
   if (row?.tickLabel) return row.tickLabel;
   if (row?.label) return row.label;
@@ -9,23 +12,36 @@ function resolveTitle(label, row) {
   return "";
 }
 
-function formatTooltipValue(entry, metric, showShare) {
+function rowLookupKey(row) {
+  return row?.id ?? row?.label;
+}
+
+function formatTooltipValue(entry, metric, showShare, prevRowById) {
   const entryRow = entry.payload;
+  if (!entryRow) return intFmt.format(0);
+
   const val = entry.value;
-  if (showShare && metric && entryRow) {
-    return `${intFmt.format(metricValue(entryRow, metric))} (${pctFmt.format(metricShare(entryRow, metric))})`;
+  const cur = metric && entryRow ? metricValue(entryRow, metric) : Number(val);
+  const prevRow = prevRowById?.[rowLookupKey(entryRow)];
+  const prev = prevRow && metric ? metricValue(prevRow, metric) : null;
+  const yoy = formatYoYPercent(cur, prev);
+
+  if (showShare && metric) {
+    const base = `${intFmt.format(cur)} (${pctFmt.format(metricShare(entryRow, metric))})`;
+    return yoy ? `${base} · ${yoy}` : base;
   }
   if (val != null && Number.isFinite(Number(val))) {
-    return intFmt.format(Number(val));
+    const base = intFmt.format(Number(val));
+    return yoy ? `${base} · ${yoy}` : base;
   }
-  if (metric && entryRow) {
-    return intFmt.format(metricValue(entryRow, metric));
+  if (metric) {
+    const base = intFmt.format(cur);
+    return yoy ? `${base} · ${yoy}` : base;
   }
   return intFmt.format(0);
 }
 
-/** Tooltip mit lesbarem Label (kein Index 0, 1, 2 …). */
-export default function ChartTooltip({ active, payload, label, metric, showShare = false }) {
+export default function ChartTooltip({ active, payload, label, metric, showShare = false, prevRowById }) {
   if (!active || !payload?.length) return null;
 
   const row = payload[0]?.payload;
@@ -36,7 +52,7 @@ export default function ChartTooltip({ active, payload, label, metric, showShare
       {title ? <p className="chart-tooltip-title">{title}</p> : null}
       <ul className="chart-tooltip-list">
         {payload.map((entry) => {
-          const text = formatTooltipValue(entry, metric, showShare);
+          const text = formatTooltipValue(entry, metric, showShare, prevRowById);
           return (
             <li key={entry.dataKey ?? entry.name}>
               <span className="chart-tooltip-dot" style={{ background: entry.color }} />

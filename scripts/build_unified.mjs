@@ -91,7 +91,7 @@ function sharesFromTotals(totals) {
   return Object.fromEntries(Object.entries(totals).map(([k, v]) => [k, v / sum]));
 }
 
-/** demand = Besucher/Views; supply = Filme im Programm/Katalog */
+/** demand = Besuche/Views; supply = Filme im Programm/Katalog */
 function metricBundle(demand, supply, demandTotal, supplyTotal) {
   return {
     demand,
@@ -250,40 +250,62 @@ function buildCinemaP4Supplementary(rows) {
     })
     .sort((a, b) => a.year - b.year);
 
+  const MONTH_LABELS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+  const monthFromDate = (dateStr) => {
+    if (!dateStr) return null;
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(dateStr).trim());
+    if (!m) return null;
+    const month = Number(m[2]);
+    return month >= 1 && month <= 12 ? month : null;
+  };
+
   const wf = CFG.cinema.weekly;
-  const weekly = rows.filter(
-    (r) =>
-      r.unit === wf.unit &&
-      r.recent === wf.recent &&
-      r.origin === wf.origin_all &&
-      SEASON_YEARS.includes(num(r.year))
-  );
-  const byWeek = {};
-  for (const r of weekly) {
-    const w = num(r.week);
-    if (!byWeek[w]) byWeek[w] = [];
-    byWeek[w].push(num(r.value));
-  }
-  const profile = Object.entries(byWeek)
-    .map(([w, vals]) => ({
-      week: Number(w),
-      mean_admissions: vals.reduce((a, b) => a + b, 0) / vals.length,
-    }))
-    .sort((a, b) => a.week - b.week);
-  const totalMean = profile.reduce((s, p) => s + p.mean_admissions, 0);
-  const seasonProfile = profile.map((p) => ({
-    week: p.week,
-    admissions: Math.round(p.mean_admissions),
-    mean_admissions: p.mean_admissions,
-    share: totalMean > 0 ? p.mean_admissions / totalMean : 0,
-  }));
+  const buildSeasonProfile = (originCode) => {
+    const weekly = rows.filter(
+      (r) =>
+        r.unit === wf.unit &&
+        r.recent === wf.recent &&
+        r.origin === originCode &&
+        SEASON_YEARS.includes(num(r.year))
+    );
+    const byWeek = {};
+    for (const r of weekly) {
+      const w = num(r.week);
+      if (!byWeek[w]) byWeek[w] = { values: [], date: r.date ?? null };
+      byWeek[w].values.push(num(r.value));
+      if (r.date) byWeek[w].date = r.date;
+    }
+    const profile = Object.entries(byWeek)
+      .map(([w, bucket]) => ({
+        week: Number(w),
+        mean_admissions: bucket.values.reduce((a, b) => a + b, 0) / bucket.values.length,
+        date: bucket.date,
+      }))
+      .sort((a, b) => a.week - b.week);
+    const totalMean = profile.reduce((s, p) => s + p.mean_admissions, 0);
+    return profile.map((p) => {
+      const month = monthFromDate(p.date);
+      return {
+        week: p.week,
+        admissions: Math.round(p.mean_admissions),
+        mean_admissions: p.mean_admissions,
+        share: totalMean > 0 ? p.mean_admissions / totalMean : 0,
+        month,
+        month_label: month ? MONTH_LABELS[month - 1] : null,
+      };
+    });
+  };
 
   return {
     role: "supplementary",
     label: "Kinostatistik (P4)",
     note: "Wöchentliche Eintritte; Herkunft jährlich mit Eintritten (adm) und Filmen (flm). Keine Genre-Dimension in dieser P4-Datei — Genre nur via PX (Kino) und VoD.",
     genre_available: false,
-    season: { years: SEASON_YEARS, profile: seasonProfile },
+    season: {
+      years: SEASON_YEARS,
+      profile: buildSeasonProfile(wf.origin_all),
+      ch_profile: buildSeasonProfile("och"),
+    },
     yearly,
   };
 }
@@ -301,6 +323,8 @@ function buildPxPrimary(pxText) {
   const series = {
     market_demand: [],
     market_supply: [],
+    ch_demand: [],
+    ch_supply: [],
     ch_demand_share: [],
     genre_fic_demand_share: [],
     genre_doc_demand_share: [],
@@ -308,6 +332,12 @@ function buildPxPrimary(pxText) {
     genre_fic_supply_share: [],
     genre_doc_supply_share: [],
     genre_ani_supply_share: [],
+    ch_genre_fic_demand_share: [],
+    ch_genre_doc_demand_share: [],
+    ch_genre_ani_demand_share: [],
+    ch_genre_fic_supply_share: [],
+    ch_genre_doc_supply_share: [],
+    ch_genre_ani_supply_share: [],
   };
 
   for (let yi = 0; yi < cube.years.length; yi++) {
@@ -360,6 +390,17 @@ function buildPxPrimary(pxText) {
       label: "Schweiz",
     };
 
+    const chGenreDemand = { fic: 0, doc: 0, ani: 0 };
+    const chGenreSupply = { fic: 0, doc: 0, ani: 0 };
+    for (const gid of ["fic", "doc", "ani"]) {
+      const gi = genreIdx[gid];
+      if (gi < 0 || ciCh < 0) continue;
+      chGenreDemand[gid] = cube.readCell(yi, ciCh, gi, cube.idxUnitAdm);
+      chGenreSupply[gid] = cube.readCell(yi, ciCh, gi, cube.idxUnitFilms);
+    }
+    const chGenreDemandTotal = Object.values(chGenreDemand).reduce((a, b) => a + b, 0);
+    const chGenreSupplyTotal = Object.values(chGenreSupply).reduce((a, b) => a + b, 0);
+
     yearly.push({
       year,
       market,
@@ -379,7 +420,33 @@ function buildPxPrimary(pxText) {
 
     series.market_demand.push({ year, value: marketAdm });
     series.market_supply.push({ year, value: marketFilms });
+    series.ch_demand.push({ year, value: chAdm });
+    series.ch_supply.push({ year, value: chFilms });
     series.ch_demand_share.push({ year, value: switzerland.share_demand });
+    series.ch_genre_fic_demand_share.push({
+      year,
+      value: chGenreDemandTotal > 0 ? chGenreDemand.fic / chGenreDemandTotal : 0,
+    });
+    series.ch_genre_doc_demand_share.push({
+      year,
+      value: chGenreDemandTotal > 0 ? chGenreDemand.doc / chGenreDemandTotal : 0,
+    });
+    series.ch_genre_ani_demand_share.push({
+      year,
+      value: chGenreDemandTotal > 0 ? chGenreDemand.ani / chGenreDemandTotal : 0,
+    });
+    series.ch_genre_fic_supply_share.push({
+      year,
+      value: chGenreSupplyTotal > 0 ? chGenreSupply.fic / chGenreSupplyTotal : 0,
+    });
+    series.ch_genre_doc_supply_share.push({
+      year,
+      value: chGenreSupplyTotal > 0 ? chGenreSupply.doc / chGenreSupplyTotal : 0,
+    });
+    series.ch_genre_ani_supply_share.push({
+      year,
+      value: chGenreSupplyTotal > 0 ? chGenreSupply.ani / chGenreSupplyTotal : 0,
+    });
     series.genre_fic_demand_share.push({
       year,
       value: genreDemandTotal > 0 ? genreDemand.fic / genreDemandTotal : 0,
@@ -452,7 +519,7 @@ function main() {
       "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
       "Nachfrage (Eintritte/Views) und Angebot (Filme) sind getrennt auszuwerten; Intensität = Nachfrage pro Film.",
       "VoD nur 2019–2024; Genre in VoD und PX, nicht in der P4-Wochen-CSV (keine Genre-Spalte).",
-      "P4-Saison = Wochenprofil Kinobesuch (nur Besucher).",
+      "P4-Saison = Wochenprofil Kinobesuch (nur Besuche).",
       "Herkunft CH/EU/Welt: PX aus Einzelländern; P4/VoD nutzen BFS-Codes oeu/oep.",
     ],
     bfs_metadata: bfsMeta ? CFG.paths.bfs_metadata : null,

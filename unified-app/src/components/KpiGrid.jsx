@@ -1,4 +1,4 @@
-import { formatVsMarketDelta, intFmt, pctFmt } from "../utils/format.js";
+import { formatVsMarketDelta, formatYoYCount, formatYoYSharePp, intFmt, pctFmt } from "../utils/format.js";
 
 function KpiCard({ card }) {
   return (
@@ -10,25 +10,47 @@ function KpiCard({ card }) {
   );
 }
 
-export default function KpiGrid({ pxRow, year }) {
+export default function KpiGrid({ pxRow, prevPxRow, year }) {
   if (!pxRow?.market) return null;
 
   const m = pxRow.market;
   const ch = pxRow.switzerland ?? {};
+  const pm = prevPxRow?.market;
+  const pch = prevPxRow?.switzerland ?? {};
   const marketIntensity = m.intensity ?? 0;
   const chIntensity = ch.intensity ?? 0;
+
+  const chIntensityPct = [
+    formatYoYCount(chIntensity, pch?.intensity),
+    marketIntensity > 0 && chIntensity
+      ? `${formatVsMarketDelta(chIntensity / marketIntensity)} ggü. Markt-Ø`
+      : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   const groups = [
     {
       key: "market",
       label: "Markt",
       cards: [
-        { key: "demand", label: "Kinobesuche", value: intFmt.format(m.demand) },
-        { key: "supply", label: "Filme im Programm", value: intFmt.format(m.supply) },
+        {
+          key: "demand",
+          label: "Kinobesuche",
+          value: intFmt.format(m.demand),
+          pct: formatYoYCount(m.demand, pm?.demand),
+        },
+        {
+          key: "supply",
+          label: "Filme im Programm",
+          value: intFmt.format(m.supply),
+          pct: formatYoYCount(m.supply, pm?.supply),
+        },
         {
           key: "intensity",
-          label: "Ø Besucher je Film",
+          label: "Ø Besuche je Film",
           value: marketIntensity ? intFmt.format(Math.round(marketIntensity)) : "—",
+          pct: formatYoYCount(marketIntensity, pm?.intensity),
         },
       ],
     },
@@ -36,16 +58,23 @@ export default function KpiGrid({ pxRow, year }) {
       key: "ch",
       label: "Schweiz",
       cards: [
-        { key: "ch-demand", label: "Anteil Besucher", value: pctFmt.format(ch.share_demand ?? 0) },
-        { key: "ch-supply", label: "Anteil Filme", value: pctFmt.format(ch.share_supply ?? 0) },
+        {
+          key: "ch-demand",
+          label: "Anteil Besuche",
+          value: pctFmt.format(ch.share_demand ?? 0),
+          pct: formatYoYSharePp(ch.share_demand, pch?.share_demand),
+        },
+        {
+          key: "ch-supply",
+          label: "Anteil Filme",
+          value: pctFmt.format(ch.share_supply ?? 0),
+          pct: formatYoYSharePp(ch.share_supply, pch?.share_supply),
+        },
         {
           key: "ch-intensity",
-          label: "Ø Besucher je CH-Film",
+          label: "Ø Besuche je CH-Film",
           value: chIntensity ? intFmt.format(Math.round(chIntensity)) : "—",
-          pct:
-            marketIntensity > 0 && chIntensity
-              ? `${formatVsMarketDelta(chIntensity / marketIntensity)} ggü. Markt-Ø`
-              : null,
+          pct: chIntensityPct || null,
         },
       ],
     },
