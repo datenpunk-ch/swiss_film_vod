@@ -15,7 +15,7 @@ import ChartBox from "./ChartBox.jsx";
 import ChartResponsive from "./ChartResponsive.jsx";
 import YearShareTooltip from "./YearShareTooltip.jsx";
 
-const MARGIN = { top: 12, left: 4, right: 4, bottom: 48 };
+const MARGIN = { top: 8, left: 4, right: 4, bottom: 44 };
 
 function prepareRows(data, series) {
   return (data ?? [])
@@ -45,34 +45,34 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
         <div className="year-share-chart-plot">
           <ChartBox height={height}>
             <ChartResponsive height={height}>
-              <BarChart data={rows} margin={MARGIN} stackOffset="expand" barCategoryGap="10%">
-                <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.gridLight} vertical={false} />
+              <BarChart data={rows} margin={MARGIN} stackOffset="expand" barCategoryGap="22%">
+                <CartesianGrid strokeDasharray="2 4" stroke={PALETTE.gridLight} vertical={false} />
                 <XAxis
                   dataKey="year"
-                  tick={{ ...AXIS.tick, fontSize: 10 }}
-                  tickLine={{ stroke: PALETTE.axis }}
+                  tick={{ ...AXIS.tick, fontSize: 9 }}
+                  tickLine={false}
                   axisLine={{ stroke: PALETTE.axis }}
                   interval={0}
                   angle={-40}
                   textAnchor="end"
-                  height={48}
+                  height={44}
                 >
-                  <Label value="Jahr" position="bottom" offset={4} style={{ fontSize: 11, fill: PALETTE.muted }} />
+                  <Label value="Jahr" position="bottom" offset={4} style={{ fontSize: 10, fill: PALETTE.muted }} />
                 </XAxis>
                 <YAxis
                   type="number"
                   domain={[0, 1]}
                   ticks={[0, 0.25, 0.5, 0.75, 1]}
-                  width={36}
-                  tick={{ ...AXIS.tick, fontSize: 10 }}
-                  tickMargin={4}
+                  width={32}
+                  tick={{ ...AXIS.tick, fontSize: 9 }}
+                  tickMargin={2}
+                  tickLine={false}
                   tickFormatter={(v) => pctFmt.format(v)}
-                  axisLine={{ stroke: PALETTE.axis }}
-                  tickLine={{ stroke: PALETTE.axis }}
+                  axisLine={false}
                 />
                 <Tooltip
                   wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-                  content={<YearShareTooltip rows={rows} />}
+                  content={<YearShareTooltip rows={rows} series={series} />}
                 />
                 {series.map((s) => (
                   <Bar
@@ -82,8 +82,10 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
                     stackId="genre"
                     fill={s.color}
                     isAnimationActive={false}
-                    maxBarSize={48}
-                    minPointSize={2}
+                    maxBarSize={26}
+                    minPointSize={1}
+                    stroke="#fff"
+                    strokeWidth={1}
                   />
                 ))}
               </BarChart>

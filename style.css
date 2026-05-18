@@ -13,8 +13,8 @@
   --color-accent-text: #7a3418;
   --color-accent-text-hover: #5c2712;
   --color-ch: #b5542a;
-  --color-eu: #c4896e;
-  --color-ww: #e5d4c8;
+  --color-eu: #e5d4c8;
+  --color-ww: #0b0d10;
 
   --rule-w: 2px;
   --rule-strong-w: 4px;
@@ -1633,9 +1633,33 @@ html.is-embed .page-explore .site-footer {
   width: 100%;
 }
 
-.page-unified .year-share-chart .recharts-xAxis .recharts-cartesian-axis-tick-value {
-  visibility: visible;
-  fill: #55606a;
+.page-unified .year-share-chart--pies .year-pie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.65rem 0.5rem;
+  width: 100%;
+  align-items: start;
+  justify-items: center;
+}
+
+.page-unified .year-pie-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 7.5rem;
+}
+
+.page-unified .year-pie-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-muted, #55606a);
+  margin-top: 0.2rem;
+  line-height: 1.2;
+}
+
+.page-unified .year-share-chart--pies .category-legend {
+  margin-top: 1rem;
 }
 
 .page-unified .visually-hidden {

@@ -1,7 +1,24 @@
 import { intFmt, formatYoYPercent, pctFmt } from "../utils/format.js";
 
+function resolveChShare(row, key, chShareDenominatorKey, chShareValueKey) {
+  if (key !== "ch" || !row) return null;
+  const official = chShareValueKey ? Number(row[chShareValueKey]) : NaN;
+  if (Number.isFinite(official)) return official;
+  const denom = chShareDenominatorKey ? Number(row[chShareDenominatorKey]) : NaN;
+  const val = Number(row.ch);
+  if (Number.isFinite(denom) && denom > 0 && Number.isFinite(val)) return val / denom;
+  return null;
+}
+
 /** Tooltip für Jahres-Zeitreihen inkl. CH-Anteil und Vorjahr (%). */
-export default function LineTrendTooltip({ active, payload, label, chShareDenominatorKey, dataByYear }) {
+export default function LineTrendTooltip({
+  active,
+  payload,
+  label,
+  chShareDenominatorKey,
+  chShareValueKey = "ch_share",
+  dataByYear,
+}) {
   if (!active || !payload?.length) return null;
 
   const row = payload[0]?.payload;
@@ -18,15 +35,11 @@ export default function LineTrendTooltip({ active, payload, label, chShareDenomi
           const key = entry.dataKey;
           let text = Number.isFinite(val) ? intFmt.format(val) : "—";
 
-          if (
-            chShareDenominatorKey &&
-            key === "ch" &&
-            row &&
-            Number.isFinite(Number(row[chShareDenominatorKey])) &&
-            Number(row[chShareDenominatorKey]) > 0 &&
-            Number.isFinite(val)
-          ) {
-            text += ` (${pctFmt.format(val / Number(row[chShareDenominatorKey]))})`;
+          if (key === "ch_share" && Number.isFinite(val)) {
+            text = pctFmt.format(val);
+          } else {
+            const share = resolveChShare(row, key, chShareDenominatorKey, chShareValueKey);
+            if (share != null) text += ` (${pctFmt.format(share)})`;
           }
 
           const prevVal = prevRow ? Number(prevRow[key]) : null;

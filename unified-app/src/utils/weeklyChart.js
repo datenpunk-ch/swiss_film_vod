@@ -35,6 +35,21 @@ export function approxMonthFromCinemaWeek(week) {
   return Math.min(12, Math.max(1, Math.ceil((w / 52) * 12)));
 }
 
+export function mergeWeeklyProfiles(marketProfile, chProfile) {
+  const market = enrichWeeklyProfile(marketProfile);
+  const chByWeek = new Map(
+    (chProfile ?? []).map((p) => [p.week, p.admissions ?? p.mean_admissions ?? 0])
+  );
+  return market.map((row) => {
+    const ch = chByWeek.get(row.week);
+    const chVal = ch != null && Number.isFinite(Number(ch)) ? Number(ch) : null;
+    const marketVal = row.admissions;
+    const ch_share =
+      marketVal > 0 && chVal != null ? chVal / marketVal : chVal === 0 ? 0 : null;
+    return { ...row, ch: chVal, ch_share };
+  });
+}
+
 export function enrichWeeklyProfile(profile) {
   const rows = (profile ?? []).map((p) => {
     const month = p.month ?? approxMonthFromCinemaWeek(p.week);

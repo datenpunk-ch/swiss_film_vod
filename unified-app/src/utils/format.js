@@ -31,18 +31,23 @@ export function formatDeltaPercentWithArrow(current, previous) {
   return `${arrow} ${pctAbsFmt.format(Math.abs(change))}`;
 }
 
-/** Prozentuale Änderung zum Vorjahr (absolute Kennzahlen). */
+/** Prozentuale Änderung zum Vorjahr (absolute Kennzahlen, ohne «ggü. Vorjahr»). */
 export function formatYoYCount(current, previous) {
   if (current == null || previous == null || !Number.isFinite(previous) || previous === 0) return null;
   if (!Number.isFinite(current)) return null;
-  return `${formatVsMarketDelta(current / previous)} ggü. Vorjahr`;
+  return formatVsMarketDelta(current / previous);
 }
 
-/** Prozentuale Änderung zum Vorjahr (für Tooltips und Anteilslisten, mit Pfeil). */
+/** Hinweis über Grafikbereichen — Pfeilwerte in Tooltips/Legenden ohne «ggü. Vorjahr». */
+export const YOY_ARROW_HINT = "Pfeilwerte (↑ / ↓): prozentuale Veränderung ggü. Vorjahr.";
+
+/** Hinweis «Nach Jahr» inkl. Kennzahlen. */
+export const YOY_YEAR_HINT =
+  "Pfeilwerte (↑ / ↓) in Grafiken und Werte unter den Kennzahlen: Veränderung ggü. Vorjahr (Anteile in Prozentpunkten).";
+
+/** Prozentuale Änderung (Pfeil) für Tooltips und Anteilslisten — ohne «ggü. Vorjahr». */
 export function formatYoYPercent(current, previous) {
-  const delta = formatDeltaPercentWithArrow(current, previous);
-  if (!delta) return null;
-  return `${delta} ggü. Vorjahr`;
+  return formatDeltaPercentWithArrow(current, previous);
 }
 
 export function indexRowsById(rows, idKey = "id") {
@@ -63,7 +68,7 @@ export function formatYoYSharePp(current, previous) {
     maximumFractionDigits: 1,
     minimumFractionDigits: 0,
   });
-  return `${ppFmt.format(pp)} Pp. ggü. Vorjahr`;
+  return `${ppFmt.format(pp)} Pp.`;
 }
 
 export function metricLabel(metric) {

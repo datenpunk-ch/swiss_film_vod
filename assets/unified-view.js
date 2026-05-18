@@ -1,6 +1,6 @@
 import { chartLayout, pct, renderLegend, renderSvgAxes } from "./ml-page.js";
 
-const ORIGIN_COLORS = { ch: "#b5542a", eu: "#c4896e", ww: "#e5d4c8" };
+const ORIGIN_COLORS = { ch: "#b5542a", eu: "#e5d4c8", ww: "#0b0d10" };
 const GENRE_COLORS = { fic: "#0b0d10", doc: "#b5542a", ani: "#c4896e" };
 
 const intFmt = new Intl.NumberFormat("de-CH");

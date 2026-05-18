@@ -23,15 +23,25 @@ export default function LineTrendChart({
   xKey = "year",
   xLabel = "Jahr",
   chShareDenominatorKey,
+  chShareValueKey = "ch_share",
+  shareSeriesKey,
+  shareSeriesLabel = "Anteil Schweiz",
 }) {
-  const merged = data.map((row) => {
-    const out = { [xKey]: row[xKey] ?? row.year };
-    for (const s of series) out[s.key] = row[s.key] ?? null;
-    return out;
-  });
+  const merged = useMemo(
+    () =>
+      (data ?? []).map((row) => {
+        const out = { ...row };
+        out[xKey] = row[xKey] ?? row.year;
+        for (const s of series ?? []) out[s.key] = row[s.key] ?? null;
+        return out;
+      }),
+    [data, series, xKey]
+  );
 
   const tickFmt = yPercent ? (v) => pctFmt.format(v) : (v) => intFmt.format(v);
-  const nSeries = series?.length ?? 2;
+  const hasShareAxis =
+    shareSeriesKey && merged.some((row) => row[shareSeriesKey] != null && Number.isFinite(Number(row[shareSeriesKey])));
+  const nLegend = (series?.length ?? 0) + (hasShareAxis ? 1 : 0);
 
   const dataByYear = useMemo(() => {
     const map = new Map();
@@ -42,15 +52,18 @@ export default function LineTrendChart({
     return map;
   }, [merged, xKey]);
 
+  const margin = chartMarginWithLegendRight(nLegend);
+
   return (
     <ChartBox height={height}>
       <ResponsiveContainer width="100%" height={height}>
-        <LineChart data={merged} margin={chartMarginWithLegendRight(nSeries)}>
+        <LineChart data={merged} margin={margin}>
           <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.grid} />
           <XAxis dataKey={xKey} tick={AXIS.tick} tickMargin={AXIS.tickMargin}>
             <Label value={xLabel} position="bottom" offset={12} style={{ fontSize: 11, fill: PALETTE.muted }} />
           </XAxis>
           <YAxis
+            yAxisId="left"
             tick={AXIS.tick}
             tickMargin={AXIS.tickMargin}
             tickFormatter={tickFmt}
@@ -59,17 +72,35 @@ export default function LineTrendChart({
             axisLine={{ stroke: PALETTE.axis }}
             tickLine={{ stroke: PALETTE.axis }}
           />
+          {hasShareAxis ? (
+            <YAxis
+              yAxisId="share"
+              orientation="right"
+              tick={AXIS.tick}
+              tickMargin={6}
+              tickFormatter={(v) => pctFmt.format(v)}
+              width={48}
+              domain={[0, "auto"]}
+              axisLine={{ stroke: PALETTE.axis }}
+              tickLine={{ stroke: PALETTE.axis }}
+            />
+          ) : null}
           <Tooltip
             wrapperStyle={TOOLTIP_WRAPPER_STYLE}
             allowEscapeViewBox={{ x: true, y: true }}
             content={
-              <LineTrendTooltip chShareDenominatorKey={chShareDenominatorKey} dataByYear={dataByYear} />
+              <LineTrendTooltip
+                chShareDenominatorKey={chShareDenominatorKey}
+                chShareValueKey={chShareValueKey}
+                dataByYear={dataByYear}
+              />
             }
           />
-          <Legend {...legendRightProps(nSeries)} />
+          <Legend {...legendRightProps(nLegend)} />
           {series.map((s) => (
             <Line
               key={s.key}
+              yAxisId="left"
               type="monotone"
               dataKey={s.key}
               name={s.label}
@@ -81,6 +112,21 @@ export default function LineTrendChart({
               isAnimationActive={false}
             />
           ))}
+          {hasShareAxis ? (
+            <Line
+              yAxisId="share"
+              type="monotone"
+              dataKey={shareSeriesKey}
+              name={shareSeriesLabel}
+              stroke={PALETTE.muted}
+              strokeWidth={1.5}
+              strokeDasharray="5 4"
+              dot={{ r: 2 }}
+              activeDot={{ r: 4 }}
+              connectNulls
+              isAnimationActive={false}
+            />
+          ) : null}
         </LineChart>
       </ResponsiveContainer>
     </ChartBox>

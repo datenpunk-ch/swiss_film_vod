@@ -13,7 +13,7 @@ import { AXIS, PALETTE, SERIES_PAIR, TOOLTIP_WRAPPER_STYLE } from "../constants.
 import { barFillForValue, enrichWeeklyProfile } from "../utils/weeklyChart.js";
 import ChartBox from "./ChartBox.jsx";
 import ChartResponsive from "./ChartResponsive.jsx";
-import ChartTooltip from "./ChartTooltip.jsx";
+import WeeklySeasonTooltip from "./WeeklySeasonTooltip.jsx";
 
 const MARGIN = { top: 16, right: 24, left: 56, bottom: 56 };
 
@@ -41,6 +41,7 @@ export default function WeeklyAdmissionsChart({
   profile,
   years,
   height = 280,
+  barName = "Ø Besuche",
   barColorLow = PALETTE.sandPale,
   barColorHigh = SERIES_PAIR.first,
 }) {
@@ -74,7 +75,7 @@ export default function WeeklyAdmissionsChart({
       <ChartBox height={height}>
         <ChartResponsive height={height}>
           <BarChart data={data} barCategoryGap="8%" margin={MARGIN}>
-            <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.grid} />
+            <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.grid} vertical={false} />
             <XAxis
               dataKey="week"
               tick={<WeeklyXAxisTick dataByWeek={dataByWeek} />}
@@ -82,7 +83,12 @@ export default function WeeklyAdmissionsChart({
               interval={0}
               height={48}
             >
-              <Label value="Kinowoche · Monat (ca.)" position="bottom" offset={4} style={{ fontSize: 11, fill: "#55606a" }} />
+              <Label
+                value="Kinowoche · Monat (ca.)"
+                position="bottom"
+                offset={4}
+                style={{ fontSize: 11, fill: "#55606a" }}
+              />
             </XAxis>
             <YAxis
               tick={AXIS.tick}
@@ -93,16 +99,12 @@ export default function WeeklyAdmissionsChart({
               axisLine={{ stroke: PALETTE.axis }}
               tickLine={{ stroke: PALETTE.axis }}
             />
-            <Tooltip
-              wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-              allowEscapeViewBox={{ x: true, y: true }}
-              content={<ChartTooltip />}
-            />
+            <Tooltip wrapperStyle={TOOLTIP_WRAPPER_STYLE} content={<WeeklySeasonTooltip />} />
             <Bar
               dataKey="admissions"
-              name="Ø Besuche"
+              name={barName}
               isAnimationActive={false}
-              maxBarSize={28}
+              maxBarSize={32}
               radius={[2, 2, 0, 0]}
             >
               {data.map((entry) => (

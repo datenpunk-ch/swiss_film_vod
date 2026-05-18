@@ -25,7 +25,8 @@ export const METRIC_COLORS = {
   intensity: PALETTE.slate,
 };
 
-export const ORIGIN_COLORS = { ch: SERIES_PAIR.first, eu: SERIES_PAIR.second, ww: PALETTE.sandLight };
+/** CH rostrot, Europa beige, übrige Welt schwarz. */
+export const ORIGIN_COLORS = { ch: PALETTE.accent, eu: PALETTE.sandLight, ww: PALETTE.ink };
 export const GENRE_COLORS = { fic: SERIES_PAIR.first, doc: SERIES_PAIR.second, ani: PALETTE.sand };
 
 export const CHART_MARGIN = { top: 16, right: 20, left: 12, bottom: 12 };

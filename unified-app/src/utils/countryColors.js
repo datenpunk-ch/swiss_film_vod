@@ -1,6 +1,6 @@
 import { PALETTE } from "../constants.js";
 
-/** Abwechslungsreiche Farben pro Land (Top-Länder), abgeleitet vom Dashboard-Palette. */
+/** Eine Farbe pro Land (Top-Länder + «Andere»). */
 const COUNTRY_PALETTE = [
   PALETTE.ink,
   PALETTE.accent,
@@ -12,15 +12,30 @@ const COUNTRY_PALETTE = [
   "#4a6741",
   "#8b6914",
   "#3d6b8e",
+  "#9a6b4c",
+  "#2d6a6a",
 ];
 
 export function buildCountryColorMap(rows) {
   const map = {};
-  rows.forEach((r, i) => {
+  const seen = new Set();
+  let index = 0;
+  for (const r of rows ?? []) {
     const key = r.id ?? r.label;
-    if (!key) return;
-    map[key] = COUNTRY_PALETTE[i % COUNTRY_PALETTE.length];
-  });
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    map[key] = COUNTRY_PALETTE[index % COUNTRY_PALETTE.length];
+    index += 1;
+  }
+
+  if (map.Schweiz != null && map.Deutschland != null) {
+    const de = map.Deutschland;
+    map.Deutschland = map.Schweiz;
+    map.Schweiz = de;
+  } else if (map.Schweiz != null) {
+    map.Schweiz = PALETTE.accent;
+  }
+
   return map;
 }
 

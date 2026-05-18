@@ -15,7 +15,7 @@ import {
   mergePxGenres,
   mergePxOrigins,
 } from "./utils/merge.js";
-import { indexRowsById } from "./utils/format.js";
+import { indexRowsById, YOY_ARROW_HINT, YOY_YEAR_HINT } from "./utils/format.js";
 
 const isEmbed = document.documentElement.classList.contains("is-embed");
 
@@ -207,6 +207,7 @@ export default function App() {
 
       <div className="dashboard-zone dashboard-zone--series">
         <h2 className="dashboard-zone-title">Über die Jahre</h2>
+        <p className="panel-intro panel-intro-meta">{YOY_ARROW_HINT}</p>
 
         {supplyTrendData.length > 0 && (
           <section className="panel panel-primary">
@@ -256,16 +257,18 @@ export default function App() {
                 <WeeklyAdmissionsChart
                   profile={seasonProfile}
                   years={seasonYears}
-                  height={300}
-                  barColorHigh={SERIES_PAIR.second}
+                  height={280}
+                  barName="Gesamtbesuche"
+                  barColorHigh={SERIES_PAIR.first}
                 />
               </ChartFrame>
               {seasonProfileCh.length > 0 && (
-                <ChartFrame title="Nur Schweizer Filme">
+                <ChartFrame title="Schweizer Filme">
                   <WeeklyAdmissionsChart
                     profile={seasonProfileCh}
                     years={seasonYears}
-                    height={300}
+                    height={280}
+                    barName="Besuche CH-Filme"
                     barColorHigh={SERIES_PAIR.second}
                   />
                 </ChartFrame>
@@ -309,6 +312,7 @@ export default function App() {
 
       <div className="dashboard-zone dashboard-zone--year">
         <h2 className="dashboard-zone-title">Nach Jahr</h2>
+        <p className="panel-intro panel-intro-meta">{YOY_YEAR_HINT}</p>
 
         <div className="controls controls-year-only">
           <div className="control-group">
