@@ -4,6 +4,18 @@ export const pctFmt = new Intl.NumberFormat("de-CH", {
   maximumFractionDigits: 1,
 });
 
+const ppAxisFmt = new Intl.NumberFormat("de-CH", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+});
+
+/** Achsen/Ticks für Prozentpunkte (Wert als Anteil, z. B. 0.015 → «1,5 Pp.»). */
+export function formatPpAxis(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "—";
+  return `${ppAxisFmt.format(n * 100)} Pp.`;
+}
+
 const deltaPctFmt = new Intl.NumberFormat("de-CH", {
   style: "percent",
   signDisplay: "exceptZero",

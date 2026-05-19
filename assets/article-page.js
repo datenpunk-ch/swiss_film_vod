@@ -53,12 +53,27 @@
     return `${n} ${PP_SUFFIX}`;
   }
 
-  function chFlagImg(size = 16) {
+  const COUNTRY_ID_TO_ISO = {
+    ch: "ch",
+    us: "us",
+    fr: "fr",
+    de: "de",
+    uk: "gb",
+    it: "it",
+  };
+
+  function countryFlagImg(countryId, size = 16) {
+    const iso = COUNTRY_ID_TO_ISO[String(countryId ?? "").toLowerCase()];
+    if (!iso) return "";
     const h = Math.round(size * 0.72);
     return (
-      `<img class="country-flag kpi-card-flag" src="https://flagcdn.com/w40/ch.png" ` +
+      `<img class="country-flag kpi-card-flag" src="https://flagcdn.com/w40/${iso}.png" ` +
       `width="${size}" height="${h}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
     );
+  }
+
+  function chFlagImg(size = 16) {
+    return countryFlagImg("ch", size);
   }
 
   function pctDirection(pct) {
@@ -88,13 +103,28 @@
     t = t.replace(/P\(Lücke\s*≤\s*0\)/gi, "Wahrscheinlichkeit: Lücke ausgeglichen");
     t = t.replace(/P\(T\*\s*≤\s*(\d+)\)/gi, "Chance, dass Kreuzung bis $1 eintritt");
     t = t.replace(/Median T\*\s*\(Kreuzung\)/gi, "Median Kreuzungsjahr (Lücke = 0)");
-    t = t.replace(/P\(β\s*<\s*0\s*\|\s*Daten\)/gi, "Wahrscheinlichkeit: Trend sinkt");
+    t = t.replace(/P\(β\s*<\s*0\s*\|\s*Daten\)/gi, "Wahrscheinlichkeit");
+    t = t.replace(/P\(Trend\s+steigt\)\s*=\s*/gi, "Wahrscheinlichkeit: ");
+    t = t.replace(/P\(Trend\s+sinkt\)\s*=\s*/gi, "Wahrscheinlichkeit: ");
+    t = t.replace(/\(logit\)/gi, "");
+    t = t.replace(/logit-Skala/gi, "Anteils-Skala");
     t = t.replace(/P\(([^)]+)\)/g, "Wahrscheinlichkeit ($1)");
     return t;
   }
 
   function isYoYDelta(text) {
     return /^[↑↓+-]/.test(String(text ?? "").trim());
+  }
+
+  function formatKpiValueHtml(valueText, { isCountryTrend = false } = {}) {
+    const text = String(valueText ?? "");
+    if (isCountryTrend && /\/\s*Jahr/i.test(text)) {
+      return MC.escapeHtml(text).replace(
+        /(\s+Pp\.)\s*(\/\s*Jahr)/i,
+        '$1<span class="kpi-trend-unit">$2</span>'
+      );
+    }
+    return MC.escapeHtml(text);
   }
 
   function renderKpiCard(card, index) {
@@ -112,13 +142,29 @@
       : "";
     const mod = card.modifier ? ` ${card.modifier}` : "";
     const wideMod = card.wide || /Pp\.|Prozentpunkt/i.test(valueText) ? " stat-card--wide is-pp-metric" : "";
-    const chMod = card.showChFlag ? " stat-card--ch" : "";
-    const value = card.showChFlag
-      ? `<span class="kpi-value-with-flag">${chFlagImg(16)}<span>${MC.escapeHtml(valueText)}</span></span>`
-      : MC.escapeHtml(valueText);
-    const label = `<span class="k kpi-card-label"><span>${MC.escapeHtml(humanizeMetricText(card.label))}</span></span>`;
+    const countryId = card.countryId || (card.showChFlag ? "ch" : null);
+    const labelText = humanizeMetricText(card.label);
+    const isCountryTrend = Boolean(countryId && /^Trend$/i.test(String(card.label ?? "").trim()));
+    const flagInLabel = card.flagInLabel ?? (isCountryTrend || false);
+    const flagInValue = Boolean(countryId && card.showChFlag && !flagInLabel);
+    const chMod =
+      (card.rowVariant === "ch" || card.showChFlag || (countryId === "ch" && !isCountryTrend)) &&
+      !isCountryTrend
+        ? " stat-card--ch"
+        : "";
+    const countryMod = isCountryTrend ? " stat-card--country" : "";
+    const flagHtml = countryId ? countryFlagImg(countryId, 16) : "";
+    const valueInner = formatKpiValueHtml(valueText, { isCountryTrend });
+    const value =
+      flagInValue && flagHtml
+        ? `<span class="kpi-value-with-flag">${flagHtml}<span>${valueInner}</span></span>`
+        : valueInner;
+    const label =
+      flagInLabel && flagHtml
+        ? `<span class="k kpi-card-label kpi-card-label--with-flag">${flagHtml}<span>${MC.escapeHtml(labelText)}</span></span>`
+        : `<span class="k kpi-card-label"><span>${MC.escapeHtml(labelText)}</span></span>`;
     return (
-      `<div class="stat-card flip${mod}${chMod}${wideMod}" role="listitem" style="animation-delay:${delay}ms">` +
+      `<div class="stat-card flip${mod}${chMod}${countryMod}${wideMod}" role="listitem" style="animation-delay:${delay}ms">` +
       `<div class="v">${value}</div>` +
       pct +
       label +
@@ -126,14 +172,30 @@
     );
   }
 
+  function kpiGroupCardCount(group) {
+    const rows = group.rows ?? [{ cards: group.cards ?? [] }];
+    return rows.reduce((n, row) => n + (row.cards?.length ?? 0), 0);
+  }
+
   function renderKpiGroup(group, baseIndex) {
     let i = baseIndex;
-    const cards = group.cards.map((c) => renderKpiCard(c, i++)).join("");
-    return (
-      `<div class="article-kpi-group">` +
-      `<div class="article-kpi-group-label">${MC.escapeHtml(group.label)}</div>` +
-      `<div class="stats-cards" role="list">${cards}</div></div>`
-    );
+    const label = group.label
+      ? `<div class="article-kpi-group-label">${MC.escapeHtml(group.label)}</div>`
+      : "";
+    const rows = group.rows ?? [{ cards: group.cards ?? [] }];
+    const colCount = Math.max(0, ...rows.map((r) => r.cards?.length ?? 0));
+    const pairsHtml = Array.from({ length: colCount }, (_, col) => {
+      const pairCards = rows
+        .map((row) => {
+          const card = row.cards?.[col];
+          if (!card) return "";
+          return renderKpiCard({ ...card, rowVariant: row.variant }, i++);
+        })
+        .filter(Boolean)
+        .join("");
+      return `<div class="article-kpi-pair" role="group">${pairCards}</div>`;
+    }).join("");
+    return `<div class="article-kpi-group">${label}<div class="article-kpi-grid" role="list">${pairsHtml}</div></div>`;
   }
 
   function renderKpiStrip(groups) {
@@ -142,7 +204,7 @@
     const inner = groups
       .map((g) => {
         const block = renderKpiGroup(g, idx);
-        idx += g.cards.length;
+        idx += kpiGroupCardCount(g);
         return block;
       })
       .join("");
@@ -164,35 +226,70 @@
     const ch = px.switzerland ?? {};
     const pm = ppx?.market;
     const pch = ppx?.switzerland ?? {};
+    const marketIntensity = m.intensity ?? 0;
+    const chIntensity = ch.intensity ?? 0;
+    const chIntensityYoY = formatYoYCount(chIntensity, pch?.intensity);
+    let chIntensityPct = chIntensityYoY;
+    if (marketIntensity > 0 && chIntensity) {
+      const ratio = chIntensity / marketIntensity;
+      const vs =
+        Math.abs(ratio - 1) < 1e-12
+          ? pctAbsFmt.format(0)
+          : `${ratio > 1 ? "↑" : "↓"} ${pctAbsFmt.format(Math.abs(ratio - 1))} ggü. Markt-Ø`;
+      chIntensityPct = [chIntensityYoY, vs].filter(Boolean).join(" · ");
+    }
     return [
       {
         label: `Kernzahlen · ${year} (PX)`,
-        cards: [
+        rows: [
           {
-            label: "Kinobesuche",
-            value: intFmt.format(m.demand ?? 0),
-            pct: formatYoYCount(m.demand, pm?.demand),
-            yoyContext: true,
+            variant: "market",
+            cards: [
+              {
+                label: "Kinobesuche",
+                value: intFmt.format(m.demand ?? 0),
+                pct: formatYoYCount(m.demand, pm?.demand),
+                yoyContext: true,
+              },
+              {
+                label: "Filme im Programm",
+                value: intFmt.format(m.supply ?? 0),
+                pct: formatYoYCount(m.supply, pm?.supply),
+                yoyContext: true,
+              },
+              {
+                label: "Interesse (Ø Besuche/Film)",
+                value: marketIntensity ? intFmt.format(Math.round(marketIntensity)) : "—",
+                pct: formatYoYCount(marketIntensity, pm?.intensity),
+                yoyContext: true,
+              },
+            ],
           },
           {
-            label: "Anteil Besuche",
-            showChFlag: true,
-            value: pctFmt.format(ch.share_demand ?? 0),
-            pct: formatYoYSharePp(ch.share_demand, pch?.share_demand),
-            yoyContext: true,
-          },
-          {
-            label: "Filme im Programm",
-            value: intFmt.format(m.supply ?? 0),
-            pct: formatYoYCount(m.supply, pm?.supply),
-            yoyContext: true,
-          },
-          {
-            label: "Anteil Filme",
-            showChFlag: true,
-            value: pctFmt.format(ch.share_supply ?? 0),
-            pct: formatYoYSharePp(ch.share_supply, pch?.share_supply),
-            yoyContext: true,
+            variant: "ch",
+            cards: [
+              {
+                label: "Anteil Besuche",
+                showChFlag: true,
+                value: pctFmt.format(ch.share_demand ?? 0),
+                pct: formatYoYSharePp(ch.share_demand, pch?.share_demand),
+                yoyContext: true,
+              },
+              {
+                label: "Anteil Filme",
+                showChFlag: true,
+                value: pctFmt.format(ch.share_supply ?? 0),
+                pct: formatYoYSharePp(ch.share_supply, pch?.share_supply),
+                yoyContext: true,
+              },
+              {
+                label: "Interesse (Ø Besuche/Film)",
+                showChFlag: true,
+                value: chIntensity ? intFmt.format(Math.round(chIntensity)) : "—",
+                pct: chIntensityPct || null,
+                yoyContext: Boolean(chIntensityYoY),
+              },
+            ],
           },
         ],
       },
@@ -206,7 +303,9 @@
         m?.label &&
         m.label !== "Hinweis" &&
         m.ok !== false &&
-        !/^(Lücke|Programm-Lücke)\s/i.test(String(m.label))
+        !/^(Lücke|Programm-Lücke)\s/i.test(String(m.label)) &&
+        !/CH-Besuchsanteil.*letzte/i.test(String(m.label)) &&
+        !/\(logit\)/i.test(String(m.value ?? ""))
     );
     if (!items.length) return "";
 
@@ -219,13 +318,15 @@
           label,
           value,
           pct: note,
-          modifier: m.ok === true ? " is-ok" : "",
-          wide: /Lücke|Prozentpunkt|Pp\./i.test(`${label}${value}${note ?? ""}`),
+          countryId: m.country_id,
+          modifier: m.ok === true && !m.country_id ? " is-ok" : "",
+          wide:
+            !m.country_id && /Lücke|Prozentpunkt|Pp\./i.test(`${label}${value}${note ?? ""}`),
         },
         i
       );
     });
-    return `<div class="article-kpi-cards reveal"><div class="stats-cards" role="list">${cards.join("")}</div></div>`;
+    return `<div class="article-kpi-cards article-kpi-cards--countries reveal"><div class="stats-cards" role="list">${cards.join("")}</div></div>`;
   }
 
   function renderFigure(f) {

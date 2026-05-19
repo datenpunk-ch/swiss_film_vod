@@ -1,3 +1,4 @@
+import BayesModelChart from "./BayesModelChart.jsx";
 import ChartFrame from "./ChartFrame.jsx";
 import CountryTrendChart from "./CountryTrendChart.jsx";
 import LineTrendChart from "./LineTrendChart.jsx";
@@ -5,6 +6,7 @@ import WeeklyAdmissionsChart from "./WeeklyAdmissionsChart.jsx";
 import YearCinemaPanel from "./YearCinemaPanel.jsx";
 import YearShareBarChart from "./YearShareBarChart.jsx";
 import { GENRE_COLORS, SERIES_PAIR } from "../constants.js";
+import { BAYES_PANEL_ANALYSIS, isBayesEmbedPanel } from "../utils/bayesPanelMap.js";
 
 export default function EmbedPanelContent({
   panel,
@@ -29,10 +31,51 @@ export default function EmbedPanelContent({
   genreTrendDemand,
   chGenreTrendDemand,
   countryTrendDemand,
+  chShareTrendData,
+  gapTrendData,
   dimmedYears,
+  bayesCharts,
+  bayesChartsLoading,
+  bayesChartsError,
 }) {
+  if (isBayesEmbedPanel(panel)) {
+    const analysisId = BAYES_PANEL_ANALYSIS[panel];
+    const chart = bayesCharts?.[analysisId];
+    const titles = {
+      forecast: "CH-Besuchsanteil: Posterior & Prognose (95 %-HDI)",
+      countries: "Besuchsanteil Kernländer: Posterior (95 %-HDI)",
+      chgenre: "CH-Anteil je Genre: Posterior (95 %-HDI)",
+      gap: "Programm-Lücke: Posterior & Prognose (95 %-HDI)",
+    };
+    if (bayesChartsLoading) {
+      return (
+        <section className="panel panel-primary panel-embed">
+          <p className="panel-intro">Modell-Daten werden geladen …</p>
+        </section>
+      );
+    }
+    if (!chart) {
+      return (
+        <section className="panel panel-primary panel-embed">
+          <p className="panel-intro panel-error">
+            Modell-Grafik nicht verfügbar
+            {bayesChartsError ? ` (${bayesChartsError})` : ""}. Bitte{" "}
+            <code>pixi run analyze --force</code> ausführen.
+          </p>
+        </section>
+      );
+    }
+    return (
+      <section className="panel panel-primary panel-embed">
+        <ChartFrame title={titles[panel]}>
+          <BayesModelChart chart={chart} height={280} useFlags={panel === "countries"} />
+        </ChartFrame>
+      </section>
+    );
+  }
+
   if (panel === "year") {
-    if (!years?.length || !pxRow) {
+    if (!years?.length) {
       return (
         <div className="wrap wrap-embed-panel wrap-embed-year">
           <p className="page-intro-lead">Daten werden geladen …</p>
@@ -124,22 +167,6 @@ export default function EmbedPanelContent({
             </ChartFrame>
           )}
         </div>
-      </section>
-    );
-  }
-
-  if (panel === "countries" && countryTrendDemand?.data?.length > 0) {
-    return (
-      <section className="panel panel-primary panel-embed">
-        <ChartFrame title="Besuchsanteil Top-Länder (PX)">
-          <CountryTrendChart
-            data={countryTrendDemand.data}
-            series={countryTrendDemand.series}
-            colors={countryTrendDemand.colors}
-            dimmedYears={dimmedYears}
-            height={280}
-          />
-        </ChartFrame>
       </section>
     );
   }

@@ -401,7 +401,46 @@ a:hover {
 }
 
 .page-article .article-kpi-strip {
-  margin: 1.75rem 0 0;
+  margin: 1.75rem 0 2.75rem;
+}
+
+/* 2 Zeilen × 3 Spalten: je Spalte ein Paar (Markt oben, CH unten) */
+.page-article .article-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.page-article .article-kpi-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.page-article .article-kpi-pair .stat-card {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 8px 10px;
+  grid-template-rows: auto auto auto;
+}
+
+.page-article .article-kpi-pair .stat-card--ch {
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-rule));
+}
+
+@media (max-width: 720px) {
+  .page-article .article-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-article .article-kpi-cards--countries .stats-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .page-article .article-kpi-group + .article-kpi-group {
@@ -419,6 +458,48 @@ a:hover {
 
 .page-article .article-kpi-cards {
   margin: 1.25rem 0 1.75rem;
+}
+
+.page-article .article-kpi-cards--countries .stats-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  flex-wrap: nowrap;
+  perspective: none;
+}
+
+.page-article .article-kpi-cards--countries .stat-card {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  height: 100%;
+  padding: 8px 10px;
+  grid-template-rows: auto auto auto;
+}
+
+.page-article .article-kpi-cards--countries .stat-card .v {
+  font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.page-article .stat-card .kpi-trend-unit {
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.page-article .stat-card--country {
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-rule));
+}
+
+.page-article .kpi-card-label--with-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
 }
 
 .page-article .sources-list {
@@ -552,14 +633,21 @@ a:hover {
   flex-shrink: 0;
 }
 
-.page-article .stat-card--ch .v,
-.page-article .stat-card--ch .kpi-value-with-flag,
-.page-article .stat-card--ch .kpi-value-with-flag > span,
 .page-unified .stat-card--ch .v,
 .page-unified .stat-card--ch .kpi-value-with-flag,
 .page-unified .stat-card--ch .kpi-value-with-flag > span {
   font: inherit;
   font-weight: 700;
+}
+
+/* Artikel-KPI-Raster: Markt- und CH-Zeile gleiche Schriftgrössen */
+.page-article .article-kpi-pair .stat-card .v,
+.page-article .article-kpi-pair .stat-card .kpi-value-with-flag,
+.page-article .article-kpi-pair .stat-card .kpi-value-with-flag > span {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.05;
 }
 
 .page-article .stat-card.stat-card--wide,
@@ -723,6 +811,14 @@ html.is-embed .page-unified .stat-card {
   height: 332px;
 }
 
+.page-article .article-plot .embed-frame--forecast,
+.page-article .article-plot .embed-frame--countries,
+.page-article .article-plot .embed-frame--chgenre,
+.page-article .article-plot .embed-frame--gap {
+  height: 408px;
+  overflow: visible;
+}
+
 .page-article .article-plot .embed-frame--season,
 .page-article .info-box-figure .embed-frame--season {
   height: 588px;
@@ -855,6 +951,24 @@ html.is-embed.is-embed-panel body {
   overflow: hidden;
 }
 
+html.is-embed.is-embed-panel[data-embed-panel="forecast"] body,
+html.is-embed.is-embed-panel[data-embed-panel="countries"] body,
+html.is-embed.is-embed-panel[data-embed-panel="chgenre"] body,
+html.is-embed.is-embed-panel[data-embed-panel="gap"] body {
+  overflow: visible;
+}
+
+html.is-embed.is-embed-panel[data-embed-panel="forecast"] .wrap-embed-panel,
+html.is-embed.is-embed-panel[data-embed-panel="countries"] .wrap-embed-panel,
+html.is-embed.is-embed-panel[data-embed-panel="chgenre"] .wrap-embed-panel,
+html.is-embed.is-embed-panel[data-embed-panel="gap"] .wrap-embed-panel,
+html.is-embed.is-embed-panel[data-embed-panel="forecast"] .panel-embed,
+html.is-embed.is-embed-panel[data-embed-panel="countries"] .panel-embed,
+html.is-embed.is-embed-panel[data-embed-panel="chgenre"] .panel-embed,
+html.is-embed.is-embed-panel[data-embed-panel="gap"] .panel-embed {
+  overflow: visible;
+}
+
 html.is-embed.is-embed-panel[data-embed-panel="year"],
 html.is-embed.is-embed-panel[data-embed-panel="year"] body {
   overflow: auto;
@@ -874,6 +988,17 @@ html.is-embed.is-embed-panel[data-embed-panel="year"] .dashboard-zone--year.is-e
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
+}
+
+html.is-embed.is-embed-panel[data-embed-panel="forecast"] .line-trend-chart,
+html.is-embed.is-embed-panel[data-embed-panel="countries"] .country-trend-chart,
+html.is-embed.is-embed-panel[data-embed-panel="chgenre"] .country-trend-chart,
+html.is-embed.is-embed-panel[data-embed-panel="gap"] .line-trend-chart {
+  min-height: 280px;
+}
+
+html.is-embed.is-embed-panel[data-embed-panel="year"] #unified-root {
+  min-height: 620px;
 }
 
 .page-article .article-plot .chart-caption {
@@ -1781,6 +1906,22 @@ html.is-embed .page-explore .site-footer {
   align-items: stretch;
 }
 
+.page-unified .stat-grid--kpi-split {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.page-unified .stat-grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.page-unified .stat-grid-row--secondary {
+  padding-top: 2px;
+}
+
 .page-unified .stat-card {
   display: grid;
   justify-items: center;
@@ -1881,6 +2022,64 @@ html.is-embed .page-explore .site-footer {
 .page-unified .chart-tooltip-list strong {
   margin-left: auto;
   font-variant-numeric: tabular-nums;
+}
+
+.page-unified .chart-tooltip--bayes {
+  min-width: 10.5rem;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-forecast {
+  font-weight: 400;
+  color: var(--color-muted, #55606a);
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-list--series {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-series {
+  margin-top: 0.4rem;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-series:first-child {
+  margin-top: 0;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-series-head {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-list--metrics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-row {
+  display: grid;
+  grid-template-columns: minmax(5.25rem, 1fr) minmax(4.75rem, auto);
+  align-items: baseline;
+  gap: 0.65rem;
+  margin-top: 0.18rem;
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-label {
+  color: var(--color-muted, #55606a);
+}
+
+.page-unified .chart-tooltip--bayes .chart-tooltip-value {
+  margin-left: 0;
+  text-align: right;
+  min-width: 4.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
 }
 
 .page-unified .vod-origin-genre-block {

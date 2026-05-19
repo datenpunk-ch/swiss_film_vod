@@ -24,6 +24,7 @@ class CinemaContext:
     px_yearly: pd.DataFrame
     px_genre_yearly: pd.DataFrame
     px_genre_mix_yearly: pd.DataFrame
+    px_country_yearly: pd.DataFrame
     p4_weekly: pd.DataFrame
     px_series: dict
     season_profile: pd.DataFrame
@@ -82,6 +83,46 @@ def _genre_mix_yearly_rows(unified: dict) -> list[dict]:
     return rows
 
 
+def _country_yearly_rows(unified: dict) -> list[dict]:
+    """Kernländer: Besuche/Filme und Markt je Jahr (ohne «Übrige»)."""
+    market_by_year = {
+        y["year"]: y["market"]["demand"]
+        for y in unified.get("primary", {}).get("px", {}).get("yearly", [])
+    }
+    market_films_by_year = {
+        y["year"]: y["market"]["supply"]
+        for y in unified.get("primary", {}).get("px", {}).get("yearly", [])
+    }
+    rows = []
+    for cs in unified.get("primary", {}).get("px", {}).get("country_series") or []:
+        cid = cs.get("id")
+        if cid == "other":
+            continue
+        demand_by_year = {p["year"]: p.get("value") for p in cs.get("demand") or []}
+        supply_by_year = {p["year"]: p.get("value") for p in cs.get("supply") or []}
+        share_demand_by_year = {p["year"]: p.get("value") for p in cs.get("demand_share") or []}
+        for year, n in market_by_year.items():
+            adm = demand_by_year.get(year)
+            if adm is None:
+                continue
+            nf = market_films_by_year.get(year) or 0
+            sup = supply_by_year.get(year) or 0
+            rows.append(
+                {
+                    "year": year,
+                    "country": cid,
+                    "country_label": cs.get("label", cid),
+                    "admissions": float(adm),
+                    "films": float(sup),
+                    "market_admissions": float(n),
+                    "market_films": float(nf),
+                    "share_demand": float(share_demand_by_year.get(year) or (adm / n if n else 0)),
+                    "is_covid": year in COVID_YEARS,
+                }
+            )
+    return rows
+
+
 def _genre_yearly_rows(unified: dict) -> list[dict]:
     rows = []
     for y in unified["primary"]["px"]["yearly"]:
@@ -125,6 +166,7 @@ def build_context(root: Path | None = None) -> CinemaContext:
     px_yearly = pd.DataFrame(_yearly_px_rows(unified))
     px_genre_yearly = pd.DataFrame(_genre_yearly_rows(unified))
     px_genre_mix_yearly = pd.DataFrame(_genre_mix_yearly_rows(unified))
+    px_country_yearly = pd.DataFrame(_country_yearly_rows(unified))
 
     season = unified["supplementary"]["cinema_p4"]["season"]
     season_profile = pd.DataFrame(season["profile"])
@@ -146,6 +188,7 @@ def build_context(root: Path | None = None) -> CinemaContext:
         px_yearly=px_yearly,
         px_genre_yearly=px_genre_yearly,
         px_genre_mix_yearly=px_genre_mix_yearly,
+        px_country_yearly=px_country_yearly,
         p4_weekly=p4_weekly,
         px_series=series,
         season_profile=season_profile,

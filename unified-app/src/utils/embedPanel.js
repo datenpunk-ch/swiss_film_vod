@@ -1,6 +1,16 @@
-const PANELS = new Set(["supply", "demand", "season", "genre", "countries", "year"]);
+const PANELS = new Set([
+  "supply",
+  "demand",
+  "season",
+  "genre",
+  "countries",
+  "forecast",
+  "chgenre",
+  "gap",
+  "year",
+]);
 
-/** Einzelgrafik für Artikel-Embed (?embed=1&panel=supply|demand|season|genre). */
+/** Einzelgrafik für Artikel-Embed (?embed=1&panel=…). */
 export function getEmbedPanel() {
   try {
     const raw = new URLSearchParams(window.location.search).get("panel");

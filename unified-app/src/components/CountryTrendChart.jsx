@@ -9,6 +9,7 @@ export default function CountryTrendChart({
   colors = {},
   height = 300,
   dimmedYears,
+  useFlags = true,
 }) {
   const legendRows = (series ?? []).map((s) => ({ id: s.key, label: s.label }));
   const legendColors = Object.fromEntries(
@@ -33,7 +34,7 @@ export default function CountryTrendChart({
             dimmedYears={dimmedYears}
           />
         </div>
-        <CategoryLegend rows={legendRows} colors={legendColors} useFlags />
+        <CategoryLegend rows={legendRows} colors={legendColors} useFlags={useFlags} />
       </div>
     </figure>
   );

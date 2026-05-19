@@ -23,6 +23,16 @@ CHANGEPOINT_MCMC_KWARGS = {**MCMC_KWARGS, "tune": 1000, "draws": 1000}
 GENRE_IDS = ("fic", "doc", "ani")
 GENRE_LABELS = {"fic": "Fiktion", "doc": "Dokumentar", "ani": "Animation"}
 
+COUNTRY_IDS = ("ch", "us", "fr", "de", "uk", "it")
+COUNTRY_LABELS = {
+    "ch": "Schweiz",
+    "us": "Vereinigte Staaten",
+    "fr": "Frankreich",
+    "de": "Deutschland",
+    "uk": "Vereinigtes Königreich",
+    "it": "Italien",
+}
+
 
 def mcmc_settings_for(analysis_id: str) -> dict:
     if analysis_id == "ch_changepoint_bayes":
@@ -64,6 +74,7 @@ def analysis_result(
     diagnostics: list[dict] | None = None,
     mcmc: dict | None = None,
     metrics: list[dict] | None = None,
+    charts: dict | None = None,
 ) -> dict:
     """Schlankes Ergebnis für analysis_report.json (Fliesstext in content/analysis.md)."""
     out: dict = {"id": id, "figures": figures, "tables": tables or [], "diagnostics": diagnostics or []}
@@ -71,6 +82,8 @@ def analysis_result(
         out["mcmc"] = mcmc
     if metrics is not None:
         out["metrics"] = metrics
+    if charts is not None:
+        out["charts"] = charts
     return out
 
 

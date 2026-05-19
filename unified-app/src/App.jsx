@@ -5,16 +5,13 @@ import LineTrendChart from "./components/LineTrendChart.jsx";
 import YearShareBarChart from "./components/YearShareBarChart.jsx";
 import MetricChartGroup from "./components/MetricChartGroup.jsx";
 import WeeklyAdmissionsChart from "./components/WeeklyAdmissionsChart.jsx";
-import { GENRE_COLORS, ORIGIN_COLORS, SERIES_PAIR } from "./constants.js";
+import { GENRE_COLORS, ORIGIN_COLORS, PALETTE, SERIES_PAIR } from "./constants.js";
+import { useBayesCharts } from "./hooks/useBayesCharts.js";
 import { useUnifiedData } from "./hooks/useUnifiedData.js";
+import { isBayesEmbedPanel } from "./utils/bayesPanelMap.js";
 import { buildCountryColorMap } from "./utils/countryColors.js";
 import { collapseTopCountries } from "./utils/collapseCountries.js";
-import {
-  mergeChannelOrigins,
-  mergeGenreRows,
-  mergePxGenres,
-  mergePxOrigins,
-} from "./utils/merge.js";
+import { mergeChannelOrigins, mergePxGenres, mergePxOrigins } from "./utils/merge.js";
 import EmbedPanelContent from "./components/EmbedPanelContent.jsx";
 import YearCinemaPanel from "./components/YearCinemaPanel.jsx";
 import { indexRowsById, SERIES_ZONE_INTRO, YOY_ARROW_HINT } from "./utils/format.js";
@@ -38,8 +35,9 @@ function joinSeries(keys) {
 
 export default function App() {
   const { data, loading, error } = useUnifiedData();
+  const { charts: bayesCharts, chartsLoading: bayesChartsLoading, chartsError: bayesChartsError } =
+    useBayesCharts();
   const px = data?.primary?.px;
-  const vod = data?.supplementary?.vod;
   const p4 = data?.supplementary?.cinema_p4;
   const years = px?.years ?? data?.years ?? [];
   const dimmedYears = useMemo(() => resolveDimmedYears(px, years), [px, years]);
@@ -133,7 +131,7 @@ export default function App() {
     const colors = buildCountryColorMap(keys.map((k) => ({ id: k.key, label: k.label })));
     const series = keys.map((k) => ({
       ...k,
-      color: k.key === "ch" ? SERIES_PAIR.second : (colors[k.key] ?? SERIES_PAIR.first),
+      color: colors[k.key] ?? colors[normalizeCountryKey?.(k.key, k.label)] ?? PALETTE.muted,
     }));
     return {
       data: joinSeries(series),
@@ -141,6 +139,21 @@ export default function App() {
       colors,
     };
   }, [px]);
+
+  const chShareTrendData = useMemo(() => {
+    const pts = px?.series?.ch_demand_share ?? [];
+    return pts.map((p) => ({ year: p.year, ch: p.value }));
+  }, [px]);
+
+  const gapTrendData = useMemo(() => {
+    return (data?.by_year ?? [])
+      .map((y) => ({
+        year: y.year,
+        gap: (y.px?.switzerland?.share_supply ?? 0) - (y.px?.switzerland?.share_demand ?? 0),
+      }))
+      .filter((r) => r.year != null)
+      .sort((a, b) => a.year - b.year);
+  }, [data]);
 
   const countryTrendSupply = useMemo(() => {
     const cs = px?.country_series ?? [];
@@ -153,7 +166,7 @@ export default function App() {
     const colors = buildCountryColorMap(keys.map((k) => ({ id: k.key, label: k.label })));
     const series = keys.map((k) => ({
       ...k,
-      color: k.key === "ch" ? SERIES_PAIR.second : (colors[k.key] ?? SERIES_PAIR.first),
+      color: colors[k.key] ?? PALETTE.muted,
     }));
     return {
       data: joinSeries(series),
@@ -165,6 +178,19 @@ export default function App() {
   const seasonProfile = p4?.season?.profile ?? [];
   const seasonProfileCh = p4?.season?.ch_profile ?? [];
   const seasonYears = p4?.season?.years ?? [];
+
+  if (embedPanel && isBayesEmbedPanel(embedPanel)) {
+    return (
+      <div className="wrap wrap-embed-panel">
+        <EmbedPanelContent
+          panel={embedPanel}
+          bayesCharts={bayesCharts}
+          bayesChartsLoading={bayesChartsLoading}
+          bayesChartsError={bayesChartsError}
+        />
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -223,13 +249,9 @@ export default function App() {
   const prevGenreById = indexRowsById(prevGenreRows);
   const prevTopById = indexRowsById(prevTopCountries);
 
-  const vodOrigins = mergeChannelOrigins(harmonized, snap?.vod?.origins, "vod");
   const p4Origins = mergeChannelOrigins(harmonized, snap?.cinema_p4?.origins, "cinema");
-  const prevVodOrigins = mergeChannelOrigins(harmonized, prevYearSnap?.vod?.origins, "vod");
   const prevP4Origins = mergeChannelOrigins(harmonized, prevYearSnap?.cinema_p4?.origins, "cinema");
-  const prevVodById = indexRowsById(prevVodOrigins);
   const prevP4ById = indexRowsById(prevP4Origins);
-  const prevVodGenreById = indexRowsById(mergeGenreRows(harmonized, prevYearSnap?.vod?.genres));
 
   if (embedPanel) {
     return (
@@ -257,7 +279,12 @@ export default function App() {
           genreTrendDemand={genreTrendDemand}
           chGenreTrendDemand={chGenreTrendDemand}
           countryTrendDemand={countryTrendDemand}
+          chShareTrendData={chShareTrendData}
+          gapTrendData={gapTrendData}
           dimmedYears={dimmedYears}
+          bayesCharts={isBayesEmbedPanel(embedPanel) ? bayesCharts : null}
+          bayesChartsLoading={isBayesEmbedPanel(embedPanel) ? bayesChartsLoading : false}
+          bayesChartsError={isBayesEmbedPanel(embedPanel) ? bayesChartsError : null}
         />
       </div>
     );
@@ -468,71 +495,23 @@ export default function App() {
         prevTopById={prevTopById}
       />
 
-        <section className="panel panel-supplementary">
-          <div className="panel-label">Zusatzdaten: VoD &amp; Kinowochen · {activeYear}</div>
-          <p className="panel-intro">{[vod?.note, p4?.note].filter(Boolean).join(" ")}</p>
-
-          {snap?.vod && (
-            <>
-              <div className="panel-label panel-label-sub">VoD — Herkunft</div>
-              <MetricChartGroup
-                rows={vodOrigins}
-                colors={ORIGIN_COLORS}
-                barHeight={180}
-                prevRowById={prevVodById}
-              />
-            </>
-          )}
-
-          {snap?.cinema_p4 && (
-            <>
-              <div className="panel-label panel-label-sub">Kino P4 — Herkunft</div>
-              <MetricChartGroup
-                rows={p4Origins}
-                colors={ORIGIN_COLORS}
-                barHeight={180}
-                grouped
-                prevRowById={prevP4ById}
-              />
-            </>
-          )}
-
-          {snap?.vod && (
-            <>
-              <div className="panel-label panel-label-sub">VoD — Genre (gesamt und pro Herkunft)</div>
-              <MetricChartGroup
-                rows={mergeGenreRows(harmonized, snap.vod.genres)}
-                colors={GENRE_COLORS}
-                barHeight={180}
-                grouped
-                prevRowById={prevVodGenreById}
-              />
-              {vodOrigins.map((o) => {
-                const prevOrigin = prevVodOrigins.find((p) => p.id === o.id);
-                return (
-                  <div key={o.id} className="vod-origin-genre-block">
-                    <div className="panel-label panel-label-sub">VoD · {o.label}</div>
-                    <MetricChartGroup
-                      rows={mergeGenreRows(harmonized, o.genres)}
-                      colors={GENRE_COLORS}
-                      barHeight={160}
-                      grouped
-                      prevRowById={indexRowsById(mergeGenreRows(harmonized, prevOrigin?.genres))}
-                    />
-                  </div>
-                );
-              })}
-            </>
-          )}
-
-          {!snap?.vod && !snap?.cinema_p4 && (
-            <p className="panel-intro meta-note">Für dieses Jahr liegen keine VoD- oder P4-Zusatzdaten vor.</p>
-          )}
-
-          <p className="panel-intro meta-note">
-            Kinowochen (P4) ohne Genre-Spalte; Genre und detaillierte Herkunft über PX und VoD.
-          </p>
-        </section>
+        {snap?.cinema_p4 && (
+          <section className="panel panel-supplementary">
+            <div className="panel-label">Kinowochen (P4) · {activeYear}</div>
+            <p className="panel-intro">{p4?.note}</p>
+            <div className="panel-label panel-label-sub">Herkunft</div>
+            <MetricChartGroup
+              rows={p4Origins}
+              colors={ORIGIN_COLORS}
+              barHeight={180}
+              grouped
+              prevRowById={prevP4ById}
+            />
+            <p className="panel-intro meta-note">
+              Kinowochen ohne Genre-Spalte; Genre und detaillierte Herkunft über PX.
+            </p>
+          </section>
+        )}
 
       <section className="panel">
         <div className="panel-label">Grenzen</div>

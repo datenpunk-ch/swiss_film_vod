@@ -26,7 +26,7 @@ export default function KpiGrid({ pxRow, prevPxRow, year }) {
     .filter(Boolean)
     .join(" · ");
 
-  const cards = [
+  const primaryCards = [
     {
       key: "demand",
       label: "Kinobesuche",
@@ -53,6 +53,9 @@ export default function KpiGrid({ pxRow, prevPxRow, year }) {
       value: pctFmt.format(ch.share_supply ?? 0),
       pct: formatYoYSharePp(ch.share_supply, pch?.share_supply),
     },
+  ];
+
+  const secondaryCards = [
     {
       key: "intensity",
       label: "Interesse (Ø Besuche/Film)",
@@ -73,10 +76,17 @@ export default function KpiGrid({ pxRow, prevPxRow, year }) {
       <div className="panel-label" id="kpi-heading">
         Kennzahlen {year ? `· ${year}` : ""}
       </div>
-      <div className="stat-grid" role="list">
-        {cards.map((card) => (
-          <KpiCard key={card.key} card={card} />
-        ))}
+      <div className="stat-grid stat-grid--kpi-split" role="list">
+        <div className="stat-grid-row" role="group" aria-label="Kernkennzahlen">
+          {primaryCards.map((card) => (
+            <KpiCard key={card.key} card={card} />
+          ))}
+        </div>
+        <div className="stat-grid-row stat-grid-row--secondary" role="group" aria-label="Interesse">
+          {secondaryCards.map((card) => (
+            <KpiCard key={card.key} card={card} />
+          ))}
+        </div>
       </div>
     </section>
   );

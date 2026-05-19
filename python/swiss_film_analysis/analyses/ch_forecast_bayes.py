@@ -4,6 +4,7 @@ import numpy as np
 import pymc as pm
 
 from ..bayes_common import HAS_PYMC, analysis_result, fallback_analysis, mcmc_block, sample_model
+from ..bayes_chart_export import export_share_forecast
 from ..bayes_plots import plot_forecast, plot_forest_list, plot_mcmc_trace
 from ..bayes_utils import (
     extract_mcmc_diagnostics,
@@ -89,6 +90,15 @@ def _run(ctx: CinemaContext) -> dict:
     fig2 = save_figure(ctx, "05_forecast_forest.png", plot_forest_list([("β", "Trend", beta_s)]))
     fig3 = save_figure(ctx, "05_forecast_trace.png", plot_mcmc_trace(idata, ["alpha", "beta"]))
 
+    charts = export_share_forecast(
+        years,
+        p_hist,
+        df["year"].values.astype(float),
+        df["ch_share_admissions"].values * 100,
+        forecast_times,
+        p_fut,
+    )
+
     return analysis_result(
         id="ch_forecast_bayes",
         figures=[
@@ -102,4 +112,5 @@ def _run(ctx: CinemaContext) -> dict:
         tables=[table],
         diagnostics=diag,
         mcmc=mcmc_block(fit_years=[int(y) for y in years], year_center=year_mean),
+        charts=charts,
     )

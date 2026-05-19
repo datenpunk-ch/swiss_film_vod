@@ -11,7 +11,7 @@ PALETTE = {
 }
 
 # Einheitliche Trend-Grafiken (Breite × Höhe in Zoll)
-STANDARD_TREND_FIGSIZE = (9.5, 5.0)
+STANDARD_TREND_FIGSIZE = (11.5, 5.2)
 LEGEND_FONTSIZE = 9
 
 

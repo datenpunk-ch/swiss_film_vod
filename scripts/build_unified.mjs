@@ -31,9 +31,9 @@ const TRACKED_COUNTRIES = [
 ];
 
 const HARM_ORIGINS = [
-  { id: "ch", label: "Schweiz", color: "#b5542a", vod: "och", cinema: "och" },
-  { id: "eu", label: "Europa (ohne CH)", color: "#e5d4c8", vod: "oep", cinema: "oeu" },
-  { id: "ww", label: "Übrige Welt", color: "#0b0d10", vod: "oot", cinema: "oot" },
+  { id: "ch", label: "Schweiz", color: "#b5542a", cinema: "och" },
+  { id: "eu", label: "Europa (ohne CH)", color: "#e5d4c8", cinema: "oeu" },
+  { id: "ww", label: "Übrige Welt", color: "#0b0d10", cinema: "oot" },
 ];
 
 const HARM_GENRES = [
@@ -562,20 +562,17 @@ function buildPxPrimary(pxText) {
 }
 
 function main() {
-  const vodRows = parseCsv(fs.readFileSync(path.join(RAW, "ts-x-16.02.01.10.csv"), "utf8"));
   const cinemaRows = parseCsv(fs.readFileSync(path.join(RAW, "ts-x-16.02.01-P4.csv"), "utf8"));
   const pxText = fs.readFileSync(path.join(RAW, "px-x-1602010000_200.px"), "latin1");
 
   const primary = buildPxPrimary(pxText);
   const supplementary = {
-    vod: buildVodSupplementary(vodRows),
     cinema_p4: buildCinemaP4Supplementary(cinemaRows),
   };
 
   const byYear = primary.years.map((year) => ({
     year,
     px: primary.yearly.find((r) => r.year === year),
-    vod: supplementary.vod.yearly.find((r) => r.year === year) ?? null,
     cinema_p4: supplementary.cinema_p4.yearly.find((r) => r.year === year) ?? null,
   }));
 
@@ -596,13 +593,12 @@ function main() {
     years: primary.years,
     by_year: byYear,
     limitations: [
-      "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
+      "PX = Kinomarkt Schweiz (Sprachgebiet).",
       "Nachfrage (Besuche/Views) und Angebot (Filme) getrennt; Interesse = Ø Besuche je Film.",
       "Jahresgrafiken: Gesamtmarkt und Schweizer Filme als Linien; CH-Anteil im Tooltip, nicht als eigene Achse.",
       "Top-Länder-Zeitreihen: feste Kernländer (CH, USA, FR, DE, UK, IT) plus «Übrige Länder» (Rest des Marktes).",
       "Kinowochen (P4): zwei Balkenplots (alle Herkünfte / CH-Filme), Ø pro Woche — kein Genre in der P4-CSV.",
-      "VoD nur 2019–2024; Genre in VoD und PX.",
-      "Herkunft nach Region (Schweiz, Europa, übrige Welt); Zuordnung aus PX-Ländern bzw. BFS-Codes bei P4/VoD.",
+      "Herkunft nach Region (Schweiz, Europa, übrige Welt); Zuordnung aus PX-Ländern bzw. BFS-Codes bei P4.",
       "Pfeilwerte (↑/↓) = Veränderung ggü. Vorjahr (siehe Hinweis über den Grafikbereichen).",
     ],
     bfs_metadata: bfsMeta ? CFG.paths.bfs_metadata : null,

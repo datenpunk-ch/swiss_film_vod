@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-RESULT_KEYS = ("id", "figures", "tables", "diagnostics", "mcmc", "metrics")
+RESULT_KEYS = ("id", "figures", "tables", "diagnostics", "mcmc", "metrics", "charts")
 
 
 def slim_analysis(a: dict) -> dict:

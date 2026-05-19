@@ -12,6 +12,7 @@ from ..bayes_common import (
     mcmc_block,
     sample_model,
 )
+from ..bayes_chart_export import export_genre_shares
 from ..bayes_plots import plot_forest_list, plot_genre_trends, plot_mcmc_trace
 from ..bayes_utils import (
     HDI_LABEL,
@@ -108,6 +109,8 @@ def _run(ctx: CinemaContext) -> dict:
     # forest for all betas - extend plot_forest to accept list
     fig3 = save_figure(ctx, "01_genre_trace.png", plot_mcmc_trace(idata, ["mu_alpha", "mu_beta"]))
 
+    charts = export_genre_shares(years, p_draws_by_genre, observed, GENRE_LABELS)
+
     return analysis_result(
         id="ch_genre_bayes",
         figures=[
@@ -118,4 +121,5 @@ def _run(ctx: CinemaContext) -> dict:
         tables=[post_table],
         diagnostics=diag,
         mcmc=mcmc_block(fit_years=[int(y) for y in years], year_center=year_mean),
+        charts=charts,
     )

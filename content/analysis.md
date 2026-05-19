@@ -8,7 +8,7 @@
 <div class="container">
   <div class="hero-tag">Bayesian · BFS Kino</div>
   <h1>Kino-Analysen im Detail</h1>
-  <p class="hero-sub">Sieben Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv). Unsicherheit: <strong>95&nbsp;%-höchstes Dichtheitsintervall (HDI)</strong>; Richtung: <strong>Richtungswahrscheinlichkeit (Pd)</strong>. Schätzung per <strong>MCMC</strong> (Markov Chain Monte Carlo, NUTS). Daten: BFS-<strong>PX</strong> (Filmangebot und Nachfrage, jährlich), BFS-<strong>P4</strong> (Kinostatistik nach Wochen). Text in <code>content/analysis.md</code>; Zahlen per <code>pixi run analyze</code>. Stand: <span id="analysis-stand">—</span>.</p>
+  <p class="hero-sub">Acht Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv). Unsicherheit: <strong>95&nbsp;%-höchstes Dichtheitsintervall (HDI)</strong>; Richtung: <strong>Richtungswahrscheinlichkeit (Pd)</strong>. Schätzung per <strong>MCMC</strong> (Markov Chain Monte Carlo, NUTS). Daten: BFS-<strong>PX</strong> (Filmangebot und Nachfrage, jährlich), BFS-<strong>P4</strong> (Kinostatistik nach Wochen). Text in <code>content/analysis.md</code>; Zahlen per <code>pixi run analyze</code>. Stand: <span id="analysis-stand">—</span>.</p>
   <p class="hero-byline"><a href="./index.html">← Artikel</a> · <a href="./unified.html">Übersicht</a></p>
 </div>
 
@@ -250,6 +250,47 @@
   </div>
 </section>
 
+<section class="analysis-block" id="ch_countries_bayes">
+  <div class="container">
+    <div class="section-label">Analyse 08</div>
+    <div class="sec-head"><div class="sec-num">08</div><h2>Bayes: Länder im Zeitverlauf (hierarchisch)</h2></div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p class="analysis-prose">Wie verschieben sich die Besuchsanteile der Kernländer am Gesamtkino über die Jahre — und steigt der Schweizer Anteil posterior gegenüber USA und europäischen Produktionsländern?</p>
+      <h3>Daten</h3>
+      <p class="analysis-prose">BFS PX, Genre-Total, Kernländer Schweiz, USA, Frankreich, Deutschland, UK, Italien; Schätzjahre ohne 2020–2021.</p>
+      <h3>Modelldefinition</h3>
+      <p><strong>Hierarchisches Binomialmodell nach Herkunftsland</strong></p>
+      <dl class="analysis-dl">
+        <dt>Likelihood</dt><dd><code>y_{c,t} ~ Binomial(N_t, p_{c,t})</code></dd>
+        <dt>Link</dt><dd><code>logit(p_{c,t}) = α_c + β_c · (Jahr − Jahr̄)</code></dd>
+        <dt>Priors</dt><dd><ul><li>Partial Pooling über Länder (Hyperpriors auf α, β)</li></ul></dd>
+      </dl>
+      <p class="analysis-note">Je Land: Besuche des Landes ÷ Gesamt-Kinobesuche. Vereinfachung: unabhängige Binomialen (Anteile summieren nicht exakt zu 1).</p>
+      <h3>Methode</h3>
+      <p class="analysis-prose">MCMC (NUTS); Posterior-Mittel und 95&nbsp;%-HDI für Anteile; Pd für Trend-Richtung je Land.</p>
+      <h3>MCMC-Konfiguration</h3>
+      <!--INJECT:ch_countries_bayes:mcmc-->
+      <h3>Ergebnisse (Grafiken)</h3>
+      <!--INJECT:ch_countries_bayes:figures-->
+      <h3>Modellgüte (MCMC-Diagnostik)</h3>
+      <!--INJECT:ch_countries_bayes:diagnostics-->
+      <h3>Posterior-Zusammenfassung</h3>
+      <!--INJECT:ch_countries_bayes:tables-->
+      <h3>Kennzahlen</h3>
+      <!--INJECT:ch_countries_bayes:metrics-->
+      <h3>Ergebnisse im Detail</h3>
+      <p class="analysis-prose">Die USA dominieren den Besuchsanteil über den ganzen Zeitraum. Der Schweizer Anteil steigt posterior — konsistent mit Analyse&nbsp;02 (CH-Gesamtanteil). Frankreich und Deutschland bleiben relevante europäische Quellen.</p>
+      <h3>Grenzen</h3>
+      <ul>
+        <li>Kein Multinomial — «Übrige Länder» ausserhalb des Modells.</li>
+        <li>Ein Herkunftsland pro Film (BFS-Zuordnung).</li>
+        <li>Koproduktionen nicht aufgesplittet.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="analysis-block" id="ch_countries_trend">
   <div class="container">
     <div class="section-label">Analyse 08</div>
@@ -260,7 +301,7 @@
       <h3>Daten</h3>
       <p class="analysis-prose">BFS PX, Genre-Total, alle Herkunftsländer je Jahr. Feste Kernländer: Schweiz, USA, Frankreich, Deutschland, UK, Italien; «Übrige Länder» = Rest des Marktes. Kein MCMC — Zeitreihen aus <code>unified.json</code> (<code>country_series</code>).</p>
       <h3>Methode</h3>
-      <p class="analysis-prose">Anteil Besuche bzw. Filme am Gesamtmarkt pro Jahr. Ergänzt die Top-Länder-Balken in der <a href="./unified.html#countries">interaktiven Übersicht</a> (dort nur ein Jahr sichtbar).</p>
+      <p class="analysis-prose">Anteil Besuche bzw. Filme am Gesamtmarkt pro Jahr (reine Zeitreihen).</p>
       <h3>Ergebnisse (Grafiken)</h3>
       <!--INJECT:ch_countries_trend:figures-->
       <h3>Kennzahlen</h3>
@@ -269,7 +310,7 @@
       <!--INJECT:ch_countries_trend:tables-->
       <h3>Ergebnisse im Detail</h3>
       <p class="analysis-prose">Die USA dominieren den Besuchsanteil über den ganzen Zeitraum; Frankreich und Deutschland bleiben relevante europäische Quellen. Der CH-Besuchsanteil liegt durchgehend unter dem USA-Anteil, steigt aber seit der Pandemie-Erholung (vgl. Logit-Trend, Analyse&nbsp;07). Im Programm ist die Schweiz stärker vertreten als in den Besuchen (vgl. Lücke, Analyse&nbsp;05).</p>
-      <p class="analysis-prose">Ein Bayesianisches Länder-Modell (Multinomial-Trend, Partial Pooling) wäre der nächste Schritt für Unsicherheitsbänder — hier bewusst nur die beobachteten Jahresanteile.</p>
+      <p class="analysis-prose">Ergänzung zu Analyse&nbsp;08: reine Beobachtungslinien ohne Posterior-Bänder.</p>
       <h3>Grenzen</h3>
       <ul>
         <li>Keine Posterior-Unsicherheit in diesem Block.</li>

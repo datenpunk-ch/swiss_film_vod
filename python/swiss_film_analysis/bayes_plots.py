@@ -12,7 +12,7 @@ from .bayes_utils import (
     hdi_bounds,
     hdi_per_column,
 )
-from .plots import PALETTE, apply_legend_right, finalize_figure
+from .plots import PALETTE, STANDARD_TREND_FIGSIZE, apply_legend_right, finalize_figure
 
 
 def _apply_forecast_time_axis(ax, hist_years: np.ndarray, fut_years: np.ndarray) -> None:
@@ -208,6 +208,45 @@ GENRE_COLORS = {
     "doc": PALETTE["accent"],
     "ani": "#c4896e",
 }
+
+COUNTRY_COLORS = {
+    "ch": PALETTE["accent"],
+    "us": PALETTE["ink"],
+    "fr": "#8b5a2b",
+    "de": "#6b4c9a",
+    "uk": "#3d6b8e",
+    "it": "#4a6741",
+}
+
+
+def plot_country_trends(
+    years: np.ndarray,
+    p_draws_by_country: dict[str, np.ndarray],
+    observed: dict[str, np.ndarray],
+    *,
+    labels: dict[str, str] | None = None,
+    ylabel: str = "Anteil an Kinobesuchen (%)",
+    title: str = "Top-Länder: Anteil an den Kinobesuchen",
+) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=(9.5, 5))
+    for cid, draws in p_draws_by_country.items():
+        lo, hi = hdi_per_column(draws)
+        mean = draws.mean(axis=0) * 100
+        color = COUNTRY_COLORS.get(cid, PALETTE["accent"])
+        lw = 2.4 if cid == "ch" else 1.8
+        z = 4 if cid == "ch" else 2
+        ax.fill_between(years, lo * 100, hi * 100, color=color, alpha=0.12)
+        ax.plot(years, mean, color=color, linewidth=lw, zorder=z, label=(labels or {}).get(cid, cid))
+        if cid in observed:
+            ax.scatter(years, observed[cid] * 100, color=color, s=40, zorder=z + 1)
+    for y in (2020, 2021):
+        ax.axvspan(y - 0.5, y + 0.5, color=PALETTE["sand"], alpha=0.45, zorder=0)
+    ax.set_xlabel("Jahr")
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    finalize_figure(fig)
+    apply_legend_right(ax, title="Land")
+    return fig
 
 
 def plot_genre_trends(
@@ -609,7 +648,7 @@ def plot_forecast(
     obs_x = np.asarray(all_obs_years if all_obs_years is not None else hist_years)
     obs_y = np.asarray(all_obs_pct if all_obs_pct is not None else hist_obs_pct)
 
-    fig, ax = plt.subplots(figsize=(9.5, 5))
+    fig, ax = plt.subplots(figsize=STANDARD_TREND_FIGSIZE)
     ax.fill_between(hist_years, p_lo * pct, p_hi * pct, color=PALETTE["accent"], alpha=0.22)
     ax.plot(hist_years, p_mean * pct, color=PALETTE["accent"], linewidth=2, label="Modell (Schätzung)")
     ax.scatter(obs_x, obs_y, color=PALETTE["ink"], s=45, zorder=3, label="Beobachtet")

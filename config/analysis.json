@@ -22,18 +22,48 @@
     },
     "slice_label": "VoD Kauf (EST), Views, alle Filme",
     "origins": [
-      { "id": "och", "label": "Schweiz", "fill": "accent" },
-      { "id": "oep", "label": "Europa (ohne CH)", "fill": "eu" },
-      { "id": "oot", "label": "Übrige Welt", "fill": "ww" }
+      {
+        "id": "och",
+        "label": "Schweiz",
+        "fill": "accent"
+      },
+      {
+        "id": "oep",
+        "label": "Europa (ohne CH)",
+        "fill": "eu"
+      },
+      {
+        "id": "oot",
+        "label": "Übrige Welt",
+        "fill": "ww"
+      }
     ],
     "genres": [
-      { "id": "fic", "label": "Fiktion", "color": "#0b0d10", "reference": true },
-      { "id": "doc", "label": "Dokumentar", "color": "#b5542a" },
-      { "id": "ani", "label": "Animation", "color": "#c4896e" }
+      {
+        "id": "fic",
+        "label": "Fiktion",
+        "color": "#0b0d10",
+        "reference": true
+      },
+      {
+        "id": "doc",
+        "label": "Dokumentar",
+        "color": "#b5542a"
+      },
+      {
+        "id": "ani",
+        "label": "Animation",
+        "color": "#c4896e"
+      }
     ]
   },
   "cinema": {
-    "season_years": [2019, 2022, 2023, 2024],
+    "season_years": [
+      2019,
+      2022,
+      2023,
+      2024
+    ],
     "weekly": {
       "unit": "adm",
       "recent": "rall",
@@ -45,14 +75,46 @@
       "recent": "rall"
     },
     "origins": [
-      { "id": "och", "label": "Schweiz", "color": "#b5542a", "fill": "accent", "reference": true },
-      { "id": "oeu", "label": "Europa", "color": "#c4896e", "fill": "eu" },
-      { "id": "oot", "label": "Übrige Welt", "color": "#e5d4c8", "fill": "ww" }
+      {
+        "id": "och",
+        "label": "Schweiz",
+        "color": "#b5542a",
+        "fill": "accent",
+        "reference": true
+      },
+      {
+        "id": "oeu",
+        "label": "Europa",
+        "color": "#c4896e",
+        "fill": "eu"
+      },
+      {
+        "id": "oot",
+        "label": "Übrige Welt",
+        "color": "#e5d4c8",
+        "fill": "ww"
+      }
     ],
     "genres": [
-      { "id": "fic", "label": "Spielfilm", "color": "#0b0d10", "reference": true, "px_match": "Spielfilme" },
-      { "id": "doc", "label": "Dokumentar", "color": "#b5542a", "px_match": "Dokumentarfilme" },
-      { "id": "ani", "label": "Animation", "color": "#c4896e", "px_match": "Animationsfilme" }
+      {
+        "id": "fic",
+        "label": "Spielfilm",
+        "color": "#0b0d10",
+        "reference": true,
+        "px_match": "Spielfilme"
+      },
+      {
+        "id": "doc",
+        "label": "Dokumentar",
+        "color": "#b5542a",
+        "px_match": "Dokumentarfilme"
+      },
+      {
+        "id": "ani",
+        "label": "Animation",
+        "color": "#c4896e",
+        "px_match": "Animationsfilme"
+      }
     ],
     "px": {
       "encoding": "latin1",
@@ -82,6 +144,6 @@
     "html": "unified.html",
     "title": "Übersicht Swiss Film",
     "stage_note": "Arbeitsansicht auf dem Weg zum Artikel — explorativ, noch keine finale Story.",
-    "lead": "Zwischenstand zur BFS-Auswertung (PX, 2014 ff.): Jahresverläufe, Kinosaison und Herkunft/Genre zum Prüfen von Hypothesen. Der Artikel bleibt die Hauptseite; VoD und P4 ergänzen andere Zeitskalen."
+    "lead": "Zwischenstand zur BFS-Auswertung (PX, 2014 ff.): Jahresverläufe, Kinosaison und Herkunft/Genre zum Prüfen von Hypothesen. Der Artikel bleibt die Hauptseite; P4 ergänzen andere Zeitskalen."
   }
 }

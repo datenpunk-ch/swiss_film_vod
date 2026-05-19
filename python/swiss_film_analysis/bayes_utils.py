@@ -10,6 +10,24 @@ HDI_COL = f"{HDI_PCT} %-HDI"
 PD_COL = "Pd (Richtungswahrscheinlichkeit)"
 
 
+def pp_per_year_from_logit(alpha_draws: np.ndarray, beta_draws: np.ndarray) -> np.ndarray:
+    """Jährliche Änderung des Besuchsanteils in Prozentpunkten (Ableitung der logit-Kurve)."""
+    alpha = np.asarray(alpha_draws).flatten()
+    beta = np.asarray(beta_draws).flatten()
+    p = 1 / (1 + np.exp(-alpha))
+    return beta * p * (1 - p) * 100
+
+
+def fmt_pp_trend(pp_samples: np.ndarray) -> str:
+    """Median-Trend als «↑ 0,4 Pp. / Jahr» (de-CH)."""
+    med = float(np.median(np.asarray(pp_samples).flatten()))
+    if not np.isfinite(med):
+        return "—"
+    arrow = "↑" if med > 1e-6 else "↓" if med < -1e-6 else ""
+    val = f"{abs(med):.2f}".replace(".", ",")
+    return f"{arrow} {val} Pp. / Jahr".strip()
+
+
 def probability_of_direction(samples: np.ndarray, *, positive: bool = True) -> float:
     """Probability of Direction (Pd): Anteil der Posterior-Draws in eine Richtung."""
     s = np.asarray(samples).flatten()

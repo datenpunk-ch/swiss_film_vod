@@ -16,7 +16,7 @@ import {
   PALETTE,
   TOOLTIP_WRAPPER_STYLE,
 } from "../constants.js";
-import { intFmt, pctFmt } from "../utils/format.js";
+import { formatPpAxis, intFmt, pctFmt } from "../utils/format.js";
 import { isDimmedYear } from "../utils/yearDisplay.js";
 import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
@@ -43,6 +43,7 @@ export default function LineTrendChart({
   series,
   height = 240,
   yPercent = false,
+  yPp = false,
   xKey = "year",
   xLabel = "Jahr",
   chShareDenominatorKey,
@@ -95,6 +96,21 @@ export default function LineTrendChart({
 
   const yDomain = useMemo(() => {
     if (yPercent) return [0, 1];
+    if (yPp) {
+      let min = 0;
+      let max = 0;
+      for (const row of merged) {
+        for (const s of series ?? []) {
+          const v = Number(row[s.key]);
+          if (Number.isFinite(v)) {
+            if (v < min) min = v;
+            if (v > max) max = v;
+          }
+        }
+      }
+      const pad = Math.max(0.002, (max - min) * 0.12);
+      return [min - pad, max + pad];
+    }
     if (!sharedYDomain) return ["auto", "auto"];
     let max = 0;
     for (const row of merged) {

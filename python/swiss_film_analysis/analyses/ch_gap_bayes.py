@@ -4,6 +4,7 @@ import numpy as np
 import pymc as pm
 
 from ..bayes_common import HAS_PYMC, analysis_result, fallback_analysis, mcmc_block, sample_model
+from ..bayes_chart_export import export_gap_forecast
 from ..bayes_plots import plot_forest_list, plot_gap_forecast, plot_gap_trend, plot_mcmc_trace
 from ..bayes_utils import (
     HDI_PCT,
@@ -207,6 +208,18 @@ def _run(ctx: CinemaContext) -> dict:
     crossing_table = _crossing_table(t_star, beta_s, last_obs_year=last_obs_year)
     metrics = _warning_metrics(t_star, gap_fut, last_gap=last_gap)
 
+    charts = export_gap_forecast(
+        years,
+        gap_draws,
+        gap,
+        forecast_times,
+        gap_fut,
+        all_years=all_years,
+        all_observed_gap=all_gap,
+        t_star_draws=t_star,
+        last_obs_year=last_obs_year,
+    )
+
     return analysis_result(
         id="ch_gap_bayes",
         figures=[
@@ -229,4 +242,5 @@ def _run(ctx: CinemaContext) -> dict:
             year_center=year_mean,
             extra={"forecast_times": [float(y) for y in forecast_times]},
         ),
+        charts=charts,
     )

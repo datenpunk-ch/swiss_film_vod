@@ -807,25 +807,19 @@ function main() {
   }
   ensureDir(DOCS_DATA);
 
-  const vodPath = path.join(RAW_DIR, "ts-x-16.02.01.10.csv");
   const cinemaPath = path.join(RAW_DIR, "ts-x-16.02.01-P4.csv");
-  const vodRows = parseCsv(fs.readFileSync(vodPath, "utf8"));
   const cinemaRows = parseCsv(fs.readFileSync(cinemaPath, "utf8"));
 
-  const vod = processVod(vodRows);
   const cinema = processCinema(cinemaRows);
 
   const summary = {
     generated_at: new Date().toISOString(),
-    vod_latest_year: vod.latest_year,
-    vod_latest_total_views: vod.latest_total_views,
-    cinema_latest_year: cinema.latest_year,
+cinema_latest_year: cinema.latest_year,
     cinema_latest_admissions: cinema.latest_admissions,
     cinema_yoy_change: cinema.yoy_change,
   };
 
-  writeJson("vod.json", vod);
-  writeJson("cinema.json", cinema);
+writeJson("cinema.json", cinema);
   writeJson("summary.json", summary);
 
   try {
