@@ -82,7 +82,7 @@ def standard_limits(*extra: str) -> list[str]:
     base = [
         "Aggregierte BFS-Daten (kein Film-Level).",
         "Pandemiejahre 2020–2021 in Jahresmodellen ausgeschlossen.",
-        f"Unsicherheit als {HDI_LABEL}; Richtung als Pd, nicht p-Wert.",
+        f"Unsicherheit als {HDI_LABEL}; Richtung als Richtungswahrscheinlichkeit (Pd), nicht p-Wert.",
     ]
     base.extend(extra)
     return base

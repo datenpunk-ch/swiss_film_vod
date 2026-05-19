@@ -31,23 +31,21 @@ export function formatDeltaPercentWithArrow(current, previous) {
   return `${arrow} ${pctAbsFmt.format(Math.abs(change))}`;
 }
 
-/** Prozentuale Änderung zum Vorjahr (absolute Kennzahlen, ohne «ggü. Vorjahr»). */
+/** Prozentuale Änderung zum Vorjahr (absolute Kennzahlen) — mit Pfeil. */
 export function formatYoYCount(current, previous) {
-  if (current == null || previous == null || !Number.isFinite(previous) || previous === 0) return null;
-  if (!Number.isFinite(current)) return null;
-  return formatVsMarketDelta(current / previous);
+  return formatDeltaPercentWithArrow(current, previous);
 }
 
 /** Hinweis Zone «Über die Jahre». */
 export const SERIES_ZONE_INTRO =
-  "Jahresverlauf: Angebot und Nachfrage als Linien (Gesamtmarkt schwarz, Schweizer Filme rostrot). Kinowochen als zwei Balkenplots. Genre als gestapelte Jahresanteile.";
+  "Jahresverläufe zu Angebot und Nachfrage, Kinowochen als Saisondiagramme, Genre als gestapelte Jahresanteile.";
 
 /** Hinweis über Grafikbereichen — Pfeilwerte in Tooltips ohne «ggü. Vorjahr». */
 export const YOY_ARROW_HINT = "Pfeilwerte (↑ / ↓) in Tooltips: prozentuale Veränderung ggü. Vorjahr.";
 
 /** Hinweis Zone «Nach Jahr» inkl. Kennzahlen. */
 export const YOY_YEAR_HINT =
-  "Pfeilwerte (↑ / ↓) in Grafiken und unter den Kennzahlen: Veränderung ggü. Vorjahr (Anteile in Prozentpunkten). Herkunft: CH rostrot, Europa beige, übrige Welt schwarz.";
+  "Pfeilwerte (↑ / ↓): Veränderung ggü. Vorjahr. Bei Anteilen immer in Pp. (Prozentpunkte), nicht in relativen Prozent.";
 
 /** Prozentuale Änderung (Pfeil) für Tooltips und Anteilslisten — ohne «ggü. Vorjahr». */
 export function formatYoYPercent(current, previous) {
@@ -63,21 +61,35 @@ export function indexRowsById(rows, idKey = "id") {
   return map;
 }
 
-/** Änderung in Prozentpunkten für Anteile (0–1). */
+/** Einheitliche Abkürzung für Prozentpunkte (immer «Pp.»). */
+export const PP_SUFFIX = "Pp.";
+
+/** Prozentpunkte mit Dezimalpunkt (nicht Komma). */
+export function formatPpNumber(value, digits = 1) {
+  if (value == null || !Number.isFinite(value)) return "—";
+  return Math.abs(value).toFixed(digits);
+}
+
+/** Prozentpunkte-Wert mit Suffix, z. B. «1.5 Pp.» */
+export function formatPpValue(value, digits = 1) {
+  const n = formatPpNumber(value, digits);
+  if (n === "—") return n;
+  if (String(value ?? "").trim().match(/\bPp\.?$/i)) return String(value).trim().replace(/\bPp\.{2,}$/i, PP_SUFFIX);
+  return `${n} ${PP_SUFFIX}`;
+}
+
+/** Änderung in Prozentpunkten für Anteile (0–1) — mit Pfeil. Nicht mit % verwechseln. */
 export function formatYoYSharePp(current, previous) {
   if (current == null || previous == null) return null;
   const pp = (current - previous) * 100;
-  const ppFmt = new Intl.NumberFormat("de-CH", {
-    signDisplay: "exceptZero",
-    maximumFractionDigits: 1,
-    minimumFractionDigits: 0,
-  });
-  return `${ppFmt.format(pp)} Pp.`;
+  if (Math.abs(pp) < 1e-12) return `0 ${PP_SUFFIX}`;
+  const arrow = pp > 0 ? "↑" : "↓";
+  return `${arrow} ${formatPpNumber(pp)} ${PP_SUFFIX}`;
 }
 
 export function metricLabel(metric) {
   if (metric === "supply") return "Angebot (Filme)";
-  if (metric === "intensity") return "Ø Besuche je Film";
+  if (metric === "intensity") return "Interesse (Ø Besuche je Film)";
   return "Nachfrage (Besuche / Views)";
 }
 

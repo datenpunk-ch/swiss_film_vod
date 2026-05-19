@@ -1,11 +1,11 @@
 {
-  "fingerprint": "2e344a6c5fad2919557efc3c",
+  "fingerprint": "cc3b856eb3f917b02ea1605e",
   "result": {
     "id": "ch_gap_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/03_gap_trend.png",
-        "caption": "Posterior der Lücke (95 %-credible interval (HDI))."
+        "caption": "Programm-Lücke in Prozentpunkten (Angebot minus Besuche)."
       },
       {
         "src": "./assets/analysis/figures/03_gap_forest.png",
@@ -14,6 +14,10 @@
       {
         "src": "./assets/analysis/figures/03_gap_trace.png",
         "caption": "MCMC-Trace β."
+      },
+      {
+        "src": "./assets/analysis/figures/03_gap_forecast.png",
+        "caption": "Prognose der Programm-Lücke bis 2030; markiertes Kreuzungsjahr = Median T* (Programm- und Besuchsanteil gleich). Lineare Extrapolation — Aussagekraft begrenzt."
       }
     ],
     "tables": [
@@ -24,17 +28,113 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [
             "β",
-            "Trend Lücke (pp/Jahr)",
+            "Trend Lücke (Pp./Jahr)",
             "-0,832",
             "0,1297",
             "-1,105 – -0,590",
             "100,0 %"
+          ]
+        ]
+      },
+      {
+        "caption": "Prognose Lücke bis 2030 (halbjährlich, lineare Extrapolation)",
+        "headers": [
+          "Periode",
+          "Median Lücke",
+          "95 %-HDI (höchst. Dichtheitsintervall)",
+          "Wahrscheinlichkeit: Lücke ausgeglichen"
+        ],
+        "rows": [
+          [
+            "2026",
+            "1.8 Pp.",
+            "-0.3 Pp. – 3.7 Pp.",
+            "3,44 %"
+          ],
+          [
+            "Jul 2026",
+            "1.4 Pp.",
+            "-0.8 Pp. – 3.4 Pp.",
+            "8,38 %"
+          ],
+          [
+            "2027",
+            "1.0 Pp.",
+            "-1.4 Pp. – 3.1 Pp.",
+            "16,44 %"
+          ],
+          [
+            "Jul 2027",
+            "0.6 Pp.",
+            "-1.8 Pp. – 2.8 Pp.",
+            "28,88 %"
+          ],
+          [
+            "2028",
+            "0.2 Pp.",
+            "-2.4 Pp. – 2.5 Pp.",
+            "43,53 %"
+          ],
+          [
+            "Jul 2028",
+            "-0.2 Pp.",
+            "-2.9 Pp. – 2.2 Pp.",
+            "57,91 %"
+          ],
+          [
+            "2029",
+            "-0.7 Pp.",
+            "-3.4 Pp. – 2.0 Pp.",
+            "69,81 %"
+          ],
+          [
+            "Jul 2029",
+            "-1.1 Pp.",
+            "-3.9 Pp. – 1.7 Pp.",
+            "78,66 %"
+          ],
+          [
+            "2030",
+            "-1.5 Pp.",
+            "-4.5 Pp. – 1.4 Pp.",
+            "85,72 %"
+          ],
+          [
+            "Jul 2030",
+            "-1.9 Pp.",
+            "-5.1 Pp. – 1.0 Pp.",
+            "90,41 %"
+          ]
+        ]
+      },
+      {
+        "caption": "Null-Kreuzung der Programm-Lücke (kontinuierlich, μ_t = 0)",
+        "headers": [
+          "Grösse",
+          "Wert"
+        ],
+        "rows": [
+          [
+            "T* (Median)",
+            "2028,2"
+          ],
+          [
+            "T* (95 %-HDI, höchst. Dichtheitsintervall)",
+            "2025,6 – 2031,7"
+          ],
+          [
+            "Wahrscheinlichkeit Kreuzung bis 2030",
+            "85,72 %"
+          ],
+          [
+            "Wahrscheinlichkeit: Trend sinkt",
+            "100,00 %"
           ]
         ]
       }
@@ -89,7 +189,63 @@
         2024,
         2025
       ],
-      "year_center": 2019.3
-    }
+      "year_center": 2019.3,
+      "forecast_times": [
+        2026.0,
+        2026.5,
+        2027.0,
+        2027.5,
+        2028.0,
+        2028.5,
+        2029.0,
+        2029.5,
+        2030.0,
+        2030.5
+      ]
+    },
+    "metrics": [
+      {
+        "label": "Chance: Lücke im Jahr 2030 ausgeglichen",
+        "value": "90,41 %",
+        "note": "Nicht dasselbe wie das Kreuzungsjahr auf der Grafik",
+        "ok": null
+      },
+      {
+        "label": "Median T* (Kreuzung)",
+        "value": "2028,2",
+        "note": "Kreuzung bis 2030: 85,66 %",
+        "ok": null
+      },
+      {
+        "label": "Hinweis",
+        "value": "—",
+        "note": "Prognose = linearer Trend — kein garantiertes Schliessen; Trend kann abflachen.",
+        "ok": false
+      },
+      {
+        "label": "Hinweis",
+        "value": "—",
+        "note": "Lücke in Prozentpunkten (pp): Differenz zweier Anteile — nicht mit «%» Relativänderung verwechseln.",
+        "ok": false
+      },
+      {
+        "label": "Hinweis",
+        "value": "—",
+        "note": "Negative Lücke möglich (Publikum > Programm); Modell erlaubt das, Interpretation dann «Überholung».",
+        "ok": false
+      },
+      {
+        "label": "Hinweis",
+        "value": "—",
+        "note": "Nur Jahresaggregate; Programm- und Besuchsanteil können sich unabhängig bewegen.",
+        "ok": false
+      },
+      {
+        "label": "Hinweis",
+        "value": "—",
+        "note": "Kreuzungsjahr T* nur sinnvoll bei β < 0; sonst keine Null-Kreuzung im Modell.",
+        "ok": false
+      }
+    ]
   }
 }

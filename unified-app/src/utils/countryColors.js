@@ -28,13 +28,8 @@ export function buildCountryColorMap(rows) {
     index += 1;
   }
 
-  if (map.Schweiz != null && map.Deutschland != null) {
-    const de = map.Deutschland;
-    map.Deutschland = map.Schweiz;
-    map.Schweiz = de;
-  } else if (map.Schweiz != null) {
-    map.Schweiz = PALETTE.accent;
-  }
+  if (map.ch != null) map.ch = PALETTE.accent;
+  if (map.Schweiz != null) map.Schweiz = PALETTE.accent;
 
   return map;
 }

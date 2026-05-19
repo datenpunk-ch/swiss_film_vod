@@ -50,8 +50,8 @@ export default function ShareStackChart({
   const axisLabel =
     metric === "intensity"
       ? usePxBenchmark
-        ? "Relativ zum Markt-Ø"
-        : "Relativ zum Kanal-Ø"
+        ? "Interesse relativ zum Markt-Ø"
+        : "Interesse relativ zum Kanal-Ø"
       : "Anteil am Total";
 
   const parts = sorted.map((r) => ({
@@ -70,7 +70,9 @@ export default function ShareStackChart({
         {parts.map((p) => (
           <li key={p.id}>
             <span className="swatch" style={{ background: colors[p.id] }} aria-hidden="true" />
-            {useFlags && p.label !== "Andere" ? <CountryFlag label={p.label} size={16} /> : null}
+            {useFlags && p.label !== "Andere" && p.label !== "Übrige Länder" ? (
+              <CountryFlag label={p.label} size={16} />
+            ) : null}
             <span className="share-pct-label">{p.label}</span>
             <strong className="share-pct-value">{formatLegendShare(p, metric, marketIntensity, prevRowById)}</strong>
           </li>

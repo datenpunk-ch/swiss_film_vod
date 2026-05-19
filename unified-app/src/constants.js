@@ -18,12 +18,17 @@ export const SERIES_PAIR = {
   second: PALETTE.accent,
 };
 
-/** Nachfrage / Angebot / Intensität. */
+/** Nachfrage / Angebot / Interesse (Ø Besuche je Film). */
 export const METRIC_COLORS = {
   demand: SERIES_PAIR.first,
   supply: SERIES_PAIR.first,
   intensity: PALETTE.slate,
 };
+
+export const CHART_SURFACE = "#ffffff";
+
+/** Linien/Balken für ausgeklammerte oder unvollständige Jahre. */
+export const DIMMED_SERIES_OPACITY = 0.38;
 
 /** CH rostrot, Europa beige, übrige Welt schwarz. */
 export const ORIGIN_COLORS = { ch: PALETTE.accent, eu: PALETTE.sandLight, ww: PALETTE.ink };
@@ -48,14 +53,35 @@ export function legendRightProps(seriesCount = 2) {
     align: "right",
     verticalAlign: "middle",
     iconType: "line",
-    wrapperStyle: { paddingLeft: 22, lineHeight: "1.55" },
-    width: Math.max(92, seriesCount * 54),
+    wrapperStyle: { paddingLeft: 6, lineHeight: "1.45", maxWidth: "100%" },
+    width: Math.max(88, seriesCount * 48),
+  };
+}
+
+export function legendBottomProps(seriesCount = 2) {
+  return {
+    layout: "horizontal",
+    align: "center",
+    verticalAlign: "bottom",
+    iconType: "line",
+    wrapperStyle: {
+      paddingTop: 10,
+      lineHeight: "1.45",
+      width: "100%",
+      left: 0,
+    },
+    height: Math.max(28, Math.ceil(seriesCount / 2) * 22),
   };
 }
 
 export function chartMarginWithLegendRight(seriesCount = 2, base = CHART_MARGIN) {
-  const legendW = Math.max(108, seriesCount * 58);
-  return { ...base, left: 72, bottom: 36, right: legendW + 16, top: 16 };
+  const legendW = Math.max(92, seriesCount * 50);
+  return { ...base, left: 72, bottom: 40, right: legendW + 8, top: 16 };
+}
+
+export function chartMarginWithLegendBottom(seriesCount = 2, base = CHART_MARGIN) {
+  const rows = Math.ceil(seriesCount / 2);
+  return { ...base, left: 72, bottom: 28 + rows * 22, right: 20, top: 16 };
 }
 
 export const Y_AXIS_LABEL_PROPS = {
@@ -68,5 +94,5 @@ export const Y_AXIS_LABEL_PROPS = {
 export const METRICS = [
   { id: "supply", label: "Angebot (Filme)", title: "Angebot" },
   { id: "demand", label: "Nachfrage (Besuche / Views)", title: "Nachfrage" },
-  { id: "intensity", label: "Ø Besuche je Film", title: "Intensität" },
+  { id: "intensity", label: "Ø Besuche je Film", title: "Interesse" },
 ];

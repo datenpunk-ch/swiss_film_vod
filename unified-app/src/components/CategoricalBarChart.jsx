@@ -75,11 +75,10 @@ export default function CategoricalBarChart({
     left: hideAxisLabels ? 4 : yAxisW + 12,
   };
 
-  return (
-    <figure className={`chart-figure is-column-bars is-absolute-chart${compact ? " is-compact" : ""}`}>
-      <ChartBox height={plotH}>
-        <ResponsiveContainer width="100%" height={plotH} initialDimension={{ width: 200, height: plotH }}>
-          <BarChart data={data} margin={margin} barCategoryGap={compact ? "20%" : "22%"}>
+  const chart = (
+    <ChartBox height={plotH}>
+      <ResponsiveContainer width="100%" height={plotH} initialDimension={{ width: 200, height: plotH }}>
+        <BarChart data={data} margin={margin} barCategoryGap={compact ? "20%" : "22%"}>
             <CartesianGrid strokeDasharray="3 3" stroke={PALETTE.grid} vertical={false} />
             <XAxis
               dataKey="tickLabel"
@@ -110,12 +109,21 @@ export default function CategoricalBarChart({
                 <Cell key={entry.barKey} fill={colors[entry.id] ?? PALETTE.ink} />
               ))}
             </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </ChartBox>
+        </BarChart>
+      </ResponsiveContainer>
+    </ChartBox>
+  );
+
+  return (
+    <figure className={`chart-figure is-column-bars is-absolute-chart${compact ? " is-compact" : ""}`}>
       {showCategoryLegend ? (
-        <CategoryLegend rows={sorted} colors={colors} useFlags={useFlags} />
-      ) : null}
+        <div className="chart-with-side-legend">
+          <div className="chart-with-side-legend__plot">{chart}</div>
+          <CategoryLegend rows={sorted} colors={colors} useFlags={useFlags} />
+        </div>
+      ) : (
+        chart
+      )}
     </figure>
   );
 }

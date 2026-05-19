@@ -1,117 +1,203 @@
 <!--
-  Artikel-Inhalt (Deutsch). index.html lädt PART:hero und PART:body.
+  Kurzstory Schweizer Film am Kino (index.html).
+  Grafiken: data/analysis_report.json via assets/article-page.js
 -->
 
 <!--PART:hero-->
 <div class="container">
-  <div class="hero-tag reveal">Datenjournalismus · Schweiz · Film</div>
-  <h1 class="reveal">Schweizer Film am Kinomarkt</h1>
-  <p class="hero-sub reveal">Wie viele Schweizer Filme laufen im Kino — und wie viele Menschen sehen sie? Die BFS-Auswertung «Filmangebot und Nachfrage» (PX) zeigt über mehr als ein Jahrzehnt: Das Programm wächst, der Markt erholt sich nach der Pandemie nur schrittweise, und Schweizer Produktionen bleiben im Besucheranteil deutlich unter ihrem Anteil am Angebot.</p>
-  <div class="hero-byline reveal">
-    <span><a href="#interactive">↓ Zur interaktiven Übersicht</a></span>
-  </div>
+  <div class="hero-tag reveal">Datenjournalismus · Schweizer Film · Kino</div>
+  <h1 class="reveal">Wie steht es ums Kino — und wie macht sich der Schweizer Film?</h1>
+  <p class="hero-sub reveal">Zuerst die Lage in Zahlen: Nach der Pandemie hat sich der Gesamtmarkt erholt, der Anteil Schweizer Film am Publikum ist gestiegen — der deutliche Sprung vor allem zwischen 2023 und 2024. Danach geht es mit statistischen Schätzungen tiefer: Markt, Genres und die Lücke zwischen Programm und Publikum.</p>
+  <p class="hero-byline reveal">
+    <span>Bundesamt für Statistik (BFS) · Stand <span id="article-stand">—</span></span>
+    <span><a href="#story">↓ Zur Story</a></span>
+  </p>
+  <!--ARTICLE:kpis-->
 </div>
 
 <!--PART:body-->
-<section>
+<section id="story">
   <div class="container">
-    <div class="section-label reveal">Angebot</div>
+    <div class="section-label reveal">Überblick</div>
+    <div class="sec-head reveal">
+      <div class="sec-num">00</div>
+      <h2>Zwei Fragen, ein roter Faden</h2>
+    </div>
+    <div class="measure">
+
+<p class="reveal">Die **Hauptfrage** hat zwei Teile: **Wie steht es mit dem Kino insgesamt?** Und: **Wie macht sich der Schweizer Film darin?** — gemessen an Kinobesuchen und am Filmeangebot (jährliche BFS-Statistik **PX**), ergänzt um die **Kinosaison** in Wochen (**P4**).</p>
+
+<p class="reveal">Die **Kennzahlen oben** und die <a href="#interactive">interaktive Jahresansicht</a> unten zeigen: Der Markt hat sich nach 2020–2021 erholt, liegt aber noch unter dem Niveau von Mitte der 2010er-Jahre. Der **Anteil Schweizer Film an den Besuchen** lag 2025 bei rund **9&nbsp;%** — vor der Pandemie meist **4–7&nbsp;%**. Zwischen **2023 und 2024** stieg er von etwa 6,3&nbsp;% auf 8,9&nbsp;%. Im **Programm** sind Schweizer Filme etwas häufiger vertreten als in den **Besuchen** (Differenz rund **1,5 Prozentpunkte**).</p>
+
+<p class="reveal">Die Abschnitte **01–05** stellen nacheinander eine präzisere Frage — jeweils mit einer passenden Auswertung. Erst der **Gesamtmarkt**, dann der **Schweizer Anteil**, dann **Genres**, schliesslich **Programm versus Publikum**.</p>
+
+    </div>
+  </div>
+</section>
+
+<section id="kino-markt">
+  <div class="container">
+    <div class="section-label reveal">Teil I · Das Kino</div>
     <div class="sec-head reveal">
       <div class="sec-num">01</div>
-      <h2>Mehr Filme im Programm</h2>
+      <h2>Wie steht es mit dem Kino insgesamt?</h2>
     </div>
     <div class="measure">
 
-Am Schweizer Kinomarkt (Sprachgebiet Schweiz, alle vorgeführten Filme) stieg die Zahl der gelisteten Filme von rund **1 700** (2014) auf über **3 800** (2025). Das Angebot wird breiter — vor allem seit der Pandemie, als viele Titel gleichzeitig im Verleih standen.
-
-Schweizer Filme sind dabei ständig präsent, verlieren aber **relativ** an Gewicht: 2014 machten sie noch gut **16 %** aller gelisteten Filme aus, 2025 etwa **11 %**. In absoluten Zahlen wächst das CH-Angebot dennoch (von rund 260 auf über 400 Titel pro Jahr). Der Markt wächst also schneller als das heimische Programm.
+<p class="reveal">Nach der Pandemie sind die **Kinobesuche** wieder deutlich höher als 2020–2021, aber der Gesamtmarkt ist **noch nicht** wieder bei den rund 12–14&nbsp;Mio. Besuchen von 2015–2019; 2023 und 2024 liegen eher bei etwa 10&nbsp;Mio. Auch das **Angebot** (Filme im Programm) hat sich erholt — die Saison folgt dem üblichen Muster (stark im Winter, schwächer im Sommer).</p>
 
 <div class="article-plot reveal">
-  <div class="embed-frame embed-frame--supply">
-    <iframe title="Angebot: Filme im Programm" src="./unified.html?embed=1&amp;panel=supply" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <div class="embed-frame visible embed-frame--demand" style="max-width: 100%;">
+    <iframe title="Kinobesuche Gesamtmarkt und CH" src="./unified.html?embed=1&amp;panel=demand" loading="lazy" referrerpolicy="no-referrer"></iframe>
   </div>
-  <p class="chart-caption">Filme im Programm nach Jahr (BFS PX): Gesamtmarkt und Schweizer Filme — CH-Anteil im Tooltip. <a href="./unified.html?panel=supply">Einzelansicht</a></p>
 </div>
 
-<div class="note-box reveal">
-  <div class="note-box-label">Datenstand</div>
-  <p>Hauptquelle: BFS «Filmangebot und Nachfrage» (PX, 2014 ff.). Kinosaison: «Kinostatistik – Ergebnisse nach Kinowochen» (P4). VoD (2019–2024) und weitere Details in der <a href="./unified.html">interaktiven Übersicht</a>. <a href="./sources.txt">Quellenliste</a>.</p>
-</div>
+<p class="chart-caption reveal">Kinobesuche in Millionen — Gesamtmarkt und Schweizer Film im Vergleich.</p>
+
+<p class="reveal"><strong>Frage:</strong> Wie viel vom Wachstum kommt daher, dass **insgesamt mehr Menschen** ins Kino gehen — und wie viel davon, dass der **Schweizer Film einen grösseren Anteil** am Publikum hat?</p>
+
+<p class="reveal"><strong>Antwort:</strong> Beides spielt eine Rolle. Wenn der Gesamtmarkt wächst, steigen auch die Besuche bei Schweizer Filmen — aber der Schweizer Anteil hat in den letzten Jahren **überproportional** zugelegt. Der Sprung zwischen 2023 und 2024 lässt sich **nicht** allein mit «das Kino hat sich nach der Pandemie erholt» erklären.</p>
 
     </div>
   </div>
 </section>
 
-<section>
+<section id="kinosaison">
   <div class="container">
-    <div class="section-label reveal">Nachfrage</div>
+    <aside class="info-box reveal" aria-labelledby="kinosaison-title">
+      <div class="info-box-label">Saison</div>
+      <h2 class="info-box-title" id="kinosaison-title">Wann gehen die Menschen ins Kino?</h2>
+      <p>Die wöchentliche Statistik (Mittel **2019** und **2022–2024**) — **Gesamtmarkt**, ohne Modell:</p>
+      <ul>
+        <li><strong>Stark:</strong> Dezember und Jahreswechsel (Kinowochen 51–53, Woche 1).</li>
+        <li><strong>Zweiter Schwerpunkt:</strong> Frühling (ca. Kinowoche 17).</li>
+        <li><strong>Schwächer:</strong> Sommer.</li>
+      </ul>
+      <p>Schweizer Filme folgen dieser Kurve; sie profitieren von den Hochphasen des Gesamtmarkts.</p>
+      <div class="info-box-figure">
+        <div class="embed-frame visible embed-frame--season" style="max-width: 100%;">
+          <iframe title="Kinosaison — Besuche pro Kinowoche (P4)" src="./unified.html?embed=1&amp;panel=season" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        </div>
+      </div>
+      <p class="info-box-foot">Durchschnittliche Besuche pro Kinowoche.</p>
+    </aside>
+  </div>
+</section>
+
+<section id="ch-anteil">
+  <div class="container">
+    <div class="section-label reveal">Teil II · Schweizer Film</div>
     <div class="sec-head reveal">
       <div class="sec-num">02</div>
-      <h2>Besuche — Erholung ohne altes Niveau</h2>
+      <h2>Wie macht sich der Schweizer Film am Publikum?</h2>
     </div>
     <div class="measure">
 
-Die Kinobesuche lagen vor der Pandemie bei rund **12–14 Millionen** pro Jahr (Höhepunkt 2015). 2020 brach der Markt auf unter **4,5 Millionen** ein. Seither steigen die Zahlen wieder: 2024 rund **10,3 Millionen**, 2025 etwa **9,5 Millionen** (rückläufig gegenüber dem Vorjahr).
+<p class="reveal">Hier geht es nicht um «mehr Besuche insgesamt», sondern um den **Anteil Schweizer Film**: Wie viel Prozent aller Kinobesuche entfallen auf Schweizer Produktionen? **2022** war ein schwaches Übergangsjahr (rund 5&nbsp;%). Der **Sprung** liegt bei **2023→2024**; 2025 bei etwa 9&nbsp;%.</p>
 
-Für Schweizer Filme heisst das: Ihr **Anteil an den Besuchen** lag 2014 bei knapp **5 %**, schwankte danach meist zwischen **4 %** und **7 %** (ohne das Ausnahmejahr 2020). 2024 und 2025 liegen die CH-Anteile mit rund **9 %** höher als in den meisten Vorkrisenjahren — bei gleichzeitig wachsendem Gesamtprogramm. Pro Schweizer Film kommen im Schnitt **weniger Besuche** als pro ausländischem Titel: Das Angebot ist da, die Reichweite pro Film bleibt begrenzt.
+<p class="reveal"><strong>Frage:</strong> Steigt dieser Anteil **über die Jahre** weiter — und wie könnte es aussehen, wenn der bisherige Trend einfach weiterlaufen würde? Die Schätzung nutzt alle Jahre ausser 2020–2021 (Pandemie).</p>
 
 <div class="article-plot reveal">
-  <div class="embed-frame embed-frame--demand">
-    <iframe title="Nachfrage: Kinobesuche" src="./unified.html?embed=1&amp;panel=demand" loading="lazy" referrerpolicy="no-referrer"></iframe>
-  </div>
-  <p class="chart-caption">Kinobesuche nach Jahr (BFS PX): Gesamtmarkt und Schweizer Filme. <a href="./unified.html?panel=demand">Einzelansicht</a></p>
+<!--INJECT:ch_forecast_bayes:figure:0-->
 </div>
+
+<p class="chart-caption reveal">Anteil Schweizer Film an allen Kinobesuchen: Verlauf und Trend-Prognose (rechts).</p>
+
+<p class="reveal"><strong>Antwort:</strong> Der Anteil steigt **klar nach oben** — von früher oft 4–7&nbsp;% Richtung rund 9&nbsp;% (2025). Die **Prognose rechts** zeigt, wie der Trend weiterlaufen könnte — keine Vorhersage für einzelne Filme oder Ausnahmejahre.</p>
 
     </div>
   </div>
 </section>
 
-<section>
+<section id="ch-genre">
   <div class="container">
-    <div class="section-label reveal">Saison</div>
+    <div class="section-label reveal">Teil II · Warum</div>
     <div class="sec-head reveal">
       <div class="sec-num">03</div>
-      <h2>Wann ist es im Kino am vollsten?</h2>
+      <h2>In welchen Genres trägt der Schweizer Film?</h2>
     </div>
     <div class="measure">
 
-Die wöchentliche Kinostatistik (P4) zeigt eine klare **Jahreskurve**: Am stärksten sind die Besuche in den **Dezember-Wochen** und um den Jahreswechsel (Kinowochen 51–53 sowie Woche 1). Ein zweiter Schwerpunkt liegt im **Frühling** (etwa Kinowoche 17 im April). In den Sommermonaten liegen die durchschnittlichen Wochenbesuche tiefer. Für dieses Wochenprofil mitteln wir **2019 und 2022–2024**; **2020 und 2021** bleiben ausserhalb (Pandemie — kein vergleichbares «normales» Kinojahr).
+<p class="reveal"><strong>Frage:</strong> Trägt der Schweizer Film in **Fiktion, Dokumentar und Animation** gleichermassen — gemessen am Anteil **innerhalb** des jeweiligen Genre-Publikums?</p>
 
-Für Schweizer Filme gilt das Muster grundsätzlich ebenfalls — die absoluten Wochenwerte sind kleiner, die Saisonform aber vergleichbar. Wer Schweizer Produktionen im Kino verorten will, findet sie damit eher in denselben Hochphasen wie der Gesamtmarkt, nicht in einer parallelen «Nebensaison».
+<p class="reveal"><strong>Antwort:</strong> **Fiktion** und **Dokumentar** gewinnen an Boden; bei **Animation** eher das Gegenteil. «Der Schweizer Film boomt» gilt also **nicht für alle Genres gleich**.</p>
 
 <div class="article-plot reveal">
-  <div class="embed-frame embed-frame--season">
-    <iframe title="Kinosaison nach Wochen" src="./unified.html?embed=1&amp;panel=season" loading="lazy" referrerpolicy="no-referrer"></iframe>
-  </div>
-  <p class="chart-caption">Ø Besuche pro Kinowoche (P4), Mittel 2019 und 2022–2024 (ohne 2020–2021) — gesamt und Schweizer Filme. <a href="./unified.html?panel=season">Einzelansicht</a></p>
+<!--INJECT:ch_genre_bayes:figure:0-->
 </div>
+
+<p class="chart-caption reveal">Anteil Schweizer Film je Genre über die Jahre.</p>
 
     </div>
   </div>
 </section>
 
-<section>
+<section id="ch-mix">
   <div class="container">
-    <div class="section-label reveal">Entwicklung</div>
     <div class="sec-head reveal">
       <div class="sec-num">04</div>
-      <h2>Was sich über die Jahre zeigt</h2>
+      <h2>Genre-Umschichtung — oder besseres Abschneiden?</h2>
     </div>
     <div class="measure">
 
-Über den gesamten Zeitraum 2014–2025 zeichnet sich ein **doppelter Trend** ab:
+<p class="reveal">Mehr Dokumentar-Besuche am Gesamtmarkt helfen nur, wenn Schweizer Filme im Dokumentar-Segment mitschneiden.</p>
 
-1. **Struktur:** Immer mehr Filme im Programm, dafür weniger Besuche pro Film im Durchschnitt — der Markt wird fragmentierter.
-2. **Schweiz:** Mehr CH-Titel im Angebot, aber ein sinkender **Angebotsanteil**; die **Nachfrageanteile** erholen sich seit 2022 teils stärker als vor der Krise, ohne die Lücke zum Angebot zu schliessen.
-
-Die Genre-Anteile (Fiktion, Dokumentar, Animation) verschieben sich Jahr für Jahr moderat — in der Übersicht als gestapelte Jahresbalken sichtbar. VoD-Daten (Kauf-Views) ergänzen den Kinomarkt, messen aber einen anderen Kanal; sie sind in der Grafik unten separat ausgewiesen.
+<p class="reveal"><strong>Frage:</strong> Kommt der höhere Gesamtanteil daher, dass das Publikum **andere Genres** bevorzugt, oder weil Schweizer Filme in den Genres **besser ankommen**?</p>
 
 <div class="article-plot reveal">
-  <div class="embed-frame embed-frame--genre">
-    <iframe title="Genre-Anteile nach Jahr" src="./unified.html?embed=1&amp;panel=genre" loading="lazy" referrerpolicy="no-referrer"></iframe>
-  </div>
-  <p class="chart-caption">Genre-Anteile an den Kinobesuchen (PX), Gesamtmarkt und Schweizer Filme. <a href="./unified.html?panel=genre">Einzelansicht</a></p>
+<!--INJECT:ch_genremix_bayes:figure:3-->
 </div>
+
+<p class="chart-caption reveal">Zerlegung 2014–2025: Wie viel kommt von Genre-Mix, wie viel vom Erfolg in den Genres (in Prozentpunkten).</p>
+
+<p class="reveal"><strong>Antwort:</strong> Der **grössere** Teil des Anstiegs seit 2014 kommt davon, dass Schweizer Filme in Fiktion, Dokumentar und Animation **stärker abschneiden** — nicht primär davon, dass das Publikum plötzlich andere Genres wählt.</p>
+
+    </div>
+  </div>
+</section>
+
+<section id="ch-luecke">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-num">05</div>
+      <h2>Mehr im Programm als im Publikum — schliesst sich die Lücke?</h2>
+    </div>
+    <div class="measure">
+
+<p class="reveal">Schweizer Filme sind im **Programm** stärker vertreten als in den **Besuchen**. Die **Lücke** ist die Differenz: Programmanteil minus Besuchsanteil (in **Prozentpunkten**, nicht «Prozent» im Sinne von Wachstum). 2025: rund **1,5 Prozentpunkte**.</p>
+
+<p class="reveal"><strong>Frage:</strong> Schrumpft die Lücke — und wann könnte sie theoretisch **null** werden?</p>
+
+<div class="article-plot reveal">
+<!--INJECT:ch_gap_bayes:figure:0-->
+</div>
+
+<p class="chart-caption reveal">Programm-Lücke in Prozentpunkten.</p>
+
+<p class="reveal"><strong>Antwort:</strong> Die Lücke **schrumpft** — das Publikum holt zum Programm auf. Setzt man den Trend fort, liegt das **geschätzte Jahr mit ausgeglichener Lücke** im Median bei rund **2028** — mit grosser Unsicherheit.</p>
+
+<!--INJECT:ch_gap_bayes:metrics-->
+
+<div class="article-plot reveal">
+<!--INJECT:ch_gap_bayes:figure:3-->
+</div>
+
+<p class="chart-caption reveal">Verlauf und Trend-Fortsetzung; markiert etwa **2028** (Median, Lücke = 0). Die Linie reicht bis **2030** — das Ende der Prognose, nicht dasselbe wie das Kreuzungsjahr.</p>
+
+    </div>
+  </div>
+</section>
+
+<section id="synthese">
+  <div class="container">
+    <div class="section-label reveal">Fazit</div>
+    <div class="sec-head reveal">
+      <div class="sec-num">·</div>
+      <h2>Kurz zusammengefasst</h2>
+    </div>
+    <div class="measure">
+
+<p class="reveal">**Kino allgemein:** Erholung ja, Vorkrisen-Niveau noch nicht. **Schweizer Film:** höherer Besuchsanteil, Sprung vor allem 2023→2024 — getragen von Fiktion und Dokumentar. **Programm vs. Publikum:** Die Lücke schrumpft. Vertiefung in der interaktiven Jahresansicht unten.</p>
 
     </div>
   </div>
@@ -119,35 +205,35 @@ Die Genre-Anteile (Fiktion, Dokumentar, Animation) verschieben sich Jahr für Ja
 
 <section id="interactive">
   <div class="container">
-    <div class="section-label reveal">Interaktiv</div>
+    <div class="section-label reveal">Vertiefung</div>
     <div class="sec-head reveal">
-      <div class="sec-num">05</div>
-      <h2>Übersicht Swiss Film</h2>
+      <div class="sec-num">↗</div>
+      <h2>Jahresverläufe im Detail</h2>
     </div>
-    <p class="measure reveal stats-intro">Jahresverläufe zu Angebot und Nachfrage, Kinosaison in zwei Wochenplots (gesamt / Schweizer Filme), Genre-Anteile und Detailansicht pro Jahr mit Vorjahresvergleich. <a href="./unified.html">Vollbild-Ansicht</a>.</p>
+    <p class="measure reveal stats-intro">Kino nach Jahr: Kennzahlen, Herkunft, Top-Länder, Genre — Jahr im Dropdown wählen.</p>
   </div>
   <div class="wide-bleed">
-    <div class="embed-frame visible" style="height: min(72vh, 820px); max-width: 1240px; margin: 0 auto;">
-      <iframe title="Übersicht Swiss Film" src="./unified.html?embed=1" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    <div class="embed-frame visible embed-frame--year-explore" style="max-width: 1240px; margin: 0 auto;">
+      <iframe title="Kino nach Jahr (PX)" src="./unified.html?embed=1&amp;panel=year" loading="lazy" referrerpolicy="no-referrer"></iframe>
     </div>
   </div>
 </section>
 
-<section>
+<section id="quellen">
   <div class="container">
-    <div class="section-label reveal">Methodik</div>
+    <div class="section-label reveal">Quellen</div>
     <div class="sec-head reveal">
-      <div class="sec-num">06</div>
-      <h2>Quellen &amp; Grenzen</h2>
+      <div class="sec-num">·</div>
+      <h2>Datengrundlage</h2>
     </div>
     <div class="measure">
 
-- **BFS PX** (jährlich): Filme im Programm und Kinobesuche nach Herkunft, Genre und Top-Ländern — Grundlage der Aussagen zu Schweizer Film am Kinomarkt.
-- **BFS P4** (wöchentlich): Besuche nach Kinowochen; Mittel über die Basisjahre 2019, 2022–2024 in der Saisongrafik.
-- **BFS VoD** (jährlich, 2019–2024): ergänzende Views nach Herkunft und Genre (anderer Markt, nicht mit Kino summierbar).
-- **Aufbereitung**: Rohdaten → `data/unified.json` via `node scripts/build_unified.mjs`; Darstellung in der eingebetteten Übersicht.
+<ul class="reveal sources-list">
+  <li><strong>PX</strong> — Kinostatistik des Bundesamts für Statistik (BFS): jährliche Aggregate zu Filmen im Programm und Kinobesuchen (keine Einzelfilme).</li>
+  <li><strong>P4</strong> — Kinostatistik des BFS nach Kinowochen: Besuche und Filme pro Woche (keine Genre-Aufteilung in den Rohdaten).</li>
+</ul>
 
-Projekt auf [GitHub](https://github.com/datenpunk-ch/swiss_film_vod).
+<p class="reveal sources-foot"><a href="https://github.com/datenpunk-ch/swiss_film_vod">GitHub-Repository</a> (Daten und Code)</p>
 
     </div>
   </div>

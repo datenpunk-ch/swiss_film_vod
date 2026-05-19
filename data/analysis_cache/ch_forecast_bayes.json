@@ -1,11 +1,11 @@
 {
-  "fingerprint": "f57cda43e5aa6f6726971372",
+  "fingerprint": "7a600f50aa9b5f8d6e7f5bc2",
   "result": {
     "id": "ch_forecast_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/05_forecast.png",
-        "caption": "Schätzung + Prognose (95 %-credible interval (HDI), grau)."
+        "caption": "CH-Besuchsanteil: Verlauf und Trend-Prognose (halbjährlich)."
       },
       {
         "src": "./assets/analysis/figures/05_forecast_forest.png",
@@ -24,8 +24,8 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [

@@ -1,0 +1,73 @@
+{
+  "fingerprint": "f1b11d87b2ace6cb62ee63b3",
+  "result": {
+    "id": "ch_countries_trend",
+    "figures": [
+      {
+        "src": "./assets/analysis/figures/08_countries_demand_share.png",
+        "caption": "Besuchsanteile der Kernländer 2014–2025 (PX, Genre-Total)."
+      },
+      {
+        "src": "./assets/analysis/figures/08_countries_supply_share.png",
+        "caption": "Programmanteile der Kernländer 2014–2025."
+      }
+    ],
+    "tables": [
+      {
+        "caption": "Besuchsanteil am Gesamtkino (2014 vs. 2025)",
+        "headers": [
+          "Land",
+          "2014",
+          "2025"
+        ],
+        "rows": [
+          [
+            "Schweiz",
+            "4,8 %",
+            "9,1 %"
+          ],
+          [
+            "Vereinigte Staaten",
+            "61,9 %",
+            "56,0 %"
+          ],
+          [
+            "Frankreich",
+            "16,2 %",
+            "8,9 %"
+          ],
+          [
+            "Deutschland",
+            "6,4 %",
+            "9,2 %"
+          ],
+          [
+            "Vereinigtes Königreich",
+            "3,9 %",
+            "6,1 %"
+          ],
+          [
+            "Italien",
+            "0,6 %",
+            "1,9 %"
+          ]
+        ]
+      }
+    ],
+    "diagnostics": [],
+    "metrics": [
+      {
+        "label": "Datenquelle",
+        "value": "unified.json · country_series",
+        "note": "Kein MCMC — deskriptive PX-Zeitreihen",
+        "ok": true
+      },
+      {
+        "label": "Länder",
+        "value": "6",
+        "note": "Kernländer + Übrige",
+        "ok": true
+      }
+    ]
+  }
+}

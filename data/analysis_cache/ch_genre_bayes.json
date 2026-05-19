@@ -1,11 +1,11 @@
 {
-  "fingerprint": "8f51b17eb332ae4c25532ec2",
+  "fingerprint": "d22a958655a3ff7b05ef3552",
   "result": {
     "id": "ch_genre_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/01_genre_trend.png",
-        "caption": "Posterior CH-Anteil je Genre (95 %-credible interval (HDI))."
+        "caption": "CH-Anteil je Genre über die Jahre."
       },
       {
         "src": "./assets/analysis/figures/01_genre_forest.png",
@@ -24,8 +24,8 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [

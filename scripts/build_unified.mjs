@@ -19,6 +19,17 @@ const CINEMA_GENRES = CFG.cinema.genres;
 const SEASON_YEARS = CFG.cinema.season_years;
 const TOP_COUNTRIES = 10;
 
+/** Feste Kernländer für Zeitreihen (Labels wie countryDisplay). */
+const TRACKED_COUNTRIES = [
+  { id: "ch", label: "Schweiz" },
+  { id: "us", label: "Vereinigte Staaten" },
+  { id: "fr", label: "Frankreich" },
+  { id: "de", label: "Deutschland" },
+  { id: "uk", label: "Vereinigtes Königreich" },
+  { id: "it", label: "Italien" },
+  { id: "other", label: "Übrige Länder" },
+];
+
 const HARM_ORIGINS = [
   { id: "ch", label: "Schweiz", color: "#b5542a", vod: "och", cinema: "och" },
   { id: "eu", label: "Europa (ohne CH)", color: "#e5d4c8", vod: "oep", cinema: "oeu" },
@@ -320,6 +331,20 @@ function buildPxPrimary(pxText) {
   const ciCh = cube.countryIndex((c) => c.includes("Schweiz") && c.startsWith("......"));
 
   const yearly = [];
+  const countrySeriesAcc = Object.fromEntries(
+    TRACKED_COUNTRIES.map((c) => [
+      c.id,
+      {
+        id: c.id,
+        label: c.label,
+        demand: [],
+        supply: [],
+        demand_share: [],
+        supply_share: [],
+      },
+    ])
+  );
+
   const series = {
     market_demand: [],
     market_supply: [],
@@ -340,9 +365,13 @@ function buildPxPrimary(pxText) {
     ch_genre_ani_supply_share: [],
   };
 
+  const curYear = new Date().getFullYear();
+  const incompleteYears = [];
+
   for (let yi = 0; yi < cube.years.length; yi++) {
     const year = cube.years[yi];
-    if (year >= new Date().getFullYear()) continue;
+    const isIncomplete = year >= curYear - 1;
+    if (isIncomplete) incompleteYears.push(year);
 
     const marketAdm =
       ciTotal >= 0 ? cube.readCell(yi, ciTotal, idxTotalFilms, cube.idxUnitAdm) : 0;
@@ -371,6 +400,38 @@ function buildPxPrimary(pxText) {
     }
     countryRows.sort((a, b) => b.demand - a.demand);
     const topCountries = countryRows.slice(0, TOP_COUNTRIES);
+
+    const trackedDemand = TRACKED_COUNTRIES.filter((c) => c.id !== "other").reduce(
+      (sum, tc) => sum + (countryRows.find((r) => r.label === tc.label)?.demand ?? 0),
+      0
+    );
+    const trackedSupply = TRACKED_COUNTRIES.filter((c) => c.id !== "other").reduce(
+      (sum, tc) => sum + (countryRows.find((r) => r.label === tc.label)?.supply ?? 0),
+      0
+    );
+    for (const tc of TRACKED_COUNTRIES) {
+      const acc = countrySeriesAcc[tc.id];
+      if (tc.id === "other") {
+        const otherDemand = Math.max(0, marketAdm - trackedDemand);
+        const otherSupply = Math.max(0, marketFilms - trackedSupply);
+        acc.demand.push({ year, value: otherDemand });
+        acc.supply.push({ year, value: otherSupply });
+        acc.demand_share.push({
+          year,
+          value: marketAdm > 0 ? otherDemand / marketAdm : null,
+        });
+        acc.supply_share.push({
+          year,
+          value: marketFilms > 0 ? otherSupply / marketFilms : null,
+        });
+        continue;
+      }
+      const row = countryRows.find((r) => r.label === tc.label);
+      acc.demand.push({ year, value: row?.demand ?? 0 });
+      acc.supply.push({ year, value: row?.supply ?? 0 });
+      acc.demand_share.push({ year, value: row?.share_demand ?? null });
+      acc.supply_share.push({ year, value: row?.share_supply ?? null });
+    }
 
     const genreDemand = { fic: 0, doc: 0, ani: 0 };
     const genreSupply = { fic: 0, doc: 0, ani: 0 };
@@ -403,6 +464,7 @@ function buildPxPrimary(pxText) {
 
     yearly.push({
       year,
+      incomplete: isIncomplete,
       market,
       origins: HARM_ORIGINS.map((h) => ({
         id: h.id,
@@ -484,13 +546,18 @@ function buildPxPrimary(pxText) {
   }
 
   yearly.sort((a, b) => a.year - b.year);
+  const country_series = TRACKED_COUNTRIES.map((tc) => countrySeriesAcc[tc.id]);
   return {
     role: "primary",
     label: "Filmangebot und Nachfrage (BFS PX)",
     slice_label: PX_SLICE,
     years: yearly.map((y) => y.year),
+    year_display: {
+      incomplete: incompleteYears,
+    },
     yearly,
     series,
+    country_series,
   };
 }
 
@@ -530,11 +597,12 @@ function main() {
     by_year: byYear,
     limitations: [
       "PX = Kinomarkt Schweiz (Sprachgebiet), nicht VoD.",
-      "Nachfrage (Besuche/Views) und Angebot (Filme) getrennt; Intensität = Besuche je Film.",
+      "Nachfrage (Besuche/Views) und Angebot (Filme) getrennt; Interesse = Ø Besuche je Film.",
       "Jahresgrafiken: Gesamtmarkt und Schweizer Filme als Linien; CH-Anteil im Tooltip, nicht als eigene Achse.",
+      "Top-Länder-Zeitreihen: feste Kernländer (CH, USA, FR, DE, UK, IT) plus «Übrige Länder» (Rest des Marktes).",
       "Kinowochen (P4): zwei Balkenplots (alle Herkünfte / CH-Filme), Ø pro Woche — kein Genre in der P4-CSV.",
       "VoD nur 2019–2024; Genre in VoD und PX.",
-      "Herkunft in Grafiken: CH rostrot, Europa beige, übrige Welt schwarz (PX aus Ländern; P4/VoD BFS-Codes).",
+      "Herkunft nach Region (Schweiz, Europa, übrige Welt); Zuordnung aus PX-Ländern bzw. BFS-Codes bei P4/VoD.",
       "Pfeilwerte (↑/↓) = Veränderung ggü. Vorjahr (siehe Hinweis über den Grafikbereichen).",
     ],
     bfs_metadata: bfsMeta ? CFG.paths.bfs_metadata : null,

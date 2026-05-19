@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T17:09:04.119004+00:00",
+  "generated_at": "2026-05-19T14:04:44.331768+00:00",
   "locale": "de-CH",
   "scope": "Kino (BFS PX + P4)",
   "analyses": [
@@ -8,7 +8,7 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/01_genre_trend.png",
-          "caption": "Posterior CH-Anteil je Genre (95 %-credible interval (HDI))."
+          "caption": "CH-Anteil je Genre über die Jahre."
         },
         {
           "src": "./assets/analysis/figures/01_genre_forest.png",
@@ -27,8 +27,8 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
@@ -116,11 +116,11 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/06_genremix_demand.png",
-          "caption": "Posterior Genre-Mix Kinobesuche (95 %-credible interval (HDI))."
+          "caption": "Genre-Anteile an Kinobesuchen über die Jahre."
         },
         {
           "src": "./assets/analysis/figures/06_genremix_supply.png",
-          "caption": "Posterior Genre-Mix Kinoprogramm (95 %-credible interval (HDI))."
+          "caption": "Genre-Anteile im Kinoprogramm über die Jahre."
         },
         {
           "src": "./assets/analysis/figures/06_genremix_contrib.png",
@@ -128,7 +128,7 @@
         },
         {
           "src": "./assets/analysis/figures/06_genremix_decomp.png",
-          "caption": "Zerlegung Gesamtänderung 2014–2025 (Prozentpunkte)."
+          "caption": "Warum der CH-Gesamtanteil steigt: Mix vs. Erfolg (2014–2025, Prozentpunkte)."
         },
         {
           "src": "./assets/analysis/figures/06_genremix_forest.png",
@@ -147,8 +147,8 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
@@ -244,7 +244,7 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/02_changepoint.png",
-          "caption": "CH-Anteil mit Change-Point bei 2022 (95 %-credible interval (HDI))."
+          "caption": "CH-Besuchsanteil mit Strukturbruch (explorativ); Schätzung ohne 2020–2022, Zusatz-Trend ab 2023."
         },
         {
           "src": "./assets/analysis/figures/02_changepoint_forest.png",
@@ -263,25 +263,25 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
               "β₁",
               "Trend vor/nach τ (Basis)",
-              "0,049",
+              "0,068",
               "0,0003",
-              "0,048 – 0,049",
+              "0,067 – 0,069",
               "100,0 %"
             ],
             [
               "β₂",
-              "Zusatz-Trend ab 2022",
-              "0,002",
+              "Zusatz-Trend ab 2023",
+              "-0,021",
               "0,0005",
-              "0,001 – 0,003",
-              "99,9 %"
+              "-0,022 – -0,021",
+              "0,0 %"
             ]
           ]
         }
@@ -289,19 +289,19 @@
       "diagnostics": [
         {
           "label": "R̂ max",
-          "value": "1.000",
+          "value": "1.010",
           "note": "Ziel < 1,01",
-          "ok": true
+          "ok": false
         },
         {
           "label": "ESS bulk (min)",
-          "value": "609",
+          "value": "809",
           "note": "Ziel ≥ 400",
           "ok": true
         },
         {
           "label": "ESS tail (min)",
-          "value": "789",
+          "value": "867",
           "note": "Ziel ≥ 400",
           "ok": true
         },
@@ -331,13 +331,18 @@
           2017,
           2018,
           2019,
-          2022,
           2023,
           2024,
           2025
         ],
-        "year_center": 2019.3,
-        "break_year": 2022
+        "year_center": 2019.0,
+        "break_year": 2023,
+        "transition_years": [
+          2020,
+          2021,
+          2022
+        ],
+        "fit_excludes": "2020–2022"
       }
     },
     {
@@ -345,15 +350,15 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/07_absolute_ch.png",
-          "caption": "Posterior CH-Besuche absolut (95 %-credible interval (HDI))."
+          "caption": "Schweizer Kinobesuche über die Jahre (Modell mit Schätzbereich)."
         },
         {
           "src": "./assets/analysis/figures/07_absolute_market_ch.png",
-          "caption": "Gesamtmarkt vs. CH-Besuche (Mio.)."
+          "caption": "Kinobesuche in Millionen — Gesamtmarkt und Schweizer Film."
         },
         {
           "src": "./assets/analysis/figures/07_absolute_rate.png",
-          "caption": "Impliziter CH-Anteil aus dem Offset-Modell (95 %-credible interval (HDI))."
+          "caption": "CH-Anteil, abgeleitet aus dem Offset-Modell."
         },
         {
           "src": "./assets/analysis/figures/07_absolute_forest.png",
@@ -372,8 +377,8 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
@@ -453,7 +458,7 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/03_gap_trend.png",
-          "caption": "Posterior der Lücke (95 %-credible interval (HDI))."
+          "caption": "Programm-Lücke in Prozentpunkten (Angebot minus Besuche)."
         },
         {
           "src": "./assets/analysis/figures/03_gap_forest.png",
@@ -462,6 +467,10 @@
         {
           "src": "./assets/analysis/figures/03_gap_trace.png",
           "caption": "MCMC-Trace β."
+        },
+        {
+          "src": "./assets/analysis/figures/03_gap_forecast.png",
+          "caption": "Prognose der Programm-Lücke bis 2030; markiertes Kreuzungsjahr = Median T* (Programm- und Besuchsanteil gleich). Lineare Extrapolation — Aussagekraft begrenzt."
         }
       ],
       "tables": [
@@ -472,17 +481,113 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
               "β",
-              "Trend Lücke (pp/Jahr)",
+              "Trend Lücke (Pp./Jahr)",
               "-0,832",
               "0,1297",
               "-1,105 – -0,590",
               "100,0 %"
+            ]
+          ]
+        },
+        {
+          "caption": "Prognose Lücke bis 2030 (halbjährlich, lineare Extrapolation)",
+          "headers": [
+            "Periode",
+            "Median Lücke",
+            "95 %-HDI (höchst. Dichtheitsintervall)",
+            "Wahrscheinlichkeit: Lücke ausgeglichen"
+          ],
+          "rows": [
+            [
+              "2026",
+              "1.8 Pp.",
+              "-0.3 Pp. – 3.7 Pp.",
+              "3,44 %"
+            ],
+            [
+              "Jul 2026",
+              "1.4 Pp.",
+              "-0.8 Pp. – 3.4 Pp.",
+              "8,38 %"
+            ],
+            [
+              "2027",
+              "1.0 Pp.",
+              "-1.4 Pp. – 3.1 Pp.",
+              "16,44 %"
+            ],
+            [
+              "Jul 2027",
+              "0.6 Pp.",
+              "-1.8 Pp. – 2.8 Pp.",
+              "28,88 %"
+            ],
+            [
+              "2028",
+              "0.2 Pp.",
+              "-2.4 Pp. – 2.5 Pp.",
+              "43,53 %"
+            ],
+            [
+              "Jul 2028",
+              "-0.2 Pp.",
+              "-2.9 Pp. – 2.2 Pp.",
+              "57,91 %"
+            ],
+            [
+              "2029",
+              "-0.7 Pp.",
+              "-3.4 Pp. – 2.0 Pp.",
+              "69,81 %"
+            ],
+            [
+              "Jul 2029",
+              "-1.1 Pp.",
+              "-3.9 Pp. – 1.7 Pp.",
+              "78,66 %"
+            ],
+            [
+              "2030",
+              "-1.5 Pp.",
+              "-4.5 Pp. – 1.4 Pp.",
+              "85,72 %"
+            ],
+            [
+              "Jul 2030",
+              "-1.9 Pp.",
+              "-5.1 Pp. – 1.0 Pp.",
+              "90,41 %"
+            ]
+          ]
+        },
+        {
+          "caption": "Null-Kreuzung der Programm-Lücke (kontinuierlich, μ_t = 0)",
+          "headers": [
+            "Grösse",
+            "Wert"
+          ],
+          "rows": [
+            [
+              "T* (Median)",
+              "2028,2"
+            ],
+            [
+              "T* (95 %-HDI, höchst. Dichtheitsintervall)",
+              "2025,6 – 2031,7"
+            ],
+            [
+              "Wahrscheinlichkeit Kreuzung bis 2030",
+              "85,72 %"
+            ],
+            [
+              "Wahrscheinlichkeit: Trend sinkt",
+              "100,00 %"
             ]
           ]
         }
@@ -537,8 +642,64 @@
           2024,
           2025
         ],
-        "year_center": 2019.3
-      }
+        "year_center": 2019.3,
+        "forecast_times": [
+          2026.0,
+          2026.5,
+          2027.0,
+          2027.5,
+          2028.0,
+          2028.5,
+          2029.0,
+          2029.5,
+          2030.0,
+          2030.5
+        ]
+      },
+      "metrics": [
+        {
+          "label": "Chance: Lücke im Jahr 2030 ausgeglichen",
+          "value": "90,41 %",
+          "note": "Nicht dasselbe wie das Kreuzungsjahr auf der Grafik",
+          "ok": null
+        },
+        {
+          "label": "Median T* (Kreuzung)",
+          "value": "2028,2",
+          "note": "Kreuzung bis 2030: 85,66 %",
+          "ok": null
+        },
+        {
+          "label": "Hinweis",
+          "value": "—",
+          "note": "Prognose = linearer Trend — kein garantiertes Schliessen; Trend kann abflachen.",
+          "ok": false
+        },
+        {
+          "label": "Hinweis",
+          "value": "—",
+          "note": "Lücke in Prozentpunkten (pp): Differenz zweier Anteile — nicht mit «%» Relativänderung verwechseln.",
+          "ok": false
+        },
+        {
+          "label": "Hinweis",
+          "value": "—",
+          "note": "Negative Lücke möglich (Publikum > Programm); Modell erlaubt das, Interpretation dann «Überholung».",
+          "ok": false
+        },
+        {
+          "label": "Hinweis",
+          "value": "—",
+          "note": "Nur Jahresaggregate; Programm- und Besuchsanteil können sich unabhängig bewegen.",
+          "ok": false
+        },
+        {
+          "label": "Hinweis",
+          "value": "—",
+          "note": "Kreuzungsjahr T* nur sinnvoll bei β < 0; sonst keine Null-Kreuzung im Modell.",
+          "ok": false
+        }
+      ]
     },
     {
       "id": "ch_weekly_bayes",
@@ -606,7 +767,7 @@
       "figures": [
         {
           "src": "./assets/analysis/figures/05_forecast.png",
-          "caption": "Schätzung + Prognose (95 %-credible interval (HDI), grau)."
+          "caption": "CH-Besuchsanteil: Verlauf und Trend-Prognose (halbjährlich)."
         },
         {
           "src": "./assets/analysis/figures/05_forecast_forest.png",
@@ -625,8 +786,8 @@
             "Bedeutung",
             "Mittelwert",
             "SD",
-            "95 %-HDI",
-            "Pd"
+            "95 %-HDI (höchstes Dichtheitsintervall)",
+            "Pd (Richtungswahrscheinlichkeit)"
           ],
           "rows": [
             [
@@ -692,6 +853,76 @@
         ],
         "year_center": 2019.3
       }
+    },
+    {
+      "id": "ch_countries_trend",
+      "figures": [
+        {
+          "src": "./assets/analysis/figures/08_countries_demand_share.png",
+          "caption": "Besuchsanteile der Kernländer 2014–2025 (PX, Genre-Total)."
+        },
+        {
+          "src": "./assets/analysis/figures/08_countries_supply_share.png",
+          "caption": "Programmanteile der Kernländer 2014–2025."
+        }
+      ],
+      "tables": [
+        {
+          "caption": "Besuchsanteil am Gesamtkino (2014 vs. 2025)",
+          "headers": [
+            "Land",
+            "2014",
+            "2025"
+          ],
+          "rows": [
+            [
+              "Schweiz",
+              "4,8 %",
+              "9,1 %"
+            ],
+            [
+              "Vereinigte Staaten",
+              "61,9 %",
+              "56,0 %"
+            ],
+            [
+              "Frankreich",
+              "16,2 %",
+              "8,9 %"
+            ],
+            [
+              "Deutschland",
+              "6,4 %",
+              "9,2 %"
+            ],
+            [
+              "Vereinigtes Königreich",
+              "3,9 %",
+              "6,1 %"
+            ],
+            [
+              "Italien",
+              "0,6 %",
+              "1,9 %"
+            ]
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "metrics": [
+        {
+          "label": "Datenquelle",
+          "value": "unified.json · country_series",
+          "note": "Kein MCMC — deskriptive PX-Zeitreihen",
+          "ok": true
+        },
+        {
+          "label": "Länder",
+          "value": "6",
+          "note": "Kernländer + Übrige",
+          "ok": true
+        }
+      ]
     }
   ]
 }

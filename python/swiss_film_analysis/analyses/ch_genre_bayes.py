@@ -111,7 +111,7 @@ def _run(ctx: CinemaContext) -> dict:
     return analysis_result(
         id="ch_genre_bayes",
         figures=[
-            {"src": fig1, "caption": f"Posterior CH-Anteil je Genre ({HDI_LABEL})."},
+            {"src": fig1, "caption": "CH-Anteil je Genre über die Jahre."},
             {"src": fig2, "caption": "Forest-Plot β (Auszug Fiktion/Dokumentar)."},
             {"src": fig3, "caption": "MCMC-Trace Hyperpriors."},
         ],

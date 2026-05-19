@@ -61,7 +61,7 @@
   function renderMcmc(mcmc) {
     if (!mcmc) return "";
     const items = [
-      `Sampler: ${mcmc.sampler || "—"}`,
+      `MCMC: Markov Chain Monte Carlo (Sampler: ${mcmc.sampler || "—"})`,
       `Ketten: ${mcmc.chains ?? "—"}, Tune-in: ${mcmc.tune ?? "—"}, Draws: ${mcmc.draws ?? "—"}`,
       `target_accept: ${mcmc.target_accept ?? "—"}`,
     ];

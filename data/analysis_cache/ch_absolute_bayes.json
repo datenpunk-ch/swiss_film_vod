@@ -1,19 +1,19 @@
 {
-  "fingerprint": "3570764af4e9bf94f883279b",
+  "fingerprint": "aeb941789cf6ae65ad094287",
   "result": {
     "id": "ch_absolute_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/07_absolute_ch.png",
-        "caption": "Posterior CH-Besuche absolut (95 %-credible interval (HDI))."
+        "caption": "Schweizer Kinobesuche über die Jahre (Modell mit Schätzbereich)."
       },
       {
         "src": "./assets/analysis/figures/07_absolute_market_ch.png",
-        "caption": "Gesamtmarkt vs. CH-Besuche (Mio.)."
+        "caption": "Kinobesuche in Millionen — Gesamtmarkt und Schweizer Film."
       },
       {
         "src": "./assets/analysis/figures/07_absolute_rate.png",
-        "caption": "Impliziter CH-Anteil aus dem Offset-Modell (95 %-credible interval (HDI))."
+        "caption": "CH-Anteil, abgeleitet aus dem Offset-Modell."
       },
       {
         "src": "./assets/analysis/figures/07_absolute_forest.png",
@@ -32,8 +32,8 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [

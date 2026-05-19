@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import ChartFrame from "./components/ChartFrame.jsx";
-import KpiGrid from "./components/KpiGrid.jsx";
+import CountryTrendChart from "./components/CountryTrendChart.jsx";
 import LineTrendChart from "./components/LineTrendChart.jsx";
 import YearShareBarChart from "./components/YearShareBarChart.jsx";
 import MetricChartGroup from "./components/MetricChartGroup.jsx";
@@ -16,8 +16,10 @@ import {
   mergePxOrigins,
 } from "./utils/merge.js";
 import EmbedPanelContent from "./components/EmbedPanelContent.jsx";
-import { indexRowsById, SERIES_ZONE_INTRO, YOY_ARROW_HINT, YOY_YEAR_HINT } from "./utils/format.js";
+import YearCinemaPanel from "./components/YearCinemaPanel.jsx";
+import { indexRowsById, SERIES_ZONE_INTRO, YOY_ARROW_HINT } from "./utils/format.js";
 import { getEmbedPanel } from "./utils/embedPanel.js";
+import { resolveDimmedYears } from "./utils/yearDisplay.js";
 
 const isEmbed = document.documentElement.classList.contains("is-embed");
 const embedPanel = getEmbedPanel();
@@ -40,6 +42,7 @@ export default function App() {
   const vod = data?.supplementary?.vod;
   const p4 = data?.supplementary?.cinema_p4;
   const years = px?.years ?? data?.years ?? [];
+  const dimmedYears = useMemo(() => resolveDimmedYears(px, years), [px, years]);
   const [year, setYear] = useState(null);
 
   const activeYear = year ?? years[years.length - 1];
@@ -119,6 +122,46 @@ export default function App() {
     return { data: joinSeries(keys), series: keys };
   }, [px]);
 
+  const countryTrendDemand = useMemo(() => {
+    const cs = px?.country_series ?? [];
+    if (!cs.length) return { data: [], series: [], colors: {} };
+    const keys = cs.map((c) => ({
+      key: c.id,
+      label: c.label,
+      points: c.demand_share ?? [],
+    }));
+    const colors = buildCountryColorMap(keys.map((k) => ({ id: k.key, label: k.label })));
+    const series = keys.map((k) => ({
+      ...k,
+      color: k.key === "ch" ? SERIES_PAIR.second : (colors[k.key] ?? SERIES_PAIR.first),
+    }));
+    return {
+      data: joinSeries(series),
+      series,
+      colors,
+    };
+  }, [px]);
+
+  const countryTrendSupply = useMemo(() => {
+    const cs = px?.country_series ?? [];
+    if (!cs.length) return { data: [], series: [], colors: {} };
+    const keys = cs.map((c) => ({
+      key: c.id,
+      label: c.label,
+      points: c.supply_share ?? [],
+    }));
+    const colors = buildCountryColorMap(keys.map((k) => ({ id: k.key, label: k.label })));
+    const series = keys.map((k) => ({
+      ...k,
+      color: k.key === "ch" ? SERIES_PAIR.second : (colors[k.key] ?? SERIES_PAIR.first),
+    }));
+    return {
+      data: joinSeries(series),
+      series,
+      colors,
+    };
+  }, [px]);
+
   const seasonProfile = p4?.season?.profile ?? [];
   const seasonProfileCh = p4?.season?.ch_profile ?? [];
   const seasonYears = p4?.season?.years ?? [];
@@ -142,17 +185,7 @@ export default function App() {
     );
   }
 
-  const harmonized = data.harmonized;
-  if (!harmonized?.origins?.length || !harmonized?.genres?.length) {
-    return (
-      <div className="wrap">
-        <p className="page-intro-lead panel-error">
-          Daten unvollständig (<code>harmonized</code> fehlt in unified.json). Bitte{" "}
-          <code>node scripts/build_unified.mjs</code> ausführen.
-        </p>
-      </div>
-    );
-  }
+  const harmonized = data.harmonized ?? { origins: [], genres: [] };
 
   const originRows = mergePxOrigins(harmonized, pxRow?.origins);
   const genreRows = mergePxGenres(harmonized, pxRow?.genres);
@@ -200,10 +233,22 @@ export default function App() {
 
   if (embedPanel) {
     return (
-      <div className="wrap wrap-embed-panel">
+      <div className={`wrap wrap-embed-panel${embedPanel === "year" ? " wrap-embed-year" : ""}`}>
         <EmbedPanelContent
           panel={embedPanel}
           px={px}
+          years={years}
+          activeYear={activeYear}
+          onYearChange={setYear}
+          pxRow={pxRow}
+          prevPxRow={prevYearPxRow}
+          originRows={originRows}
+          genreRows={genreRows}
+          topCountries={topCountries}
+          topCountryColors={topCountryColors}
+          prevOriginById={prevOriginById}
+          prevGenreById={prevGenreById}
+          prevTopById={prevTopById}
           supplyTrendData={supplyTrendData}
           demandTrendData={demandTrendData}
           seasonProfile={seasonProfile}
@@ -211,7 +256,20 @@ export default function App() {
           seasonYears={seasonYears}
           genreTrendDemand={genreTrendDemand}
           chGenreTrendDemand={chGenreTrendDemand}
+          countryTrendDemand={countryTrendDemand}
+          dimmedYears={dimmedYears}
         />
+      </div>
+    );
+  }
+
+  if (!data.harmonized?.origins?.length || !data.harmonized?.genres?.length) {
+    return (
+      <div className="wrap">
+        <p className="page-intro-lead panel-error">
+          Daten unvollständig (<code>harmonized</code> fehlt in unified.json). Bitte{" "}
+          <code>node scripts/build_unified.mjs</code> ausführen.
+        </p>
       </div>
     );
   }
@@ -236,12 +294,14 @@ export default function App() {
             <div className="panel-label">Angebot (PX)</div>
             <p className="panel-intro panel-intro-meta">{px?.slice_label}</p>
             <p className="panel-intro">
-              Filme im Programm: Gesamtmarkt und Schweizer Filme (CH-Anteil im Tooltip).
+              Filme im Programm: Gesamtmarkt und Schweizer Filme im Vergleich (Anzahl Filme).
             </p>
             <ChartFrame title="Filme im Programm">
               <LineTrendChart
                 data={supplyTrendData}
-                height={240}
+                height={260}
+                sharedYDomain
+                dimmedYears={dimmedYears}
                 chShareDenominatorKey="market"
                 series={[
                   { key: "market", label: "Gesamtmarkt", color: SERIES_PAIR.first },
@@ -257,12 +317,14 @@ export default function App() {
             <div className="panel-label">Nachfrage (PX)</div>
             <p className="panel-intro panel-intro-meta">{px?.slice_label}</p>
             <p className="panel-intro">
-              Kinobesuche: gleiche Darstellung wie beim Angebot (Gesamtmarkt und Schweizer Filme).
+              Kinobesuche in Millionen: Gesamtmarkt und Schweizer Filme im Vergleich (CH-Anteil im Tooltip).
             </p>
             <ChartFrame title="Kinobesuche">
               <LineTrendChart
                 data={demandTrendData}
-                height={240}
+                height={260}
+                sharedYDomain
+                dimmedYears={dimmedYears}
                 chShareDenominatorKey="market"
                 series={[
                   { key: "market", label: "Gesamtmarkt", color: SERIES_PAIR.first },
@@ -273,12 +335,46 @@ export default function App() {
           </section>
         )}
 
+        {(countryTrendDemand.data.length > 0 || countryTrendSupply.data.length > 0) && (
+          <section className="panel panel-primary" id="countries">
+            <div className="panel-label">Top-Länder über die Jahre (PX)</div>
+            <p className="panel-intro">
+              Anteil am Gesamtkino für Schweiz, USA, Frankreich, Deutschland, UK, Italien und Übrige
+              Länder (Restsumme) — je Land eine Linie über alle Jahre. Schweiz in Rostrot.
+            </p>
+            <div className="panel-chart-stack is-country-trends">
+              {countryTrendDemand.data.length > 0 && (
+                <ChartFrame title="Besuchsanteil">
+                  <CountryTrendChart
+                    data={countryTrendDemand.data}
+                    series={countryTrendDemand.series}
+                    colors={countryTrendDemand.colors}
+                    dimmedYears={dimmedYears}
+                    height={300}
+                  />
+                </ChartFrame>
+              )}
+              {countryTrendSupply.data.length > 0 && (
+                <ChartFrame title="Programmanteil">
+                  <CountryTrendChart
+                    data={countryTrendSupply.data}
+                    series={countryTrendSupply.series}
+                    colors={countryTrendSupply.colors}
+                    dimmedYears={dimmedYears}
+                    height={300}
+                  />
+                </ChartFrame>
+              )}
+            </div>
+          </section>
+        )}
+
         {seasonProfile.length > 0 && (
           <section className="panel panel-primary">
             <div className="panel-label">Nachfrage · Besuche pro Kinowoche (P4)</div>
             <p className="panel-intro">
-              Zwei Balkendiagramme: Gesamtbesuche aller Herkünfte (Schwarztöne) und Besuche bei
-              Schweizer Filmen (Rottöne), jeweils Ø pro Kinowoche.
+              Durchschnittliche Besuche pro Kinowoche — einmal für alle Herkünfte, einmal für Schweizer
+              Filme.
               {seasonYears.length
                 ? ` Basisjahre: ${seasonYears.join(", ")} (Mittel über diese Jahre).`
                 : ""}{" "}
@@ -321,7 +417,12 @@ export default function App() {
               <div className="panel-label panel-label-sub">Angebot</div>
               <div className="unified-grid is-genre-years">
                 <ChartFrame title="Gesamtmarkt · Anteil">
-                  <YearShareBarChart data={genreTrendSupply.data} series={genreTrendSupply.series} height={300} />
+                  <YearShareBarChart
+                    data={genreTrendSupply.data}
+                    series={genreTrendSupply.series}
+                    height={300}
+                    dimmedYears={dimmedYears}
+                  />
                 </ChartFrame>
                 {chGenreTrendSupply.data.length > 0 && (
                   <ChartFrame title="Schweizer Filme · Anteil">
@@ -334,7 +435,12 @@ export default function App() {
               <div className="panel-label panel-label-sub">Nachfrage</div>
               <div className="unified-grid is-genre-years">
                 <ChartFrame title="Gesamtmarkt · Anteil">
-                  <YearShareBarChart data={genreTrendDemand.data} series={genreTrendDemand.series} height={300} />
+                  <YearShareBarChart
+                    data={genreTrendDemand.data}
+                    series={genreTrendDemand.series}
+                    height={300}
+                    dimmedYears={dimmedYears}
+                  />
                 </ChartFrame>
                 {chGenreTrendDemand.data.length > 0 && (
                   <ChartFrame title="Schweizer Filme · Anteil">
@@ -347,63 +453,20 @@ export default function App() {
         </section>
       </div>
 
-      <div className="dashboard-zone dashboard-zone--year">
-        <h2 className="dashboard-zone-title">Nach Jahr</h2>
-        <p className="panel-intro panel-intro-meta">{YOY_YEAR_HINT}</p>
-
-        <div className="controls controls-year-only">
-          <div className="control-group">
-            <label htmlFor="yearSelect">Jahr (PX, VoD)</label>
-            <select
-              id="yearSelect"
-              value={activeYear ?? ""}
-              onChange={(e) => setYear(Number(e.target.value))}
-            >
-              {years.map((y) => (
-                <option key={y} value={y}>
-                  {y}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <section className="panel panel-primary">
-          <div className="panel-label">Kinomarkt Schweiz (PX) · {activeYear}</div>
-          <KpiGrid pxRow={pxRow} prevPxRow={prevYearPxRow} year={activeYear} />
-        </section>
-
-        <section className="panel panel-primary">
-          <div className="panel-label">Herkunft (CH · Europa · Welt) · {activeYear}</div>
-          <MetricChartGroup
-            rows={originRows}
-            colors={ORIGIN_COLORS}
-            marketIntensity={pxRow?.market?.intensity}
-            grouped
-            prevRowById={prevOriginById}
-          />
-          <div className="panel-label panel-label-sub">Top-Länder</div>
-          <MetricChartGroup
-            rows={topCountries}
-            colors={topCountryColors}
-            variant="countries"
-            barHeight={200}
-            marketIntensity={pxRow?.market?.intensity}
-            grouped
-            prevRowById={prevTopById}
-          />
-        </section>
-
-        <section className="panel panel-primary">
-          <div className="panel-label">Genre (Fiktion · Dokumentar · Animation) · {activeYear}</div>
-          <MetricChartGroup
-            rows={genreRows}
-            colors={GENRE_COLORS}
-            marketIntensity={pxRow?.market?.intensity}
-            grouped
-            prevRowById={prevGenreById}
-          />
-        </section>
+      <YearCinemaPanel
+        years={years}
+        activeYear={activeYear}
+        onYearChange={setYear}
+        pxRow={pxRow}
+        prevPxRow={prevYearPxRow}
+        originRows={originRows}
+        genreRows={genreRows}
+        topCountries={topCountries}
+        topCountryColors={topCountryColors}
+        prevOriginById={prevOriginById}
+        prevGenreById={prevGenreById}
+        prevTopById={prevTopById}
+      />
 
         <section className="panel panel-supplementary">
           <div className="panel-label">Zusatzdaten: VoD &amp; Kinowochen · {activeYear}</div>
@@ -467,11 +530,9 @@ export default function App() {
           )}
 
           <p className="panel-intro meta-note">
-            Kinowochen (P4) ohne Genre-Spalte; Genre und detaillierte Herkunft über PX und VoD. Top-Länder
-            mit je eigener Farbe (Schweiz rostrot).
+            Kinowochen (P4) ohne Genre-Spalte; Genre und detaillierte Herkunft über PX und VoD.
           </p>
         </section>
-      </div>
 
       <section className="panel">
         <div className="panel-label">Grenzen</div>

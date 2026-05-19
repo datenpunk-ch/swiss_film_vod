@@ -1,3 +1,5 @@
+import { CHART_SURFACE } from "../constants.js";
+
 /** Fester Container — verhindert Recharts width/height = 0 in CSS-Grid. */
 export default function ChartBox({ height, children }) {
   return (
@@ -8,6 +10,7 @@ export default function ChartBox({ height, children }) {
         height,
         minHeight: height,
         minWidth: 120,
+        background: CHART_SURFACE,
       }}
     >
       {children}

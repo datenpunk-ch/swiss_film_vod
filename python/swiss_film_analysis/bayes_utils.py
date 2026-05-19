@@ -4,7 +4,10 @@ import numpy as np
 
 HDI_PROB = 0.95
 HDI_PCT = int(HDI_PROB * 100)
-HDI_LABEL = f"{HDI_PCT} %-credible interval (HDI)"
+# Vollform mindestens einmal in Beschriftungen; danach Abkürzung HDI.
+HDI_LABEL = f"{HDI_PCT} %-höchstes Dichtheitsintervall (HDI)"
+HDI_COL = f"{HDI_PCT} %-HDI"
+PD_COL = "Pd (Richtungswahrscheinlichkeit)"
 
 
 def probability_of_direction(samples: np.ndarray, *, positive: bool = True) -> float:
@@ -135,7 +138,7 @@ def extract_mcmc_diagnostics(idata, var_names: list[str]) -> list[dict]:
 
 
 def posterior_table_rows(rows: list[dict]) -> dict:
-    headers = ["Parameter", "Bedeutung", "Mittelwert", "SD", f"{HDI_PCT} %-HDI", "Pd"]
+    headers = ["Parameter", "Bedeutung", "Mittelwert", "SD", f"{HDI_COL} (höchstes Dichtheitsintervall)", PD_COL]
     body = []
     for r in rows:
         pd_val = r.get("pd_label", "—")
@@ -154,3 +157,29 @@ def posterior_table_rows(rows: list[dict]) -> dict:
 
 def fmt_num(x: float, *, decimals: int = 3) -> str:
     return f"{x:.{decimals}f}".replace(".", ",")
+
+
+def forecast_half_year_times(
+    last_obs_year: int,
+    *,
+    end_year: int | None = None,
+    years_ahead: int = 3,
+) -> np.ndarray:
+    """Halbjahresschritte ab Jan des Jahres nach last_obs_year (…, Jul, Jan+1, …)."""
+    start = float(int(last_obs_year) + 1)
+    end = float(end_year if end_year is not None else int(last_obs_year) + years_ahead) + 0.5
+    n = int(round((end - start) / 0.5)) + 1
+    return start + 0.5 * np.arange(max(n, 1), dtype=float)
+
+
+def format_time_period(t: float) -> str:
+    """Lesbare Periode für Tabellen (Jahreswerte vs. Jul-Halbjahr)."""
+    y = int(t)
+    if abs(t - y) < 1e-6:
+        return str(y)
+    return f"Jul {y}"
+
+
+def format_time_tick(t: float) -> str:
+    """Achsenbeschriftung: nur Kalenderjahre (Halbjahre wie Jul 2026 nur in Tabellen)."""
+    return str(int(round(t)))

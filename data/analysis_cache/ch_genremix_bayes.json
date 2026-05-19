@@ -1,15 +1,15 @@
 {
-  "fingerprint": "b0ff5602ceae760e37a82f5c",
+  "fingerprint": "021dd4481ac916427a2050f0",
   "result": {
     "id": "ch_genremix_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/06_genremix_demand.png",
-        "caption": "Posterior Genre-Mix Kinobesuche (95 %-credible interval (HDI))."
+        "caption": "Genre-Anteile an Kinobesuchen über die Jahre."
       },
       {
         "src": "./assets/analysis/figures/06_genremix_supply.png",
-        "caption": "Posterior Genre-Mix Kinoprogramm (95 %-credible interval (HDI))."
+        "caption": "Genre-Anteile im Kinoprogramm über die Jahre."
       },
       {
         "src": "./assets/analysis/figures/06_genremix_contrib.png",
@@ -17,7 +17,7 @@
       },
       {
         "src": "./assets/analysis/figures/06_genremix_decomp.png",
-        "caption": "Zerlegung Gesamtänderung 2014–2025 (Prozentpunkte)."
+        "caption": "Warum der CH-Gesamtanteil steigt: Mix vs. Erfolg (2014–2025, Prozentpunkte)."
       },
       {
         "src": "./assets/analysis/figures/06_genremix_forest.png",
@@ -36,8 +36,8 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [

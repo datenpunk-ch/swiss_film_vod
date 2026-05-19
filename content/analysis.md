@@ -8,7 +8,7 @@
 <div class="container">
   <div class="hero-tag">Bayesian · BFS Kino</div>
   <h1>Kino-Analysen im Detail</h1>
-  <p class="hero-sub">Sieben Bayesianische Modelle mit Posterior, 95&nbsp;%-credible intervals (HDI) und Probability of Direction (Pd). Fliesstext in <code>content/analysis.md</code>; Zahlen per <code>pixi run analyze</code> (Cache). Neu schätzen: <code>pixi run analyze-force</code>. Stand: <span id="analysis-stand">—</span>.</p>
+  <p class="hero-sub">Sieben Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv). Unsicherheit: <strong>95&nbsp;%-höchstes Dichtheitsintervall (HDI)</strong>; Richtung: <strong>Richtungswahrscheinlichkeit (Pd)</strong>. Schätzung per <strong>MCMC</strong> (Markov Chain Monte Carlo, NUTS). Daten: BFS-<strong>PX</strong> (Filmangebot und Nachfrage, jährlich), BFS-<strong>P4</strong> (Kinostatistik nach Wochen). Text in <code>content/analysis.md</code>; Zahlen per <code>pixi run analyze</code>. Stand: <span id="analysis-stand">—</span>.</p>
   <p class="hero-byline"><a href="./index.html">← Artikel</a> · <a href="./unified.html">Übersicht</a></p>
 </div>
 
@@ -32,7 +32,7 @@
       </dl>
       <p class="analysis-note">Je Genre: CH-Besuche im Genre ÷ Marktbesuche im Genre. Fiktion als Referenz für den Genre-Mix-Teil in Analyse&nbsp;02.</p>
       <h3>Methode</h3>
-      <p class="analysis-prose">Partial Pooling; Unsicherheit als HDI, Richtung als Pd.</p>
+      <p class="analysis-prose">Partial Pooling; Unsicherheit als HDI-Band, Richtung als Pd (siehe Kopfzeile).</p>
       <h3>MCMC-Konfiguration</h3>
       <!--INJECT:ch_genre_bayes:mcmc-->
       <h3>Ergebnisse (Grafiken)</h3>
@@ -94,16 +94,16 @@
 <section class="analysis-block" id="ch_changepoint_bayes">
   <div class="container">
     <div class="section-label">Analyse 03</div>
-    <div class="sec-head"><div class="sec-num">03</div><h2>Bayes: Change-Point im CH-Kinoanteil</h2></div>
+    <div class="sec-head"><div class="sec-num">03</div><h2>Bayes: Change-Point im CH-Kinoanteil (explorativ)</h2></div>
     <div class="measure analysis-body">
       <h3>Fragestellung</h3>
-      <p class="analysis-prose">Verändert sich der Trend des CH-Besuchsanteils am Gesamtkino nach der Pandemie (Break τ&nbsp;=&nbsp;2022)?</p>
+      <p class="analysis-prose"><strong>Hinweis:</strong> Wegen der Pandemielücke ist dieses Modell **explorativ** — für die Kurzstory eignet sich eher der Logit-Trend (Analyse&nbsp;07). Verändert sich der Trend des CH-Besuchsanteils nach der Pandemie mit zusätzlicher Steigung ab τ?</p>
       <h3>Daten</h3>
-      <p class="analysis-prose">BFS PX Gesamtmarkt; ohne 2020–2021.</p>
+      <p class="analysis-prose">BFS PX Gesamtmarkt. Schätzjahre ohne 2020–2022 (2022 = instabile Erholung). Die Jahre 2020–2022 sind in der Grafik ausgeblendet (nicht geschätzt); ab 2023 modelliert ein zusätzlicher Trend — nicht als «Bruch» im Jahr 2022.</p>
       <h3>Modelldefinition</h3>
       <p><strong>Change-Point auf logit-Skala</strong></p>
       <dl class="analysis-dl">
-        <dt>Link</dt><dd><code>logit(p_t) = α + β₁·(Jahr−Jahr̄) + β₂·(Jahr−Jahr̄)·𝟙[Jahr ≥ 2022]</code></dd>
+        <dt>Link</dt><dd><code>logit(p_t) = α + β₁·(Jahr−Jahr̄) + β₂·(Jahr−Jahr̄)·𝟙[Jahr ≥ 2023]</code></dd>
       </dl>
       <h3>MCMC-Konfiguration</h3>
       <!--INJECT:ch_changepoint_bayes:mcmc-->
@@ -112,11 +112,16 @@
       <h3>Modellgüte (MCMC-Diagnostik)</h3>
       <!--INJECT:ch_changepoint_bayes:diagnostics-->
       <h3>Ergebnisse im Detail</h3>
-      <p class="analysis-prose">Das Modell trennt Basis-Trend (β₁) von zusätzlicher Steigung ab 2022 (β₂). Die Grafik zeigt Erholung nach der Pandemie und ein höheres Niveau als vor 2019 — nicht zwingend «Rekord», aber struktureller Schub.</p>
+      <p class="analysis-prose">Nur der <strong>CH-Besuchsanteil</strong> — nicht absolute Kinobesuche (Analyse&nbsp;04). Schätzjahre ohne 2020–2022; τ&nbsp;=&nbsp;2023. 2022: Übergang (Markt ~8,7&nbsp;Mio. Besuche, CH-Anteil ~5 %). Der beobachtete Sprung liegt bei <strong>2023→2024</strong> (~6,3 % → ~8,9 %). Mit ausgeschlossenem 2022 schätzt β₁ den langfristigen Anstieg; ein zusätzlicher linearer β₂-Slope ab τ fängt den konzentrierten Sprung nicht vollständig — in der Grafik als Niveau-Anhebung sichtbar. Gesamtmarkt-Besuche haben keinen gemeinsamen «CH-Change-Point» in diesem Modell.</p>
       <h3>Posterior-Zusammenfassung</h3>
       <!--INJECT:ch_changepoint_bayes:tables-->
       <h3>Grenzen</h3>
-      <ul><li>τ auf 2022 fixiert (nicht geschätzt).</li><li>Nur Besuchsanteil — absolute Besuche: Analyse&nbsp;04.</li></ul>
+      <ul>
+        <li>τ fix auf 2023 (nicht geschätzt); 2020–2022 aus der Schätzung — graue Fläche ≠ Break-Jahr.</li>
+        <li>β₂ fängt einen konzentrierten Sprung 2023→2024 nicht zuverlässig; Modell fragil.</li>
+        <li>Nur CH-Anteil am Besuch — keine Länder- oder Gesamtmarkt-Change-Points.</li>
+        <li>Absolute Besuche: Analyse&nbsp;04.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -174,11 +179,20 @@
       <h3>Modellgüte (MCMC-Diagnostik)</h3>
       <!--INJECT:ch_gap_bayes:diagnostics-->
       <h3>Ergebnisse im Detail</h3>
-      <p class="analysis-prose">Positive Lücke: mehr Programmplatz als Publikumsanteil. Posterior Trend β&nbsp;&lt;&nbsp;0 bedeutet: die Lücke schrumpft — das Publikum holt relativ zum Programm auf, ohne dass sie zwingend null wird.</p>
+      <p class="analysis-prose">Die <strong>Lücke</strong> ist die Differenz zweier Anteile: Programmanteil CH minus Besuchsanteil CH, in <strong>Prozentpunkten</strong> (nicht «Prozent» im Sinne von Relativwachstum). Beispiel: 12&nbsp;% Programm und 10,5&nbsp;% Besuche → Lücke 1,5&nbsp;Prozentpunkte.</p>
+      <p class="analysis-prose">Positive Lücke: mehr Programmplatz als Publikumsanteil. Der Trend ist fallend: die Lücke schrumpft — das Publikum holt auf. Ob und wann sie <strong>null</strong> wird, zeigt eine <strong>lineare Prognose</strong> aus demselben Modell — mit begrenzter Aussagekraft.</p>
+      <h3>Prognose (Lücke = 0?)</h3>
+      <!--INJECT:ch_gap_bayes:figure:3-->
+      <h3>Kennzahlen &amp; Warnungen</h3>
+      <!--INJECT:ch_gap_bayes:metrics-->
       <h3>Posterior-Zusammenfassung</h3>
       <!--INJECT:ch_gap_bayes:tables-->
       <h3>Grenzen</h3>
-      <ul><li>Jahresaggregate; keine Genre-Aufteilung der Lücke.</li></ul>
+      <ul>
+        <li>Prognose = Trendextrapolation, kein Szenario für Programmpolitik oder Produktion.</li>
+        <li>Prozentpunkte ≠ Prozent: Lücke ist Differenz, nicht Quotient.</li>
+        <li>Jahresaggregate; keine Genre-Aufteilung der Lücke.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -236,21 +250,52 @@
   </div>
 </section>
 
+<section class="analysis-block" id="ch_countries_trend">
+  <div class="container">
+    <div class="section-label">Analyse 08</div>
+    <div class="sec-head"><div class="sec-num">08</div><h2>Länder im Zeitverlauf (PX, deskriptiv)</h2></div>
+    <div class="measure analysis-body">
+      <h3>Fragestellung</h3>
+      <p class="analysis-prose">Wie verschieben sich die Anteile der wichtigsten Herkunftsländer am Kinomarkt über die Jahre — und wo steht die Schweiz im Vergleich zu USA und europäischen Produktionsländern?</p>
+      <h3>Daten</h3>
+      <p class="analysis-prose">BFS PX, Genre-Total, alle Herkunftsländer je Jahr. Feste Kernländer: Schweiz, USA, Frankreich, Deutschland, UK, Italien; «Übrige Länder» = Rest des Marktes. Kein MCMC — Zeitreihen aus <code>unified.json</code> (<code>country_series</code>).</p>
+      <h3>Methode</h3>
+      <p class="analysis-prose">Anteil Besuche bzw. Filme am Gesamtmarkt pro Jahr. Ergänzt die Top-Länder-Balken in der <a href="./unified.html#countries">interaktiven Übersicht</a> (dort nur ein Jahr sichtbar).</p>
+      <h3>Ergebnisse (Grafiken)</h3>
+      <!--INJECT:ch_countries_trend:figures-->
+      <h3>Kennzahlen</h3>
+      <!--INJECT:ch_countries_trend:metrics-->
+      <h3>Posterior-Zusammenfassung</h3>
+      <!--INJECT:ch_countries_trend:tables-->
+      <h3>Ergebnisse im Detail</h3>
+      <p class="analysis-prose">Die USA dominieren den Besuchsanteil über den ganzen Zeitraum; Frankreich und Deutschland bleiben relevante europäische Quellen. Der CH-Besuchsanteil liegt durchgehend unter dem USA-Anteil, steigt aber seit der Pandemie-Erholung (vgl. Logit-Trend, Analyse&nbsp;07). Im Programm ist die Schweiz stärker vertreten als in den Besuchen (vgl. Lücke, Analyse&nbsp;05).</p>
+      <p class="analysis-prose">Ein Bayesianisches Länder-Modell (Multinomial-Trend, Partial Pooling) wäre der nächste Schritt für Unsicherheitsbänder — hier bewusst nur die beobachteten Jahresanteile.</p>
+      <h3>Grenzen</h3>
+      <ul>
+        <li>Keine Posterior-Unsicherheit in diesem Block.</li>
+        <li>Koproduktionen: ein Herkunftsland pro BFS-Zuordnung.</li>
+        <li>«Übrige» bündelt viele kleine Länder.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="analysis-block analysis-synthesis" id="gesamtinterpretation">
   <div class="container">
     <div class="section-label">Synthese</div>
     <div class="sec-head"><div class="sec-num">∑</div><h2>Gesamtinterpretation: Schweizer Film am Kino</h2></div>
     <div class="measure analysis-body">
-      <p class="analysis-prose analysis-lead">Sieben komplementäre Modelle: Genre-Erfolg, Genre-Mix, Strukturbruch, Programm-Lücke, Wochensaison, Prognose. Alle mit MCMC (PyMC/NUTS), HDI und Pd.</p>
-      <p class="analysis-prose">Lesereihenfolge: (1) Genre → (2) Mix → (3) Change-Point → (4) Absolute Besuche → (5) Lücke Angebot/Nachfrage → (6) Saison → (7) Prognose.</p>
+      <p class="analysis-prose analysis-lead">Sieben Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv): Genre-Erfolg, Genre-Mix, Strukturbruch, absolute Besuche, Programm-Lücke, Wochensaison, Prognose, Top-Länder.</p>
+      <p class="analysis-prose">Lesereihenfolge: (1) Genre → (2) Mix → (3) Change-Point (explorativ) → (4) Absolute Besuche → (5) Lücke → (6) Saison → (7) Prognose → (8) Länder.</p>
       <h3>Gemeinsame Story</h3>
-      <p class="analysis-prose">CH wächst in Fiktion und Dokumentar am Genre-Markt; der Gesamt-CH-Anteil steigt vor allem durch besseres Abschneiden in den Genres, nicht primär durch «mehr Dokus im Kino». Nach 2022 zusätzlicher Aufwärtstrend; Programm-Lücke schrumpft, bleibt aber positiv. Saison wie der Gesamtmarkt; Prognose zeigt weiter steigenden Anteil — mit allen Caveats der Trendextrapolation.</p>
+      <p class="analysis-prose">CH wächst in Fiktion und Dokumentar; der Gesamt-CH-Anteil steigt vor allem durch Erfolg in den Genres, nicht durch Genre-Umschichtung. Der Sprung in den Rohdaten liegt bei 2023→2024; Change-Point nur explorativ. Programm-Lücke schrumpft. Am Länder-Markt dominieren USA; CH holt beim Besuchsanteil auf. Saison und Prognose — mit allen Caveats.</p>
       <h3>Grenzen (alle Modelle)</h3>
       <ul>
         <li>Jahres- bzw. Wochenaggregate BFS — kein Film-Level.</li>
         <li>2020–2021 in Jahresmodellen ausgeschlossen.</li>
         <li>Absolute Besuche mit Markt-Offset in Analyse 04.</li>
-        <li>Pd = Richtungswahrscheinlichkeit, nicht p-Wert.</li>
+        <li><strong>Pd</strong> (Richtungswahrscheinlichkeit, Probability of Direction) — nicht p-Wert.</li>
+        <li><strong>HDI</strong> — höchstes posteriores Dichtheitsintervall (Highest Density Interval), hier 95&nbsp;%.</li>
       </ul>
     </div>
   </div>

@@ -101,9 +101,9 @@ def _run(ctx: CinemaContext) -> dict:
     return analysis_result(
         id="ch_absolute_bayes",
         figures=[
-            {"src": fig1, "caption": f"Posterior CH-Besuche absolut ({HDI_LABEL})."},
-            {"src": fig2, "caption": "Gesamtmarkt vs. CH-Besuche (Mio.)."},
-            {"src": fig3, "caption": f"Impliziter CH-Anteil aus dem Offset-Modell ({HDI_LABEL})."},
+            {"src": fig1, "caption": "Schweizer Kinobesuche über die Jahre (Modell mit Schätzbereich)."},
+            {"src": fig2, "caption": "Kinobesuche in Millionen — Gesamtmarkt und Schweizer Film."},
+            {"src": fig3, "caption": "CH-Anteil, abgeleitet aus dem Offset-Modell."},
             {"src": fig4, "caption": "Forest-Plot Trend β (log-Rate)."},
             {"src": fig5, "caption": "MCMC-Trace α, β."},
         ],

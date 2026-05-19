@@ -1,11 +1,11 @@
 {
-  "fingerprint": "1a04da8072b3d8aa988dea1f",
+  "fingerprint": "c2f06da16f0e812eab37b8c1",
   "result": {
     "id": "ch_changepoint_bayes",
     "figures": [
       {
         "src": "./assets/analysis/figures/02_changepoint.png",
-        "caption": "CH-Anteil mit Change-Point bei 2022 (95 %-credible interval (HDI))."
+        "caption": "CH-Besuchsanteil mit Strukturbruch (explorativ); Schätzung ohne 2020–2022, Zusatz-Trend ab 2023."
       },
       {
         "src": "./assets/analysis/figures/02_changepoint_forest.png",
@@ -24,25 +24,25 @@
           "Bedeutung",
           "Mittelwert",
           "SD",
-          "95 %-HDI",
-          "Pd"
+          "95 %-HDI (höchstes Dichtheitsintervall)",
+          "Pd (Richtungswahrscheinlichkeit)"
         ],
         "rows": [
           [
             "β₁",
             "Trend vor/nach τ (Basis)",
-            "0,049",
+            "0,068",
             "0,0003",
-            "0,048 – 0,049",
+            "0,067 – 0,069",
             "100,0 %"
           ],
           [
             "β₂",
-            "Zusatz-Trend ab 2022",
-            "0,002",
+            "Zusatz-Trend ab 2023",
+            "-0,021",
             "0,0005",
-            "0,001 – 0,003",
-            "99,9 %"
+            "-0,022 – -0,021",
+            "0,0 %"
           ]
         ]
       }
@@ -50,19 +50,19 @@
     "diagnostics": [
       {
         "label": "R̂ max",
-        "value": "1.000",
+        "value": "1.010",
         "note": "Ziel < 1,01",
-        "ok": true
+        "ok": false
       },
       {
         "label": "ESS bulk (min)",
-        "value": "609",
+        "value": "809",
         "note": "Ziel ≥ 400",
         "ok": true
       },
       {
         "label": "ESS tail (min)",
-        "value": "789",
+        "value": "867",
         "note": "Ziel ≥ 400",
         "ok": true
       },
@@ -92,13 +92,18 @@
         2017,
         2018,
         2019,
-        2022,
         2023,
         2024,
         2025
       ],
-      "year_center": 2019.3,
-      "break_year": 2022
+      "year_center": 2019.0,
+      "break_year": 2023,
+      "transition_years": [
+        2020,
+        2021,
+        2022
+      ],
+      "fit_excludes": "2020–2022"
     }
   }
 }

@@ -16,17 +16,24 @@ from ..bayes_utils import HDI_LABEL, extract_mcmc_diagnostics, posterior_row, po
 from ..data import COVID_YEARS, CinemaContext, save_figure
 from ..plots import apply_style, pct_de
 
-BREAK_YEAR = 2022
+# Erstes «normales» Erholungsjahr nach Lockdown — nicht in der Schätzung (wie 2020–2021).
+TRANSITION_YEARS = COVID_YEARS | {2022}
+# Zusatz-Trend ab 2023: ab hier Markt und CH-Anteil klar über Pandemie-Tief.
+BREAK_YEAR = 2023
 
 MODEL = {
-    "title": "Change-Point-Modell für den CH-Besuchsanteil",
+    "title": "Change-Point-Modell für den CH-Besuchsanteil (explorativ)",
     "likelihood": "yₜ ~ Binomial(Nₜ, pₜ)",
     "link": "logit(pₜ) = α + β₁·(Jahr−Jahr̄) + β₂·(Jahr−Jahr̄)·𝟙[Jahr ≥ τ]",
     "priors": [
         "α, β₁, β₂ ~ Normal(0, schwach informativ)",
-        f"τ = {BREAK_YEAR} (Übergang Post-Pandemie / Erholung)",
+        f"τ = {BREAK_YEAR} (fix; Schätzjahre ohne 2020–2022)",
     ],
-    "notes": f"Zwei Phasen: Trend vor und zusätzliche Änderung ab τ. {HDI_LABEL}.",
+    "notes": (
+        "Explorativ: Pandemie unterbricht die Zeitreihe — τ fix, Schätzjahre ohne 2020–2022. "
+        "Für die Kurzstory eignet sich eher ein einfacher Logit-Trend (Analyse 07). "
+        f"{HDI_LABEL}."
+    ),
 }
 
 VARIABLES = [
@@ -45,7 +52,7 @@ def run(ctx: CinemaContext) -> dict:
 def _run(ctx: CinemaContext) -> dict:
     apply_style()
     df = ctx.px_yearly.sort_values("year")
-    fit_df = df[~df["is_covid"]].copy()
+    fit_df = df[~df["year"].isin(TRANSITION_YEARS)].copy()
     years = fit_df["year"].values
     year_mean = float(years.mean())
     year_c = years - year_mean
@@ -75,6 +82,7 @@ def _run(ctx: CinemaContext) -> dict:
     all_years = df["year"].values
     year_c_all = all_years - year_mean
     post_all = (all_years >= BREAK_YEAR).astype(float)
+    transition_years = tuple(sorted(TRANSITION_YEARS))
     alpha_s = post_s["alpha"].values.flatten()
     b1s = post_s["beta1"].values.flatten()
     b2s = post_s["beta2"].values.flatten()
@@ -93,6 +101,7 @@ def _run(ctx: CinemaContext) -> dict:
             p_draws,
             df["ch_share_admissions"].values * 100,
             break_year=BREAK_YEAR,
+            transition_years=transition_years,
         ),
     )
     fig2 = save_figure(ctx, "02_changepoint_forest.png", plot_forest_list([("β₁", "Basis-Trend", b1), ("β₂", "Sprung ab τ", b2)]))
@@ -101,7 +110,13 @@ def _run(ctx: CinemaContext) -> dict:
     return analysis_result(
         id="ch_changepoint_bayes",
         figures=[
-            {"src": fig1, "caption": f"CH-Anteil mit Change-Point bei {BREAK_YEAR} ({HDI_LABEL})."},
+            {
+                "src": fig1,
+                "caption": (
+                    f"CH-Besuchsanteil mit Strukturbruch (explorativ); Schätzung ohne 2020–2022, "
+                    f"Zusatz-Trend ab {BREAK_YEAR}."
+                ),
+            },
             {"src": fig2, "caption": "Forest-Plot β₁ und β₂."},
             {"src": fig3, "caption": "MCMC-Trace."},
         ],
@@ -111,6 +126,10 @@ def _run(ctx: CinemaContext) -> dict:
             analysis_id="ch_changepoint_bayes",
             fit_years=[int(y) for y in years],
             year_center=year_mean,
-            extra={"break_year": BREAK_YEAR},
+            extra={
+                "break_year": BREAK_YEAR,
+                "transition_years": list(transition_years),
+                "fit_excludes": "2020–2022",
+            },
         ),
     )

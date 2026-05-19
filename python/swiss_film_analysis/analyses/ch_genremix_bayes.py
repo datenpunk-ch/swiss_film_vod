@@ -174,7 +174,7 @@ def _run(ctx: CinemaContext) -> dict:
             observed_adm,
             labels=GENRE_LABELS,
             ylabel="Anteil an Kinobesuchen (%)",
-            title=f"Posterior Genre-Mix Besuche ({HDI_LABEL})",
+            title="Genre-Anteile an Kinobesuchen über die Jahre",
         ),
     )
     fig2 = save_figure(
@@ -199,7 +199,7 @@ def _run(ctx: CinemaContext) -> dict:
         "06_genremix_decomp.png",
         plot_decomposition_bars(
             decomp_pp,
-            title=f"Zerlegung CH-Gesamtanteil: {y0} → {y1} (pp)",
+            title=f"Zerlegung CH-Gesamtanteil: {y0} → {y1} (Prozentpunkte)",
         ),
     )
     fig5 = save_figure(
@@ -221,10 +221,10 @@ def _run(ctx: CinemaContext) -> dict:
     return analysis_result(
         id="ch_genremix_bayes",
         figures=[
-            {"src": fig1, "caption": f"Posterior Genre-Mix Kinobesuche ({HDI_LABEL})."},
-            {"src": fig2, "caption": f"Posterior Genre-Mix Kinoprogramm ({HDI_LABEL})."},
+            {"src": fig1, "caption": "Genre-Anteile an Kinobesuchen über die Jahre."},
+            {"src": fig2, "caption": "Genre-Anteile im Kinoprogramm über die Jahre."},
             {"src": fig3, "caption": "Beitrag je Genre zum CH-Gesamtanteil (Mix × Erfolg)."},
-            {"src": fig4, "caption": f"Zerlegung Gesamtänderung {y0}–{y1} (Prozentpunkte)."},
+            {"src": fig4, "caption": f"Warum der CH-Gesamtanteil steigt: Mix vs. Erfolg ({y0}–{y1}, Prozentpunkte)."},
             {"src": fig5, "caption": "Forest-Plot Mix-Trends (Besuche)."},
             {"src": fig6, "caption": "MCMC-Trace Mix-Trends Besuche."},
         ],

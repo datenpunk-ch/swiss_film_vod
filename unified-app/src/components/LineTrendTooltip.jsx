@@ -1,4 +1,4 @@
-import { intFmt, formatYoYPercent, pctFmt } from "../utils/format.js";
+import { formatYoYSharePp, formatYoYPercent, intFmt, pctFmt } from "../utils/format.js";
 
 function resolveChShare(row, key, chShareDenominatorKey, chShareValueKey) {
   if (key !== "ch" || !row) return null;
@@ -18,6 +18,7 @@ export default function LineTrendTooltip({
   chShareDenominatorKey,
   chShareValueKey = "ch_share",
   dataByYear,
+  percentTooltip = false,
 }) {
   if (!active || !payload?.length) return null;
 
@@ -33,17 +34,20 @@ export default function LineTrendTooltip({
         {payload.map((entry) => {
           const val = Number(entry.value);
           const key = entry.dataKey;
-          let text = Number.isFinite(val) ? intFmt.format(val) : "—";
+          let text = "—";
+          if (Number.isFinite(val)) {
+            text = percentTooltip || key === "ch_share" ? pctFmt.format(val) : intFmt.format(val);
+          }
 
-          if (key === "ch_share" && Number.isFinite(val)) {
-            text = pctFmt.format(val);
-          } else {
+          if (!percentTooltip && key !== "ch_share") {
             const share = resolveChShare(row, key, chShareDenominatorKey, chShareValueKey);
             if (share != null) text += ` (${pctFmt.format(share)})`;
           }
 
           const prevVal = prevRow ? Number(prevRow[key]) : null;
-          const yoy = formatYoYPercent(val, prevVal);
+          const yoy = percentTooltip
+            ? formatYoYSharePp(val, prevVal)
+            : formatYoYPercent(val, prevVal);
           if (yoy) text += ` · ${yoy}`;
 
           return (

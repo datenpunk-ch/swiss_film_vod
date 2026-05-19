@@ -3,19 +3,22 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   Label,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, DIMMED_SERIES_OPACITY, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { withAlpha } from "../utils/colorAlpha.js";
 import { pctFmt } from "../utils/format.js";
+import { isDimmedYear } from "../utils/yearDisplay.js";
 import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
 import ChartResponsive from "./ChartResponsive.jsx";
 import YearShareTooltip from "./YearShareTooltip.jsx";
 
-const MARGIN = { top: 8, left: 4, right: 4, bottom: 44 };
+const MARGIN = { top: 8, left: 4, right: 4, bottom: 52 };
 
 function prepareRows(data, series) {
   return (data ?? [])
@@ -29,7 +32,32 @@ function prepareRows(data, series) {
     });
 }
 
-export default function YearShareBarChart({ data, series, height = 280 }) {
+function YearXTick({ x, y, payload, dimmedYears }) {
+  const year = Number(payload?.value);
+  const dimmed = isDimmedYear(year, dimmedYears);
+  return (
+    <text
+      x={x}
+      y={y}
+      dy={12}
+      textAnchor="end"
+      transform={`rotate(-40, ${x}, ${y})`}
+      fontSize={9}
+      fill={dimmed ? PALETTE.axis : PALETTE.muted}
+      opacity={dimmed ? 0.55 : 1}
+    >
+      {payload?.value}
+    </text>
+  );
+}
+
+export default function YearShareBarChart({
+  data,
+  series,
+  height = 280,
+  useFlags = false,
+  dimmedYears,
+}) {
   const rows = useMemo(() => prepareRows(data, series), [data, series]);
 
   if (!rows.length || !series?.length) {
@@ -49,15 +77,13 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
                 <CartesianGrid strokeDasharray="2 4" stroke={PALETTE.gridLight} vertical={false} />
                 <XAxis
                   dataKey="year"
-                  tick={{ ...AXIS.tick, fontSize: 9 }}
                   tickLine={false}
                   axisLine={{ stroke: PALETTE.axis }}
                   interval={0}
-                  angle={-40}
-                  textAnchor="end"
-                  height={44}
+                  height={52}
+                  tick={<YearXTick dimmedYears={dimmedYears} />}
                 >
-                  <Label value="Jahr" position="bottom" offset={4} style={{ fontSize: 10, fill: PALETTE.muted }} />
+                  <Label value="Jahr" position="bottom" offset={8} style={{ fontSize: 10, fill: PALETTE.muted }} />
                 </XAxis>
                 <YAxis
                   type="number"
@@ -86,13 +112,23 @@ export default function YearShareBarChart({ data, series, height = 280 }) {
                     minPointSize={1}
                     stroke="#fff"
                     strokeWidth={1}
-                  />
+                  >
+                    {rows.map((entry) => {
+                      const dimmed = isDimmedYear(entry.year, dimmedYears);
+                      return (
+                        <Cell
+                          key={`${entry.year}-${s.key}`}
+                          fill={dimmed ? withAlpha(s.color, DIMMED_SERIES_OPACITY) : s.color}
+                        />
+                      );
+                    })}
+                  </Bar>
                 ))}
               </BarChart>
             </ChartResponsive>
           </ChartBox>
         </div>
-        <CategoryLegend rows={legendRows} colors={legendColors} />
+        <CategoryLegend rows={legendRows} colors={legendColors} useFlags={useFlags} />
       </div>
     </figure>
   );

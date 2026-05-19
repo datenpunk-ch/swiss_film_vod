@@ -1,4 +1,4 @@
-const PANELS = new Set(["supply", "demand", "season", "genre"]);
+const PANELS = new Set(["supply", "demand", "season", "genre", "countries", "year"]);
 
 /** Einzelgrafik für Artikel-Embed (?embed=1&panel=supply|demand|season|genre). */
 export function getEmbedPanel() {

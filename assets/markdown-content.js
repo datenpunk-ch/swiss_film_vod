@@ -12,15 +12,31 @@
       .replaceAll("'", "&#39;");
   }
 
+  /** Text zwischen HTML-Tags: HTML-Entities erhalten, nur echte Sonderzeichen escapen. */
+  function escapeTextContent(s) {
+    return String(s || "")
+      .replace(/&(?!([a-zA-Z]+|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
   function renderInlineMarkdown(s) {
-    let out = escapeHtml(s);
+    let out = escapeTextContent(s).replace(/\u202f/g, "\u00a0");
     out = out.replace(
       /\[([^\]]+)\]\(([^)]+)\)/g,
       (_m, t, url) => `<a href="${escapeHtml(url)}">${escapeHtml(t)}</a>`
     );
     out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    out = out.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
+    out = out.replace(/_([^_]+)_/g, "<em>$1</em>");
     return out;
+  }
+
+  function renderInlineInHtml(html) {
+    return String(html)
+      .split(/(<[^>]+>)/g)
+      .map((part) => (part.startsWith("<") ? part : renderInlineMarkdown(part)))
+      .join("");
   }
 
   function mdToHtml(md) {
@@ -47,7 +63,7 @@
 
       if (t.startsWith("<")) {
         closeUl();
-        out.push(raw);
+        out.push(renderInlineInHtml(raw.trimEnd()));
         continue;
       }
 
@@ -109,7 +125,9 @@
 
   window.MarkdownContent = {
     escapeHtml,
+    escapeTextContent,
     renderInlineMarkdown,
+    renderInlineInHtml,
     mdToHtml,
     splitParts,
     fetchTextCached,
