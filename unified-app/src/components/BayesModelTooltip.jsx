@@ -1,4 +1,16 @@
 import { pctFmt } from "../utils/format.js";
+import { isoForCountry } from "../utils/countryFlags.js";
+import CountryFlag from "./CountryFlag.jsx";
+import BayesTooltipFrame from "./BayesTooltipFrame.jsx";
+
+const COUNTRY_ID_TO_ISO = {
+  ch: "CH",
+  us: "US",
+  fr: "FR",
+  de: "DE",
+  uk: "GB",
+  it: "IT",
+};
 
 export function formatBayesValue(yFormat, value) {
   const v = Number(value);
@@ -13,18 +25,57 @@ function tooltipRow(payload) {
   return payload?.find((p) => p?.payload)?.payload ?? null;
 }
 
-function TooltipMetricRow({ label, value }) {
-  if (value == null || value === "") return null;
+function seriesLabelCell(s, flagsOnly) {
+  if (flagsOnly) {
+    const iso = COUNTRY_ID_TO_ISO[s.id] ?? isoForCountry(s.label);
+    if (iso) {
+      return (
+        <span className="chart-tooltip-series-inner">
+          <CountryFlag iso={iso} size={18} className="chart-tooltip-flag" />
+        </span>
+      );
+    }
+  }
   return (
-    <li className="chart-tooltip-row">
-      <span className="chart-tooltip-label">{label}</span>
-      <strong className="chart-tooltip-value">{value}</strong>
-    </li>
+    <span className="chart-tooltip-series-inner chart-tooltip-series-inner--label">
+      <span className="chart-tooltip-dot" style={{ background: s.color }} aria-hidden="true" />
+      <span className="chart-tooltip-series-text">{s.label}</span>
+    </span>
   );
 }
 
-/** Einzelne Zeitreihe: Berechnet, dann Daten. */
-export function BayesSingleTooltip({ active, payload, label, yFormat = "percent" }) {
+function TooltipMetricTable({ rows }) {
+  const visible = rows.filter((r) => r.value != null && r.value !== "");
+  if (!visible.length) return null;
+  return (
+    <table className="chart-tooltip-table chart-tooltip-table--single">
+      <colgroup>
+        <col className="col-label" />
+        <col className="col-value" />
+      </colgroup>
+      <tbody>
+        {visible.map((r) => (
+          <tr key={r.label}>
+            <th scope="row" className="chart-tooltip-metric-label">
+              {r.label}
+            </th>
+            <td className="chart-tooltip-num">{r.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+/** Einzelne Zeitreihe: Berechnet, optional HDI bei Prognose, dann Daten. */
+export function BayesSingleTooltip({
+  active,
+  payload,
+  label,
+  coordinate,
+  yFormat = "percent",
+  showForecastHdi = false,
+}) {
   if (!active) return null;
   const row = tooltipRow(payload);
   if (!row) return null;
@@ -38,23 +89,38 @@ export function BayesSingleTooltip({ active, payload, label, yFormat = "percent"
       ? row.futMean
       : row.histMean;
   const obs = row.obs;
+  const lo = Number.isFinite(row.lo) ? row.lo : row.futLo;
+  const hi = Number.isFinite(row.hi) ? row.hi : row.futHi;
+
+  const metricRows = [
+    { label: "Berechnet", value: Number.isFinite(mean) ? fmt(mean) : null },
+  ];
+  if (showForecastHdi && isForecast && Number.isFinite(lo) && Number.isFinite(hi)) {
+    metricRows.push({ label: "95 %-HDI", value: `${fmt(lo)} – ${fmt(hi)}` });
+  }
+  metricRows.push({ label: "Daten", value: Number.isFinite(obs) ? fmt(obs) : null });
 
   return (
-    <div className="chart-tooltip chart-tooltip--bayes">
+    <BayesTooltipFrame active={active} coordinate={coordinate}>
       <p className="chart-tooltip-title">
         {year}
         {isForecast ? <span className="chart-tooltip-forecast"> · Prognose</span> : null}
       </p>
-      <ul className="chart-tooltip-list chart-tooltip-list--metrics">
-        <TooltipMetricRow label="Berechnet" value={Number.isFinite(mean) ? fmt(mean) : null} />
-        <TooltipMetricRow label="Daten" value={Number.isFinite(obs) ? fmt(obs) : null} />
-      </ul>
-    </div>
+      <TooltipMetricTable rows={metricRows} />
+    </BayesTooltipFrame>
   );
 }
 
-/** Mehrere Länder/Genres: je Serie Berechnet, dann Daten. */
-export function BayesMultiTooltip({ active, payload, label, series = [], yFormat = "percent" }) {
+/** Mehrere Länder/Genres: Länder mit Flagge, Genres mit Text. */
+export function BayesMultiTooltip({
+  active,
+  payload,
+  label,
+  coordinate,
+  series = [],
+  yFormat = "percent",
+  flagsOnly = false,
+}) {
   if (!active) return null;
   const row = tooltipRow(payload);
   if (!row) return null;
@@ -69,27 +135,47 @@ export function BayesMultiTooltip({ active, payload, label, series = [], yFormat
       if (![mean, obs].some((v) => Number.isFinite(v))) return null;
       return { s, mean, obs };
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort((a, b) => {
+      const dm = Number(b.mean) - Number(a.mean);
+      if (Number.isFinite(dm) && Math.abs(dm) > 1e-9) return dm;
+      const dObs = Number(b.obs) - Number(a.obs);
+      if (Number.isFinite(dObs) && Math.abs(dObs) > 1e-9) return dObs;
+      return String(a.s.id).localeCompare(String(b.s.id), "de");
+    });
 
   if (!entries.length) return null;
 
+  const tableMod = flagsOnly ? " chart-tooltip-table--flags" : "";
+
   return (
-    <div className="chart-tooltip chart-tooltip--bayes">
+    <BayesTooltipFrame active={active} coordinate={coordinate} variant="multi">
       <p className="chart-tooltip-title">{year}</p>
-      <ul className="chart-tooltip-list chart-tooltip-list--series">
-        {entries.map(({ s, mean, obs }) => (
-          <li key={s.id} className="chart-tooltip-series">
-            <div className="chart-tooltip-series-head">
-              <span className="chart-tooltip-dot" style={{ background: s.color }} aria-hidden="true" />
-              <span>{s.label}</span>
-            </div>
-            <ul className="chart-tooltip-list chart-tooltip-list--metrics">
-              <TooltipMetricRow label="Berechnet" value={Number.isFinite(mean) ? fmt(mean) : null} />
-              <TooltipMetricRow label="Daten" value={Number.isFinite(obs) ? fmt(obs) : null} />
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <table className={`chart-tooltip-table chart-tooltip-table--multi${tableMod}`}>
+        <colgroup>
+          <col className="col-series" />
+          <col className="col-value" />
+          <col className="col-value" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" aria-hidden="true" />
+            <th scope="col">Berechnet</th>
+            <th scope="col">Daten</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map(({ s, mean, obs }) => (
+            <tr key={s.id}>
+              <th scope="row" className="chart-tooltip-series-name" aria-label={s.label}>
+                {seriesLabelCell(s, flagsOnly)}
+              </th>
+              <td className="chart-tooltip-num">{Number.isFinite(mean) ? fmt(mean) : "—"}</td>
+              <td className="chart-tooltip-num">{Number.isFinite(obs) ? fmt(obs) : "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </BayesTooltipFrame>
   );
 }

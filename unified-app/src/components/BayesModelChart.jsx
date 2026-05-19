@@ -12,9 +12,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, PALETTE, SERIES_PAIR, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, BAYES_TOOLTIP_WRAPPER_STYLE, PALETTE, SERIES_PAIR } from "../constants.js";
 import { mergeForecastChart, yearTicks } from "../utils/bayesChartRows.js";
-import { bayesTooltipPosition } from "../utils/bayesTooltipPosition.js";
 import { BayesMultiTooltip, BayesSingleTooltip, formatBayesValue } from "./BayesModelTooltip.jsx";
 import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
@@ -83,7 +82,18 @@ function SingleBandChart({ chart, height = 280, color = SERIES_PAIR.second }) {
             width={56}
             tickMargin={AXIS.tickMargin}
           />
-          <Tooltip wrapperStyle={TOOLTIP_WRAPPER_STYLE} content={<BayesSingleTooltip yFormat={yFormat} />} />
+          <Tooltip
+            wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+            content={(props) => (
+              <BayesSingleTooltip
+                {...props}
+                yFormat={yFormat}
+                showForecastHdi={chart.type === "gap_forecast"}
+              />
+            )}
+            labelFormatter={() => ""}
+            isAnimationActive={false}
+          />
           <Area dataKey="histLo" stackId="hist" fill="transparent" stroke="none" isAnimationActive={false} />
           <Area dataKey="histBand" stackId="hist" fill={color} fillOpacity={0.22} stroke="none" isAnimationActive={false} />
           <Area dataKey="futLo" stackId="fut" fill="transparent" stroke="none" isAnimationActive={false} />
@@ -173,11 +183,18 @@ function MultiBandChart({ chart, height = 280, useFlags = false }) {
                   tickMargin={AXIS.tickMargin}
                 />
                 <Tooltip
-                  wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-                  content={<BayesMultiTooltip series={series} yFormat={yFormat} />}
-                  allowEscapeViewBox={{ x: true, y: true }}
-                  position={bayesTooltipPosition(220, Math.min(56 + series.length * 44, 220))}
-                  offset={0}
+                  wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+                  content={(props) => (
+                    <BayesMultiTooltip
+                      {...props}
+                      series={series}
+                      yFormat={yFormat}
+                      flagsOnly={useFlags}
+                    />
+                  )}
+                  labelFormatter={() => ""}
+                  itemSorter={(a, b) => Number(b.value) - Number(a.value)}
+                  isAnimationActive={false}
                 />
                 {series.map((s) => (
                   <Area

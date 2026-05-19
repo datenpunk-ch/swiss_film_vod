@@ -47,6 +47,11 @@ export const TOOLTIP_WRAPPER_STYLE = {
   outline: "none",
 };
 
+/** Recharts-Wrapper ausblenden — Bayes-Tooltips positionieren per Portal. */
+export const BAYES_TOOLTIP_WRAPPER_STYLE = {
+  display: "none",
+};
+
 export function legendRightProps(seriesCount = 2) {
   return {
     layout: "vertical",

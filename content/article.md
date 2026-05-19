@@ -184,17 +184,11 @@
   </div>
 </div>
 
-<p class="chart-caption reveal">Programm-Lücke (Pp.): Posterior, Prognose und Beobachtungen; gestrichelte Linie = Median des Kreuzungsjahrs.</p>
+<p class="chart-caption reveal">Programm-Lücke (Pp.): Posterior, Prognose und Beobachtungen; markierte Linie ≈ Median des Kreuzungsjahrs (Lücke = 0). Die Prognose reicht bis **2030** (Ende der Extrapolation).</p>
 
 <p class="reveal"><strong>Antwort:</strong> Die Lücke **schrumpft** — das Publikum holt zum Programm auf. Setzt man den Trend fort, liegt das **geschätzte Jahr mit ausgeglichener Lücke** im Median bei rund **2028** — mit grosser Unsicherheit.</p>
 
 <!--INJECT:ch_gap_bayes:metrics-->
-
-<div class="article-plot reveal">
-<!--INJECT:ch_gap_bayes:figure:3-->
-</div>
-
-<p class="chart-caption reveal">Verlauf und Trend-Fortsetzung; markiert etwa **2028** (Median, Lücke = 0). Die Linie reicht bis **2030** — das Ende der Prognose, nicht dasselbe wie das Kreuzungsjahr.</p>
 
     </div>
   </div>
