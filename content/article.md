@@ -6,7 +6,7 @@
 <!--PART:hero-->
 <div class="container">
   <div class="hero-tag reveal">Kultur · Schweiz · Kino</div>
-  <h1 class="reveal">Wie stehts eigentlich um den Schweizer Film?</h1>
+  <h1 class="reveal">Wie steht's eigentlich um den Schweizer Film?</h1>
   <p class="hero-sub reveal">Zuerst die Kinobesuche — Gesamtmarkt und Schweizer Film. Dann Saison, Herkunftsländer, wie der Schweizer Film ankommt, Genres und die Lücke zwischen Programm und Publikum. Der deutliche Sprung beim CH-Anteil liegt vor allem zwischen 2023 und 2024.</p>
   <p class="hero-byline reveal">
     <span>Bundesamt für Statistik (BFS) · Stand <span id="article-stand">—</span></span>
