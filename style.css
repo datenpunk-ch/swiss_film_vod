@@ -816,7 +816,8 @@ html.is-embed .page-unified .stat-card {
 .page-article .article-plot .embed-frame--chgenre,
 .page-article .article-plot .embed-frame--gap {
   height: 408px;
-  overflow: visible;
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 .page-article .article-plot .embed-frame--season,
@@ -949,24 +950,6 @@ html.is-embed.is-embed-panel .unified-grid.is-genre-years {
 html.is-embed.is-embed-panel,
 html.is-embed.is-embed-panel body {
   overflow: hidden;
-}
-
-html.is-embed.is-embed-panel[data-embed-panel="forecast"] body,
-html.is-embed.is-embed-panel[data-embed-panel="countries"] body,
-html.is-embed.is-embed-panel[data-embed-panel="chgenre"] body,
-html.is-embed.is-embed-panel[data-embed-panel="gap"] body {
-  overflow: visible;
-}
-
-html.is-embed.is-embed-panel[data-embed-panel="forecast"] .wrap-embed-panel,
-html.is-embed.is-embed-panel[data-embed-panel="countries"] .wrap-embed-panel,
-html.is-embed.is-embed-panel[data-embed-panel="chgenre"] .wrap-embed-panel,
-html.is-embed.is-embed-panel[data-embed-panel="gap"] .wrap-embed-panel,
-html.is-embed.is-embed-panel[data-embed-panel="forecast"] .panel-embed,
-html.is-embed.is-embed-panel[data-embed-panel="countries"] .panel-embed,
-html.is-embed.is-embed-panel[data-embed-panel="chgenre"] .panel-embed,
-html.is-embed.is-embed-panel[data-embed-panel="gap"] .panel-embed {
-  overflow: visible;
 }
 
 html.is-embed.is-embed-panel[data-embed-panel="year"],
@@ -2013,6 +1996,14 @@ html.is-embed .page-explore .site-footer {
 .page-unified .recharts-tooltip-wrapper {
   z-index: 100000 !important;
   pointer-events: none;
+}
+
+.page-unified .bayes-tooltip-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 100000;
 }
 
 .page-unified .chart-tooltip {
