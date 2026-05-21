@@ -194,7 +194,7 @@ a:hover {
   background: var(--color-bg);
 }
 
-.page-article .hero-figure__img {
+.page-article .hero-figure-img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -203,7 +203,7 @@ a:hover {
   object-position: center bottom;
 }
 
-.page-article .hero-figure__img--raw {
+.page-article .hero-figure-img-raw {
   filter: none;
 }
 

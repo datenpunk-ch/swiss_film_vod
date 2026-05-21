@@ -41,142 +41,33 @@
       >
     </footer>
 
+    <script src="./assets/markdown-content.js"></script>
     <script>
       window.__contentReady = (async function () {
+        const MC = window.MarkdownContent;
         const nodes = Array.from(document.querySelectorAll("[data-src]"));
-        if (!nodes.length) return;
+        if (!nodes.length || !MC) return;
 
-        function escapeHtml(s) {
-          return String(s || "")
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#39;");
-        }
-
-        function escapeTextContent(s) {
-          return String(s || "")
-            .replace(/&(?!([a-zA-Z]+|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;");
-        }
-
-        function renderInlineMarkdown(s) {
-          let out = escapeTextContent(s).replace(/\u202f/g, "\u00a0");
-          out = out.replace(
-            /\[([^\]]+)\]\(([^)]+)\)/g,
-            (_m, t, url) => `<a href="${escapeHtml(url)}">${escapeHtml(t)}</a>`
-          );
-          out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-          out = out.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
-          out = out.replace(/_([^_]+)_/g, "<em>$1</em>");
-          return out;
-        }
-
-        function renderInlineInHtml(html) {
-          return String(html)
-            .split(/(<[^>]+>)/g)
-            .map((part) => (part.startsWith("<") ? part : renderInlineMarkdown(part)))
-            .join("");
-        }
-
-        function mdToHtml(md) {
-          const lines = String(md || "").replace(/\r\n?/g, "\n").split("\n");
-          const out = [];
-          let inUl = false;
-
-          function closeUl() {
-            if (inUl) {
-              out.push("</ul>");
-              inUl = false;
-            }
-          }
-
-          for (let i = 0; i < lines.length; i++) {
-            const raw = lines[i];
-            const line = raw.trimEnd();
-            const t = line.trim();
-
-            if (!t) {
-              closeUl();
-              continue;
-            }
-
-            if (t.startsWith("<")) {
-              closeUl();
-              out.push(renderInlineInHtml(raw.trimEnd()));
-              continue;
-            }
-
-            const h3 = t.match(/^###\s+(.*)$/);
-            if (h3) {
-              closeUl();
-              out.push(`<h3 class="reveal">${renderInlineMarkdown(h3[1])}</h3>`);
-              continue;
-            }
-            const h2 = t.match(/^##\s+(.*)$/);
-            if (h2) {
-              closeUl();
-              out.push(`<h2 class="reveal">${renderInlineMarkdown(h2[1])}</h2>`);
-              continue;
-            }
-
-            const li = t.match(/^- (.*)$/);
-            if (li) {
-              if (!inUl) {
-                out.push('<ul class="reveal">');
-                inUl = true;
-              }
-              out.push(`<li>${renderInlineMarkdown(li[1])}</li>`);
-              continue;
-            }
-
-            closeUl();
-            out.push(`<p class="reveal">${renderInlineMarkdown(t)}</p>`);
-          }
-          closeUl();
-          return out.join("\n");
-        }
-
-        function splitParts(md) {
-          const text = String(md || "").replace(/\r\n?/g, "\n");
-          const re = /^<!--PART:([a-zA-Z0-9_-]+)-->\s*$/gm;
-          const matches = Array.from(text.matchAll(re));
-          if (!matches.length) return null;
-          const parts = {};
-          for (let i = 0; i < matches.length; i++) {
-            const key = matches[i][1];
-            const start = matches[i].index + matches[i][0].length;
-            const end = i + 1 < matches.length ? matches[i + 1].index : text.length;
-            parts[key] = text.slice(start, end).trim();
-          }
-          return parts;
-        }
-
-        async function fetchTextCached(cache, src) {
-          if (cache.has(src)) return cache.get(src);
-          const p = (async () => {
-            const r = await fetch(src, { cache: "no-cache" });
-            if (!r.ok) throw new Error("Failed to load: " + src);
-            return await r.text();
-          })();
-          cache.set(src, p);
-          return p;
+        function mdToHtmlArticle(md) {
+          return MC.mdToHtml(md)
+            .replace(/<h2>/g, '<h2 class="reveal">')
+            .replace(/<h3>/g, '<h3 class="reveal">')
+            .replace(/<p class="analysis-prose">/g, '<p class="reveal">')
+            .replace(/<ul>/g, '<ul class="reveal">');
         }
 
         async function loadInto(node, cache) {
           const src = node.getAttribute("data-src");
           if (!src) return;
           const part = (node.getAttribute("data-part") || "").trim();
-          const txt = await fetchTextCached(cache, src);
+          const txt = await MC.fetchTextCached(cache, src);
           if (src.toLowerCase().endsWith(".md")) {
-            const parts = splitParts(txt);
+            const parts = MC.splitParts(txt);
             const chunk =
               parts && part && Object.prototype.hasOwnProperty.call(parts, part)
                 ? parts[part]
                 : txt;
-            node.innerHTML = mdToHtml(chunk);
+            node.innerHTML = mdToHtmlArticle(chunk);
           } else {
             node.innerHTML = txt;
           }
@@ -200,7 +91,6 @@
         }
       })();
     </script>
-    <script src="./assets/markdown-content.js"></script>
     <script src="./assets/article-page.js"></script>
     <script>
       (async function () {

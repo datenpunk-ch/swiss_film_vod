@@ -39,10 +39,15 @@
       .join("");
   }
 
+  function isHtmlLineComplete(t) {
+    return />$/.test(t) || /<\/[a-zA-Z][^>]*>$/.test(t) || (t.endsWith(">") && !t.startsWith("<!--"));
+  }
+
   function mdToHtml(md) {
     const lines = String(md || "").replace(/\r\n?/g, "\n").split("\n");
     const out = [];
     let inUl = false;
+    let htmlBuf = null;
 
     function closeUl() {
       if (inUl) {
@@ -51,13 +56,35 @@
       }
     }
 
+    function flushHtmlBuf() {
+      if (htmlBuf == null) return;
+      out.push(renderInlineInHtml(htmlBuf));
+      htmlBuf = null;
+    }
+
     for (let i = 0; i < lines.length; i++) {
       const raw = lines[i];
       const line = raw.trimEnd();
       const t = line.trim();
 
       if (!t) {
+        if (htmlBuf != null) {
+          htmlBuf += "\n";
+          continue;
+        }
         closeUl();
+        continue;
+      }
+
+      if (htmlBuf != null) {
+        htmlBuf += (htmlBuf.endsWith("\n") ? "" : "\n") + raw.trimEnd();
+        if (isHtmlLineComplete(t)) flushHtmlBuf();
+        continue;
+      }
+
+      if (t.startsWith("<") && !isHtmlLineComplete(t)) {
+        closeUl();
+        htmlBuf = raw.trimEnd();
         continue;
       }
 
@@ -93,6 +120,7 @@
       closeUl();
       out.push(`<p class="analysis-prose">${renderInlineMarkdown(t)}</p>`);
     }
+    flushHtmlBuf();
     closeUl();
     return out.join("\n");
   }
