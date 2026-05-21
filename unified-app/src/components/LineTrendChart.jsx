@@ -14,7 +14,7 @@ import {
   chartMarginWithLegendRight,
   DIMMED_SERIES_OPACITY,
   PALETTE,
-  TOOLTIP_WRAPPER_STYLE,
+  BAYES_TOOLTIP_WRAPPER_STYLE,
 } from "../constants.js";
 import { formatPpAxis, intFmt, pctFmt } from "../utils/format.js";
 import { isDimmedYear } from "../utils/yearDisplay.js";
@@ -172,8 +172,8 @@ export default function LineTrendChart({
             />
           ) : null}
           <Tooltip
-            wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-            allowEscapeViewBox={{ x: true, y: true }}
+            wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+            allowEscapeViewBox={false}
             content={
               <LineTrendTooltip
                 chShareDenominatorKey={chShareDenominatorKey}

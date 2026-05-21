@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, BAYES_TOOLTIP_WRAPPER_STYLE, PALETTE } from "../constants.js";
 import { resolveChartColors } from "../utils/countryColors.js";
 import { metricLabel, metricValue } from "../utils/format.js";
 import { sortRowsByMetric } from "../utils/sortRows.js";
@@ -74,8 +74,8 @@ export default function CountryBarChart({
               tickLine={false}
             />
             <Tooltip
-              wrapperStyle={TOOLTIP_WRAPPER_STYLE}
-              allowEscapeViewBox={{ x: true, y: true }}
+              wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+              allowEscapeViewBox={false}
               content={<ChartTooltip metric={metric} showShare={tooltipShowShare} prevRowById={prevRowById} />}
             />
             <Bar dataKey="value" name={axisName} isAnimationActive={false} maxBarSize={compact ? 14 : 22} minPointSize={3}>

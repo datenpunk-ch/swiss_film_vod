@@ -87,8 +87,10 @@ def _run(ctx: CinemaContext) -> dict:
     post_table = posterior_table_rows(rows)
     diag = extract_mcmc_diagnostics(idata, ["mu_alpha", "mu_beta", "alpha", "beta"])
 
+    gdf_all = ctx.px_genre_yearly.sort_values(["genre", "year"])
     p_draws_by_genre = {}
     observed = {}
+    observed_all: dict[str, dict[str, np.ndarray]] = {}
     for gid in GENRE_IDS:
         sub = gdf[gdf["genre"] == gid].sort_values("year")
         yc = sub["year"].values - year_mean
@@ -96,6 +98,11 @@ def _run(ctx: CinemaContext) -> dict:
         logit = alpha_s[:, i][:, None] + beta_s[:, i][:, None] * yc[None, :]
         p_draws_by_genre[gid] = 1 / (1 + np.exp(-logit))
         observed[gid] = sub["ch_share"].values
+        sub_all = gdf_all[gdf_all["genre"] == gid].sort_values("year")
+        observed_all[gid] = {
+            "years": sub_all["year"].values.astype(float),
+            "value": sub_all["ch_share"].values.astype(float) * 100.0,
+        }
 
     fig1 = save_figure(
         ctx,
@@ -109,7 +116,9 @@ def _run(ctx: CinemaContext) -> dict:
     # forest for all betas - extend plot_forest to accept list
     fig3 = save_figure(ctx, "01_genre_trace.png", plot_mcmc_trace(idata, ["mu_alpha", "mu_beta"]))
 
-    charts = export_genre_shares(years, p_draws_by_genre, observed, GENRE_LABELS)
+    charts = export_genre_shares(
+        years, p_draws_by_genre, observed, GENRE_LABELS, observed_all=observed_all
+    )
 
     return analysis_result(
         id="ch_genre_bayes",

@@ -1,4 +1,5 @@
 import { intFmt, metricShare, metricValue, formatYoYPercent, pctFmt } from "../utils/format.js";
+import BayesTooltipFrame from "./BayesTooltipFrame.jsx";
 
 function resolveTitle(label, row) {
   if (row?.week != null && row.week !== "") {
@@ -41,14 +42,22 @@ function formatTooltipValue(entry, metric, showShare, prevRowById) {
   return intFmt.format(0);
 }
 
-export default function ChartTooltip({ active, payload, label, metric, showShare = false, prevRowById }) {
+export default function ChartTooltip({
+  active,
+  payload,
+  label,
+  coordinate,
+  metric,
+  showShare = false,
+  prevRowById,
+}) {
   if (!active || !payload?.length) return null;
 
   const row = payload[0]?.payload;
   const title = resolveTitle(label, row);
 
-  return (
-    <div className="chart-tooltip">
+  const inner = (
+    <>
       {title ? <p className="chart-tooltip-title">{title}</p> : null}
       <ul className="chart-tooltip-list">
         {payload.map((entry) => {
@@ -62,6 +71,21 @@ export default function ChartTooltip({ active, payload, label, metric, showShare
           );
         })}
       </ul>
-    </div>
+    </>
+  );
+
+  if (!coordinate) {
+    return <div className="chart-tooltip">{inner}</div>;
+  }
+
+  return (
+    <BayesTooltipFrame
+      active={active}
+      coordinate={coordinate}
+      variant="list"
+      itemCount={payload.length}
+    >
+      {inner}
+    </BayesTooltipFrame>
   );
 }

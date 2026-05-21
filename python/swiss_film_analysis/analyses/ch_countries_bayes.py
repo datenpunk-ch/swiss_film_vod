@@ -98,8 +98,10 @@ def _run(ctx: CinemaContext) -> dict:
     post_table = posterior_table_rows(rows)
     diag = extract_mcmc_diagnostics(idata, ["mu_alpha", "mu_beta", "alpha", "beta"])
 
+    full_cdf = ctx.px_country_yearly.sort_values(["country", "year"])
     p_draws: dict[str, np.ndarray] = {}
     observed: dict[str, np.ndarray] = {}
+    observed_all: dict[str, dict[str, np.ndarray]] = {}
     for cid in COUNTRY_IDS:
         sub = cdf[cdf["country"] == cid].sort_values("year")
         if sub.empty:
@@ -109,6 +111,11 @@ def _run(ctx: CinemaContext) -> dict:
         logit = alpha_s[:, i][:, None] + beta_s[:, i][:, None] * yc[None, :]
         p_draws[cid] = 1 / (1 + np.exp(-logit))
         observed[cid] = sub["share_demand"].values
+        sub_all = full_cdf[full_cdf["country"] == cid].sort_values("year")
+        observed_all[cid] = {
+            "years": sub_all["year"].values.astype(float),
+            "value": sub_all["share_demand"].values.astype(float) * 100.0,
+        }
 
     fig1 = save_figure(
         ctx,
@@ -165,7 +172,9 @@ def _run(ctx: CinemaContext) -> dict:
         "rows": [[COUNTRY_LABELS[cid], share_at(cid, y0), share_at(cid, y1)] for cid in COUNTRY_IDS],
     }
 
-    charts = export_country_shares(years, p_draws, observed, COUNTRY_LABELS)
+    charts = export_country_shares(
+        years, p_draws, observed, COUNTRY_LABELS, observed_all=observed_all
+    )
 
     return analysis_result(
         id="ch_countries_bayes",

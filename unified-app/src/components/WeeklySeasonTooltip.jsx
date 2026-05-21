@@ -1,6 +1,7 @@
 import { intFmt } from "../utils/format.js";
+import BayesTooltipFrame from "./BayesTooltipFrame.jsx";
 
-export default function WeeklySeasonTooltip({ active, payload }) {
+export default function WeeklySeasonTooltip({ active, payload, coordinate }) {
   if (!active || !payload?.length) return null;
 
   const row = payload[0]?.payload;
@@ -11,8 +12,8 @@ export default function WeeklySeasonTooltip({ active, payload }) {
   const val = Number(entry.value);
   const text = Number.isFinite(val) ? intFmt.format(val) : "—";
 
-  return (
-    <div className="chart-tooltip">
+  const inner = (
+    <>
       <p className="chart-tooltip-title">{title}</p>
       <ul className="chart-tooltip-list">
         <li>
@@ -21,6 +22,16 @@ export default function WeeklySeasonTooltip({ active, payload }) {
           <strong>{text}</strong>
         </li>
       </ul>
-    </div>
+    </>
+  );
+
+  if (!coordinate) {
+    return <div className="chart-tooltip">{inner}</div>;
+  }
+
+  return (
+    <BayesTooltipFrame active={active} coordinate={coordinate} variant="list" itemCount={1}>
+      {inner}
+    </BayesTooltipFrame>
   );
 }

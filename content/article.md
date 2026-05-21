@@ -59,6 +59,8 @@
 
 <p class="reveal"><strong>Antwort:</strong> Beides spielt eine Rolle. Wenn der Gesamtmarkt wächst, steigen auch die Besuche bei Schweizer Filmen — aber der Schweizer Anteil hat in den letzten Jahren **überproportional** zugelegt. Der Sprung zwischen 2023 und 2024 lässt sich **nicht** allein mit «das Kino hat sich nach der Pandemie erholt» erklären.</p>
 
+<p class="reveal">Ein **absolutes** Bayes-Modell (CH-Besuche mit Marktgrösse als Referenz) bestätigt: die Schweizer **Rate** — der erwartete CH-Anteil bei gegebener Marktgrösse — steigt posterior **klar**. Mehr CH-Besuche kommen also nicht nur von der Markterholung. Die **Intensität** (Besuche pro Film im Programm) liegt bei CH-Produktionen traditionell unter dem Marktdurchschnitt; 2025 sind beide näher beieinander (Markt Ø ~2&nbsp;500, CH Ø ~2&nbsp;100 Besuche/Film).</p>
+
     </div>
   </div>
 </section>
@@ -75,6 +77,7 @@
         <li><strong>Schwächer:</strong> Sommer.</li>
       </ul>
       <p>Schweizer Filme folgen dieser Kurve; sie profitieren von den Hochphasen des Gesamtmarkts.</p>
+      <p>Ein Bayes-Modell auf **Wochenebene** (P4, 2019 und 2022–2024) zeigt dasselbe Muster für den **CH-Anteil** am Wochenpublikum: Winterhoch, Sommer tiefer — nicht «weniger Schweizer Filme», sondern ein kleinerer Anteil in schwachen Wochen.</p>
       <div class="info-box-figure">
         <div class="embed-frame visible embed-frame--season" style="max-width: 100%;">
           <iframe title="Kinosaison — Besuche pro Kinowoche (P4)" src="./unified.html?embed=1&amp;panel=season" loading="lazy" referrerpolicy="no-referrer"></iframe>
@@ -110,6 +113,8 @@
 
 <p class="reveal"><strong>Antwort:</strong> Die **USA** dominieren den Besuchsanteil über den ganzen Zeitraum. **Schweiz**, **Frankreich** und **Deutschland** bleiben relevante europäische Quellen. Der **Schweizer Anteil** am Gesamtmarkt steigt im Modell **klar** — parallel zum CH-Trend in Abschnitt&nbsp;04, hier im direkten Ländervergleich.</p>
 
+<p class="reveal">**Deskriptiv** (PX, ohne Posterior): Schweiz **4,8&nbsp;%** → **9,1&nbsp;%** Besuchsanteil (2014→2025); USA **61,9&nbsp;%** → **56,0&nbsp;%**; Frankreich verliert, Deutschland gewinnt leicht. Im **Programm** ist die Schweiz stärker vertreten als in den Besuchen — das Thema der Lücke in Abschnitt&nbsp;06.</p>
+
     </div>
   </div>
 </section>
@@ -135,7 +140,9 @@
 
 <p class="chart-caption reveal">Posterior-Mittel und 95&nbsp;%-HDI (Bayes-Modell); Punkte = beobachtete Anteile; gestrichelt = Prognose. Pandemie-Jahre schattiert.</p>
 
-<p class="reveal"><strong>Antwort:</strong> Der Anteil steigt **klar nach oben** — von früher oft 4–7&nbsp;% Richtung rund 9&nbsp;% (2025). Eine statistische Trend-Fortsetzung (Bayes-Modell, siehe Analysen) deutet auf weiteres Wachstum hin — keine Vorhersage für einzelne Filme oder Ausnahmejahre.</p>
+<p class="reveal"><strong>Antwort:</strong> Der Anteil steigt **klar nach oben** — von früher oft 4–7&nbsp;% Richtung rund 9&nbsp;% (2025). Das **Logit-Trendmodell** (ohne 2020–2021) schätzt einen **stabilen Aufwärtstrend** (posterior nahezu sicher); extrapoliert Richtung **knapp über 9&nbsp;%** bis etwa **2028** — mit wachsender Unsicherheit, keine Einzelfilm-Prognose.</p>
+
+<p class="reveal">Ein exploratives **Strukturbruch-Modell** ab 2023 erklärt den konzentrierten Sprung **2023→2024** nicht zuverlässig; für die Kurzstory zählt der **durchgehende Trend** (Details in den <a href="./analysis.html">Kino-Analysen</a>).</p>
 
     </div>
   </div>
@@ -152,7 +159,9 @@
 
 <p class="reveal"><strong>Frage:</strong> Trägt der Schweizer Film in **Fiktion, Dokumentar und Animation** gleichermassen — gemessen am Anteil **innerhalb** des jeweiligen Genre-Publikums? Und kommt ein höherer Gesamtanteil daher, dass das Publikum **andere Genres** bevorzugt, oder weil Schweizer Filme in den Genres **besser ankommen**?</p>
 
-<p class="reveal"><strong>Antwort:</strong> **Fiktion** und **Dokumentar** gewinnen an Boden; bei **Animation** eher das Gegenteil. «Der Schweizer Film boomt» gilt also **nicht für alle Genres gleich**. Der **grössere** Teil des Anstiegs seit 2014 kommt davon, dass Schweizer Filme in Fiktion, Dokumentar und Animation **stärker abschneiden** — nicht primär davon, dass das Publikum plötzlich andere Genres wählt.</p>
+<p class="reveal"><strong>Antwort:</strong> **Fiktion** und **Dokumentar** gewinnen an Boden (je Genre posterior **steigender** Trend); bei **Animation** eher **Rückgang**. «Der Schweizer Film boomt» gilt also **nicht für alle Genres gleich**.</p>
+
+<p class="reveal">Eine **Zerlegung** des CH-Gesamtanteils (2014→2025, Mix × Erfolg im Genre): der Markt spielt etwas **mehr Dokumentar und Animation** (Mix-Effekt etwa **+1,3&nbsp;Prozentpunkte**), der grössere Block kommt vom **besseren Abschneiden** Schweizer Filme **innerhalb** der Genres (etwa **+3,0&nbsp;Prozentpunkte**). Der Anstieg ist also vor allem **Erfolg im Genre**, nicht Genre-Umschichtung allein.</p>
 
 <div class="article-plot reveal">
   <div class="embed-frame visible embed-frame--chgenre" style="max-width: 100%;">
@@ -203,7 +212,7 @@
     </div>
     <div class="measure">
 
-<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht — der Schweizer Anteil am Publikum steigt überproportional (Sprung 2023→2024). **Saison:** Hochphasen im Winter und Frühling. **Länder:** USA dominieren; die Schweiz gewinnt an Gewicht. **Ankommen:** höherer CH-Anteil mit deutlichem Sprung 2023→2024. **Genres:** vor allem Fiktion und Dokumentar. **Programm vs. Publikum:** Die Lücke schrumpft. Vertiefung in der interaktiven Jahresansicht unten.</p>
+<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht — CH-Anteil und absolute CH-Rate steigen überproportional (Sprung 2023→2024). **Saison:** Winter/Frühling stark; CH-Anteil folgt dem Kalender. **Länder:** USA dominieren, CH von ~5&nbsp;% auf ~9&nbsp;% Besuchsanteil. **Ankommen:** Trendmodell mit Prognose Richtung weiterem Wachstum. **Genres:** Fiktion/Doku up, Animation down; Anstieg vor allem Erfolg im Genre (~3&nbsp;Pp.), nicht Mix (~1&nbsp;Pp.). **Programm vs. Publikum:** Lücke schrumpft (Median Kreuzung ~2028). Methodik: <a href="./analysis.html">Kino-Analysen</a>; Vertiefung unten.</p>
 
     </div>
   </div>
@@ -239,7 +248,7 @@
   <li><strong>P4</strong> — Kinostatistik des BFS nach Kinowochen: Besuche und Filme pro Woche (keine Genre-Aufteilung in den Rohdaten).</li>
 </ul>
 
-<p class="reveal sources-foot"><a href="https://github.com/datenpunk-ch/swiss_film_vod">GitHub-Repository</a> (Daten und Code)</p>
+<p class="reveal sources-foot"><a href="./analysis.html">Kino-Analysen im Detail</a> (Bayes-Modelle, MCMC) · <a href="https://github.com/datenpunk-ch/swiss_film_vod">GitHub-Repository</a> (Daten und Code)</p>
 
     </div>
   </div>

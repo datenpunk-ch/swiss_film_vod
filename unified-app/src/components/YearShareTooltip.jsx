@@ -1,6 +1,7 @@
 import { pctFmt, formatYoYPercent } from "../utils/format.js";
+import BayesTooltipFrame from "./BayesTooltipFrame.jsx";
 
-export default function YearShareTooltip({ active, payload, label, rows, series }) {
+export default function YearShareTooltip({ active, payload, label, coordinate, rows, series }) {
   if (!active || !payload?.length) return null;
 
   const slice = payload[0]?.payload;
@@ -23,8 +24,8 @@ export default function YearShareTooltip({ active, payload, label, rows, series 
         color: entry.color,
       }));
 
-  return (
-    <div className="chart-tooltip">
+  const inner = (
+    <>
       {title ? <p className="chart-tooltip-title">{title}</p> : null}
       <ul className="chart-tooltip-list">
         {items.map((entry) => {
@@ -42,6 +43,21 @@ export default function YearShareTooltip({ active, payload, label, rows, series 
           );
         })}
       </ul>
-    </div>
+    </>
+  );
+
+  if (!coordinate) {
+    return <div className="chart-tooltip">{inner}</div>;
+  }
+
+  return (
+    <BayesTooltipFrame
+      active={active}
+      coordinate={coordinate}
+      variant="list"
+      itemCount={items.length}
+    >
+      {inner}
+    </BayesTooltipFrame>
   );
 }

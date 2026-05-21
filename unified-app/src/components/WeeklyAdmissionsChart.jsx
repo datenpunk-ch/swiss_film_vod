@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, PALETTE, SERIES_PAIR, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, BAYES_TOOLTIP_WRAPPER_STYLE, PALETTE, SERIES_PAIR } from "../constants.js";
 import { barFillForValue, enrichWeeklyProfile } from "../utils/weeklyChart.js";
 import ChartBox from "./ChartBox.jsx";
 import ChartResponsive from "./ChartResponsive.jsx";
@@ -99,7 +99,11 @@ export default function WeeklyAdmissionsChart({
               axisLine={{ stroke: PALETTE.axis }}
               tickLine={{ stroke: PALETTE.axis }}
             />
-            <Tooltip wrapperStyle={TOOLTIP_WRAPPER_STYLE} content={<WeeklySeasonTooltip />} />
+            <Tooltip
+              wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+              allowEscapeViewBox={false}
+              content={<WeeklySeasonTooltip />}
+            />
             <Bar
               dataKey="admissions"
               name={barName}

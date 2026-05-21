@@ -1,4 +1,5 @@
 import { formatYoYSharePp, formatYoYPercent, intFmt, pctFmt } from "../utils/format.js";
+import BayesTooltipFrame from "./BayesTooltipFrame.jsx";
 
 function resolveChShare(row, key, chShareDenominatorKey, chShareValueKey) {
   if (key !== "ch" || !row) return null;
@@ -15,6 +16,7 @@ export default function LineTrendTooltip({
   active,
   payload,
   label,
+  coordinate,
   chShareDenominatorKey,
   chShareValueKey = "ch_share",
   dataByYear,
@@ -27,8 +29,8 @@ export default function LineTrendTooltip({
   const year = row?.year != null ? Number(row.year) : null;
   const prevRow = year != null && dataByYear ? dataByYear.get(year - 1) : null;
 
-  return (
-    <div className="chart-tooltip">
+  const inner = (
+    <>
       {title ? <p className="chart-tooltip-title">{title}</p> : null}
       <ul className="chart-tooltip-list">
         {payload.map((entry) => {
@@ -59,6 +61,21 @@ export default function LineTrendTooltip({
           );
         })}
       </ul>
-    </div>
+    </>
+  );
+
+  if (!coordinate) {
+    return <div className="chart-tooltip">{inner}</div>;
+  }
+
+  return (
+    <BayesTooltipFrame
+      active={active}
+      coordinate={coordinate}
+      variant="list"
+      itemCount={payload.length}
+    >
+      {inner}
+    </BayesTooltipFrame>
   );
 }

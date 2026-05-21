@@ -13,7 +13,7 @@ import {
   YAxis,
 } from "recharts";
 import { AXIS, BAYES_TOOLTIP_WRAPPER_STYLE, PALETTE, SERIES_PAIR } from "../constants.js";
-import { mergeForecastChart, yearTicks } from "../utils/bayesChartRows.js";
+import { covidYearSet, mergeForecastChart, yearTicks } from "../utils/bayesChartRows.js";
 import { BayesMultiTooltip, BayesSingleTooltip, formatBayesValue } from "./BayesModelTooltip.jsx";
 import CategoryLegend from "./CategoryLegend.jsx";
 import ChartBox from "./ChartBox.jsx";
@@ -115,7 +115,24 @@ function SingleBandChart({ chart, height = 280, color = SERIES_PAIR.second }) {
             connectNulls
             isAnimationActive={false}
           />
-          <Scatter dataKey="obs" fill={PALETTE.ink} r={4} isAnimationActive={false} />
+          <Scatter
+            dataKey="obs"
+            fill={PALETTE.ink}
+            r={4}
+            isAnimationActive={false}
+            name="Daten"
+          />
+          <Scatter
+            dataKey="obsCovid"
+            fill={PALETTE.ink}
+            fillOpacity={0.32}
+            stroke={PALETTE.ink}
+            strokeOpacity={0.45}
+            strokeWidth={1}
+            r={4}
+            isAnimationActive={false}
+            name="Daten (Pandemie)"
+          />
         </ComposedChart>
       </ResponsiveContainer>
     </ChartBox>
@@ -127,20 +144,28 @@ function MultiBandChart({ chart, height = 280, useFlags = false }) {
   const yFormat = chart.yFormat ?? "percent";
 
   const { rows, legendRows, legendColors } = useMemo(() => {
+    const covidYears = covidYearSet(chart);
     const yearSet = new Set();
-    for (const s of series) for (const y of s.years ?? []) yearSet.add(Number(y));
+    for (const s of series) {
+      for (const y of s.years ?? []) yearSet.add(Number(y));
+      for (const y of s.observed?.years ?? []) yearSet.add(Number(y));
+    }
     const years = [...yearSet].sort((a, b) => a - b);
     const merged = years.map((year) => {
       const row = { year };
+      const isCovid = covidYears.has(year);
       for (const s of series) {
         const idx = s.years?.findIndex((y) => Number(y) === year) ?? -1;
-        if (idx < 0) continue;
-        row[`${s.id}_mean`] = s.mean?.[idx];
-        row[`${s.id}_lo`] = s.lo?.[idx];
-        row[`${s.id}_hi`] = s.hi?.[idx];
-        row[`${s.id}_band`] = (s.hi?.[idx] ?? 0) - (s.lo?.[idx] ?? 0);
+        if (idx >= 0) {
+          row[`${s.id}_mean`] = s.mean?.[idx];
+          row[`${s.id}_lo`] = s.lo?.[idx];
+          row[`${s.id}_hi`] = s.hi?.[idx];
+          row[`${s.id}_band`] = (s.hi?.[idx] ?? 0) - (s.lo?.[idx] ?? 0);
+        }
         const obsIdx = s.observed?.years?.findIndex((y) => Number(y) === year) ?? -1;
-        row[`${s.id}_obs`] = obsIdx >= 0 ? s.observed.value?.[obsIdx] : null;
+        const rawObs = obsIdx >= 0 ? s.observed.value?.[obsIdx] : null;
+        row[`${s.id}_obs`] = !isCovid && obsIdx >= 0 ? rawObs : null;
+        row[`${s.id}_obsCovid`] = isCovid && obsIdx >= 0 ? rawObs : null;
       }
       return row;
     });
@@ -149,7 +174,7 @@ function MultiBandChart({ chart, height = 280, useFlags = false }) {
       legendRows: series.map((s) => ({ id: s.id, label: s.label })),
       legendColors: Object.fromEntries(series.map((s) => [s.id, s.color ?? PALETTE.accent])),
     };
-  }, [series]);
+  }, [series, chart]);
 
   return (
     <figure className="country-trend-chart">
@@ -233,6 +258,19 @@ function MultiBandChart({ chart, height = 280, useFlags = false }) {
                     key={`${s.id}-obs`}
                     dataKey={`${s.id}_obs`}
                     fill={s.color ?? PALETTE.ink}
+                    r={3}
+                    isAnimationActive={false}
+                  />
+                ))}
+                {series.map((s) => (
+                  <Scatter
+                    key={`${s.id}-obs-covid`}
+                    dataKey={`${s.id}_obsCovid`}
+                    fill={s.color ?? PALETTE.ink}
+                    fillOpacity={0.32}
+                    stroke={s.color ?? PALETTE.ink}
+                    strokeOpacity={0.45}
+                    strokeWidth={1}
                     r={3}
                     isAnimationActive={false}
                   />

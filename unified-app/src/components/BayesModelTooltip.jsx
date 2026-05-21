@@ -88,7 +88,9 @@ export function BayesSingleTooltip({
     : Number.isFinite(row.futMean)
       ? row.futMean
       : row.histMean;
-  const obs = row.obs;
+  const obsCovid = row.obsCovid;
+  const obs = Number.isFinite(row.obs) ? row.obs : obsCovid;
+  const covidOnly = row.phase === "covid" || (Number.isFinite(obsCovid) && !Number.isFinite(mean));
   const lo = Number.isFinite(row.lo) ? row.lo : row.futLo;
   const hi = Number.isFinite(row.hi) ? row.hi : row.futHi;
 
@@ -105,6 +107,7 @@ export function BayesSingleTooltip({
       <p className="chart-tooltip-title">
         {year}
         {isForecast ? <span className="chart-tooltip-forecast"> · Prognose</span> : null}
+        {covidOnly ? <span className="chart-tooltip-covid"> · Pandemie (nur Daten)</span> : null}
       </p>
       <TooltipMetricTable rows={metricRows} />
     </BayesTooltipFrame>
@@ -131,9 +134,10 @@ export function BayesMultiTooltip({
   const entries = series
     .map((s) => {
       const mean = row[`${s.id}_mean`];
-      const obs = row[`${s.id}_obs`];
+      const obsCovid = row[`${s.id}_obsCovid`];
+      const obs = Number.isFinite(row[`${s.id}_obs`]) ? row[`${s.id}_obs`] : obsCovid;
       if (![mean, obs].some((v) => Number.isFinite(v))) return null;
-      return { s, mean, obs };
+      return { s, mean, obs, covidOnly: Number.isFinite(obsCovid) && !Number.isFinite(mean) };
     })
     .filter(Boolean)
     .sort((a, b) => {
@@ -150,7 +154,12 @@ export function BayesMultiTooltip({
 
   return (
     <BayesTooltipFrame active={active} coordinate={coordinate} variant="multi">
-      <p className="chart-tooltip-title">{year}</p>
+      <p className="chart-tooltip-title">
+        {year}
+        {entries.every((e) => e.covidOnly) ? (
+          <span className="chart-tooltip-covid"> · Pandemie (nur Daten)</span>
+        ) : null}
+      </p>
       <table className={`chart-tooltip-table chart-tooltip-table--multi${tableMod}`}>
         <colgroup>
           <col className="col-series" />

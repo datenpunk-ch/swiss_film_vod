@@ -82,6 +82,8 @@ def export_country_shares(
     p_draws: dict[str, np.ndarray],
     observed: dict[str, np.ndarray],
     labels: dict[str, str],
+    *,
+    observed_all: dict[str, dict[str, np.ndarray]] | None = None,
 ) -> dict:
     series = []
     for cid, draws in p_draws.items():
@@ -91,7 +93,13 @@ def export_country_shares(
             "color": COUNTRY_COLORS.get(cid),
             **band_from_draws(years, draws, scale=100.0),
         }
-        if cid in observed:
+        if observed_all and cid in observed_all:
+            obs = observed_all[cid]
+            entry["observed"] = {
+                "years": _tolist(obs["years"]),
+                "value": _tolist(np.asarray(obs["value"])),
+            }
+        elif cid in observed:
             entry["observed"] = {
                 "years": _tolist(years),
                 "value": _tolist(np.asarray(observed[cid]) * 100.0),
@@ -105,6 +113,8 @@ def export_genre_shares(
     p_draws: dict[str, np.ndarray],
     observed: dict[str, np.ndarray],
     labels: dict[str, str],
+    *,
+    observed_all: dict[str, dict[str, np.ndarray]] | None = None,
 ) -> dict:
     series = []
     for gid, draws in p_draws.items():
@@ -114,7 +124,13 @@ def export_genre_shares(
             "color": GENRE_COLORS.get(gid),
             **band_from_draws(years, draws, scale=100.0),
         }
-        if gid in observed:
+        if observed_all and gid in observed_all:
+            obs = observed_all[gid]
+            entry["observed"] = {
+                "years": _tolist(obs["years"]),
+                "value": _tolist(np.asarray(obs["value"])),
+            }
+        elif gid in observed:
             entry["observed"] = {
                 "years": _tolist(years),
                 "value": _tolist(np.asarray(observed[gid]) * 100.0),

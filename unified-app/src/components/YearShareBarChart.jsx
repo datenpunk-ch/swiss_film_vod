@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AXIS, DIMMED_SERIES_OPACITY, PALETTE, TOOLTIP_WRAPPER_STYLE } from "../constants.js";
+import { AXIS, BAYES_TOOLTIP_WRAPPER_STYLE, DIMMED_SERIES_OPACITY, PALETTE } from "../constants.js";
 import { withAlpha } from "../utils/colorAlpha.js";
 import { pctFmt } from "../utils/format.js";
 import { isDimmedYear } from "../utils/yearDisplay.js";
@@ -97,7 +97,8 @@ export default function YearShareBarChart({
                   axisLine={false}
                 />
                 <Tooltip
-                  wrapperStyle={TOOLTIP_WRAPPER_STYLE}
+                  wrapperStyle={BAYES_TOOLTIP_WRAPPER_STYLE}
+                  allowEscapeViewBox={false}
                   content={<YearShareTooltip rows={rows} series={series} />}
                 />
                 {series.map((s) => (
