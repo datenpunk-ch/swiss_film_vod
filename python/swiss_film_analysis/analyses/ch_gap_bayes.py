@@ -121,34 +121,39 @@ def _crossing_table(t_star: np.ndarray, beta_s: np.ndarray, *, last_obs_year: in
     }
 
 
-def _warning_metrics(
-    t_star: np.ndarray,
-    gap_fut: np.ndarray,
-    *,
-    last_gap: float,
-) -> list[dict]:
-    future_cross = t_star[np.isfinite(t_star) & (t_star > 2025)]
-    p_close_2030 = float(np.mean(gap_fut[:, -1] <= 0)) if gap_fut.size else 0.0
-    items = [
+def _format_crossing_year(y: float) -> str:
+    if abs(y - round(y)) < 0.05:
+        return str(int(round(y)))
+    return f"{y:.1f}".replace(".", ",")
+
+
+def _format_year_span(lo: float, hi: float) -> str:
+    lo_s = str(int(round(lo))) if abs(lo - round(lo)) < 0.05 else f"{lo:.1f}".replace(".", ",")
+    hi_s = str(int(round(hi))) if abs(hi - round(hi)) < 0.05 else f"{hi:.1f}".replace(".", ",")
+    return f"{lo_s}–{hi_s}"
+
+
+def _gap_article_metrics(t_star: np.ndarray) -> list[dict]:
+    """Zwei KPIs: Median-Kreuzungsjahr (mit 95 %-HDI) und P(Kreuzung bis Horizont)."""
+    future_cross = t_star[np.isfinite(t_star) & (t_star > 2025) & (t_star < 2045)]
+    if future_cross.size == 0:
+        return []
+    lo, hi = hdi_bounds(future_cross)
+    med = float(np.median(future_cross))
+    p_horizon = float(np.mean(future_cross <= HORIZON_END))
+    year_span = _format_year_span(lo, hi)
+    med_year = _format_crossing_year(med)
+    return [
         {
-            "label": f"Chance: Lücke im Jahr {HORIZON_END} ausgeglichen",
-            "value": prob_pct(p_close_2030),
-            "note": "Nicht dasselbe wie das Kreuzungsjahr auf der Grafik",
-            "ok": None,
+            "label": "Median Kreuzungsjahr (T*)",
+            "value": med_year,
+            "note": f"95 %-HDI: {year_span}",
+        },
+        {
+            "label": f"Chance Kreuzung bis {HORIZON_END}",
+            "value": prob_pct(p_horizon),
         },
     ]
-    if future_cross.size:
-        items.append(
-            {
-                "label": "Median T* (Kreuzung)",
-                "value": f"{float(np.median(future_cross)):.1f}".replace(".", ","),
-                "note": f"Kreuzung bis {HORIZON_END}: {prob_pct(float(np.mean(future_cross <= HORIZON_END)))}",
-                "ok": None,
-            }
-        )
-    for w in WARNINGS:
-        items.append({"label": "Hinweis", "value": "—", "note": w, "ok": False})
-    return items
 
 
 def _run(ctx: CinemaContext) -> dict:
@@ -160,7 +165,6 @@ def _run(ctx: CinemaContext) -> dict:
     year_c = years - year_mean
     gap = (fit_df["ch_share_films"] - fit_df["ch_share_admissions"]).values * 100
     last_obs_year = int(fit_df["year"].max())
-    last_gap = float(gap[-1])
 
     with pm.Model() as model:
         alpha = pm.Normal("alpha", 0, 5)
@@ -206,7 +210,7 @@ def _run(ctx: CinemaContext) -> dict:
 
     forecast_table = _forecast_table(gap_fut, forecast_times)
     crossing_table = _crossing_table(t_star, beta_s, last_obs_year=last_obs_year)
-    metrics = _warning_metrics(t_star, gap_fut, last_gap=last_gap)
+    metrics = _gap_article_metrics(t_star)
 
     charts = export_gap_forecast(
         years,

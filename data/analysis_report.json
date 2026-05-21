@@ -917,40 +917,13 @@
       },
       "metrics": [
         {
-          "label": "Chance: Lücke im Jahr 2030 ausgeglichen",
-          "value": "90,41 %",
-          "note": "Nicht dasselbe wie das Kreuzungsjahr auf der Grafik",
-          "ok": null
+          "label": "Median Kreuzungsjahr (T*)",
+          "value": "2028",
+          "note": "95 %-HDI: 2026–2032"
         },
         {
-          "label": "Median T* (Kreuzung)",
-          "value": "2028,2",
-          "note": "Kreuzung bis 2030: 85,66 %",
-          "ok": null
-        },
-        {
-          "label": "Hinweis",
-          "value": "—",
-          "note": "Prognose = linearer Trend — kein garantiertes Schliessen; Trend kann abflachen.",
-          "ok": false
-        },
-        {
-          "label": "Hinweis",
-          "value": "—",
-          "note": "Lücke in Prozentpunkten (pp): Differenz zweier Anteile — nicht mit «%» Relativänderung verwechseln.",
-          "ok": false
-        },
-        {
-          "label": "Hinweis",
-          "value": "—",
-          "note": "Negative Lücke möglich (Publikum > Programm); Modell erlaubt das, Interpretation dann «Überholung».",
-          "ok": false
-        },
-        {
-          "label": "Hinweis",
-          "value": "—",
-          "note": "Nur Jahresaggregate; Programm- und Besuchsanteil können sich unabhängig bewegen.",
-          "ok": false
+          "label": "Chance Kreuzung bis 2030",
+          "value": "85,72 %"
         },
         {
           "label": "Hinweis",
