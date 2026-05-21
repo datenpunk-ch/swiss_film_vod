@@ -6,7 +6,7 @@
 
 <!--PART:hero-->
 <div class="container">
-  <div class="wide-bleed hero-figure-wrap reveal" aria-hidden="false">
+  <div class="hero-figure-wrap reveal" aria-hidden="false">
     <figure class="hero-figure"><img class="hero-figure-img hero-figure-img-raw" src="./assets/images/swissfilm-hero.jpg" alt="Kinosaal mit Matterhorn auf der Leinwand und Publikum im Vordergrund" width="1600" height="900" loading="eager" decoding="async" /></figure>
   </div>
   <div class="hero-tag reveal">Kultur · Schweiz · Kino</div>
