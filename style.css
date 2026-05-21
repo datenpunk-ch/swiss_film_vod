@@ -185,11 +185,28 @@ a:hover {
 }
 
 .page-article .hero-figure-wrap {
-  margin: 0 0 2rem;
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto 1.75rem;
+  padding: 0;
+}
+
+.page-article .wide-bleed.hero-figure-wrap {
+  width: 100%;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .page-article .hero-figure {
-  margin: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: clamp(10.5rem, 24vw, 15rem);
+  overflow: hidden;
   border: var(--rule-w) solid var(--color-rule);
   background: var(--color-bg);
 }
@@ -197,8 +214,7 @@ a:hover {
 .page-article .hero-figure-img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: clamp(16rem, 42vw, 28rem);
+  height: 100%;
   object-fit: cover;
   object-position: center bottom;
 }
@@ -207,8 +223,33 @@ a:hover {
   filter: none;
 }
 
-html.is-embed .hero-figure-wrap {
+.page-article .hero-figure-wrap:first-child {
+  margin-top: 0;
+}
+
+html.is-embed .progress-bar {
   display: none;
+}
+
+html.is-embed body.page-article .hero {
+  padding: clamp(1rem, 2.5vw, 1.5rem) 0 2.5rem;
+}
+
+html.is-embed body.page-article .hero-figure-wrap {
+  margin-bottom: 1.25rem;
+}
+
+html.is-embed body.page-article .hero-figure {
+  max-height: clamp(9rem, 22vw, 13rem);
+}
+
+html.is-embed body.page-article .hero h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin-bottom: 0.75rem;
+}
+
+html.is-embed body.page-article .hero-sub {
+  margin-bottom: 1.25rem;
 }
 
 .page-article #content > section {
