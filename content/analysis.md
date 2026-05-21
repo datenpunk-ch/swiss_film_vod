@@ -8,7 +8,7 @@
 <div class="container">
   <div class="hero-tag">Bayesian · BFS Kino</div>
   <h1>Kino-Analysen im Detail</h1>
-  <p class="hero-sub">Acht Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv). Unsicherheit: <strong>95&nbsp;%-höchstes Dichtheitsintervall (HDI)</strong>; Richtung: <strong>Richtungswahrscheinlichkeit (Pd)</strong>. Schätzung per <strong>MCMC</strong> (Markov Chain Monte Carlo, NUTS). Daten: BFS-<strong>PX</strong> (Filmangebot und Nachfrage, jährlich), BFS-<strong>P4</strong> (Kinostatistik nach Wochen). Text in <code>content/analysis.md</code>; Zahlen per <code>pixi run analyze</code>. Stand: <span id="analysis-stand">—</span>.</p>
+  <p class="hero-sub">Acht Bayes Modelle plus Länder-Zeitverlauf (deskriptiv). Unsicherheit: <strong>95&nbsp;%-höchstes Dichtheitsintervall (HDI)</strong>; Richtung: <strong>Richtungswahrscheinlichkeit (Pd)</strong>. Schätzung per <strong>MCMC</strong> (Markov Chain Monte Carlo, NUTS). Daten: BFS-<strong>PX</strong> (Filmangebot und Nachfrage, jährlich), BFS-<strong>P4</strong> (Kinostatistik nach Wochen). Stand: <span id="analysis-stand">—</span>.</p>
   <p class="hero-byline"><a href="./index.html">← Artikel</a> · <a href="./unified.html">Übersicht</a></p>
 </div>
 
@@ -293,8 +293,8 @@
 
 <section class="analysis-block" id="ch_countries_trend">
   <div class="container">
-    <div class="section-label">Analyse 08</div>
-    <div class="sec-head"><div class="sec-num">08</div><h2>Länder im Zeitverlauf (PX, deskriptiv)</h2></div>
+    <div class="section-label">Analyse 09</div>
+    <div class="sec-head"><div class="sec-num">09</div><h2>Länder im Zeitverlauf (PX, deskriptiv)</h2></div>
     <div class="measure analysis-body">
       <h3>Fragestellung</h3>
       <p class="analysis-prose">Wie verschieben sich die Anteile der wichtigsten Herkunftsländer am Kinomarkt über die Jahre — und wo steht die Schweiz im Vergleich zu USA und europäischen Produktionsländern?</p>
@@ -326,17 +326,19 @@
     <div class="section-label">Synthese</div>
     <div class="sec-head"><div class="sec-num">∑</div><h2>Gesamtinterpretation: Schweizer Film am Kino</h2></div>
     <div class="measure analysis-body">
-      <p class="analysis-prose analysis-lead">Sieben Bayesianische Modelle plus Länder-Zeitverlauf (deskriptiv): Genre-Erfolg, Genre-Mix, Strukturbruch, absolute Besuche, Programm-Lücke, Wochensaison, Prognose, Top-Länder.</p>
-      <p class="analysis-prose">Lesereihenfolge: (1) Genre → (2) Mix → (3) Change-Point (explorativ) → (4) Absolute Besuche → (5) Lücke → (6) Saison → (7) Prognose → (8) Länder.</p>
+      <p class="analysis-prose analysis-lead">Acht Bayes Modelle plus ein deskriptiver Länder-Zeitverlauf: Genre-Erfolg, Genre-Mix, Strukturbruch (explorativ), absolute Besuche, Programm-Lücke, Kinosaison, Prognose, Länder (hierarchisch, Bayes), Länder (PX, deskriptiv).
+      </br></br>
+      <strong>Pd</strong> (Richtungswahrscheinlichkeit, Probability of Direction) — nicht p-Wert. </br>
+      <strong>HDI</strong> — höchstes posteriores Dichtheitsintervall (Highest Density Interval), hier 95&nbsp;%.
+      </p>
+      <p class="analysis-prose"></p>
       <h3>Gemeinsame Story</h3>
-      <p class="analysis-prose">CH wächst in Fiktion und Dokumentar; der Gesamt-CH-Anteil steigt vor allem durch Erfolg in den Genres, nicht durch Genre-Umschichtung. Der Sprung in den Rohdaten liegt bei 2023→2024; Change-Point nur explorativ. Programm-Lücke schrumpft. Am Länder-Markt dominieren USA; CH holt beim Besuchsanteil auf. Saison und Prognose — mit allen Caveats.</p>
+      <p class="analysis-prose">CH wächst in Fiktion und Dokumentar; der Gesamt-CH-Anteil steigt vor allem durch Erfolg in den Genres, nicht durch Genre-Umschichtung. Der Sprung in den Rohdaten liegt bei 2023→2024; das Change-Point-Modell (03) ist dafür nur explorativ. Programm-Lücke schrumpft. Am Länder-Markt dominieren USA; CH holt beim Besuchsanteil auf (Bayes und deskriptiv konsistent).</p>
       <h3>Grenzen (alle Modelle)</h3>
       <ul>
         <li>Jahres- bzw. Wochenaggregate BFS — kein Film-Level.</li>
         <li>2020–2021 in Jahresmodellen ausgeschlossen.</li>
         <li>Absolute Besuche mit Markt-Offset in Analyse 04.</li>
-        <li><strong>Pd</strong> (Richtungswahrscheinlichkeit, Probability of Direction) — nicht p-Wert.</li>
-        <li><strong>HDI</strong> — höchstes posteriores Dichtheitsintervall (Highest Density Interval), hier 95&nbsp;%.</li>
       </ul>
     </div>
   </div>

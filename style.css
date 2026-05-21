@@ -841,6 +841,23 @@ html.is-embed.is-embed-panel .wrap-embed-year {
   padding: 0.5rem 0.75rem 1rem;
 }
 
+html.is-embed.is-embed-panel[data-embed-panel="year"] .page-explore .wrap.wrap-embed-year,
+html.is-embed.is-embed-panel[data-embed-panel="year"] .wrap-embed-year.wrap-embed-panel {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0.35rem 0.65rem 0.75rem;
+  box-sizing: border-box;
+}
+
+html.is-embed.is-embed-panel[data-embed-panel="year"] .dashboard-zone--year.is-embed-year,
+html.is-embed.is-embed-panel[data-embed-panel="year"] .metric-chart-group--grouped,
+html.is-embed.is-embed-panel[data-embed-panel="year"] .metric-chart-block,
+html.is-embed.is-embed-panel[data-embed-panel="year"] .chart-frame {
+  width: 100%;
+  max-width: none;
+}
+
 html.is-embed.is-embed-panel .wrap-embed-year .dashboard-zone--year {
   margin: 0;
 }

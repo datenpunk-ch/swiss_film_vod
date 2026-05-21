@@ -1,5 +1,6 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useContext, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { ChartPlotContext } from "./ChartPlotContext.jsx";
 
 const TOOLTIP_LAYER_ID = "chart-tooltip-layer";
 
@@ -15,11 +16,12 @@ function getTooltipLayer() {
   return el;
 }
 
-function plotRect() {
-  const el = document.querySelector(
-    ".wrap-embed-year .recharts-wrapper, .panel-embed .recharts-wrapper, .recharts-wrapper"
-  );
-  return el?.getBoundingClientRect() ?? null;
+function plotRectFromRef(plotRef) {
+  const root = plotRef?.current;
+  if (!root) return null;
+  const el = root.querySelector(".recharts-wrapper") ?? root;
+  const rect = el.getBoundingClientRect();
+  return rect.width > 0 && rect.height > 0 ? rect : null;
 }
 
 function estimateSize(variant, itemCount = 0) {
@@ -70,11 +72,12 @@ export default function BayesTooltipFrame({
   itemCount = 0,
 }) {
   const ref = useRef(null);
+  const plotRef = useContext(ChartPlotContext);
   const [measured, setMeasured] = useState(false);
 
   const draftStyle = useMemo(() => {
     if (!active || !coordinate) return null;
-    const plot = plotRect();
+    const plot = plotRectFromRef(plotRef);
     return computeTooltipStyle({
       coordinate,
       variant,
@@ -82,7 +85,7 @@ export default function BayesTooltipFrame({
       node: measured ? ref.current : null,
       itemCount,
     });
-  }, [active, coordinate, variant, measured, itemCount]);
+  }, [active, coordinate, variant, measured, itemCount, plotRef]);
 
   useLayoutEffect(() => {
     if (!active || !coordinate) {
