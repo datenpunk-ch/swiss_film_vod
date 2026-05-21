@@ -1,7 +1,7 @@
 <!--
-  Analyse-Seite: Text hier bearbeiten. Zahlen/Grafiken kommen aus
-  data/analysis_report.json (pixi run analyze).
-  Platzhalter im Body: INJECT:id:typ (HTML-Kommentar-Syntax).
+  Analyse-Seite: Fliesstext NUR hier bearbeiten (wird von Skripten nicht überschrieben).
+  Zahlen/Grafiken/Tabellen: data/analysis_report.json via pixi run analyze.
+  Platzhalter INJECT:id:typ werden zur Laufzeit mit MCMC-Ergebnissen gefüllt.
 -->
 
 <!--PART:hero-->

@@ -27,7 +27,7 @@ node scripts/build_unified.mjs
 ```text
 node scripts/bundle_unified_ui.mjs
 
-**Kino-Analysen (Pixi):** `pixi run analyze` → `analysis.html` (vorher ggf. `pixi run build-unified`). Fallback ohne Pixi: `node scripts/build_analysis_page.mjs`
+**Kino-Analysen (Pixi):** `pixi run analyze` → `data/analysis_report.json` + Grafiken (vorher ggf. `pixi run build-unified`). Fliesstext nur in `content/analysis.md` (manuell). Optional: `pixi run build-analysis-figures` für Legacy-SVG-Teaser ohne Text/JSON.
 ```
 
 Baut nach `assets/unified/unified.js` (esbuild; optional `cd unified-app && npm run build`).

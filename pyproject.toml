@@ -31,6 +31,6 @@ arviz = ">=0.17"
 [tool.pixi.tasks]
 analyze = { cmd = "python python/run_analyses.py", description = "Kino-Analysen (Cache) → analysis_report.json" }
 analyze-force = { cmd = "python python/run_analyses.py --force", description = "Alle MCMC-Modelle neu schätzen" }
-build-analysis = { cmd = "node scripts/build_analysis_page.mjs", description = "SVG-Fallback ohne PyMC (Node)" }
+build-analysis-figures = { cmd = "node scripts/build_analysis_page.mjs", description = "Legacy-SVG-Teaser nur (ohne Text/JSON/HTML)" }
 build-unified = { cmd = "node scripts/build_unified.mjs", description = "data/unified.json aus Rohdaten" }
 bundle-ui = { cmd = "node scripts/bundle_unified_ui.mjs", description = "React-Dashboard bündeln" }

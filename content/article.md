@@ -1,6 +1,7 @@
 <!--
   Kurzstory Schweizer Film am Kino (index.html).
-  Grafiken: data/analysis_report.json via assets/article-page.js
+  Fliesstext NUR hier bearbeiten (wird von Skripten nicht überschrieben).
+  INJECT-Platzhalter und KPIs: data/analysis_report.json via assets/article-page.js
 -->
 
 <!--PART:hero-->

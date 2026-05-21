@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Nur diese Keys landen in analysis_report.json — kein Fliesstext (steht in content/analysis.md).
 RESULT_KEYS = ("id", "figures", "tables", "diagnostics", "mcmc", "metrics", "charts")
 
 

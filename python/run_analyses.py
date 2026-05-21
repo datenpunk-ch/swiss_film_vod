@@ -45,7 +45,8 @@ def main() -> int:
 
     write_report(ROOT, analyses)
     print(f"✓ {len(analyses)} Analysen → data/analysis_report.json")
-    print("  Text: content/analysis.md · Seite: analysis.html")
+    print("  Fliesstext: content/analysis.md (manuell, wird nicht überschrieben)")
+    print("  Seite: analysis.html lädt Markdown + JSON zur Laufzeit")
     print("  Cache: data/analysis_cache/  (--force zum Neu-Schätzen)")
     print("✓ Grafiken → assets/analysis/figures/")
     return 0
