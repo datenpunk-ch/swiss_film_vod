@@ -158,11 +158,11 @@
     </div>
     <div class="measure">
 
-<p class="reveal">Wie schlägt sich der Schweizer Film in **Fiktion, Dokumentation und Animation** gemessen am Anteil **innerhalb** des jeweiligen Genre-Publikums? Und kommen einheimische Produktionen in einem Genre besonders gut an?</p>
+<p class="reveal">Wie schlägt sich der Schweizer Film in **Fiktion, Dokumentar und Animation** gemessen am Anteil **innerhalb** des jeweiligen Genre-Publikums? Und kommen einheimische Produktionen in einem Genre besonders gut an?</p>
 
-<p class="reveal">Sowohl in der **Fiktion** als auch in den **Dokumentationen** gewinnen Schweizer Filme an Boden und zeigen einen steigenden Anteil der Besucher. Zeitgleich sind die Anteile bei **Animation** eher **rückläufig**.</p>
+<p class="reveal">Sowohl in der **Fiktion** als auch im **Dokumentar** gewinnen Schweizer Filme an Boden und zeigen einen steigenden Anteil der Besucher. Zeitgleich sind die Anteile bei **Animation** eher **rückläufig**.</p>
 
-<p class="reveal">Eine genaue **Zerlegung** des CH-Gesamtanteils (2014→2025) basierend auf dem Markt und dem jeweiligen Erfolg im Genre zeigt: Im Angebot sind zwar insgesamt etwas **mehr Dokumentationen und Animationsfilme** (**+1,3&nbsp;Prozentpunkte**), aber der Schweizer Film schneidet tatsächlich innerhalb der Genres deutlich besser ab (etwa **+3,0&nbsp;Prozentpunkte**). Der Erfolg liegt also vor allem an der Nachfrage im **Genre**, nicht an der marktübergreifenden Umschichtung allein.</p>
+<p class="reveal">Eine genaue **Zerlegung** des CH-Gesamtanteils (2014→2025) basierend auf dem Markt und dem jeweiligen Erfolg im Genre zeigt: Im Angebot sind zwar insgesamt etwas **mehr Dokumentar- und Animationsfilme** (**+1,3&nbsp;Prozentpunkte**), aber der Schweizer Film schneidet tatsächlich innerhalb der Genres deutlich besser ab (etwa **+3,0&nbsp;Prozentpunkte**). Der Erfolg liegt also vor allem an der Nachfrage im **Genre**, nicht an der marktübergreifenden Umschichtung allein.</p>
 
 <div class="article-plot reveal">
   <div class="embed-frame visible embed-frame--chgenre" style="max-width: 100%;">
@@ -213,7 +213,7 @@
     </div>
     <div class="measure">
 
-<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht, aber der CH-Anteil und absolute CH-Rate steigen überproportional (Sprung 2023→2024). **Kinosaison:** Besonders im Winter zwischen den Jahren und im Frühling ist es voller; auch bei Schweizer Produktionen. **Länder:** Die USA dominieren, die Besuchszahlen des Schweizer Films steigen von ~5&nbsp;% auf ~9&nbsp;% Besuchsanteil. **Entwicklung:** Die Prognose deutet auf weiteres Wachstum hin. **Genres:** Schweizer Fiktion/Doku werden beliebter, Animationsanteil nimmt ab; Anstieg basiert vor allem auf dem Erfolg im Genre, nicht auf dem generellen Wechsel im Genremarkt. **Programm vs. Publikum:** Lücke schrumpft (Median Kreuzung ~2028). Methodik: <a href="./analysis.html">Kino-Analysen</a>; Vertiefung unten.</p>
+<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht, aber der CH-Anteil und absolute CH-Rate steigen überproportional (Sprung 2023→2024). **Kinosaison:** Besonders im Winter zwischen den Jahren und im Frühling ist es voller; auch bei Schweizer Produktionen. **Länder:** Die USA dominieren, die Besuchszahlen des Schweizer Films steigen von ~5&nbsp;% auf ~9&nbsp;% Besuchsanteil. **Entwicklung:** Die Prognose deutet auf weiteres Wachstum hin. **Genres:** Schweizer Fiktion/Dokumentar werden beliebter, Animationsanteil nimmt ab; Anstieg basiert vor allem auf dem Erfolg im Genre, nicht auf dem generellen Wechsel im Genremarkt. **Programm vs. Publikum:** Lücke schrumpft (Median Kreuzung ~2028). Methodik: <a href="./analysis.html">Kino-Analysen</a>; Vertiefung unten.</p>
 
     </div>
   </div>
