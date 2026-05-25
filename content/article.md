@@ -213,7 +213,13 @@
     </div>
     <div class="measure">
 
-<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht, aber der CH-Anteil und absolute CH-Rate steigen überproportional (Sprung 2023→2024). **Kinosaison:** Besonders im Winter zwischen den Jahren und im Frühling ist es voller; auch bei Schweizer Produktionen. **Länder:** Die USA dominieren, die Besuchszahlen des Schweizer Films steigen von ~5&nbsp;% auf ~9&nbsp;% Besuchsanteil. **Entwicklung:** Die Prognose deutet auf weiteres Wachstum hin. **Genres:** Schweizer Fiktion/Dokumentar werden beliebter, Animationsanteil nimmt ab; Anstieg basiert vor allem auf dem Erfolg im Genre, nicht auf dem generellen Wechsel im Genremarkt. **Programm vs. Publikum:** Lücke schrumpft (Median Kreuzung ~2028). Methodik: <a href="./analysis.html">Kino-Analysen</a>; Vertiefung unten.</p>
+<p class="reveal">**Kinobesuche:** Erholung ja, Vorkrisen-Niveau noch nicht, aber der CH-Anteil und absolute CH-Rate steigen überproportional (Sprung 2023→2024). 
+**Kinosaison:** Besonders im Winter zwischen den Jahren und im Frühling ist es voller; auch bei Schweizer Produktionen. 
+**Länder:** Die USA dominieren, die Besuchszahlen des Schweizer Films steigen von ~5&nbsp;% auf ~9&nbsp;% Besuchsanteil. 
+**Entwicklung:** Die Prognose deutet auf weiteres Wachstum hin. **Genres:** Schweizer Fiktion/Dokumentar werden beliebter, Animationsanteil nimmt ab; Anstieg basiert vor allem auf dem Erfolg im Genre, nicht auf dem generellen Wechsel im Genremarkt. 
+**Programm vs. Publikum:** Lücke schrumpft (Median Kreuzung ~2028). 
+
+Methodik: <a href="./analysis.html">Kino-Analysen</a></p>
 
     </div>
   </div>
